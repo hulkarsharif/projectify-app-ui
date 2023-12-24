@@ -15,10 +15,7 @@ const App = () => {
     }, []);
     return (
         <>
-            <Typography variant={TypographyProps.variant.h2}>Hello</Typography>
-            <Typography variant={TypographyProps.variant.subtitleLg}>
-                Hello
-            </Typography>
+            <Typography variant={TypographyProps.variant.h1}>Hello</Typography>;
         </>
     );
 };
