@@ -12,6 +12,12 @@ const App = () => {
             <Button size="lg" color="primary">
                 Test
             </Button>
+            <Button size="md" color="danger" shape="rounded">
+                Welcome to Tyspscript1
+            </Button>
+            <Button size="lg" color="danger" shape="circle">
+                Welcome to Tyspscript-2
+            </Button>
         </div>
     );
 };

@@ -55,3 +55,23 @@
     background-color: var(--primary-700);
     box-shadow: var(--shadow-xs-hover);
 }
+
+.btn-danger {
+    background-color: var(--red-orange-700);
+    color: var(--white);
+    box-shadow: var(--shadow-s);
+}
+
+.btn-danger:hover {
+    background-color: var(--red-orange-600);
+    color: var(--white);
+    box-shadow: var(--shadow-xs-hover);
+}
+.btn-danger:disabled {
+    background-color: var(--jaguar-300);
+}
+
+.btn-danger:focus {
+    background-color: var(--danger-700);
+    box-shadow: var(--shadow-xs-hover);
+}
