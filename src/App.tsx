@@ -7,22 +7,9 @@ const App = () => {
     return (
         <div style={{ padding: "100px" }}>
             <Typography variant="h5">Hello</Typography>
-            <Button
-                color="primary"
-                shape="circle"
-                onClick={() => alert("Hello")}
-            >
-                Create a Project
-            </Button>
-            <Button
-                color="primary"
-                size="lg"
-                shape="circle"
-                onClick={() => setShow(true)}
-            >
-                Create a Project
-            </Button>
+
             <form onSubmit={() => alert("submitted")}>
+                <input />
                 <Button>Submit</Button>
             </form>
             {show && <p>Hello</p>}
