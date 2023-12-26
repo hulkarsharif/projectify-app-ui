@@ -4,7 +4,7 @@ import { trimWhiteSpaces } from "../utils";
 
 type ButtonSize = "sm" | "md" | "lg";
 type ButtonShape = "rounded" | "circle";
-type ButtonColor = "primary" | "secondary" | "text" | "danger";
+type ButtonColor = "primary" | "secondary" | "danger" | "success";
 type ButtonVariant = "contained" | "outlined" | "text";
 
 type ButtonProps = {
@@ -32,9 +32,10 @@ const shapeClassNames = {
 const colorClassNames = {
     primary: "btn-primary",
     secondary: "btn-secondary",
-    text: "btn-tertiary",
-    danger: "btn-danger"
+    danger: "btn-danger",
+    success: "btn-success"
 };
+
 const variantClassNames = {
     contained: "btn-contained",
     outlined: "btn-outlined",
@@ -62,7 +63,7 @@ const Button: FC<ButtonProps> = (props) => {
     const variantClassName =
         variant !== undefined ? variantClassNames[variant] : "";
 
-    const finalClassNames = `btn ${colorClassName} ${sizeClassName} ${shapeClassName}${variantClassName} ${
+    const finalClassNames = `btn ${colorClassName} ${sizeClassName} ${shapeClassName} ${variantClassName} ${
         className || ""
     }`;
 
