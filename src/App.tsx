@@ -9,7 +9,6 @@ const App = () => {
             <Typography variant="h5">Hello</Typography>
             <Button
                 color="primary"
-                size="lg"
                 shape="circle"
                 onClick={() => alert("Hello")}
             >

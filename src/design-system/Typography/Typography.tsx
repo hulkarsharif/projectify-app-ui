@@ -5,6 +5,7 @@ import {
     weightClassNames,
     alignClassNames
 } from "./classnames";
+import { trimWhiteSpaces } from "../utils";
 
 type TypographyVariant =
     | "displayLG"
@@ -36,11 +37,11 @@ export const Typography: React.FC<TypographyProps> = ({
     const weightClassName =
         weight !== undefined ? weightClassNames[weight] : "";
     const alignClassName = align !== undefined ? alignClassNames[align] : "";
-    const finalClassName =
+    const finalClassName = trimWhiteSpaces(
         `${variantClassName} ${weightClassName} ${alignClassName} ${
             className || ""
-        }`.trim();
-
+        }`
+    );
     if (
         variant === "displayLG" ||
         variant === "displaySM" ||

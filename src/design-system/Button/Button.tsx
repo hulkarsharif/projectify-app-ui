@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import "./Button.css";
+import { trimWhiteSpaces } from "../utils";
 
 type ButtonSize = "sm" | "md" | "lg";
 type ButtonShape = "rounded" | "circle";
@@ -10,6 +11,7 @@ type ButtonProps = {
     size?: ButtonSize;
     shape?: ButtonShape;
     color?: ButtonColor;
+    variant?: ButtonVariant;
     disabled?: boolean;
     className?: string;
     children: React.ReactNode;
@@ -33,10 +35,23 @@ const colorClassNames = {
     text: "btn-tertiary",
     danger: "btn-danger"
 };
+const variantClassNames = {
+    contained: "btn-contained",
+    outlined: "btn-outlined",
+    text: "btn-text"
+};
 
 const Button: FC<ButtonProps> = (props) => {
-    const { size, shape, color, disabled, className, children, onClick } =
-        props;
+    const {
+        size,
+        shape,
+        color,
+        variant,
+        disabled,
+        className,
+        children,
+        onClick
+    } = props;
 
     const sizeClassName = size !== undefined ? sizeClassNames[size] : "";
 
@@ -44,11 +59,16 @@ const Button: FC<ButtonProps> = (props) => {
 
     const colorClassName = color !== undefined ? colorClassNames[color] : "";
 
-    const finalClassNames = `btn ${colorClassName} ${sizeClassName} ${shapeClassName} ${className}`;
+    const variantClassName =
+        variant !== undefined ? variantClassNames[variant] : "";
+
+    const finalClassNames = `btn ${colorClassName} ${sizeClassName} ${shapeClassName}${variantClassName} ${
+        className || ""
+    }`;
 
     return (
         <button
-            className={finalClassNames}
+            className={trimWhiteSpaces(finalClassNames)}
             disabled={disabled}
             onClick={onClick}
         >
