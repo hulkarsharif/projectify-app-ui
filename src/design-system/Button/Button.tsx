@@ -4,6 +4,7 @@ import "./Button.css";
 type ButtonSize = "sm" | "md" | "lg";
 type ButtonShape = "rounded" | "circle";
 type ButtonColor = "primary" | "secondary" | "text" | "danger";
+type ButtonVariant = "contained" | "outlined" | "text";
 
 type ButtonProps = {
     size?: ButtonSize;
@@ -12,6 +13,7 @@ type ButtonProps = {
     disabled?: boolean;
     className?: string;
     children: React.ReactNode;
+    onClick?: () => void;
 };
 
 const sizeClassNames = {
@@ -33,7 +35,8 @@ const colorClassNames = {
 };
 
 const Button: FC<ButtonProps> = (props) => {
-    const { size, shape, color, disabled, className, children } = props;
+    const { size, shape, color, disabled, className, children, onClick } =
+        props;
 
     const sizeClassName = size !== undefined ? sizeClassNames[size] : "";
 
@@ -44,7 +47,11 @@ const Button: FC<ButtonProps> = (props) => {
     const finalClassNames = `btn ${colorClassName} ${sizeClassName} ${shapeClassName} ${className}`;
 
     return (
-        <button className={finalClassNames} disabled={disabled}>
+        <button
+            className={finalClassNames}
+            disabled={disabled}
+            onClick={onClick}
+        >
             {children}
         </button>
     );

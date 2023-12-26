@@ -1,25 +1,35 @@
-import { Button, Typography } from "./design-system";
-// import { Button } from "./design-system/Button";
+import { useState } from "react";
 
+import { Button, Typography } from "./design-system";
 const App = () => {
+    const [show, setShow] = useState(false);
+
     return (
         <div style={{ padding: "100px" }}>
             <Typography variant="h5">Hello</Typography>
-            <Button>Test</Button>
-            <Button size="md" color="primary">
-                Test
+            <Button
+                color="primary"
+                size="lg"
+                shape="circle"
+                onClick={() => alert("Hello")}
+            >
+                Create a Project
             </Button>
-            <Button size="lg" color="primary">
-                Test
+            <Button
+                color="primary"
+                size="lg"
+                shape="circle"
+                onClick={() => setShow(true)}
+            >
+                Create a Project
             </Button>
-            <Button size="md" color="danger" shape="rounded">
-                Welcome to Tyspscript1
-            </Button>
-            <Button size="lg" color="danger" shape="circle">
-                Welcome to Tyspscript-2
-            </Button>
+            <form onSubmit={() => alert("submitted")}>
+                <Button>Submit</Button>
+            </form>
+            {show && <p>Hello</p>}
         </div>
     );
 };
 
+<button type="submit"></button>;
 export { App };
