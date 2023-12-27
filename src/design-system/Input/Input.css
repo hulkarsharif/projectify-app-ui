@@ -8,7 +8,6 @@
     color: var(--jaguar-900);
 
     width: 100%;
-    display: block;
 }
 
 input::placeholder,
