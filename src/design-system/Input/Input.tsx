@@ -47,11 +47,13 @@ const Input: React.FC<InputProps> = (props) => {
 
     const errorClassName = error ? "input-error" : "";
     const textareaClassName = type === "textarea" ? "input-textarea" : "";
-
     const finalClassNames = trimWhiteSpaces(
         `input ${
             className || ""
         } ${sizeClassName} ${shapeClassName} ${errorClassName} ${textareaClassName}`
+    );
+    const hintMessageClass = trimWhiteSpaces(
+        `hint-message ${error ? "hint-message--error" : ""}`
     );
 
     return (
@@ -77,6 +79,10 @@ const Input: React.FC<InputProps> = (props) => {
                     id={id}
                 />
             )}
+
+            {hintMessage ? (
+                <span className={hintMessageClass}>{hintMessage}</span>
+            ) : null}
         </div>
     );
 };

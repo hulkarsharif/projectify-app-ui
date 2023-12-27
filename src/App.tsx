@@ -13,15 +13,17 @@ const App = () => {
                 <Input
                     type="email"
                     placeholder="Email"
-                    size="md"
+                    size="sm"
                     shape="rounded"
                     labelText="Email"
+                    hintMessage="This is your password"
                 />
                 <Input
-                    placeholder="First Name"
-                    size="md"
+                    placeholder="About you"
+                    size="lg"
+                    type="textarea"
                     shape="rounded"
-                    labelText="First Name"
+                    labelText="Tell us about yourself"
                 />
                 <Button color="primary" fullWidth>
                     Submit
