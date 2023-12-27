@@ -23,22 +23,9 @@ const App = () => {
                     shape="rounded"
                     labelText="First Name"
                 />
-                <Input
-                    placeholder="Last Name"
-                    size="md"
-                    shape="rounded"
-                    labelText="Last Name"
-                />
-                <Input
-                    placeholder="About You"
-                    size="lg"
-                    type="textarea"
-                    shape="rounded"
-                    labelText="Tell us about yourself"
-                    hintMessage="This is for your password"
-                />
-
-                <Button>Submit</Button>
+                <Button color="primary" fullWidth>
+                    Submit
+                </Button>
             </form>
 
             {show && <p>Hello</p>}

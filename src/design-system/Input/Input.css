@@ -4,8 +4,13 @@
     border: 0.15rem solid var(--jaguar-200);
     padding: 0 var(--space-16);
     font-family: inherit;
+    font-size: var(--font-size-16);
     color: var(--jaguar-900);
+    resize: none;
+    width: 100%;
+    display: block;
 }
+
 input::placeholder,
 :-ms-input-placeholder {
     color: var(--jaguar-400);
@@ -30,6 +35,7 @@ input::placeholder,
 .input-circle {
     border-radius: var(--border-radius-20);
 }
+
 .input-lg.input-circle {
     border-radius: var(--border-radius-24);
 }
@@ -50,6 +56,7 @@ input::placeholder,
     border-color: var(--jaguar-100);
     background-color: var(--white);
 }
+
 .input:disabled::placeholder {
     color: var(--jaguar-300);
 }
