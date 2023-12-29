@@ -1,52 +1,41 @@
 import { useState, useId } from "react";
+import women from "./assets/women.jpg";
+import { Button, Typography, Input, Label, Avatar } from "./design-system";
 
-import { Button, Typography, Input, Label } from "./design-system";
-import { text } from "stream/consumers";
 const App = () => {
-    const [value, setValue] = useState<string>("");
-    const [text, setText] = useState<string>("");
-
-    const handleOnChange = (value: string) => {
-        console.log(value);
-        setValue(value);
-    };
-
-    const handleOnChangeTextarea = (value: string) => {
-        setText(value);
-    };
     return (
         <div style={{ padding: "100px" }}>
-            <Typography variant="h5">Hello</Typography>
-
-            <form onSubmit={() => alert(`${value} ${text}`)} noValidate>
-                <Input
-                    type="email"
-                    placeholder="Email"
-                    size="md"
-                    shape="rounded"
-                    labelText="Email"
-                    onChange={handleOnChange}
-                    value={value}
-                />
-
-                <Input
-                    type="textarea"
-                    placeholder="About me"
-                    size="md"
-                    shape="rounded"
-                    labelText="Email"
-                    onChange={handleOnChangeTextarea}
-                    value={text}
-                />
-
-                <Button color="primary" shape="rounded">
-                    Submit
-                </Button>
-            </form>
+            <Avatar type="initials" size="sm" shape="circle">
+                Khulkar Sharipova
+            </Avatar>
+            <Avatar type="initials" size="md" shape="circle">
+                Khulkar Sharipova
+            </Avatar>
+            <Avatar type="initials" size="lg" shape="circle">
+                Khulkar Sharipova
+            </Avatar>
+            <br />
+            <Avatar type="photo" size="sm" shape="rounded" imageUrl={women}>
+                Khulkar Sharipova
+            </Avatar>
+            <Avatar type="photo" size="md" shape="rounded" imageUrl={women}>
+                Khulkar Sharipova
+            </Avatar>
+            <Avatar type="photo" size="lg" shape="circle" imageUrl={women}>
+                Khulkar Sharipova
+            </Avatar>
+            <br />
+            <Avatar type="initials" size="sm" shape="rounded">
+                Khulkar Sharipova
+            </Avatar>
+            <Avatar type="photo" size="md" shape="rounded" imageUrl={women}>
+                Khulkar Sharipova
+            </Avatar>
+            <Avatar type="photo" size="lg" shape="rounded" imageUrl={women}>
+                Khulkar Sharipova
+            </Avatar>
         </div>
     );
 };
-
-<button type="submit"></button>;
 
 export { App };

@@ -7,7 +7,7 @@
     outline: none;
 
     height: 3.6rem;
-    padding: 0 var(--space-16);
+    /* padding: 0 var(--space-16); */
 }
 
 .btn-full-width {
