@@ -8,6 +8,8 @@
     color: var(--jaguar-900);
 
     width: 100%;
+
+    transition: all 0.3s;
 }
 
 input::placeholder,

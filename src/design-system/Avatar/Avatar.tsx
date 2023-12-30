@@ -1,6 +1,7 @@
 import React, { FC } from "react";
+
+import { trimWhiteSpaces, getFullName } from "../utils";
 import "./Avatar.css";
-import { trimWhiteSpaces, getInitials } from "../utils";
 
 type AvatarSize = "sm" | "md" | "lg";
 type AvatarShape = "sharp" | "rounded" | "circle";
@@ -54,12 +55,12 @@ const Avatar: FC<AvatarProps> = (props) => {
     let modiefiedChildren: React.ReactNode = children;
 
     if (type === "initials") {
-        const initials = getInitials(children as string);
+        const initials = getFullName(children as string);
         modiefiedChildren = <span>{initials}</span>;
     } else if (type === "photo" && imageUrl) {
         modiefiedChildren = <img src={imageUrl} alt="Avatar" />;
     }
-    const finalClassNames = `btn  ${sizeClassName} ${shapeClassName}  ${typeClassName} ${
+    const finalClassNames = `avatar  ${sizeClassName} ${shapeClassName}  ${typeClassName} ${
         className || ""
     }`;
 
