@@ -1,7 +1,8 @@
-import { SignUp } from "./pages";
+// import { SignUp } from "./pages";
+import { Login } from "./pages";
 
 const App = () => {
-    return <SignUp />;
+    return <Login />;
     //     <div style={{ padding: "100px" }}>
     //         <Avatar type="initials" size="sm" shape="circle">
     //             Khulkar Sharipova
