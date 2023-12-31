@@ -2,7 +2,7 @@ import { AuthWrapper } from "../../components";
 import { Button, Input, Label, Checkbox } from "../../../design-system";
 import { useState } from "react";
 import "./Login.css";
-import flatIronBuilding from "../../../assets/images/edu.jpg";
+import flatIronBuilding from "../../../assets/images/samarkand.jpeg";
 
 const Login = () => {
     const [email, setEmail] = useState<string>("");
