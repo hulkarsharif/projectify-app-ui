@@ -3,6 +3,7 @@ import { Button, Input } from "../../../design-system";
 import { useState } from "react";
 import "./ForgotPassword.css";
 import lock from "../../../assets/images/lock.jpg";
+import { PasswordWrapper } from "../../components/auth-wrapper/password-wrapper/Password.Wrapper";
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState<string>("");
@@ -11,16 +12,18 @@ const ForgotPassword = () => {
         setEmail(value);
     };
 
-    const createAccount = (e: React.FormEvent<HTMLFormElement>) => {
+    const sendInstruction = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(email);
     };
 
     return (
-        <AuthWrapper imageUrl="none" pageTitle="Forgot Password">
-            <form className="forgot-password" onSubmit={createAccount}>
-                <img src={lock} alt="Lock" className="lock-image" />
-
+        <PasswordWrapper
+            pageTitle="Forgot Password"
+            imagePath={lock}
+            btnText="Get Instructions"
+        >
+            <form onSubmit={sendInstruction}>
                 <Input
                     type="email"
                     placeholder="Email"
@@ -28,19 +31,9 @@ const ForgotPassword = () => {
                     onChange={handleOnChangeEmail}
                     shape="rounded"
                     size="lg"
-                    className="forgot-password__email"
                 />
-
-                <Button
-                    color="primary"
-                    size="lg"
-                    shape="rounded"
-                    className="instruction-button"
-                >
-                    Get Instructions
-                </Button>
             </form>
-        </AuthWrapper>
+        </PasswordWrapper>
     );
 };
 

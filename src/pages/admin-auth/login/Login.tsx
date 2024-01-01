@@ -1,5 +1,5 @@
 import { AuthWrapper } from "../../components";
-import { Button, Input, Label, Checkbox } from "../../../design-system";
+import { Button, Input, Checkbox } from "../../../design-system";
 import { useState } from "react";
 import "./Login.css";
 import flatIronBuilding from "../../../assets/images/samarkand.jpeg";
