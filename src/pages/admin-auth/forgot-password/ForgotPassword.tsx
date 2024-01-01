@@ -1,5 +1,4 @@
-import { AuthWrapper } from "../../components";
-import { Button, Input } from "../../../design-system";
+import { Input, Button } from "../../../design-system";
 import { useState } from "react";
 import "./ForgotPassword.css";
 import lock from "../../../assets/images/lock.jpg";
@@ -18,12 +17,12 @@ const ForgotPassword = () => {
     };
 
     return (
-        <PasswordWrapper
-            pageTitle="Forgot Password"
-            imagePath={lock}
-            btnText="Get Instructions"
-        >
-            <form onSubmit={sendInstruction}>
+        <PasswordWrapper pageTitle="Forgot Password" imageUrl={lock}>
+            <form
+                onSubmit={sendInstruction}
+                className="forgot-password"
+                noValidate
+            >
                 <Input
                     type="email"
                     placeholder="Email"
@@ -32,6 +31,14 @@ const ForgotPassword = () => {
                     shape="rounded"
                     size="lg"
                 />
+                <Button
+                    color="primary"
+                    size="lg"
+                    shape="rounded"
+                    fullWidth={true}
+                >
+                    Get Instructions
+                </Button>
             </form>
         </PasswordWrapper>
     );
