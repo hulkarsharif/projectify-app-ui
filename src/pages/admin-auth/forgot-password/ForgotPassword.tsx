@@ -2,7 +2,7 @@ import { Input, Button } from "../../../design-system";
 import { useState } from "react";
 import "./ForgotPassword.css";
 import lock from "../../../assets/images/lock.jpg";
-import { PasswordWrapper } from "../../components/auth-wrapper/password-wrapper/Password.Wrapper";
+import { PasswordWrapper } from "../../components/password-wrapper/Password.Wrapper";
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState<string>("");
