@@ -1,8 +1,8 @@
 // import { SignUp } from "./pages";
-import { UpdatePassword } from "./pages/admin-auth/update-Password/UpdatePassword";
+import { Profile } from "./pages";
 
 const App = () => {
-    return <UpdatePassword />;
+    return <Profile />;
     //     <div style={{ padding: "100px" }}>
     //         <Avatar type="initials" size="sm" shape="circle">
     //             Khulkar Sharipova

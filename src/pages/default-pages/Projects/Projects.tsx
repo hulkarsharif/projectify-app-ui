@@ -26,7 +26,7 @@ const Projects = () => {
         <MainLayout>
             {!projects ? (
                 <DefaultPageWrapper
-                    imagePath={adminguy}
+                    imagePath={lock}
                     pageTitle="You don't have any projects yet!"
                     btnText="Add a Task"
                 />

@@ -3,7 +3,7 @@ import React, { useState, FC } from "react";
 import "./Profile.css";
 import { MainLayout } from "../components";
 import { Typography, Input, Button } from "../../design-system";
-import admin from "../../assets/images/admin1.png";
+import admin from "../../assets/images/adminguy.jpg";
 
 type ProfileProps = {
     imagePath?: string;
