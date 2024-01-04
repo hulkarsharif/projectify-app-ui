@@ -1,10 +1,10 @@
 import { Input, Button } from "../../../design-system";
 import { useState } from "react";
-import "./UpdatePassword.css";
-import updatePassword from "../../../assets/images/updatePassword.jpg";
+import "./ResetPassword.css";
+import resetPasswordImg from "../../../assets/images/resetPasswordImg.jpg";
 import { PasswordWrapper } from "../../components/password-wrapper/Password.Wrapper";
 
-const UpdatePassword = () => {
+const ResetPassword = () => {
     const [newPassword, setNewPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");
 
@@ -21,10 +21,10 @@ const UpdatePassword = () => {
     };
 
     return (
-        <PasswordWrapper pageTitle="Update Password" imageUrl={updatePassword}>
+        <PasswordWrapper pageTitle="Reset Password" imageUrl={resetPasswordImg}>
             <form
                 onSubmit={resetPassword}
-                className="update-password"
+                className="reset-password"
                 noValidate
             >
                 <Input
@@ -56,4 +56,4 @@ const UpdatePassword = () => {
     );
 };
 
-export { UpdatePassword };
+export { ResetPassword };
