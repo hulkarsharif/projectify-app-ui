@@ -1,12 +1,15 @@
 import { Input, Button } from "../../../design-system";
 import { useState } from "react";
-import "./ResetPassword.css";
+import "./AdminResetPassword.css";
 import resetPasswordImg from "../../../assets/images/resetPasswordImg.jpg";
 import { PasswordWrapper } from "../../components/password-wrapper/Password.Wrapper";
+import { useSearchParams } from "react-router-dom";
 
-const ResetPassword = () => {
+const AdminResetPassword = () => {
     const [newPassword, setNewPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");
+    const [searchParams] = useSearchParams();
+    const resetPasswordToken = searchParams.get("resetPasswordToken");
 
     const handleOnChangeNewPassword = (value: string) => {
         setNewPassword(value);
@@ -56,4 +59,4 @@ const ResetPassword = () => {
     );
 };
 
-export { ResetPassword };
+export { AdminResetPassword };

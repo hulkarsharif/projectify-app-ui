@@ -1,10 +1,10 @@
 import { AuthWrapper } from "../../components";
 import { Button, Input } from "../../../design-system";
 import { useState } from "react";
-import "./Signup.css";
+import "./AdminSignup.css";
 import flatIronBuilding from "../../../assets/images/flatIronBuilding.jpg";
 
-const SignUp = () => {
+const AdminSignUp = () => {
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
     const [preferredName, setPreferredName] = useState<string>("");
@@ -107,4 +107,4 @@ const SignUp = () => {
     );
 };
 
-export { SignUp };
+export { AdminSignUp };

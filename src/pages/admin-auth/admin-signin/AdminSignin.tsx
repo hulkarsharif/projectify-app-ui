@@ -1,10 +1,10 @@
 import { AuthWrapper } from "../../components";
 import { Button, Input, Checkbox } from "../../../design-system";
 import { useState } from "react";
-import "./Login.css";
+import "./AdminSignin.css";
 import samarkand from "../../../assets/images/samarkand-min.jpeg";
 
-const Login = () => {
+const AdminSignin = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [rememberMe, setRememeberMe] = useState<boolean>(false);
@@ -67,4 +67,4 @@ const Login = () => {
     );
 };
 
-export { Login };
+export { AdminSignin };
