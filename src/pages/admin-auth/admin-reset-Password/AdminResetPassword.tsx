@@ -1,9 +1,10 @@
 import { Input, Button } from "../../../design-system";
 import { useState } from "react";
-import "./AdminResetPassword.css";
+
 import resetPasswordImg from "../../../assets/images/resetPasswordImg.jpg";
 import { PasswordWrapper } from "../../components/password-wrapper/Password.Wrapper";
 import { useSearchParams } from "react-router-dom";
+import styled from "styled-components";
 
 const AdminResetPassword = () => {
     const [newPassword, setNewPassword] = useState<string>("");
@@ -23,13 +24,16 @@ const AdminResetPassword = () => {
         console.log(newPassword, confirmPassword);
     };
 
+    const Form = styled.form`
+        width: 100%;
+
+        display: grid;
+        gap: var(--space-20);
+    `;
+
     return (
         <PasswordWrapper pageTitle="Reset Password" imageUrl={resetPasswordImg}>
-            <form
-                onSubmit={resetPassword}
-                className="reset-password"
-                noValidate
-            >
+            <Form onSubmit={resetPassword} noValidate>
                 <Input
                     type="password"
                     placeholder="New password"
@@ -54,7 +58,7 @@ const AdminResetPassword = () => {
                 >
                     Reset My Password
                 </Button>
-            </form>
+            </Form>
         </PasswordWrapper>
     );
 };
