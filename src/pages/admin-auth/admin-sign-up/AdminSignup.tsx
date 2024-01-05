@@ -1,7 +1,6 @@
 import { AuthWrapper } from "../../components";
 import { Button, Input } from "../../../design-system";
 import { useState } from "react";
-import "./AdminSignup.css";
 import flatIronBuilding from "../../../assets/images/flatIronBuilding.jpg";
 import styled from "styled-components";
 

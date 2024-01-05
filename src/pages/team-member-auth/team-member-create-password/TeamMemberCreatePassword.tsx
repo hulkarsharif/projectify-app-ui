@@ -1,9 +1,23 @@
 import { AuthWrapper } from "../../components";
 import { Button, Input } from "../../../design-system";
 import { useState } from "react";
-import "./TeamMemberCreatePassword.css";
 import flatIronBuilding from "../../../assets/images/samarkand.jpeg";
+import styled from "styled-components";
 
+const Form = styled.form`
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-20);
+`;
+
+const StyledEmailInput = styled(Input)`
+    grid-column: 1/3;
+`;
+
+const StyledButton = styled(Button)`
+    grid-column: 1/3;
+`;
 const TeamMemberCreatePassword = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -26,19 +40,14 @@ const TeamMemberCreatePassword = () => {
 
     return (
         <AuthWrapper imageUrl={flatIronBuilding} pageTitle="Create Password">
-            <form
-                className="create-password"
-                onSubmit={createPassword}
-                noValidate
-            >
-                <Input
+            <Form onSubmit={createPassword} noValidate>
+                <StyledEmailInput
                     type="email"
                     placeholder="Email"
                     value={email}
                     onChange={handleOnChangeEmail}
                     shape="rounded"
                     size="lg"
-                    className="create-password__email"
                 />
                 <Input
                     type="password"
@@ -57,15 +66,10 @@ const TeamMemberCreatePassword = () => {
                     size="lg"
                 />
 
-                <Button
-                    color="primary"
-                    size="lg"
-                    shape="rounded"
-                    className="create-password__button"
-                >
+                <StyledButton color="primary" size="lg" shape="rounded">
                     Create Password
-                </Button>
-            </form>
+                </StyledButton>
+            </Form>
         </AuthWrapper>
     );
 };

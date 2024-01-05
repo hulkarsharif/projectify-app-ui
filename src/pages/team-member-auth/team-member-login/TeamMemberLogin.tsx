@@ -1,8 +1,15 @@
 import { AuthWrapper } from "../../components";
 import { Button, Input } from "../../../design-system";
 import { useState } from "react";
-import "./TeamMemberLogin.css";
+
 import flatIronBuilding from "../../../assets/images/samarkand.jpeg";
+import styled from "styled-components";
+
+const Form = styled.form`
+    width: 100%;
+    display: grid;
+    gap: var(--space-20);
+`;
 
 const TeamMemberLogin = () => {
     const [email, setEmail] = useState<string>("");
@@ -22,7 +29,7 @@ const TeamMemberLogin = () => {
 
     return (
         <AuthWrapper imageUrl={flatIronBuilding} pageTitle="Projectify">
-            <form className="login" onSubmit={createAccount}>
+            <Form onSubmit={createAccount}>
                 <Input
                     type="email"
                     placeholder="Email"
@@ -50,7 +57,7 @@ const TeamMemberLogin = () => {
                 >
                     Login
                 </Button>
-            </form>
+            </Form>
         </AuthWrapper>
     );
 };

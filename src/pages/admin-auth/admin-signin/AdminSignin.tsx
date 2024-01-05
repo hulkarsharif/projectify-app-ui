@@ -1,8 +1,16 @@
 import { AuthWrapper } from "../../components";
 import { Button, Input, Checkbox } from "../../../design-system";
 import { useState } from "react";
-import "./AdminSignin.css";
+
 import samarkand from "../../../assets/images/samarkand-min.jpeg";
+import styled from "styled-components";
+
+const Form = styled.form`
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-20);
+`;
 
 const AdminSignin = () => {
     const [email, setEmail] = useState<string>("");
@@ -26,7 +34,7 @@ const AdminSignin = () => {
 
     return (
         <AuthWrapper imageUrl={samarkand} pageTitle="Projectify">
-            <form className="login" onSubmit={createAccount}>
+            <Form onSubmit={createAccount}>
                 <Input
                     type="email"
                     placeholder="Email"
@@ -62,7 +70,7 @@ const AdminSignin = () => {
                 >
                     Login
                 </Button>
-            </form>
+            </Form>
         </AuthWrapper>
     );
 };
