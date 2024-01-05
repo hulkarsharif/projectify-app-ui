@@ -2,7 +2,7 @@ import { AuthWrapper } from "../../components";
 import { Button, Input, Checkbox } from "../../../design-system";
 import { useState } from "react";
 import "./Login.css";
-import flatIronBuilding from "../../../assets/images/samarkand.jpeg";
+import samarkand from "../../../assets/images/samarkand-min.jpeg";
 
 const Login = () => {
     const [email, setEmail] = useState<string>("");
@@ -25,7 +25,7 @@ const Login = () => {
     };
 
     return (
-        <AuthWrapper imageUrl={flatIronBuilding} pageTitle="Projectify">
+        <AuthWrapper imageUrl={samarkand} pageTitle="Projectify">
             <form className="login" onSubmit={createAccount}>
                 <Input
                     type="email"
