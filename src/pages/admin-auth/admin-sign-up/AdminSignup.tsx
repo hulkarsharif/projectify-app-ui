@@ -3,7 +3,26 @@ import { Button, Input } from "../../../design-system";
 import { useState } from "react";
 import "./AdminSignup.css";
 import flatIronBuilding from "../../../assets/images/flatIronBuilding.jpg";
+import styled from "styled-components";
 
+const Form = styled.form`
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-20);
+`;
+
+const StyledPreferredNameInput = styled(Input)`
+    grid-column: 1/3;
+`;
+
+const StyledPreferrefEmail = styled(Input)`
+    grid-column: 1/3;
+`;
+
+const StyledButton = styled(Button)`
+    grid-column: 1/3;
+`;
 const AdminSignUp = () => {
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
@@ -43,7 +62,7 @@ const AdminSignUp = () => {
 
     return (
         <AuthWrapper imageUrl={flatIronBuilding} pageTitle="Sign Up">
-            <form className="sign-up" onSubmit={createAccount}>
+            <Form onSubmit={createAccount}>
                 <Input
                     type="text"
                     placeholder="First Name"
@@ -60,23 +79,21 @@ const AdminSignUp = () => {
                     shape="rounded"
                     size="lg"
                 />
-                <Input
+                <StyledPreferredNameInput
                     type="text"
                     placeholder="Preferred First Name"
                     value={preferredName}
                     onChange={handleOnChangeName}
                     shape="rounded"
                     size="lg"
-                    className="sign-up__preffered-name"
                 />
-                <Input
+                <StyledPreferrefEmail
                     type="email"
                     placeholder="Email"
                     value={email}
                     onChange={handleOnChangeEmail}
                     shape="rounded"
                     size="lg"
-                    className="sign-up__email"
                 />
                 <Input
                     type="password"
@@ -94,15 +111,10 @@ const AdminSignUp = () => {
                     shape="rounded"
                     size="lg"
                 />
-                <Button
-                    color="primary"
-                    size="lg"
-                    shape="rounded"
-                    className="sign-up__submit-button"
-                >
+                <StyledButton color="primary" size="lg" shape="rounded">
                     Sign Up
-                </Button>
-            </form>
+                </StyledButton>
+            </Form>
         </AuthWrapper>
     );
 };
