@@ -30,6 +30,13 @@ export const router = createBrowserRouter(
                 path="/team-member/create-password"
                 element={<TeamMemberCreatePassword />}
             />
+
+            <Route path="./platform">
+                <Route path="projects" />
+                <Route path="stories" />
+                <Route path="personal-tasks" />
+                <Route path="team-members" />
+            </Route>
         </>
     )
 );

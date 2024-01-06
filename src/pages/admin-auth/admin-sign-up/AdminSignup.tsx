@@ -3,12 +3,16 @@ import { Button, Input } from "../../../design-system";
 import { useState } from "react";
 import flatIronBuilding from "../../../assets/images/flatIronBuilding.jpg";
 import styled from "styled-components";
+import { Icon } from "../../../design-system/Icon/Icon";
 
 const Form = styled.form`
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-20);
+    svg {
+        color: red;
+    }
 `;
 
 const StyledPreferredNameInput = styled(Input)`
