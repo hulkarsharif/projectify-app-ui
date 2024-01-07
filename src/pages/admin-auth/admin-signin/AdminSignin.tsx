@@ -1,5 +1,5 @@
 import { AuthWrapper } from "../../components";
-import { Button, Input, Checkbox } from "../../../design-system";
+import { Button, Input } from "../../../design-system";
 import { useState } from "react";
 
 import samarkand from "../../../assets/images/samarkand-min.jpeg";
@@ -11,11 +11,21 @@ const Form = styled.form`
     grid-template-columns: 1fr 1fr;
     gap: var(--space-20);
 `;
+const StyledLoginEmail = styled(Input)`
+    grid-column: 1/3;
+`;
+
+const StyledLoginPassword = styled(Input)`
+    grid-column: 1/3;
+`;
+
+const StyledLoginButton = styled(Button)`
+    grid-column: 1/3;
+`;
 
 const AdminSignin = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const [rememberMe, setRememeberMe] = useState<boolean>(false);
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
@@ -23,53 +33,35 @@ const AdminSignin = () => {
     const handleOnChangePassword = (value: string) => {
         setPassword(value);
     };
-    const handleOnChangeRememberMe = (checked: boolean) => {
-        setRememeberMe(checked);
-    };
 
     const createAccount = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(email, password, rememberMe);
+        console.log(email, password);
     };
 
     return (
         <AuthWrapper imageUrl={samarkand} pageTitle="Projectify">
             <Form onSubmit={createAccount}>
-                <Input
+                <StyledLoginEmail
                     type="email"
                     placeholder="Email"
                     value={email}
                     onChange={handleOnChangeEmail}
                     shape="rounded"
                     size="lg"
-                    className="login__email"
                 />
-                <Input
+                <StyledLoginPassword
                     type="password"
                     placeholder="Password"
                     value={password}
                     onChange={handleOnChangePassword}
                     shape="rounded"
                     size="lg"
-                    className="login-password"
                 />
-                <Checkbox
-                    label="Remember me"
-                    checked={rememberMe}
-                    onChange={handleOnChangeRememberMe}
-                />
-                <a href="/forgot-password" color="primary">
-                    Forgot Password?
-                </a>
 
-                <Button
-                    color="primary"
-                    size="lg"
-                    shape="rounded"
-                    className="login-button"
-                >
+                <StyledLoginButton color="primary" size="lg" shape="rounded">
                     Login
-                </Button>
+                </StyledLoginButton>
             </Form>
         </AuthWrapper>
     );

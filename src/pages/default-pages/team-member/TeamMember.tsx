@@ -1,4 +1,4 @@
-import { MainLayout } from "../../components";
+import { AppLayout } from "../../components";
 import { DefaultPageWrapper } from "../../components";
 import "./TeamMember.css";
 import lock from "../../../assets/images/lock.jpg";
@@ -23,7 +23,7 @@ const teamMembers = [
 
 const TeamMembers = () => {
     return (
-        <MainLayout>
+        <AppLayout>
             {!teamMembers ? (
                 <DefaultPageWrapper
                     imagePath={lock}
@@ -33,7 +33,7 @@ const TeamMembers = () => {
             ) : (
                 "Hello"
             )}
-        </MainLayout>
+        </AppLayout>
     );
 };
 

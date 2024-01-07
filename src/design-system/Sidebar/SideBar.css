@@ -1,0 +1,13 @@
+.side-bar {
+    width: 100%;
+    height: 100vh;
+}
+
+.side-bar__logo-wrapper {
+    padding: var(--space-30);
+}
+
+.side-bar svg {
+    fill: red;
+    /* stroke: red; */
+}

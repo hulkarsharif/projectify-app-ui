@@ -17,7 +17,7 @@ const Wrapper = styled.main`
 `;
 
 const Authform = styled.section<{ $switchLayout?: boolean }>`
-    grid-column: 1 / 2;
+    grid-row: 1 / 2;
     grid-column: ${(props) => (props.$switchLayout ? "2 / 3" : "1 / 2")};
     padding: var(--space-50);
 

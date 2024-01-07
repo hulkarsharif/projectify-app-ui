@@ -8,7 +8,7 @@ type LogoProps = {
     layout: "horizontal" | "vertical";
     size: "lg" | "sm";
     className?: string;
-    customText: string;
+    customText?: string;
 };
 
 const layoutClassNames = {

@@ -10,21 +10,22 @@ const Form = styled.form`
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-20);
+
     svg {
         color: red;
     }
 `;
 
 const StyledPreferredNameInput = styled(Input)`
-    grid-column: 1/3;
+    grid-column: 1 / 3;
 `;
 
-const StyledPreferrefEmail = styled(Input)`
-    grid-column: 1/3;
+const StyledPreferredEmail = styled(Input)`
+    grid-column: 1 / 3;
 `;
 
 const StyledButton = styled(Button)`
-    grid-column: 1/3;
+    grid-column: 1 / 3;
 `;
 const AdminSignUp = () => {
     const [firstName, setFirstName] = useState<string>("");
@@ -64,7 +65,11 @@ const AdminSignUp = () => {
     };
 
     return (
-        <AuthWrapper imageUrl={flatIronBuilding} pageTitle="Sign Up">
+        <AuthWrapper
+            imageUrl={flatIronBuilding}
+            pageTitle="Sign Up"
+            switchLayout={true}
+        >
             <Form onSubmit={createAccount}>
                 <Input
                     type="text"
@@ -90,7 +95,7 @@ const AdminSignUp = () => {
                     shape="rounded"
                     size="lg"
                 />
-                <StyledPreferrefEmail
+                <StyledPreferredEmail
                     type="email"
                     placeholder="Email"
                     value={email}

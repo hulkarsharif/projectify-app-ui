@@ -7,5 +7,7 @@ export * from "./Modal";
 export * from "./Logo";
 export * from "./checkbox";
 export * from "./Toggle";
+export * from "./Sidebar";
+export * from "./Icon";
 
 export * from "./utils";

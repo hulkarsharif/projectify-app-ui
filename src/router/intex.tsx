@@ -9,8 +9,10 @@ import {
     AdminResetPassword,
     AdminSignin,
     AdminSignUp,
-    TeamMemberCreatePassword
+    AdminPlatform,
+    AdminProjects
 } from "../pages";
+import { SideBar } from "../design-system";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -26,16 +28,12 @@ export const router = createBrowserRouter(
                 path="/admin/reset-password"
                 element={<AdminResetPassword />}
             />
-            <Route
-                path="/team-member/create-password"
-                element={<TeamMemberCreatePassword />}
-            />
 
-            <Route path="./platform">
-                <Route path="projects" />
-                <Route path="stories" />
-                <Route path="personal-tasks" />
-                <Route path="team-members" />
+            <Route path="./platform" element={<AdminPlatform />}>
+                <Route path="projects" element={<AdminProjects />} />
+                <Route path="stories" element={<h1>Stories</h1>} />
+                <Route path="personal-tasks" element={<h1>Tasks</h1>} />
+                <Route path="team-members" element={<h1>Members</h1>} />
             </Route>
         </>
     )
