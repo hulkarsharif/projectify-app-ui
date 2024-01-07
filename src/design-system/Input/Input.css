@@ -73,6 +73,8 @@ input::placeholder,
 
 .input-textarea {
     resize: none;
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
 }
 .input.input-textarea.input-small {
     height: 7.2rem;

@@ -2,7 +2,7 @@ import { AuthWrapper } from "../../components";
 import { Button, Input } from "../../../design-system";
 import { useState } from "react";
 
-import samarkand from "../../../assets/images/samarkand-min.jpeg";
+import samarkand from "../../../assets/image/samarkand-min.jpeg";
 import styled from "styled-components";
 
 const Form = styled.form`

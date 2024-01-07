@@ -2,7 +2,8 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Input, Modal, Typography, Button } from "../../../design-system";
 import { NoDataPlaceholder } from "../../components/NoDataPlaceHolder";
-import noProject from "../../../assets/illustrations/noProject.svg";
+import noProject from "../../../assets/illustrations/no-project.svg";
+
 const PageBase = styled.div`
     position: relative;
     width: 100%;
@@ -30,7 +31,7 @@ const Projects = () => {
             {!projects.length ? (
                 <NoDataPlaceholder
                     illustrationUrl={noProject}
-                    text="You don’t have any projects yet!"
+                    text="You don't have any projects yet!"
                     buttonText="Add a Project"
                     buttonAction={() => setShowCreateProjectModal(true)}
                 />

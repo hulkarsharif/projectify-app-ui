@@ -1,7 +1,7 @@
 import { AuthWrapper } from "../../components";
 import { Button, Input } from "../../../design-system";
 import { useState } from "react";
-import flatIronBuilding from "../../../assets/images/flatIronBuilding.jpg";
+import flatIronBuilding from "../../../assets/image/flatIronBuilding.jpg";
 import styled from "styled-components";
 
 const Form = styled.form`

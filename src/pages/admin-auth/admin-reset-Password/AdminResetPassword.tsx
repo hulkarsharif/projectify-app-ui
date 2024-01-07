@@ -1,7 +1,7 @@
 import { Input, Button } from "../../../design-system";
 import { useState } from "react";
 
-import resetPasswordImg from "../../../assets/images/resetPasswordImg.jpg";
+import resetPasswordImg from "../../../assets/image/resetPasswordImg.jpg";
 import { PasswordWrapper } from "../../components/password-wrapper/Password.Wrapper";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";

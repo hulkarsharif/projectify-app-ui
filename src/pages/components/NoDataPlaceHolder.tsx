@@ -1,8 +1,8 @@
 import React from "react";
-import { Button, Typography } from "../../design-system";
 import styled from "styled-components";
+import { Button, Typography } from "../../design-system";
 
-type NoDataPlaceHolderProps = {
+type NoDatePlaceholderProps = {
     illustrationUrl: string;
     text: string;
     buttonText?: string;
@@ -20,7 +20,6 @@ const Illustration = styled.img.attrs({ alt: "There is no data" })`
     display: block;
     margin: 0 auto var(--space-24) auto;
 `;
-
 const Text = styled(Typography)`
     margin-bottom: var(--space-50);
     text-align: center;
@@ -30,7 +29,7 @@ const ActionButton = styled(Button)`
     margin: 0 auto;
 `;
 
-const NoDataPlaceholder: React.FC<NoDataPlaceHolderProps> = ({
+const NoDataPlaceholder: React.FC<NoDatePlaceholderProps> = ({
     illustrationUrl,
     text,
     buttonText,

@@ -6,7 +6,7 @@ const AppLayout = styled.main`
 `;
 
 const AppContent = styled.section`
-    background-color: var(--primary-25);
+    background-color: var(--primary-12);
     height: 100vh;
     padding: var(--space-30);
 `;

@@ -2,7 +2,7 @@ import { Input, Button } from "../../../design-system";
 import { useState } from "react";
 import styled from "styled-components";
 
-import lock from "../../../assets/images/lock.jpg";
+import lock from "../../../assets/image/lock.jpg";
 import { PasswordWrapper } from "../../components/password-wrapper/Password.Wrapper";
 
 const Form = styled.form`
