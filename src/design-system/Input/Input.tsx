@@ -15,7 +15,7 @@ const shapeClassNames = {
 };
 
 type InputProps = {
-    type: "text" | "email" | "password" | "tel" | "textarea";
+    type?: "text" | "email" | "password" | "tel" | "textarea";
     disabled?: boolean;
     placeholder: string;
     className?: string;

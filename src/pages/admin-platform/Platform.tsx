@@ -44,7 +44,7 @@ const links = [
     }
 ];
 
-const Platform = () => {
+const AdminPlatform = () => {
     return (
         <AppLayout>
             <SideBar>
@@ -58,4 +58,4 @@ const Platform = () => {
     );
 };
 
-export { Platform as AdminPlatform };
+export { AdminPlatform };

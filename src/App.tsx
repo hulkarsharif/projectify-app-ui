@@ -20,6 +20,7 @@ const App = () => {
             <Link to="admin/sign-in">Sign n</Link>
             <Link to="admin/forgot-password">Forgot password</Link>
             <Link to="admin/reset-password">Reset Password</Link>
+            <Link to="platform/projects">Reset Password</Link>
         </>
     );
 };

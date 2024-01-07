@@ -8,6 +8,10 @@
 }
 
 .side-bar svg {
-    fill: red;
+    fill: var(--primary-500);
     /* stroke: red; */
+}
+
+.side-bar .active {
+    color: var(--primary-500);
 }
