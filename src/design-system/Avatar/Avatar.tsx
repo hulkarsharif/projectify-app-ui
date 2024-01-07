@@ -1,21 +1,15 @@
-import React, { FC } from "react";
-
-import { trimWhiteSpaces, getFullName } from "../utils";
+import React from "react";
 import "./Avatar.css";
-
-type AvatarSize = "sm" | "md" | "lg";
-type AvatarShape = "sharp" | "rounded" | "circle";
-type AvatarType = "initials" | "photo";
+import { trimWhiteSpaces } from "../utils";
 
 type AvatarProps = {
-    size?: AvatarSize;
-    shape?: AvatarShape;
-    type?: AvatarType;
-    className?: string;
-    disabled?: boolean;
-    children: React.ReactNode;
-    onClick?: () => void;
+    firstName: string;
+    lastName: string;
+    shape?: "rounded" | "circle";
+    size?: "sm" | "md" | "lg";
     imageUrl?: string;
+    className?: string;
+    onClick?: () => void;
 };
 
 const sizeClassNames = {
@@ -25,52 +19,34 @@ const sizeClassNames = {
 };
 
 const shapeClassNames = {
-    sharp: "avatar-sharp",
     rounded: "avatar-rounded",
     circle: "avatar-circle"
 };
 
-const typeClassNames = {
-    default: "avatar-default",
-    initials: "avatar-initials",
-    photo: "avatar-photo"
-};
-const Avatar: FC<AvatarProps> = (props) => {
-    const {
-        size,
-        shape,
-        type,
-        className,
-        disabled,
-        children,
-        onClick,
-        imageUrl
-    } = props;
-
+const Avatar: React.FC<AvatarProps> = ({
+    firstName,
+    lastName,
+    shape,
+    size,
+    imageUrl,
+    onClick,
+    className
+}) => {
     const sizeClassName = size !== undefined ? sizeClassNames[size] : "";
-
     const shapeClassName = shape !== undefined ? shapeClassNames[shape] : "";
-
-    const typeClassName = type !== undefined ? typeClassNames[type] : "";
-    let modiefiedChildren: React.ReactNode = children;
-
-    if (type === "initials") {
-        const initials = getFullName(children as string);
-        modiefiedChildren = <span>{initials}</span>;
-    } else if (type === "photo" && imageUrl) {
-        modiefiedChildren = <img src={imageUrl} alt="Avatar" />;
-    }
-    const finalClassNames = `avatar  ${sizeClassName} ${shapeClassName}  ${typeClassName} ${
+    const finalClassNames = `avatar ${sizeClassName} ${shapeClassName} $ ${
         className || ""
     }`;
 
     return (
-        <button
-            className={trimWhiteSpaces(finalClassNames)}
-            disabled={disabled}
-            onClick={onClick}
-        >
-            {modiefiedChildren}
+        <button className={trimWhiteSpaces(finalClassNames)} onClick={onClick}>
+            {imageUrl ? (
+                <img src={imageUrl} alt={`${firstName} ${lastName}`} />
+            ) : (
+                `${firstName ? firstName[0].toUpperCase() : ""}${
+                    lastName ? lastName[0].toUpperCase() : ""
+                }`
+            )}
         </button>
     );
 };

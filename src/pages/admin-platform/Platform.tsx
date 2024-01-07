@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { SideBar, SideBarLinks } from "../../design-system";
-import { AppContent, AppLayout, User } from "../components";
+import { AppContent, AppLayout, SideBarUser } from "../components";
+import user from "../../assets/image/user.jpg";
 const links = [
     {
         title: "Menu",
@@ -48,7 +49,14 @@ const AdminPlatform = () => {
     return (
         <AppLayout>
             <SideBar>
-                <User />
+                <SideBarUser
+                    details={{
+                        firstName: "John",
+                        lastName: "Will",
+                        imageUrl: user,
+                        email: "info@gmail.com"
+                    }}
+                />
                 <SideBarLinks links={links} />
             </SideBar>
             <AppContent>

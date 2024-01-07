@@ -4,4 +4,4 @@ export * from "./default-page-wrapper/DefaultPageWrapper";
 export * from "./AppLayout";
 export * from "./NoDataPlaceHolder";
 
-export * from "./User";
+export * from "./SideBarUser";
