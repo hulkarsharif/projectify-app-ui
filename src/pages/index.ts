@@ -7,3 +7,13 @@ export * from "./admin-platform/team-members/team-members";
 
 export * from "./admin-platform/Platform";
 export * from "./admin-platform/Projects/Projects";
+export * from "./admin-platform/personal-tasks/PersonalTasks";
+export * from "./admin-platform/admin-stories/stories";
+
+export * from "./team-member-auth/team-member-create-password/TeamMemberCreatePassword";
+export * from "./team-member-auth/team-member-login/TeamMemberLogin";
+
+export * from "./team-member-platform/TeamMemberPlatform";
+export * from "./team-member-platform/team-member-projects/TeamMemberProjects";
+export * from "./team-member-platform/team-member-personal-task/TeamMemberPersonalTask";
+export * from "./team-member-platform/team-member-stories/TeamMemberStories";

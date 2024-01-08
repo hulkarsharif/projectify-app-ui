@@ -1,27 +1,36 @@
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-// import { useState } from "react";
-// import { Toggle } from "./design-system";
+const Form = styled.form`
+    font-size: 1.6rem;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 2rem;
+`;
 
 const App = () => {
-    // const [value, setValue] = useState<boolean>(false);
-    // const handleOnToggle = (value: boolean) => {
-    //     setValue(value);
-    // };
-    // return <(
-    //     <div style={{ padding: "300px" }}>
-    //         <Toggle value={value} onToggle={handleOnToggle} />
-    //     </div>
-    // );>
     return (
-        <>
+        <Form>
             <h1>You are at Home </h1>
             <Link to="admin/sign-up">Sign Up</Link>
-            <Link to="admin/sign-in">Sign n</Link>
+            <Link to="admin/sign-in">Sign in</Link>
             <Link to="admin/forgot-password">Forgot password</Link>
             <Link to="admin/reset-password">Reset Password</Link>
-            <Link to="platform/projects">Reset Password</Link>
-        </>
+            <Link to="platform/projects">Projects</Link>
+            <Link to="platform/stories">Stories</Link>
+            <Link to="platform/team-members">Team Members</Link>
+            <Link to="platform/personal-tasks">Personal Tasks</Link>
+
+            <Link to="team-member/create-password">
+                Team Member Create Password
+            </Link>
+            <Link to="team-member/login">Team Member Login</Link>
+            <Link to="team-member/platform/projects">Team Member Projects</Link>
+            <Link to="team-member/platform/stories">Team Member Stories</Link>
+            <Link to="team-member/platform/personal-tasks">
+                Team Member Tasks
+            </Link>
+        </Form>
     );
 };
 

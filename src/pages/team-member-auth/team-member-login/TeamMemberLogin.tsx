@@ -2,7 +2,7 @@ import { AuthWrapper } from "../../components";
 import { Button, Input } from "../../../design-system";
 import { useState } from "react";
 
-import flatIronBuilding from "../../../assets/images/samarkand.jpeg";
+import samarkand from "../../../assets/image/samarkand.jpeg";
 import styled from "styled-components";
 
 const Form = styled.form`
@@ -28,7 +28,7 @@ const TeamMemberLogin = () => {
     };
 
     return (
-        <AuthWrapper imageUrl={flatIronBuilding} pageTitle="Projectify">
+        <AuthWrapper imageUrl={samarkand} pageTitle="Projectify">
             <Form onSubmit={createAccount}>
                 <Input
                     type="email"

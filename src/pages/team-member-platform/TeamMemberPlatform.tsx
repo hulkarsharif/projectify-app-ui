@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { SideBar, SideBarLinks } from "../../design-system";
 import { AppContent, AppLayout, SideBarUser } from "../components";
-import TeamUser from "../../assets/image/TMUser.jpg";
+import UserImage from "../../assets/image/userImage.jpg";
 const links = [
     {
         title: "Menu",
@@ -20,11 +20,6 @@ const links = [
                 linkText: "Personal Tasks",
                 linkTo: "personal-tasks",
                 iconName: "tasks"
-            },
-            {
-                linkText: "Team Members",
-                linkTo: "team-members",
-                iconName: "members"
             }
         ]
     },
@@ -53,7 +48,7 @@ const TeamMemberPlatform = () => {
                     details={{
                         firstName: "Farina",
                         lastName: "Yusupova",
-                        imageUrl: TeamUser,
+                        imageUrl: UserImage,
                         email: "info@gmail.com"
                     }}
                 />
