@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { SideBar, SideBarLinks } from "../../design-system";
 import { AppContent, AppLayout, SideBarUser } from "../components";
-import user from "../../assets/image/user.jpg";
+import TeamUser from "../../assets/image/TMUser.jpg";
 const links = [
     {
         title: "Menu",
@@ -45,15 +45,15 @@ const links = [
     }
 ];
 
-const AdminPlatform = () => {
+const TeamMemberPlatform = () => {
     return (
         <AppLayout>
             <SideBar>
                 <SideBarUser
                     details={{
-                        firstName: "Yaseen",
-                        lastName: "Yusupov",
-                        imageUrl: user,
+                        firstName: "Farina",
+                        lastName: "Yusupova",
+                        imageUrl: TeamUser,
                         email: "info@gmail.com"
                     }}
                 />
@@ -66,4 +66,4 @@ const AdminPlatform = () => {
     );
 };
 
-export { AdminPlatform };
+export { TeamMemberPlatform };
