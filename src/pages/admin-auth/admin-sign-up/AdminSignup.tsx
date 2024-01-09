@@ -65,7 +65,7 @@ const AdminSignUp = () => {
                 password,
                 preferredName: preferredName
             });
-            setIsFormSubmitting(false);
+
             setFirstName("");
             setLastName("");
             setEmail("");

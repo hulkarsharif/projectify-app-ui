@@ -9,11 +9,11 @@ type SignUpInput = {
         position: string;
     };
 };
-
-type signInInput = {
+type SignInInput = {
     email: string;
     password: string;
 };
+
 class Admin {
     url: string;
     constructor() {
@@ -40,7 +40,7 @@ class Admin {
             throw error;
         }
     }
-    async signIn(input: signInInput): Promise<{ token: string }> {
+    async signIn(input: SignInInput): Promise<{ token: string }> {
         try {
             const response = await fetch(`${this.url}/login`, {
                 method: "POST",
@@ -53,12 +53,12 @@ class Admin {
                 const data = await response.json();
                 throw new Error(data.message);
             }
+
             return response.json();
         } catch (error) {
             throw error;
         }
     }
-
     async forgotPassword(email: string) {
         try {
             const response = await fetch(`${this.url}/forgot-password`, {
@@ -79,5 +79,4 @@ class Admin {
         }
     }
 }
-
 export const admin = new Admin();
