@@ -2,6 +2,7 @@ import { AuthWrapper } from "../../components";
 import { Button, Input } from "../../../design-system";
 import { useState } from "react";
 import flatIronBuilding from "../../../assets/image/flatIronBuilding.jpg";
+import { admin } from "../../../api";
 import styled from "styled-components";
 
 const Form = styled.form`
@@ -33,6 +34,8 @@ const AdminSignUp = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+    const [isFormSubmiting, setIsFormSubmitting] = useState<boolean>(false);
+    const [isError, setIsError] = useState<boolean>(false);
     const handleOnChangeFirstName = (value: string) => {
         setFirstName(value);
     };
@@ -51,16 +54,27 @@ const AdminSignUp = () => {
     const handleOnChangePasswordConfirm = (value: string) => {
         setPasswordConfirm(value);
     };
-    const createAccount = (e: React.FormEvent<HTMLFormElement>) => {
+    const createAccount = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(
-            firstName,
-            lastName,
-            preferredName,
-            password,
-            passwordConfirm,
-            email
-        );
+        try {
+            setIsFormSubmitting(true);
+            await admin.signUp({
+                firstName,
+                lastName,
+                email,
+                password,
+                preferredName: preferredName
+            });
+            setIsFormSubmitting(false);
+            setFirstName("");
+            setLastName("");
+            setEmail("");
+            setPreferredName("");
+            setPassword("");
+            setPasswordConfirm("");
+        } catch (error) {}
+        setIsFormSubmitting(false);
+        setIsError(true);
     };
 
     return (
@@ -77,6 +91,7 @@ const AdminSignUp = () => {
                     onChange={handleOnChangeFirstName}
                     shape="rounded"
                     size="lg"
+                    disabled={isFormSubmiting}
                 />
                 <Input
                     type="text"
@@ -85,6 +100,7 @@ const AdminSignUp = () => {
                     onChange={handleOnChangeLastName}
                     shape="rounded"
                     size="lg"
+                    disabled={isFormSubmiting}
                 />
                 <StyledPreferredNameInput
                     type="text"
@@ -93,6 +109,7 @@ const AdminSignUp = () => {
                     onChange={handleOnChangeName}
                     shape="rounded"
                     size="lg"
+                    disabled={isFormSubmiting}
                 />
                 <StyledPreferredEmail
                     type="email"
@@ -101,6 +118,7 @@ const AdminSignUp = () => {
                     onChange={handleOnChangeEmail}
                     shape="rounded"
                     size="lg"
+                    disabled={isFormSubmiting}
                 />
                 <Input
                     type="password"
@@ -109,16 +127,23 @@ const AdminSignUp = () => {
                     onChange={handleOnChangePassword}
                     shape="rounded"
                     size="lg"
+                    disabled={isFormSubmiting}
                 />
                 <Input
                     type="password"
                     placeholder="Password Confirmation"
-                    value={lastName}
+                    value={passwordConfirm}
                     onChange={handleOnChangePasswordConfirm}
                     shape="rounded"
                     size="lg"
+                    disabled={isFormSubmiting}
                 />
-                <StyledButton color="primary" size="lg" shape="rounded">
+                <StyledButton
+                    color="primary"
+                    size="lg"
+                    shape="rounded"
+                    disabled={isFormSubmiting}
+                >
                     Sign Up
                 </StyledButton>
             </Form>

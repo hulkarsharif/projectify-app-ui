@@ -1,6 +1,7 @@
 import { AuthWrapper } from "../../components";
 import { Button, Input } from "../../../design-system";
 import { useState } from "react";
+import { admin } from "../../../api";
 
 import samarkand from "../../../assets/image/samarkand-min.jpeg";
 import styled from "styled-components";
@@ -26,6 +27,8 @@ const StyledLoginButton = styled(Button)`
 const AdminSignin = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [isFormSubmiting, setIsFormSubmitting] = useState<boolean>(false);
+    const [isError, setIsError] = useState<boolean>(false);
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
@@ -34,14 +37,29 @@ const AdminSignin = () => {
         setPassword(value);
     };
 
-    const createAccount = (e: React.FormEvent<HTMLFormElement>) => {
+    const createAccount = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(email, password);
+        try {
+            setIsFormSubmitting(true);
+            const response = await admin.signIn({
+                email,
+                password
+            });
+            console.log(response);
+
+            setIsFormSubmitting(false);
+
+            setEmail("");
+
+            setPassword("");
+        } catch (error) {}
+        setIsFormSubmitting(false);
+        setIsError(true);
     };
 
     return (
-        <AuthWrapper imageUrl={samarkand} pageTitle="Projectify">
-            <Form onSubmit={createAccount}>
+        <AuthWrapper imageUrl={samarkand} pageTitle="Sign In">
+            <Form onSubmit={AdminSignin}>
                 <StyledLoginEmail
                     type="email"
                     placeholder="Email"
@@ -49,6 +67,7 @@ const AdminSignin = () => {
                     onChange={handleOnChangeEmail}
                     shape="rounded"
                     size="lg"
+                    disabled={isFormSubmiting}
                 />
                 <StyledLoginPassword
                     type="password"
@@ -57,9 +76,15 @@ const AdminSignin = () => {
                     onChange={handleOnChangePassword}
                     shape="rounded"
                     size="lg"
+                    disabled={isFormSubmiting}
                 />
 
-                <StyledLoginButton color="primary" size="lg" shape="rounded">
+                <StyledLoginButton
+                    color="primary"
+                    size="lg"
+                    shape="rounded"
+                    disabled={isFormSubmiting}
+                >
                     Login
                 </StyledLoginButton>
             </Form>
