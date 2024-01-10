@@ -5,91 +5,86 @@ import { admin } from "../../../api";
 
 import samarkand from "../../../assets/image/samarkand-min.jpeg";
 import styled from "styled-components";
+import { useFocus } from "../../../custom-hooks/useFocus";
+import { useNavigate } from "react-router-dom";
 
 const Form = styled.form`
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: var(--space-20);
 `;
-const StyledLoginEmail = styled(Input)`
-    grid-column: 1/3;
-`;
 
-const StyledLoginPassword = styled(Input)`
-    grid-column: 1/3;
-`;
-
-const StyledLoginButton = styled(Button)`
-    grid-column: 1/3;
-`;
-
-const AdminSignin = () => {
+const Signin = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const [isFormSubmiting, setIsFormSubmitting] = useState<boolean>(false);
+    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
     };
+
     const handleOnChangePassword = (value: string) => {
         setPassword(value);
     };
 
-    const createAccount = async (e: React.FormEvent<HTMLFormElement>) => {
+    const signin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             setIsFormSubmitting(true);
-            const response = await admin.signIn({
+            const { token } = await admin.signIn({
                 email,
                 password
             });
-            console.log(response);
+            localStorage.setItem("authToken", token);
+            navigate("/admin/platform");
 
             setIsFormSubmitting(false);
-
             setEmail("");
-
             setPassword("");
-        } catch (error) {}
-        setIsFormSubmitting(false);
-        setIsError(true);
+        } catch (error) {
+            if (error instanceof Error) {
+                console.log(error.message);
+                setIsFormSubmitting(false);
+                setIsError(true);
+            }
+        }
     };
 
     return (
         <AuthWrapper imageUrl={samarkand} pageTitle="Sign In">
-            <Form onSubmit={AdminSignin}>
-                <StyledLoginEmail
+            <Form onSubmit={signin}>
+                <Input
                     type="email"
                     placeholder="Email"
                     value={email}
                     onChange={handleOnChangeEmail}
                     shape="rounded"
                     size="lg"
-                    disabled={isFormSubmiting}
+                    disabled={isFormSubmitting}
                 />
-                <StyledLoginPassword
+                <Input
                     type="password"
                     placeholder="Password"
                     value={password}
                     onChange={handleOnChangePassword}
                     shape="rounded"
                     size="lg"
-                    disabled={isFormSubmiting}
+                    disabled={isFormSubmitting}
                 />
-
-                <StyledLoginButton
+                <Button
                     color="primary"
                     size="lg"
                     shape="rounded"
-                    disabled={isFormSubmiting}
+                    disabled={isFormSubmitting}
                 >
-                    Login
-                </StyledLoginButton>
+                    Sign In
+                </Button>
             </Form>
         </AuthWrapper>
     );
 };
 
-export { AdminSignin };
+export { Signin as AdminSignin };

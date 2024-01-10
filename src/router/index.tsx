@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import { App } from "../App";
 import {
-    AdminSignUp,
+    AdminSignup,
     AdminSignin,
     AdminForgotPassword,
     AdminResetPassword,
@@ -26,7 +26,7 @@ export const router = createBrowserRouter(
     createRoutesFromElements(
         <>
             <Route path="/" element={<App />} />
-            <Route path="/admin/sign-up" element={<AdminSignUp />} />
+            <Route path="/admin/sign-up" element={<AdminSignup />} />
             <Route path="/admin/sign-In" element={<AdminSignin />} />
             <Route
                 path="/admin/forgot-password"

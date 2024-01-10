@@ -33,10 +33,13 @@ class Admin {
                 body: JSON.stringify(input)
             });
             if (!response.ok) {
+                console.log("hello");
                 const data = await response.json();
+                console.log(data);
                 throw new Error(data.message);
             }
         } catch (error) {
+            console.log(error);
             throw error;
         }
     }
