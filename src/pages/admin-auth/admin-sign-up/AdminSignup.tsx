@@ -1,9 +1,9 @@
-import { AuthWrapper } from "../../components";
 import { Button, Input, Toaster } from "../../../design-system";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import flatIronBuilding from "../../../assets/image/flatIronBuilding.jpg";
 import { admin } from "../../../api";
+import { AuthActionLink, AuthWrapper } from "../../components";
 import styled from "styled-components";
 
 const Form = styled.form`
@@ -189,6 +189,13 @@ const AdminSignup = () => {
                         Sign Up
                     </StyledButton>
                 </Form>
+                <div style={{ marginTop: "auto" }}>
+                    <AuthActionLink
+                        linkText="Sign In"
+                        hintText="Already have an account?"
+                        linkto="../admin/sign-in"
+                    />
+                </div>
             </AuthWrapper>
             <Toaster />
         </>
