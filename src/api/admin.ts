@@ -38,6 +38,7 @@ class Admin {
                 console.log(data);
                 throw new Error(data.message);
             }
+            return response.json();
         } catch (error) {
             console.log(error);
             throw error;

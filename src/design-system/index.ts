@@ -9,5 +9,6 @@ export * from "./checkbox";
 export * from "./Toggle";
 export * from "./Sidebar";
 export * from "./Icon";
+export * from "./Toast";
 
 export * from "./utils";
