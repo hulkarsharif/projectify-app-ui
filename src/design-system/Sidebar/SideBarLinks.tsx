@@ -1,8 +1,7 @@
 import React from "react";
 import { Typography } from "../Typography";
 import { Icon } from "../Icon";
-import { Link, useNavigate } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 
 type SideBarLink = {
     linkText: string;

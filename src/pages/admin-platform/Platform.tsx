@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { SideBar, SideBarLinks } from "../../design-system";
 import { AppContent, AppLayout, SideBarUser } from "../components";
 import user from "../../assets/image/user.jpg";
+
 const links = [
     {
         title: "Menu",

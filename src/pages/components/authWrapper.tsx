@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import { FC, ReactNode } from "react";
 import styled from "styled-components";
 
 import { Logo } from "../../design-system";
@@ -31,7 +31,7 @@ const AuthContent = styled.div`
     flex-direction: column;
     gap: var(--space-50);
     align-items: center;
-    flex-basis: 57rem;
+    flex-basis: 47rem;
 `;
 
 const AuthImageWrapper = styled.section<{ $switchLayout?: boolean }>`

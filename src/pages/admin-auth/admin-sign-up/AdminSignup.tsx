@@ -34,8 +34,6 @@ const AdminSignup = () => {
 
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
 
-    const [isError, setIsError] = useState<boolean>(false);
-
     const handleOnChangeFirstName = (value: string) => {
         setFirstName(value);
     };

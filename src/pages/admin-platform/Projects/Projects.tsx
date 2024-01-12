@@ -22,7 +22,7 @@ const Buttons = styled.div`
     display: flex;
     gap: var(--space-10);
 `;
-const Projects = () => {
+const AdminProjects = () => {
     const [projects, setProject] = useState<string[]>([]);
     const [showCreateProjectModal, setShowCreateProjectModal] =
         useState<boolean>(false);
@@ -78,4 +78,4 @@ const Projects = () => {
         </PageBase>
     );
 };
-export { Projects as AdminProjects };
+export { AdminProjects };
