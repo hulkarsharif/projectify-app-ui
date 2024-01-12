@@ -1,11 +1,11 @@
-import { AuthWrapper } from "../../components";
+import { AuthWrapper, AuthActionLink } from "../../components";
 import { Button, Input } from "../../../design-system";
 import { useState } from "react";
 import { admin } from "../../../api";
-
 import samarkand from "../../../assets/image/samarkand-min.jpeg";
 import styled from "styled-components";
-import { useFocus } from "../../../custom-hooks/useFocus";
+import { useLocalStorage } from "../../../hooks";
+
 import { useNavigate } from "react-router-dom";
 
 const Form = styled.form`
@@ -15,12 +15,18 @@ const Form = styled.form`
     gap: var(--space-20);
 `;
 
+const ActionLinks = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+`;
 const Signin = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);
     const navigate = useNavigate();
+    const [setItem, getItem] = useLocalStorage();
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
@@ -39,6 +45,7 @@ const Signin = () => {
                 password
             });
             localStorage.setItem("authToken", token);
+            setItem("authToken", token);
             navigate("/admin/platform");
 
             setIsFormSubmitting(false);
@@ -46,7 +53,6 @@ const Signin = () => {
             setPassword("");
         } catch (error) {
             if (error instanceof Error) {
-                console.log(error.message);
                 setIsFormSubmitting(false);
                 setIsError(true);
             }
@@ -83,6 +89,18 @@ const Signin = () => {
                     Sign In
                 </Button>
             </Form>
+            <ActionLinks>
+                <AuthActionLink
+                    hintText="Don't have an account?"
+                    linkto="../admin/sign-up"
+                    linkText="Sign Up"
+                />
+                <AuthActionLink
+                    hintText="Forgot password?"
+                    linkto="../admin/forgot-password"
+                    linkText="Get Help"
+                />
+            </ActionLinks>
         </AuthWrapper>
     );
 };

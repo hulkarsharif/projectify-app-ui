@@ -1,65 +1,99 @@
-import { Input, Button } from "../../../design-system";
 import { useState } from "react";
-
-import resetPasswordImg from "../../../assets/image/resetPasswordImg.jpg";
-import { PasswordWrapper } from "../../components/password-wrapper/Password.Wrapper";
-import { useSearchParams } from "react-router-dom";
+import { Input, Button, Toaster } from "../../../design-system";
+import { AuthWrapper, AuthActionLink } from "../../components";
+import flatIronBuilding from "../../../assets/image/flatIronBuilding.jpg";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { admin } from "../../../api";
+import toast from "react-hot-toast";
+import { useCounter } from "../../../App";
 
+const Form = styled.form`
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-20);
+`;
 const AdminResetPassword = () => {
-    const [newPassword, setNewPassword] = useState<string>("");
-    const [confirmPassword, setConfirmPassword] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [passwordConfirm, setPasswordConfirm] = useState<string>("");
     const [searchParams] = useSearchParams();
-    const resetPasswordToken = searchParams.get("resetPasswordToken");
+    const passwordResetToken = searchParams.get("passwordResetToken");
+    const [counter, setCounter] = useCounter(200, 5);
 
-    const handleOnChangeNewPassword = (value: string) => {
-        setNewPassword(value);
+    const navigate = useNavigate();
+
+    const handleOnChangePassword = (value: string) => {
+        setPassword(value);
     };
-    const handleOnChangeConfirmPassword = (value: string) => {
-        setConfirmPassword(value);
+    const handleOnChangePasswordConfirm = (value: string) => {
+        setPasswordConfirm(value);
     };
 
-    const resetPassword = (e: React.FormEvent<HTMLFormElement>) => {
+    const resetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(newPassword, confirmPassword);
+
+        try {
+            const response = await admin.resetPassword(
+                password,
+                passwordConfirm,
+                passwordResetToken as string
+            );
+
+            setPassword("");
+            setPasswordConfirm("");
+
+            toast.success(response.message);
+            setTimeout(() => {
+                navigate("/admin/sign-in");
+            }, 2000);
+        } catch (error) {
+            if (error instanceof Error) {
+                toast.error(error.message);
+            }
+        }
     };
-
-    const Form = styled.form`
-        width: 100%;
-
-        display: grid;
-        gap: var(--space-20);
-    `;
 
     return (
-        <PasswordWrapper pageTitle="Reset Password" imageUrl={resetPasswordImg}>
-            <Form onSubmit={resetPassword} noValidate>
-                <Input
-                    type="password"
-                    placeholder="New password"
-                    value={newPassword}
-                    onChange={handleOnChangeNewPassword}
-                    shape="rounded"
-                    size="lg"
+        <>
+            <AuthWrapper
+                imageUrl={flatIronBuilding}
+                pageTitle="Reset Password"
+                switchLayout
+            >
+                <button onClick={setCounter}>{counter}</button>
+                <Form onSubmit={resetPassword}>
+                    <button onClick={setCounter}>{counter}</button>
+                    <Input
+                        type="password"
+                        placeholder="New Password"
+                        value={password}
+                        onChange={handleOnChangePassword}
+                        shape="rounded"
+                        size="lg"
+                    />
+                    <Input
+                        type="password"
+                        placeholder="New Password Confirmation"
+                        value={passwordConfirm}
+                        onChange={handleOnChangePasswordConfirm}
+                        shape="rounded"
+                        size="lg"
+                    />
+
+                    <Button color="primary" size="lg" shape="rounded">
+                        Reset Password
+                    </Button>
+                </Form>
+                <AuthActionLink
+                    hintText="Get Instructions"
+                    linkText="Forget password"
+                    linkto="../admin/forgot-password"
                 />
-                <Input
-                    type="password"
-                    placeholder="Confirm password"
-                    value={confirmPassword}
-                    onChange={handleOnChangeConfirmPassword}
-                    shape="rounded"
-                    size="lg"
-                />
-                <Button
-                    color="primary"
-                    size="lg"
-                    shape="rounded"
-                    fullWidth={true}
-                >
-                    Reset My Password
-                </Button>
-            </Form>
-        </PasswordWrapper>
+            </AuthWrapper>
+            <Toaster />
+        </>
     );
 };
 

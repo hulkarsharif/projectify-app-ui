@@ -27,7 +27,7 @@ export const router = createBrowserRouter(
         <>
             <Route path="/" element={<App />} />
             <Route path="/admin/sign-up" element={<AdminSignup />} />
-            <Route path="/admin/sign-In" element={<AdminSignin />} />
+            <Route path="/admin/sign-in" element={<AdminSignin />} />
             <Route
                 path="/admin/forgot-password"
                 element={<AdminForgotPassword />}
@@ -37,7 +37,7 @@ export const router = createBrowserRouter(
                 element={<AdminResetPassword />}
             />
 
-            <Route path="/platform" element={<AdminPlatform />}>
+            <Route path="/admin/platform" element={<AdminPlatform />}>
                 <Route path="projects" element={<AdminProjects />} />
                 <Route path="stories" element={<AdminStories />} />
                 <Route path="personal-tasks" element={<AdminPersonalTasks />} />
