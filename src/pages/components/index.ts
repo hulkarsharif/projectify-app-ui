@@ -1,4 +1,4 @@
-export * from "./AuthWrapper";
+export * from "./authWrapper";
 export * from "./password-wrapper/Password.Wrapper";
 export * from "./default-page-wrapper/DefaultPageWrapper";
 export * from "./AppLayout";

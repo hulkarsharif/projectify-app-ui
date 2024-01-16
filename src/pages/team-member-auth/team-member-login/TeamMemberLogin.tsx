@@ -1,6 +1,8 @@
-import { AuthWrapper } from "../../components";
+import { AppContent, AuthActionLink, AuthWrapper } from "../../components";
 import { Button, Input } from "../../../design-system";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { admin } from "../../../api";
+import { AppContext } from "../../../App";
 
 import samarkand from "../../../assets/image/samarkand.jpeg";
 import styled from "styled-components";
@@ -11,9 +13,20 @@ const Form = styled.form`
     gap: var(--space-20);
 `;
 
+const ActionLinks = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+`;
+
 const TeamMemberLogin = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
+    const [isError, setIsError] = useState<boolean>(false);
+    // const navigate = useNavigate();
+    // const [setItem, getItem] = useLocalStorage();
+    const { counter, setCounter } = useContext(AppContext);
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
@@ -22,14 +35,14 @@ const TeamMemberLogin = () => {
         setPassword(value);
     };
 
-    const createAccount = (e: React.FormEvent<HTMLFormElement>) => {
+    const signin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(email, password);
     };
 
     return (
-        <AuthWrapper imageUrl={samarkand} pageTitle="Projectify">
-            <Form onSubmit={createAccount}>
+        <AuthWrapper imageUrl={samarkand} pageTitle="Sign In">
+            <button onClick={() => setCounter(counter + 1)}>{counter}</button>
+            <Form onSubmit={signin}>
                 <Input
                     type="email"
                     placeholder="Email"
@@ -38,6 +51,7 @@ const TeamMemberLogin = () => {
                     shape="rounded"
                     size="lg"
                     className="login__email"
+                    disabled={isFormSubmitting}
                 />
                 <Input
                     type="password"
@@ -54,10 +68,24 @@ const TeamMemberLogin = () => {
                     size="lg"
                     shape="rounded"
                     className="login-button"
+                    disabled={isFormSubmitting}
                 >
-                    Login
+                    Sign In
                 </Button>
             </Form>
+
+            <ActionLinks>
+                <AuthActionLink
+                    hintText="Don’t have an account?"
+                    linkto="../admin/sign-up"
+                    linkText="Sign Up"
+                />
+                <AuthActionLink
+                    hintText="Forgot password? "
+                    linkto="../team-member/forget-password"
+                    linkText="Get Help"
+                />
+            </ActionLinks>
         </AuthWrapper>
     );
 };

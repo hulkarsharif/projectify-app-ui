@@ -47,13 +47,16 @@ const TeamMemberPlatform = () => {
             <SideBar>
                 <SideBarUser
                     details={{
-                        firstName: "Amelia",
-                        lastName: "Raven",
+                        firstName: "Farina",
+                        lastName: "Yusupova",
                         imageUrl: userImage,
-                        email: "memberinfo@email.com"
+                        email: "nora@email.com"
                     }}
                 />
-                <SideBarLinks links={links} loggedOutLink="" />
+                <SideBarLinks
+                    links={links}
+                    loggedOutLink="/team-member/sign-in"
+                />
             </SideBar>
             <AppContent>
                 <Outlet />

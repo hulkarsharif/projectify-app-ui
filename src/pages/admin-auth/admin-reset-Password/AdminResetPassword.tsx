@@ -6,7 +6,6 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { admin } from "../../../api";
 import toast from "react-hot-toast";
-import { useCounter } from "../../../App";
 
 const Form = styled.form`
     width: 100%;
@@ -14,13 +13,14 @@ const Form = styled.form`
     display: flex;
     flex-direction: column;
     gap: var(--space-20);
+    margin-bottom: var(--space-40);
 `;
 const AdminResetPassword = () => {
     const [password, setPassword] = useState<string>("");
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
     const [searchParams] = useSearchParams();
     const passwordResetToken = searchParams.get("passwordResetToken");
-    const [counter, setCounter] = useCounter(200, 5);
 
     const navigate = useNavigate();
 
@@ -30,17 +30,20 @@ const AdminResetPassword = () => {
     const handleOnChangePasswordConfirm = (value: string) => {
         setPasswordConfirm(value);
     };
+    const isFormSubmittable = password && passwordConfirm;
 
     const resetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
+            setIsFormSubmitting(true);
             const response = await admin.resetPassword(
                 password,
                 passwordConfirm,
                 passwordResetToken as string
             );
 
+            setIsFormSubmitting(false);
             setPassword("");
             setPasswordConfirm("");
 
@@ -50,6 +53,7 @@ const AdminResetPassword = () => {
             }, 2000);
         } catch (error) {
             if (error instanceof Error) {
+                setIsFormSubmitting(false);
                 toast.error(error.message);
             }
         }
@@ -62,9 +66,7 @@ const AdminResetPassword = () => {
                 pageTitle="Reset Password"
                 switchLayout
             >
-                <button onClick={setCounter}>{counter}</button>
                 <Form onSubmit={resetPassword}>
-                    <button onClick={setCounter}>{counter}</button>
                     <Input
                         type="password"
                         placeholder="New Password"
@@ -82,7 +84,12 @@ const AdminResetPassword = () => {
                         size="lg"
                     />
 
-                    <Button color="primary" size="lg" shape="rounded">
+                    <Button
+                        color="primary"
+                        size="lg"
+                        shape="rounded"
+                        disabled={isFormSubmitting || !isFormSubmittable}
+                    >
                         Reset Password
                     </Button>
                 </Form>

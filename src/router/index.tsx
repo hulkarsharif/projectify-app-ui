@@ -45,14 +45,11 @@ export const router = createBrowserRouter(
             </Route>
 
             <Route
-                path="/team-member/create-password"
+                path="team-member/create-password"
                 element={<TeamMemberCreatePassword />}
             />
-            <Route path="/team-member/login" element={<TeamMemberLogin />} />
-            <Route
-                path="/team-member/platform"
-                element={<TeamMemberPlatform />}
-            >
+            <Route path="team-member/login" element={<TeamMemberLogin />} />
+            <Route path="team-member/platform" element={<TeamMemberPlatform />}>
                 <Route path="projects" element={<TeamMemberProjects />} />
                 <Route path="stories" element={<TeamMemberStories />} />
                 <Route
