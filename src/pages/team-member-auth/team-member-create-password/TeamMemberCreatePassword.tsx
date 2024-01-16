@@ -1,8 +1,12 @@
-import { AuthWrapper } from "../../components";
+import { AuthActionLink, AuthWrapper } from "../../components";
 import { Button, Input } from "../../../design-system";
 import { useState } from "react";
 import flatIronBuilding from "../../../assets/image/flatIronBuilding.jpg";
 import styled from "styled-components";
+import { teamMember } from "../../../api";
+import { useSearchParams } from "react-router-dom";
+import toast from "react-hot-toast";
+import { error } from "console";
 
 const Form = styled.form`
     width: 100%;
@@ -22,6 +26,10 @@ const TeamMemberCreatePassword = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
+
+    const [searchParams] = useSearchParams;
+    const inviteToken = searchParams.get("inviteToken");
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
@@ -33,9 +41,34 @@ const TeamMemberCreatePassword = () => {
         setPasswordConfirm(value);
     };
 
-    const createPassword = (e: React.FormEvent<HTMLFormElement>) => {
+    const isFormSubmittable = email && password && passwordConfirm;
+
+    const createPassword = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(email, password, passwordConfirm);
+        try {
+            setIsFormSubmitting(true);
+            const response = await teamMember.createPassword(
+                {
+                    email,
+                    password,
+                    passwordConfirm
+                },
+                inviteToken as string
+            );
+
+            setIsFormSubmitting(false);
+
+            setEmail("");
+            setPassword("");
+            setPasswordConfirm("");
+
+            toast.success(response.message);
+        } catch (error) {
+            if (error instanceof Error) {
+                setIsFormSubmitting(false);
+                toast.error(error.message);
+            }
+        }
     };
 
     return (
@@ -66,10 +99,21 @@ const TeamMemberCreatePassword = () => {
                     size="lg"
                 />
 
-                <StyledButton color="primary" size="lg" shape="rounded">
+                <StyledButton
+                    color="primary"
+                    size="lg"
+                    shape="rounded"
+                    disabled={isFormSubmitting || !isFormSubmittable}
+                >
                     Create Password
                 </StyledButton>
             </Form>
+
+            <AuthActionLink
+                hintText="Already have an account?"
+                linkText="Sign In"
+                linkto="../team-member/sign-in"
+            />
         </AuthWrapper>
     );
 };
