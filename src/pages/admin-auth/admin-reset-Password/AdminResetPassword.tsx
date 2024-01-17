@@ -96,7 +96,7 @@ const AdminResetPassword = () => {
                 <AuthActionLink
                     hintText="Get Instructions"
                     linkText="Forget password"
-                    linkto="../admin/forgot-password"
+                    linkTo="../admin/forgot-password"
                 />
             </AuthWrapper>
             <Toaster />

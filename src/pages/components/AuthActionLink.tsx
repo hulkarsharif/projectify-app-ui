@@ -6,7 +6,7 @@ import React from "react";
 type PropsType = {
     linkText: string;
     hintText?: string;
-    linkto: string;
+    linkTo: string;
 };
 
 const ActionLinkWrapper = styled.div`
@@ -26,14 +26,14 @@ const StyledLink = styled(Link)`
 const AuthActionLink: React.FC<PropsType> = ({
     hintText,
     linkText,
-    linkto
+    linkTo
 }) => {
     return (
         <ActionLinkWrapper>
             <HintTextTypography variant="paragraphSM" weight="medium">
                 {hintText}
             </HintTextTypography>
-            <StyledLink to={linkto} className="paragraph-sm">
+            <StyledLink to={linkTo} className="paragraph-sm">
                 {linkText}
             </StyledLink>
         </ActionLinkWrapper>

@@ -15,12 +15,15 @@ import {
     AdminPersonalTasks,
     AdminTeamMembers,
     TeamMemberCreatePassword,
-    TeamMemberLogin,
+    TeamMemberResetPassword,
+    TeamMemberForgotPassword,
+    TeamMemberSignin,
     TeamMemberPlatform,
     TeamMemberPersonalTasks,
     TeamMemberProjects,
     TeamMemberStories
 } from "../pages";
+import { Private } from "./Private";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -37,7 +40,16 @@ export const router = createBrowserRouter(
                 element={<AdminResetPassword />}
             />
 
-            <Route path="/admin/platform" element={<AdminPlatform />}>
+            <Route
+                path="/admin/platform"
+                element={
+                    <Private
+                        component={<AdminPlatform />}
+                        userType="admin"
+                        to="../admin/sign-in"
+                    />
+                }
+            >
                 <Route path="projects" element={<AdminProjects />} />
                 <Route path="stories" element={<AdminStories />} />
                 <Route path="personal-tasks" element={<AdminPersonalTasks />} />
@@ -45,11 +57,28 @@ export const router = createBrowserRouter(
             </Route>
 
             <Route
-                path="team-member/create-password"
+                path="/team-member/create-password"
                 element={<TeamMemberCreatePassword />}
             />
-            <Route path="team-member/login" element={<TeamMemberLogin />} />
-            <Route path="team-member/platform" element={<TeamMemberPlatform />}>
+            <Route
+                path="/team-member/reset-password"
+                element={<TeamMemberResetPassword />}
+            />
+            <Route
+                path="/team-member/forgot-password"
+                element={<TeamMemberForgotPassword />}
+            />
+            <Route path="/team-member/sign-in" element={<TeamMemberSignin />} />
+            <Route
+                path="/team-member/platform"
+                element={
+                    <Private
+                        component={<TeamMemberPlatform />}
+                        userType="teamMember"
+                        to="../team-member/sign-in"
+                    />
+                }
+            >
                 <Route path="projects" element={<TeamMemberProjects />} />
                 <Route path="stories" element={<TeamMemberStories />} />
                 <Route

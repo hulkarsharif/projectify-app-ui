@@ -9,7 +9,7 @@ const PageBase = styled.div`
     width: 100%;
     height: 100%;
 `;
-const CreateTeamMembersModalTitle = styled(Typography)`
+const CreateTeamMemberModalTitle = styled(Typography)`
     margin-bottom: var(--space-24);
 `;
 const StyledPositionInput = styled(Input)`
@@ -34,7 +34,7 @@ const TeamMembers = () => {
     const [lastName, setLastName] = useState<string>("");
     const [position, setPosition] = useState<string>("");
     const [email, setEmail] = useState<string>("");
-    const [teamMembers, setTeamMembers] = useState<string[]>([]);
+    const [teamMember, setTeamMember] = useState<string[]>([]);
 
     const handleOnChangeFirstName = (value: string) => {
         setFirstName(value);
@@ -49,27 +49,27 @@ const TeamMembers = () => {
         setEmail(value);
     };
 
-    const [showCreateTeamMembersModal, setShowCreateTeamMembersModal] =
+    const [showCreateTeamMemberModal, setShowCreateTeamMemberModal] =
         useState<boolean>(false);
     return (
         <PageBase>
-            {!TeamMembers.length ? (
+            {!teamMember.length ? (
                 <NoDataPlaceholder
                     illustrationUrl={noTeamMember}
                     text="You don't have any team members yet!"
                     buttonText="Add a new Member"
-                    buttonAction={() => setShowCreateTeamMembersModal(true)}
+                    buttonAction={() => setShowCreateTeamMemberModal(true)}
                 />
             ) : (
                 <h1>Team Members</h1>
             )}
-            <Modal show={showCreateTeamMembersModal} position="center">
-                <CreateTeamMembersModalTitle
+            <Modal show={showCreateTeamMemberModal} position="center">
+                <CreateTeamMemberModalTitle
                     variant="paragraphLG"
                     weight="medium"
                 >
                     New Member
-                </CreateTeamMembersModalTitle>
+                </CreateTeamMemberModalTitle>
                 <Inputs>
                     <Input
                         type="text"
@@ -111,7 +111,7 @@ const TeamMembers = () => {
                         shape="rounded"
                         variant="outlined"
                         fullWidth
-                        onClick={() => setShowCreateTeamMembersModal(false)}
+                        onClick={() => setShowCreateTeamMemberModal(false)}
                     >
                         Cancel
                     </Button>

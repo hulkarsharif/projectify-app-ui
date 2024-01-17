@@ -28,7 +28,7 @@ const TeamMemberCreatePassword = () => {
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
 
-    const [searchParams] = useSearchParams;
+    const [searchParams] = useSearchParams();
     const inviteToken = searchParams.get("inviteToken");
 
     const handleOnChangeEmail = (value: string) => {
@@ -112,7 +112,7 @@ const TeamMemberCreatePassword = () => {
             <AuthActionLink
                 hintText="Already have an account?"
                 linkText="Sign In"
-                linkto="../team-member/sign-in"
+                linkTo="../team-member/sign-in"
             />
         </AuthWrapper>
     );

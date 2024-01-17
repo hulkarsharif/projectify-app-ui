@@ -53,10 +53,7 @@ const TeamMemberPlatform = () => {
                         email: "nora@email.com"
                     }}
                 />
-                <SideBarLinks
-                    links={links}
-                    loggedOutLink="/team-member/sign-in"
-                />
+                <SideBarLinks links={links} loggedOutLink="/admin/sign-in" />
             </SideBar>
             <AppContent>
                 <Outlet />

@@ -3,7 +3,7 @@ import { DefaultPageWrapper } from "../../components";
 import "./TeamMember.css";
 import lock from "../../../assets/images/lock.jpg";
 
-const teamMembers = [
+const teamMember = [
     {
         name: "Project Management Tool",
         description:
@@ -21,10 +21,10 @@ const teamMembers = [
     }
 ];
 
-const TeamMembers = () => {
+const TeamMember = () => {
     return (
         <AppLayout>
-            {!teamMembers ? (
+            {!teamMember ? (
                 <DefaultPageWrapper
                     imagePath={lock}
                     pageTitle="You don't have any team members yet!"
@@ -37,4 +37,4 @@ const TeamMembers = () => {
     );
 };
 
-export { TeamMembers };
+export { TeamMember };

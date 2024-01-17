@@ -26,7 +26,7 @@ const Signin = () => {
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);
     const navigate = useNavigate();
-    const [setItem, getItem] = useLocalStorage();
+    const { setItem } = useLocalStorage();
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
@@ -92,12 +92,12 @@ const Signin = () => {
             <ActionLinks>
                 <AuthActionLink
                     hintText="Don't have an account?"
-                    linkto="../admin/sign-up"
+                    linkTo="../admin/sign-up"
                     linkText="Sign Up"
                 />
                 <AuthActionLink
                     hintText="Forgot password?"
-                    linkto="../admin/forgot-password"
+                    linkTo="../admin/forgot-password"
                     linkText="Get Help"
                 />
             </ActionLinks>

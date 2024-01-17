@@ -2,7 +2,7 @@ import { Input, Button, Toaster } from "../../../design-system";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import styled from "styled-components";
-import lock from "../../../assets/image/lock.jpg";
+
 import flatIronBuilding from "../../../assets/image/flatIronBuilding.jpg";
 import { admin } from "../../../api";
 import { AuthWrapper } from "../../components";
@@ -45,7 +45,7 @@ const AdminForgotPassword = () => {
         <>
             <AuthWrapper
                 imageUrl={flatIronBuilding}
-                pageTitle="Forget Password"
+                pageTitle="Forgot Password"
                 switchLayout
             >
                 <Form onSubmit={getInstructions}>

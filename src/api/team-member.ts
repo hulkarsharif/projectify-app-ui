@@ -1,42 +1,35 @@
-import { UserRole, UserType } from "../types";
-type SignUpInput = {
-    firstName: string;
-    lastName: string;
-    preferredName?: string;
+type CreatePasswordInput = {
     email: string;
     password: string;
-    company?: {
-        name: string;
-        position: string;
-    };
+    passwordConfirm: string;
 };
 type SignInInput = {
     email: string;
     password: string;
 };
 
-export type GetMeResponseType = {
-    data: UserType;
-};
-
-class Admin {
+class TeamMember {
     url: string;
     constructor() {
         this.url = `${
             process.env.NODE_ENV === "development"
                 ? process.env.REACT_APP_PROJECTIFY_API_URL_LOCAL
                 : process.env.REACT_APP_PROJECTIFY_API_URL
-        }/admins`;
+        }/team-members`;
     }
-    async signUp(input: SignUpInput) {
+
+    async createPassword(input: CreatePasswordInput, inviteToken: string) {
         try {
-            const response = await fetch(`${this.url}/sign-up`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(input)
-            });
+            const response = await fetch(
+                `${this.url}/create-password?inviteToken=${inviteToken}`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(input)
+                }
+            );
             if (!response.ok) {
                 console.log("hello");
                 const data = await response.json();
@@ -49,7 +42,9 @@ class Admin {
             throw error;
         }
     }
-    async signIn(input: SignInInput): Promise<{ token: string }> {
+    async signIn(
+        input: SignInInput
+    ): Promise<{ message: string; token: string }> {
         try {
             const response = await fetch(`${this.url}/login`, {
                 method: "POST",
@@ -68,6 +63,7 @@ class Admin {
             throw error;
         }
     }
+
     async forgotPassword(email: string) {
         try {
             const response = await fetch(`${this.url}/forgot-password`, {
@@ -88,6 +84,7 @@ class Admin {
             throw error;
         }
     }
+
     async resetPassword(
         password: string,
         passwordConfirm: string,
@@ -115,25 +112,6 @@ class Admin {
             throw error;
         }
     }
-
-    async getMe(): Promise<GetMeResponseType> {
-        try {
-            const rawAuthToken = localStorage.getItem("authToken");
-            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
-            const response = await fetch(`${this.url}/me`, {
-                headers: {
-                    authorization: `Bearer ${authToken}`
-                }
-            });
-            if (!response.ok) {
-                const data = await response.json();
-                throw new Error(data.message);
-            }
-            return response.json();
-        } catch (error) {
-            throw error;
-        }
-    }
 }
 
-export const admin = new Admin();
+export const teamMember = new TeamMember();

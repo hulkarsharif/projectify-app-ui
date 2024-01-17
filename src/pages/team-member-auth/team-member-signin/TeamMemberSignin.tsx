@@ -1,8 +1,12 @@
-import { AppContent, AuthActionLink, AuthWrapper } from "../../components";
+import { AuthActionLink, AuthWrapper } from "../../components";
 import { Button, Input } from "../../../design-system";
-import { useState, useContext } from "react";
+import { useState } from "react";
+import { teamMember } from "../../../api";
+import toast from "react-hot-toast";
+import { useParams, useNavigate } from "react-router-dom";
 import { admin } from "../../../api";
-import { AppContext } from "../../../App";
+
+import { useLocalStorage } from "../../../hooks";
 
 import samarkand from "../../../assets/image/samarkand.jpeg";
 import styled from "styled-components";
@@ -17,32 +21,54 @@ const ActionLinks = styled.div`
     display: flex;
     flex-direction: column;
     gap: var(--space-12);
+    align-items: center;
 `;
-
-const TeamMemberLogin = () => {
+const TeamMemberSignin = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);
-    // const navigate = useNavigate();
-    // const [setItem, getItem] = useLocalStorage();
-    const { counter, setCounter } = useContext(AppContext);
+
+    const navigate = useNavigate();
+    const { setItem } = useLocalStorage();
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
     };
+
     const handleOnChangePassword = (value: string) => {
         setPassword(value);
     };
 
+    const isFormSubmittable = email && password;
+
     const signin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        try {
+            setIsFormSubmitting(true);
+            const response = await teamMember.signIn({
+                email,
+                password
+            });
+            localStorage.setItem("authTokem", response.token);
+            setItem("authToken", response.token);
+            navigate("/team-member/platform");
+
+            setIsFormSubmitting(false);
+            setEmail("");
+            toast.success(response.message);
+        } catch (error) {
+            if (error instanceof Error) {
+                setIsFormSubmitting(false);
+                setIsError(true);
+                toast.error(error.message);
+            }
+        }
     };
 
     return (
         <AuthWrapper imageUrl={samarkand} pageTitle="Sign In">
-            <button onClick={() => setCounter(counter + 1)}>{counter}</button>
-            <Form onSubmit={signin}>
+            <Form onSubmit={signin} noValidate>
                 <Input
                     type="email"
                     placeholder="Email"
@@ -50,8 +76,6 @@ const TeamMemberLogin = () => {
                     onChange={handleOnChangeEmail}
                     shape="rounded"
                     size="lg"
-                    className="login__email"
-                    disabled={isFormSubmitting}
                 />
                 <Input
                     type="password"
@@ -60,34 +84,29 @@ const TeamMemberLogin = () => {
                     onChange={handleOnChangePassword}
                     shape="rounded"
                     size="lg"
-                    className="login-password"
                 />
 
                 <Button
                     color="primary"
                     size="lg"
                     shape="rounded"
-                    className="login-button"
-                    disabled={isFormSubmitting}
+                    disabled={isFormSubmitting || !isFormSubmittable}
                 >
                     Sign In
                 </Button>
             </Form>
-
             <ActionLinks>
                 <AuthActionLink
-                    hintText="Don’t have an account?"
-                    linkto="../admin/sign-up"
-                    linkText="Sign Up"
+                    linkText="Forgot Password?"
+                    linkTo="../team-member/forgot-password"
                 />
                 <AuthActionLink
-                    hintText="Forgot password? "
-                    linkto="../team-member/forget-password"
-                    linkText="Get Help"
+                    hintText="Have not created password yet?"
+                    linkText="Create Password"
+                    linkTo="../team-member/create-password"
                 />
             </ActionLinks>
         </AuthWrapper>
     );
 };
-
-export { TeamMemberLogin };
+export { TeamMemberSignin };

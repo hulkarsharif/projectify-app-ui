@@ -191,7 +191,7 @@ const AdminSignup = () => {
                     <AuthActionLink
                         linkText="Sign In"
                         hintText="Already have an account?"
-                        linkto="../admin/sign-in"
+                        linkTo="../admin/sign-in"
                     />
                 </div>
             </AuthWrapper>
