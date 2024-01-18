@@ -36,6 +36,10 @@ const Signin = () => {
         setPassword(value);
     };
 
+    const saveAuthToken = (token: string) => {
+        setItem("authToken", token);
+    };
+
     const signin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
@@ -44,8 +48,8 @@ const Signin = () => {
                 email,
                 password
             });
-            localStorage.setItem("authToken", token);
-            setItem("authToken", token);
+
+            saveAuthToken(token);
             navigate("/admin/platform");
 
             setIsFormSubmitting(false);
