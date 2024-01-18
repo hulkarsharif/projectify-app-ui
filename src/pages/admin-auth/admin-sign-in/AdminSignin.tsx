@@ -1,6 +1,7 @@
 import { AuthWrapper, AuthActionLink } from "../../components";
 import { Button, Input } from "../../../design-system";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { admin } from "../../../api";
 import samarkand from "../../../assets/image/samarkand-min.jpeg";
 import styled from "styled-components";
@@ -26,7 +27,7 @@ const Signin = () => {
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);
     const navigate = useNavigate();
-    const { setItem } = useLocalStorage();
+    const { setItem, getItem } = useLocalStorage();
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
@@ -35,6 +36,8 @@ const Signin = () => {
     const handleOnChangePassword = (value: string) => {
         setPassword(value);
     };
+
+    const isformSubmittable = email && password;
 
     const saveAuthToken = (token: string) => {
         setItem("authToken", token);
@@ -88,7 +91,7 @@ const Signin = () => {
                     color="primary"
                     size="lg"
                     shape="rounded"
-                    disabled={isFormSubmitting}
+                    disabled={isFormSubmitting || !isformSubmittable}
                 >
                     Sign In
                 </Button>
