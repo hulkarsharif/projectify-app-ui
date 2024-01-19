@@ -4,8 +4,6 @@ import { useState } from "react";
 import { teamMember } from "../../../api";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { admin } from "../../../api";
-
 import { useLocalStorage, useStore } from "../../../hooks";
 
 import samarkand from "../../../assets/image/samarkand.jpeg";
@@ -27,10 +25,10 @@ const TeamMemberSignin = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     const [isError, setIsError] = useState<boolean>(false);
 
-    const navigate = useNavigate();
     const { setItem } = useLocalStorage();
 
     const handleOnChangeEmail = (value: string) => {
@@ -51,17 +49,17 @@ const TeamMemberSignin = () => {
                 email,
                 password
             });
-            localStorage.setItem("authTokem", response.token);
             setItem("authToken", response.token);
             navigate("/team-member/platform");
 
             setIsFormSubmitting(false);
             setEmail("");
+            setPassword("");
             toast.success(response.message);
         } catch (error) {
             if (error instanceof Error) {
                 setIsFormSubmitting(false);
-                setIsError(true);
+
                 toast.error(error.message);
             }
         }
