@@ -2,8 +2,10 @@ import { Outlet } from "react-router-dom";
 import { SideBar, SideBarLinks } from "../../design-system";
 import { AppContent, AppLayout, SideBarUser } from "../components";
 import { useNavigate } from "react-router-dom";
-import { useLocalStorage } from "../../hooks";
+import { Actions } from "../../store";
+import { useLocalStorage, useStore } from "../../hooks";
 import userImage from "../../assets/image/userImage.jpg";
+import { Toaster } from "react-hot-toast";
 
 const links = [
     {
@@ -44,29 +46,39 @@ const links = [
 ];
 
 const TeamMemberPlatform = () => {
+    const {
+        state: { user },
+        dispatch
+    } = useStore();
     const navigate = useNavigate();
     const { removeItem } = useLocalStorage();
 
     const logOut = () => {
-        navigate("admin/sign-in");
+        removeItem("authToken");
+        removeItem("userRole");
+        dispatch({ type: Actions.RESET_STATE });
+        navigate("team-member/sign-in");
     };
     return (
-        <AppLayout>
-            <SideBar>
-                <SideBarUser
-                    details={{
-                        firstName: "Farina",
-                        lastName: "Yusupova",
-                        imageUrl: userImage,
-                        email: "nora@email.com"
-                    }}
-                />
-                <SideBarLinks links={links} logOut={logOut} />
-            </SideBar>
-            <AppContent>
-                <Outlet />
-            </AppContent>
-        </AppLayout>
+        <>
+            <AppLayout>
+                <SideBar>
+                    <SideBarUser
+                        details={{
+                            firstName: user?.firstName || "",
+                            lastName: user?.lastName || "",
+                            imageUrl: "",
+                            email: user?.email || ""
+                        }}
+                    />
+                    <SideBarLinks links={links} logOut={logOut} />
+                </SideBar>
+                <AppContent>
+                    <Outlet />
+                </AppContent>
+            </AppLayout>
+            <Toaster />
+        </>
     );
 };
 

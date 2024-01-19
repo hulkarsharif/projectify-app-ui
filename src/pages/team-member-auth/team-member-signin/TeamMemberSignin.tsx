@@ -8,6 +8,7 @@ import { useLocalStorage, useStore } from "../../../hooks";
 
 import samarkand from "../../../assets/image/samarkand.jpeg";
 import styled from "styled-components";
+import { error } from "console";
 
 const Form = styled.form`
     width: 100%;
@@ -41,24 +42,28 @@ const TeamMemberSignin = () => {
 
     const isFormSubmittable = email && password;
 
+    const saveAuthToken = (token: string) => {
+        setItem("authToken", token);
+    };
+
     const signin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             setIsFormSubmitting(true);
-            const response = await teamMember.signIn({
+            const { token } = await teamMember.signIn({
                 email,
                 password
             });
-            setItem("authToken", response.token);
+            saveAuthToken(token);
             navigate("/team-member/platform");
 
             setIsFormSubmitting(false);
             setEmail("");
             setPassword("");
-            toast.success(response.message);
         } catch (error) {
             if (error instanceof Error) {
                 setIsFormSubmitting(false);
+                setIsError(true);
 
                 toast.error(error.message);
             }

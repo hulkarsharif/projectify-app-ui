@@ -1,9 +1,7 @@
 import { Outlet, useNavigate, Navigate } from "react-router-dom";
 import { SideBar, SideBarLinks, Toaster } from "../../design-system";
 import { AppContent, AppLayout, SideBarUser } from "../components";
-import user from "../../assets/image/user.jpg";
-import { GetMeResponseType, admin } from "../../api";
-import toast from "react-hot-toast";
+
 import { useStore, useLocalStorage } from "../../hooks";
 import { Actions, InitUserAction } from "../../store/actions";
 

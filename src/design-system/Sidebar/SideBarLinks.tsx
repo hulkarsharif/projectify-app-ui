@@ -2,7 +2,7 @@ import React from "react";
 import { Typography } from "../Typography";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { Icon } from "../Icon";
-import { Link, useNavigate, NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 type SideBarLink = {
     linkText: string;
