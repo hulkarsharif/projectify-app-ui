@@ -32,7 +32,7 @@ const Private: React.FC<ProtectedRouteProps> = ({ component, userType }) => {
                         setItem("userRole", data.data.role);
                     })
                     .catch((error: Error) => {
-                        console.log(error);
+                        navigate("../");
                     });
             } else if (userType === UserRole.teamMember) {
                 teamMember
