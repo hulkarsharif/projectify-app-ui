@@ -38,8 +38,6 @@ const App = () => {
             <Link to="admin/reset-password">Reset Password</Link>
             <Link to="admin/platform">Admin Platform</Link>
 
-            <Link to="team-member/sign-in">Sign in</Link>
-
             <Link to="team-member/create-password">
                 Team Member Create Password
             </Link>
@@ -53,9 +51,7 @@ const App = () => {
                 Team Member Tasks
             </Link>
 
-            <StatusBadge color="red" status="COMPLETED">
-                Badge User
-            </StatusBadge>
+            <StatusBadge status="COMPLETED" />
         </Form>
     );
 };

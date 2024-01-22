@@ -20,18 +20,6 @@
     border-radius: var(--border-radius-20);
 }
 
-/* Badge Variants */
-.no {
-    border-radius: var(--border-radius-8);
-}
-
-.light {
-    border-radius: var(--border-radius-8);
-}
-
-.stroke {
-    border-radius: var(--border-radius-8);
-}
 .ACTIVE-sign {
     background-color: var(--dodger-blue-600);
 }

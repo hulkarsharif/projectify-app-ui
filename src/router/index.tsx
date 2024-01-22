@@ -50,7 +50,7 @@ export const router = createBrowserRouter(
                 }
             />
             <Route
-                path="admin/forget-password"
+                path="admin/forgot-password"
                 element={
                     <Auth
                         component={<AdminForgotPassword />}
@@ -83,12 +83,22 @@ export const router = createBrowserRouter(
             </Route>
 
             <Route
-                path="/team-member/create-password"
-                element={<TeamMemberCreatePassword />}
+                path="team-member/reset-password"
+                element={
+                    <Auth
+                        component={<TeamMemberResetPassword />}
+                        userType={UserRole.teamMember}
+                    />
+                }
             />
             <Route
-                path="/team-member/reset-password"
-                element={<TeamMemberResetPassword />}
+                path="team-member/create-password"
+                element={
+                    <Auth
+                        component={<TeamMemberCreatePassword />}
+                        userType={UserRole.teamMember}
+                    />
+                }
             />
             <Route
                 path="/team-member/forgot-password"
