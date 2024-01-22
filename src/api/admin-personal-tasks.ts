@@ -63,6 +63,48 @@ class AdminPersonalTasks {
             throw error;
         }
     }
+
+    async updateTask(taskId: string) {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+
+            const response = await fetch(`${this.url}/tasks${taskId}/`, {
+                method: "PATCH",
+                headers: {
+                    authorization: `Bearer ${authToken}`
+                }
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async deleteTask(taskId: string) {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+
+            const response = await fetch(`${this.url}/tasks${taskId}/delete`, {
+                method: "PATCH",
+                headers: {
+                    authorization: `Bearer ${authToken}`
+                }
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 export const adminPersonalTasks = new AdminPersonalTasks();
