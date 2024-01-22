@@ -36,7 +36,7 @@ const PersonalTasks = () => {
                     buttonAction={() => setShowCreateTasksModal(true)}
                 />
             ) : (
-                <h1>Tasks</h1>
+                <h1>Personal Tasks</h1>
             )}
             <Modal show={showCreateTasksModal} position="center">
                 <CreateTasksModalTitle variant="paragraphLG" weight="medium">

@@ -1,3 +1,5 @@
+import { GetMeResponseType } from "./admin";
+
 type CreatePasswordInput = {
     email: string;
     password: string;
@@ -112,7 +114,7 @@ class TeamMember {
             throw error;
         }
     }
-    async getMe() {
+    async getMe(): Promise<GetMeResponseType> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";

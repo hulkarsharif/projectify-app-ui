@@ -1,0 +1,85 @@
+.status-badge-wrapper {
+    display: flex;
+    padding: var(--space-6);
+    align-items: center;
+    width: max-content;
+    border-radius: var(--border-radius-8);
+}
+.status-badge-sign {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 0.2rem;
+    margin-right: 0.6rem;
+}
+
+.badge-rounded {
+    border-radius: var(--border-radius-8);
+}
+
+.badge-circle {
+    border-radius: var(--border-radius-20);
+}
+
+/* Badge Variants */
+.no {
+    border-radius: var(--border-radius-8);
+}
+
+.light {
+    border-radius: var(--border-radius-8);
+}
+
+.stroke {
+    border-radius: var(--border-radius-8);
+}
+.ACTIVE-sign {
+    background-color: var(--dodger-blue-600);
+}
+
+.ACTIVE {
+    color: var(--dodger-blue-600);
+}
+
+.ACTIVE-badge-wrapper {
+    background-color: var(--dodger-blue-25);
+    border: 0.1rem solid var(--dodger-blue-200);
+}
+
+.INACTIVE-sign {
+    background-color: var(--red-orange-600);
+}
+
+.INACTIVE {
+    color: var(--red-orange-600);
+}
+
+.INACTIVE-badge-wrapper {
+    background-color: var(--red-orange-25);
+    border: 0.1rem solid var(--red-orange-200);
+}
+
+.COMPLETED-sign {
+    background-color: var(--green-600);
+}
+
+.COMPLETED {
+    color: var(--green-600);
+    border-radius: var(--border-radius-8);
+}
+
+.COMPLETED-badge-wrapper {
+    background-color: var(--green-25);
+    border-radius: var(--border-radius-8);
+}
+.ARCHIVED-sign {
+    background-color: var(--jaguar-400);
+}
+
+.ARCHIVED {
+    color: var(--jaguar-400);
+}
+
+.ARCHIVED-badge-wrapper {
+    background-color: var(--jaguar-25);
+    border: 0.1rem solid var(--jaguar-200);
+}

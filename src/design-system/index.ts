@@ -10,5 +10,6 @@ export * from "./Toggle";
 export * from "./Sidebar";
 export * from "./Icon";
 export * from "./Toast";
+export * from "./StatusBadge";
 
 export * from "./utils";
