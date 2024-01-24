@@ -51,10 +51,16 @@ const App = () => {
                 Team Member Tasks
             </Link>
 
-            {/* <Badge status="ACTIVE" />
-            <StatusBadge status="INACTIVE" />
-            <StatusBadge status="COMPLETED" />
-            <StatusBadge status="ARCHIVED" /> */}
+            <Badge color="primary">INACTIVE</Badge>
+            <Badge shape="rounded" color="green" variant="stroke">
+                INACTIVE
+            </Badge>
+            <Badge shape="circle" color="sunglow" variant="light">
+                DONE
+            </Badge>
+            <Badge shape="rounded" color="grey" variant="stroke">
+                INPROGRESS
+            </Badge>
         </Form>
     );
 };

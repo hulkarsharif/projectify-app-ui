@@ -28,18 +28,18 @@ const shapeClassNames = {
 };
 
 const colorClassNames = {
-    primary: "bg-primary",
-    sunglow: "bg-sunglow",
-    green: "bg-green",
-    blue: "bg-blue",
-    red: "bg-red",
-    purple: "bg-purple",
-    grey: "bg-grey"
+    primary: "badge-primary",
+    sunglow: "badge-sunglow",
+    green: "badge-green",
+    blue: "badge-blue",
+    red: "badge-red",
+    purple: "badge-purple",
+    grey: "badge-grey"
 };
 
 const variantClassNames = {
-    light: "bg-light",
-    stroke: "bg-stroke"
+    light: "badge-light",
+    stroke: "badge-stroke"
 };
 
 const Badge: FC<BadgeProps> = (props) => {
