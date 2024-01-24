@@ -1,0 +1,146 @@
+.bg {
+    color: var(--jaguar-200);
+    font-family: inherit;
+    font-size: var(--font-size-12);
+    font-style: normal;
+    font-weight: var(--font-weight-600);
+    line-height: var(--line-height-18);
+
+    border: none;
+    outline: none;
+    padding: 0 var(--space-12);
+    align-items: center;
+    width: max-content;
+}
+
+.bg-rounded {
+    border-radius: var(--border-radius-8);
+}
+
+.bg-circle {
+    border-radius: var(--border-radius-40);
+}
+
+/*No Background*/
+.bg-primary {
+    color: var(--primary-600);
+}
+
+.bg-sunglow {
+    color: var(--sunglow-700);
+}
+
+.bg-green {
+    color: var(--green-600);
+}
+
+.bg-blue {
+    color: var(--dodger-blue-600);
+}
+
+.bg-red {
+    color: var(--red-orange-600);
+}
+
+.bg-purple {
+    color: var(--purple-600);
+}
+
+.bg-grey {
+    color: var(--jaguar-400);
+}
+
+/* No Background */
+
+.bg-primary {
+    color: var(--primary-600);
+}
+
+.bg-sunglow {
+    color: var(--sunglow-700);
+}
+
+.bg-green {
+    color: var(--green-600);
+}
+
+.bg-blue {
+    color: var(--dodger-blue-600);
+}
+
+.bg-red {
+    color: var(--red-orange-600);
+}
+
+.bg-purple {
+    color: var(--purple-600);
+}
+
+.bg-grey {
+    color: var(--jaguar-400);
+}
+
+/* Light Bacground */
+
+.bg-primary.bg-light-bg {
+    background-color: var(--primary-50);
+}
+
+.bg-sunglow.bg-light-bg {
+    background-color: var(--sunglow-50);
+}
+
+.bg-green.bg-light-bg {
+    background-color: var(--green-50);
+}
+
+.bg-blue.bg-light-bg {
+    background-color: var(--dodger-blue-50);
+}
+
+.bg-red.bg-light-bg {
+    background-color: var(--red-orange-50);
+}
+
+.bg-purple.bg-light-bg {
+    background-color: var(--purple-50);
+}
+
+.bg-grey.bg-light-bg {
+    background-color: var(--jaguar-50);
+}
+/*Stroke*/
+.bg-primary.bg-stroke {
+    border: 1px solid var(--primary-200);
+    background-color: var(--primary-25);
+}
+
+.bg-sunglow.bg-stroke {
+    border: 1px solid var(--sunglow-200);
+    background-color: var(--sunglow-25);
+}
+
+.bg-green.bg-stroke {
+    border: 1px solid var(--green-200);
+    background-color: var(--green-25);
+}
+
+.bg-blue.bg-stroke {
+    border: 1px solid var(--dodger-blue-200);
+    background-color: var(--dodger-blue-25);
+}
+
+.bg-red.bg-stroke {
+    border: 1px solid var(--red-orange-200);
+    background-color: var(--red-orange-25);
+}
+
+.bg-purple.bg-stroke {
+    border: 1px solid var(--purple-200);
+    background-color: var(--purple-25);
+}
+
+.bg-grey.bg-stroke {
+    border: 1px solid var(--jaguar-200);
+    background-color: var(--jaguar-25);
+}

@@ -5,7 +5,7 @@ import React, {
     SetStateAction,
     useContext
 } from "react";
-import { StatusBadge } from "./design-system";
+import { Badge } from "./design-system";
 import { Link } from "react-router-dom";
 
 import styled from "styled-components";
@@ -51,7 +51,10 @@ const App = () => {
                 Team Member Tasks
             </Link>
 
+            {/* <Badge status="ACTIVE" />
+            <StatusBadge status="INACTIVE" />
             <StatusBadge status="COMPLETED" />
+            <StatusBadge status="ARCHIVED" /> */}
         </Form>
     );
 };
