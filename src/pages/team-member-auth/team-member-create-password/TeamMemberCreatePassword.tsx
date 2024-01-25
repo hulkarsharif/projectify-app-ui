@@ -5,8 +5,8 @@ import flatIronBuilding from "../../../assets/image/flatIronBuilding.jpg";
 import styled from "styled-components";
 import { teamMember } from "../../../api";
 import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { error } from "console";
 
 const Form = styled.form`
     width: 100%;
@@ -42,37 +42,37 @@ const TeamMemberCreatePassword = () => {
     };
 
     const isFormSubmittable = email && password && passwordConfirm;
+    const navigate = useNavigate();
 
-    const createPassword = async (e: React.FormEvent<HTMLFormElement>) => {
+    const createPassword = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        try {
-            setIsFormSubmitting(true);
-            const response = await teamMember.createPassword(
-                {
-                    email,
-                    password,
-                    passwordConfirm
-                },
+        const inviteToken = searchParams.get("inviteToken");
+        console.log(inviteToken);
+        teamMember
+            .createPassword(
+                { email, password, passwordConfirm },
                 inviteToken as string
-            );
+            )
+            .then((data) => {
+                navigate("/team-member/sign-in");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
 
-            setIsFormSubmitting(false);
+        setIsFormSubmitting(false);
 
-            setEmail("");
-            setPassword("");
-            setPasswordConfirm("");
-
-            toast.success(response.message);
-        } catch (error) {
-            if (error instanceof Error) {
-                setIsFormSubmitting(false);
-                toast.error(error.message);
-            }
-        }
+        setEmail("");
+        setPassword("");
+        setPasswordConfirm("");
     };
 
     return (
-        <AuthWrapper imageUrl={flatIronBuilding} pageTitle="Create Password">
+        <AuthWrapper
+            imageUrl={flatIronBuilding}
+            pageTitle="Create Password"
+            switchLayout
+        >
             <Form onSubmit={createPassword} noValidate>
                 <StyledEmailInput
                     type="email"
