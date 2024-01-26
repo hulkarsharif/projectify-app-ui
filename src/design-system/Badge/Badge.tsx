@@ -14,7 +14,7 @@ type BadgeColor =
     | "grey";
 
 type BadgeVariant = "light" | "stroke";
-type BadgeIcon = "flag" | "check";
+type BadgeIcon = "fillFlag" | "check";
 
 type BadgeProps = {
     icon?: BadgeIcon;
@@ -41,7 +41,7 @@ const colorClassNames = {
 };
 
 const iconClassNames = {
-    flag: "flag",
+    fillFlag: "flag",
     check: "check"
 };
 const variantClassNames = {
@@ -61,14 +61,16 @@ const Badge: FC<BadgeProps> = (props) => {
         variant !== undefined ? variantClassNames[variant] : "";
 
     const finalClassNames = trimWhiteSpaces(
-        `badge  ${colorClassName} ${iconClassName}${shapeClassName} ${variantClassName} ${
+        `badge  ${colorClassName} ${iconClassName} ${shapeClassName} ${variantClassName} ${
             className || ""
         }`
     );
 
     return (
         <span className={trimWhiteSpaces(finalClassNames)}>
-            {icon ? <Icon iconName={icon} height="1.6" width="1.6" /> : null}
+            {icon ? (
+                <Icon iconName={icon} height="1.6rem" width="1.6rem" />
+            ) : null}
             {children}
         </span>
     );

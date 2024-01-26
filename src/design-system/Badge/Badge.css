@@ -5,7 +5,9 @@
     font-style: normal;
     font-weight: var(--font-weight-600);
     line-height: var(--line-height-18);
+    display: inline-flex;
 
+    gap: 0.8rem;
     border: none;
     outline: none;
     padding: 0 var(--space-12);
@@ -150,4 +152,52 @@
 .badge-grey.badge-stroke {
     border: 1px solid var(--jaguar-200);
     background-color: var(--jaguar-25);
+}
+
+.badge.badge-sunglow.fillFlag,
+.badge-rounded.badge-sunglow.flag,
+.badge-circle.badge-sunglow.flag {
+    fill: var(--sunglow-700);
+}
+
+.badge.badge-orange.check,
+.badge-rounded.badge-orange.check,
+.badge-circle.badge-orange.check {
+    fill: var(--sunglow-700);
+}
+
+.badge.badge-green.flag,
+.badge-rounded.badge-green.flag,
+.badge-circle.badge-green.flag {
+    fill: var(--green-600);
+}
+
+.badge.badge-green.check,
+.badge-rounded.badge-green.check,
+.badge-circle.badge-green.check {
+    fill: var(--green-600);
+}
+
+.badge.badge-red.flag,
+.badge-rounded.badge-red.flag,
+.badge-circle.badge-red.flag {
+    fill: var(--red-orange-600);
+}
+
+.badge.badge-red.check,
+.badge-rounded.badge-red.check,
+.badge-circle.badge-red.check {
+    fill: var(--red-orange-600);
+}
+
+.badge.badge-grey.flag,
+.badge-rounded.badge-grey.flag,
+.badge-circle.badge-grey.flag {
+    fill: var(--jaguar-400);
+}
+
+.badge.badge-grey.check,
+.badge-rounded.badge-grey.check,
+.badge-circle.badge-grey.check {
+    fill: var(--jaguar-400);
 }

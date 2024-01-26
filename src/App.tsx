@@ -5,7 +5,7 @@ import React, {
     SetStateAction,
     useContext
 } from "react";
-import { Badge } from "./design-system";
+import { Badge, Icon } from "./design-system";
 import { Link } from "react-router-dom";
 
 import styled from "styled-components";
@@ -27,6 +27,9 @@ const Form = styled.form`
     gap: 3rem;
 
     font-size: 2rem;
+    .fillFlag {
+        fill: red;
+    }
 `;
 
 const App = () => {
@@ -50,17 +53,103 @@ const App = () => {
             <Link to="team-member/platform/personal-tasks">
                 Team Member Tasks
             </Link>
-
-            <Badge color="primary">INACTIVE</Badge>
-            <Badge shape="rounded" color="green" variant="stroke">
+            <Badge icon="check" color="blue">
                 INACTIVE
             </Badge>
-            <Badge shape="circle" color="sunglow" variant="light">
-                DONE
-            </Badge>
-            <Badge shape="rounded" color="grey" variant="stroke">
+            <Badge
+                icon="check"
+                className="badge-rounded"
+                shape="circle"
+                color="blue"
+                variant="stroke"
+            >
                 INPROGRESS
             </Badge>
+            <Badge icon="check" shape="circle" color="primary">
+                INACTIVE
+            </Badge>
+            <Badge icon="check" shape="rounded" color="red">
+                DONE
+            </Badge>
+            <Badge
+                icon="fillFlag"
+                shape="rounded"
+                color="purple"
+                variant="stroke"
+            >
+                INACTIVE
+            </Badge>
+            <Badge
+                icon="fillFlag"
+                shape="rounded"
+                color="sunglow"
+                variant="light"
+            >
+                INACTIVE
+            </Badge>
+            <Badge
+                icon="fillFlag"
+                shape="rounded"
+                color="primary"
+                variant="light"
+            >
+                INPROGRESS
+            </Badge>
+            <Badge
+                icon="fillFlag"
+                shape="rounded"
+                color="primary"
+                variant="light"
+            >
+                INACTIVE
+            </Badge>
+            <Badge icon="fillFlag" shape="rounded" color="primary">
+                INACTIVE
+            </Badge>
+            <Badge
+                icon="fillFlag"
+                shape="rounded"
+                color="sunglow"
+                variant="light"
+            >
+                INACTIVE
+            </Badge>
+            <Badge icon="fillFlag" shape="rounded" color="grey" variant="light">
+                INACTIVE
+            </Badge>
+            <Badge icon="fillFlag" shape="rounded" color="red" variant="stroke">
+                INACTIVE
+            </Badge>
+            <Badge icon="check" shape="rounded" color="red" variant="stroke">
+                View
+            </Badge>
+            <Badge
+                icon="check"
+                shape="rounded"
+                color="green"
+                variant="stroke"
+                className="circle"
+            >
+                Korsatyabdi
+            </Badge>
+            <Badge icon="check" shape="rounded" color="blue" variant="stroke">
+                INACTIVE
+            </Badge>
+            <Badge icon="check" shape="rounded" color="red" variant="stroke">
+                INACTIVE
+            </Badge>
+            <Badge
+                icon="fillFlag"
+                shape="rounded"
+                color="green"
+                variant="stroke"
+            >
+                INACTIVE
+            </Badge>
+            <Badge icon="check" shape="circle" color="grey" variant="stroke">
+                INACTIVE
+            </Badge>
+            <Icon iconName="fillFlag" className="fillFlag" />
         </Form>
     );
 };
