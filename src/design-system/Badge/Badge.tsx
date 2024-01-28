@@ -2,28 +2,7 @@ import React, { FC } from "react";
 import "./Badge.css";
 import { trimWhiteSpaces } from "../utils";
 import { Icon } from "../Icon";
-
-type BadgeShape = "rounded" | "circle";
-type BadgeColor =
-    | "primary"
-    | "sunglow"
-    | "green"
-    | "blue"
-    | "red"
-    | "purple"
-    | "grey";
-
-type BadgeVariant = "light" | "stroke";
-type BadgeIcon = "fillFlag" | "check";
-
-type BadgeProps = {
-    icon?: BadgeIcon;
-    shape?: BadgeShape;
-    color?: BadgeColor;
-    variant?: BadgeVariant;
-    className?: string;
-    children?: React.ReactNode;
-};
+import { BadgeProps } from "./types";
 
 const shapeClassNames = {
     rounded: "badge-rounded",
@@ -31,8 +10,8 @@ const shapeClassNames = {
 };
 
 const colorClassNames = {
-    primary: "badge-primary",
-    sunglow: "badge-sunglow",
+    primary: "badge-violet",
+    sunglow: "badg-orange",
     green: "badge-green",
     blue: "badge-blue",
     red: "badge-red",
@@ -45,12 +24,13 @@ const iconClassNames = {
     check: "check"
 };
 const variantClassNames = {
-    light: "badge-light",
-    stroke: "badge-stroke"
+    contained: "badge-contained",
+    outlined: "badge-outlined"
 };
 
 const Badge: FC<BadgeProps> = (props) => {
-    const { shape, color, icon, variant, className, children } = props;
+    const { label, shape, color, status, icon, iconName, variant, className } =
+        props;
 
     const colorClassName = color !== undefined ? colorClassNames[color] : "";
 
@@ -67,12 +47,16 @@ const Badge: FC<BadgeProps> = (props) => {
     );
 
     return (
-        <span className={trimWhiteSpaces(finalClassNames)}>
-            {icon ? (
-                <Icon iconName={icon} height="1.6rem" width="1.6rem" />
+        <div className={trimWhiteSpaces(finalClassNames)}>
+            {icon && !status && !iconName ? icon : null}
+            {iconName && !status && !iconName ? (
+                <Icon iconName={iconName} />
             ) : null}
-            {children}
-        </span>
+            {status && !icon && !iconName ? (
+                <div className="badge__status" />
+            ) : null}
+            <span className="badge__text">{label}</span>
+        </div>
     );
 };
 

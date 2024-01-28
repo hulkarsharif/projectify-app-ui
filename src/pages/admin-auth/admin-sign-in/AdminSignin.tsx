@@ -43,7 +43,7 @@ const Signin = () => {
         setItem("authToken", token);
     };
 
-    const signin = async (e: React.FormEvent<HTMLFormElement>) => {
+    const signIn = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             setIsFormSubmitting(true);
@@ -68,7 +68,7 @@ const Signin = () => {
 
     return (
         <AuthWrapper imageUrl={samarkand} pageTitle="Sign In">
-            <Form onSubmit={signin}>
+            <Form onSubmit={signIn}>
                 <Input
                     type="email"
                     placeholder="Email"
