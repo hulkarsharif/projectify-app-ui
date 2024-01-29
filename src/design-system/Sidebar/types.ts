@@ -12,7 +12,7 @@ export type SideBarLinkGroup = {
     links: SideBarLink[];
 };
 
-export type SideBarLinkProps = {
+export type SideBarLinksProps = {
     links: SideBarLinkGroup[];
     logOut: () => void;
 };

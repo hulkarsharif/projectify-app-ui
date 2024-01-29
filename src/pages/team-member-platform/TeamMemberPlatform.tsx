@@ -1,18 +1,17 @@
-import { Outlet } from "react-router-dom";
-import { SideBar, SideBarLinks } from "../../design-system";
+import { Outlet, useNavigate } from "react-router-dom";
+import { SideBar, SideBarLinks, SideBarLinkGroup } from "../../design-system";
 import { AppContent, AppLayout, SideBarUser } from "../components";
-import { useNavigate } from "react-router-dom";
 import { Actions } from "../../store";
 import { useLocalStorage, useStore } from "../../hooks";
 import userImage from "../../assets/image/userImage.jpg";
 import { Toaster } from "react-hot-toast";
 
-const links = [
+const links: SideBarLinkGroup[] = [
     {
         title: "Menu",
         links: [
             {
-                linkText: "Project",
+                linkText: "Projects",
                 linkTo: "projects",
                 iconName: "projects"
             },

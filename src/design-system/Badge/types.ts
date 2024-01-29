@@ -1,13 +1,13 @@
 import { IconName } from "../Icon";
 
-type BadgeColor =
-    | "primary"
-    | "sunglow"
+type BadgeColors =
+    | "violet"
+    | "orange"
     | "green"
     | "blue"
     | "red"
     | "purple"
-    | "grey";
+    | "gray";
 
 type BadgeShape = "rounded" | "circle";
 
@@ -15,9 +15,9 @@ type BadgeVariant = "contained" | "outlined";
 
 type BadgePropsBase = {
     label: string;
-    icon?: BadgeIcon;
+    icon?: React.ReactNode;
     shape?: BadgeShape;
-    color?: BadgeColor;
+    color?: BadgeColors;
     status?: boolean;
     variant?: BadgeVariant;
     className?: string;

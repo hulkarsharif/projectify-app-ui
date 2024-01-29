@@ -1,22 +1,8 @@
 import React from "react";
 import { Typography } from "../Typography";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { Icon } from "../Icon";
 import { Link, NavLink } from "react-router-dom";
 import { SideBarLinksProps } from "./types";
-
-type SideBarLink = {
-    linkText: string;
-    linkTo: string;
-    iconName: string;
-};
-
-type SideBarLinksGroup = {
-    title: string;
-    links: SideBarLink[];
-};
-
-type SideBarLinksProps = { links: SideBarLinksGroup[]; logOut: () => void };
 
 const SideBarLinks: React.FC<SideBarLinksProps> = ({ links, logOut }) => {
     return (
