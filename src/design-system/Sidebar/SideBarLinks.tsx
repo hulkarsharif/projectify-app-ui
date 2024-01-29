@@ -3,6 +3,7 @@ import { Typography } from "../Typography";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { Icon } from "../Icon";
 import { Link, NavLink } from "react-router-dom";
+import { SideBarLinksProps } from "./types";
 
 type SideBarLink = {
     linkText: string;
