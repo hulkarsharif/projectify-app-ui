@@ -22,7 +22,7 @@ const Buttons = styled.div`
     display: flex;
     gap: var(--space-10);
 `;
-const PersonalTasks = () => {
+const AdminPersonalTasks = () => {
     const [tasks, setTasks] = useState<string[]>([]);
     const [showCreateTasksModal, setShowCreateTasksModal] =
         useState<boolean>(false);
@@ -44,7 +44,7 @@ const PersonalTasks = () => {
                 </CreateTasksModalTitle>
                 <Inputs>
                     <Input
-                        placeholder="Task Name"
+                        placeholder="Task"
                         value=""
                         onChange={() => {}}
                         shape="rounded"
@@ -52,7 +52,7 @@ const PersonalTasks = () => {
                     />
                     <Input
                         type="textarea"
-                        placeholder="Task Description"
+                        placeholder="Description"
                         value=""
                         onChange={() => {}}
                         shape="rounded"
@@ -78,4 +78,4 @@ const PersonalTasks = () => {
         </PageBase>
     );
 };
-export { PersonalTasks as AdminPersonalTasks };
+export { AdminPersonalTasks };

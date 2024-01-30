@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Input, Modal, Typography, Button } from "../../../design-system";
 import { NoDataPlaceholder } from "../../components/NoDataPlaceHolder";
 import noTasks from "../../../assets/illustrations/no-task.svg";
+import { teamMember } from "../../../api";
+import { useLocalStorage } from "../../../hooks";
 
 const PageBase = styled.div`
     position: relative;
@@ -26,17 +28,33 @@ const TeamMemberPersonalTasks = () => {
     const [tasks, setTasks] = useState<string[]>([]);
     const [showCreateTasksModal, setShowCreateTasksModal] =
         useState<boolean>(false);
+
+    const [isformSubmitting, setIsFormSubmitting] = useState<boolean>(false);
+    const [isError, setIsError] = useState<boolean>(false);
+
+    const { setItem } = useLocalStorage();
+
+    // const handleOnChangeTask = (value: string) => {
+    //     setTasks(value);
+    // };
+
+    // const handleOnChangeShowCreateTasksMOdal = (value: boolean) => {
+    //     setShowCreateTasksModal(value);
+    // };
+
+    const isFormSubmittable = tasks && showCreateTasksModal;
+
     return (
         <PageBase>
             {!tasks.length ? (
                 <NoDataPlaceholder
                     illustrationUrl={noTasks}
-                    text="You don't have any tasks yet!"
-                    buttonText="Add a Tasks"
+                    text="You don't have any task yet!"
+                    buttonText="Add a Task"
                     buttonAction={() => setShowCreateTasksModal(true)}
                 />
             ) : (
-                <h1>Tasks</h1>
+                <h1>Task</h1>
             )}
             <Modal show={showCreateTasksModal} position="center">
                 <CreateTasksModalTitle variant="paragraphLG" weight="medium">
@@ -54,7 +72,9 @@ const TeamMemberPersonalTasks = () => {
                         type="textarea"
                         placeholder="Description"
                         value=""
-                        onChange={() => {}}
+                        onChange={() =>
+                            setShowCreateTasksModal((prevState) => !prevState)
+                        }
                         shape="rounded"
                         size="lg"
                     />

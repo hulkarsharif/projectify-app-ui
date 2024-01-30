@@ -25,9 +25,8 @@ const Signin = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
-    const [isError, setIsError] = useState<boolean>(false);
     const navigate = useNavigate();
-    const { setItem, getItem } = useLocalStorage();
+    const { setItem } = useLocalStorage();
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
@@ -58,11 +57,10 @@ const Signin = () => {
             setIsFormSubmitting(false);
             setEmail("");
             setPassword("");
-        } catch (error) {
-            if (error instanceof Error) {
-                setIsFormSubmitting(false);
-                setIsError(true);
-            }
+        } catch (e) {
+            const error = e as Error;
+            setIsFormSubmitting(false);
+            toast.error(error.message);
         }
     };
 

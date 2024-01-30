@@ -4,8 +4,7 @@ import { useState } from "react";
 import flatIronBuilding from "../../../assets/image/flatIronBuilding.jpg";
 import styled from "styled-components";
 import { teamMember } from "../../../api";
-import { useSearchParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const Form = styled.form`
@@ -29,7 +28,6 @@ const TeamMemberCreatePassword = () => {
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
 
     const [searchParams] = useSearchParams();
-    const inviteToken = searchParams.get("inviteToken");
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
@@ -44,27 +42,33 @@ const TeamMemberCreatePassword = () => {
     const isFormSubmittable = email && password && passwordConfirm;
     const navigate = useNavigate();
 
-    const createPassword = (e: React.FormEvent<HTMLFormElement>) => {
+    const createPassword = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const inviteToken = searchParams.get("inviteToken");
-        console.log(inviteToken);
-        teamMember
-            .createPassword(
-                { email, password, passwordConfirm },
+
+        try {
+            setIsFormSubmitting(true);
+            await teamMember.createPassword(
+                {
+                    email,
+                    password,
+                    passwordConfirm
+                },
                 inviteToken as string
-            )
-            .then((data) => {
-                navigate("/team-member/sign-in");
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+            );
+            setIsFormSubmitting(false);
 
-        setIsFormSubmitting(false);
+            setEmail("");
+            setPassword("");
+            setPasswordConfirm("");
 
-        setEmail("");
-        setPassword("");
-        setPasswordConfirm("");
+            navigate("/team-member/sign-in");
+        } catch (error) {
+            if (error instanceof Error) {
+                setIsFormSubmitting(false);
+                toast.error(error.message);
+            }
+        }
     };
 
     return (

@@ -28,7 +28,7 @@ const AdminForgotPassword = () => {
 
         try {
             setIsFormSubmitting(true);
-            const response = await admin.forgotPassword(email);
+            const response = await admin.forgetPassword(email);
 
             setIsFormSubmitting(false);
             setEmail("");

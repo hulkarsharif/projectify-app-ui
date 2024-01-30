@@ -1,8 +1,16 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Input, Modal, Typography, Button } from "../../../design-system";
+import {
+    Input,
+    Modal,
+    Typography,
+    Button,
+    Toaster
+} from "../../../design-system";
 import { NoDataPlaceholder } from "../../components/NoDataPlaceHolder";
 import noTeamMember from "../../../assets/illustrations//no-teamMember.svg";
+import { adminTeamMembers } from "../../../api/adminTeamMembers";
+import toast from "react-hot-toast";
 
 const PageBase = styled.div`
     position: relative;
@@ -29,12 +37,18 @@ const Buttons = styled.div`
     display: flex;
     gap: var(--space-10);
 `;
-const TeamMembers = () => {
+const AdminTeamMembers = () => {
+    const [teamMembers, setTeamMembers] = useState<string[]>([]);
+    const [showCreateTeamMemberModal, setShowCreateTeamMemberModal] =
+        useState<boolean>(false);
+
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
     const [position, setPosition] = useState<string>("");
     const [email, setEmail] = useState<string>("");
-    const [teamMember, setTeamMember] = useState<string[]>([]);
+
+    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
+    const isFormSubmittable = firstName && lastName && email && position;
 
     const handleOnChangeFirstName = (value: string) => {
         setFirstName(value);
@@ -49,78 +63,121 @@ const TeamMembers = () => {
         setEmail(value);
     };
 
-    const [showCreateTeamMemberModal, setShowCreateTeamMemberModal] =
-        useState<boolean>(false);
+    const createTeamMember = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        try {
+            setIsFormSubmitting(true);
+
+            const response = await adminTeamMembers.create({
+                firstName,
+                lastName,
+                position,
+                email
+            });
+
+            setIsFormSubmitting(false);
+            setFirstName("");
+            setLastName("");
+            setPosition("");
+            setEmail("");
+            setShowCreateTeamMemberModal(false);
+
+            toast.success(response.message);
+        } catch (error) {
+            if (error instanceof Error) {
+                setIsFormSubmitting(false);
+
+                toast.error(error.message);
+            }
+        }
+    };
+
     return (
-        <PageBase>
-            {!teamMember.length ? (
-                <NoDataPlaceholder
-                    illustrationUrl={noTeamMember}
-                    text="You don't have any team members yet!"
-                    buttonText="Add a new Member"
-                    buttonAction={() => setShowCreateTeamMemberModal(true)}
-                />
-            ) : (
-                <h1>Team Members</h1>
-            )}
-            <Modal show={showCreateTeamMemberModal} position="center">
-                <CreateTeamMemberModalTitle
-                    variant="paragraphLG"
-                    weight="medium"
-                >
-                    New Member
-                </CreateTeamMemberModalTitle>
-                <Inputs>
-                    <Input
-                        type="text"
-                        placeholder="First Name"
-                        value={firstName}
-                        onChange={handleOnChangeFirstName}
-                        shape="rounded"
-                        size="lg"
+        <>
+            <PageBase>
+                {!teamMembers.length ? (
+                    <NoDataPlaceholder
+                        illustrationUrl={noTeamMember}
+                        text="You don't have any team members yet!"
+                        buttonText="Add a new Member"
+                        buttonAction={() => setShowCreateTeamMemberModal(true)}
                     />
-                    <Input
-                        type="text"
-                        placeholder="Last Name"
-                        value={lastName}
-                        onChange={handleOnChangeLastName}
-                        shape="rounded"
-                        size="lg"
-                    />
-                    <StyledPositionInput
-                        type="text"
-                        placeholder="Position"
-                        value={position}
-                        onChange={handleOnChangePosition}
-                        shape="rounded"
-                        size="lg"
-                    />
-                    <StyledPreferredEmail
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={handleOnChangeEmail}
-                        shape="rounded"
-                        size="lg"
-                    />
-                </Inputs>
-                <Buttons>
-                    <Button
-                        color="secondary"
-                        size="lg"
-                        shape="rounded"
-                        variant="outlined"
-                        fullWidth
-                        onClick={() => setShowCreateTeamMemberModal(false)}
-                    >
-                        Cancel
-                    </Button>
-                    <Button size="lg" shape="rounded" color="primary" fullWidth>
-                        Save
-                    </Button>
-                </Buttons>
-            </Modal>
-        </PageBase>
+                ) : (
+                    <h1>Team Members</h1>
+                )}
+
+                <form onSubmit={createTeamMember}>
+                    <Modal show={showCreateTeamMemberModal} position="center">
+                        <CreateTeamMemberModalTitle
+                            variant="paragraphLG"
+                            weight="medium"
+                        >
+                            New Member
+                        </CreateTeamMemberModalTitle>
+                        <Inputs>
+                            <Input
+                                placeholder="First Name"
+                                value={firstName}
+                                onChange={handleOnChangeFirstName}
+                                shape="rounded"
+                                size="lg"
+                                disabled={isFormSubmitting}
+                            />
+                            <Input
+                                placeholder="Last Name"
+                                value={lastName}
+                                onChange={handleOnChangeLastName}
+                                shape="rounded"
+                                size="lg"
+                            />
+                            <StyledPositionInput
+                                placeholder="Position"
+                                value={position}
+                                onChange={handleOnChangePosition}
+                                shape="rounded"
+                                size="lg"
+                            />
+                            <StyledPreferredEmail
+                                type="email"
+                                placeholder="Email"
+                                value={email}
+                                onChange={handleOnChangeEmail}
+                                shape="rounded"
+                                size="lg"
+                                disabled={isFormSubmitting}
+                            />
+                        </Inputs>
+                        <Buttons>
+                            <Button
+                                color="secondary"
+                                size="lg"
+                                shape="rounded"
+                                variant="outlined"
+                                fullWidth
+                                onClick={() =>
+                                    setShowCreateTeamMemberModal(false)
+                                }
+                            >
+                                Cancel
+                            </Button>
+                            <Button
+                                size="lg"
+                                shape="rounded"
+                                color="primary"
+                                fullWidth
+                                disabled={
+                                    isFormSubmitting || !isFormSubmittable
+                                }
+                            >
+                                Save
+                            </Button>
+                        </Buttons>
+                    </Modal>
+                </form>
+            </PageBase>
+            <Toaster />
+        </>
     );
 };
-export { TeamMembers as AdminTeamMembers };
+export { AdminTeamMembers };

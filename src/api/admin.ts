@@ -1,4 +1,5 @@
 import { AdminUser } from "../types";
+
 type SignUpInput = {
     firstName: string;
     lastName: string;
@@ -68,7 +69,7 @@ class Admin {
             throw error;
         }
     }
-    async forgotPassword(email: string) {
+    async forgetPassword(email: string) {
         try {
             const response = await fetch(`${this.url}/forgot-password`, {
                 method: "PATCH",

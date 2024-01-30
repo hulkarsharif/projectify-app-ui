@@ -6,7 +6,7 @@ export * from "./admin-platform/personal-tasks/PersonalTasks";
 export * from "./admin-platform/team-members/team-members";
 
 export * from ".//admin-platform/AdminPlatform";
-export * from "./admin-platform/Projects/Projects";
+export * from "./admin-platform/Projects/AdminProjects";
 export * from "./admin-platform/personal-tasks/PersonalTasks";
 export * from "./admin-platform/admin-stories/stories";
 
