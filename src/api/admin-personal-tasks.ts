@@ -1,6 +1,7 @@
 import { Task } from "../types";
 
 type TaskCreateInput = Omit<Task, "id" | "status">;
+type TaskUpdateInput = Omit<Task, "id">;
 
 interface GetAllTasksResponse {
     data: {
@@ -21,14 +22,17 @@ class AdminPersonalTasks {
                 : process.env.REACT_APP_PROJECTIFY_API_URL
         }/admins/me`;
     }
+
     async createTask(input: TaskCreateInput): Promise<TaskCreateResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+
             const response = await fetch(`${this.url}/tasks`, {
                 method: "PATCH",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${authToken}`
                 },
                 body: JSON.stringify(input)
             });
@@ -64,12 +68,12 @@ class AdminPersonalTasks {
         }
     }
 
-    async updateTask(taskId: string) {
+    async deleteTask(taskId: string) {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
 
-            const response = await fetch(`${this.url}/tasks${taskId}/`, {
+            const response = await fetch(`${this.url}/tasks/${taskId}/delete`, {
                 method: "PATCH",
                 headers: {
                     authorization: `Bearer ${authToken}`
@@ -85,12 +89,12 @@ class AdminPersonalTasks {
         }
     }
 
-    async deleteTask(taskId: string) {
+    async updateTask(taskId: string, input: TaskUpdateInput) {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
 
-            const response = await fetch(`${this.url}/tasks${taskId}/delete`, {
+            const response = await fetch(`${this.url}/tasks/${taskId}/`, {
                 method: "PATCH",
                 headers: {
                     authorization: `Bearer ${authToken}`
