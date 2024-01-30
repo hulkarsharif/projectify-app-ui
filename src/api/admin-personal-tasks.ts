@@ -37,9 +37,8 @@ class AdminPersonalTasks {
                 body: JSON.stringify(input)
             });
             if (!response.ok) {
-                console.log("hello");
                 const data = await response.json();
-                console.log(data);
+
                 throw new Error(data.message);
             }
             return response.json();

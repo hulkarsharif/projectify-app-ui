@@ -1,4 +1,4 @@
-import { GetMeResponseType } from "./admin";
+import { TeamMemberUser } from "../types";
 
 type CreatePasswordInput = {
     email: string;
@@ -8,6 +8,10 @@ type CreatePasswordInput = {
 type SignInInput = {
     email: string;
     password: string;
+};
+
+export type GetMeResponseType = {
+    data: TeamMemberUser;
 };
 
 class TeamMember {
@@ -33,20 +37,15 @@ class TeamMember {
                 }
             );
             if (!response.ok) {
-                console.log("hello");
                 const data = await response.json();
-                console.log(data);
                 throw new Error(data.message);
             }
             return response.json();
         } catch (error) {
-            console.log(error);
             throw error;
         }
     }
-    async signIn(
-        input: SignInInput
-    ): Promise<{ message: string; token: string }> {
+    async signIn(input: SignInInput): Promise<{ token: string }> {
         try {
             const response = await fetch(`${this.url}/login`, {
                 method: "POST",
