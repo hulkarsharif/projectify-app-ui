@@ -5,6 +5,7 @@ import { NoDataPlaceholder } from "../../components/NoDataPlaceHolder";
 import noTasks from "../../../assets/illustrations/no-task.svg";
 import { teamMember } from "../../../api";
 import { useLocalStorage } from "../../../hooks";
+import toast from "react-hot-toast";
 
 const PageBase = styled.div`
     position: relative;
@@ -25,28 +26,61 @@ const Buttons = styled.div`
     gap: var(--space-10);
 `;
 const TeamMemberPersonalTasks = () => {
-    const [tasks, setTasks] = useState<string[]>([]);
+    const [personalTasks, setPersonalTasks] = useState<string[]>([]);
     const [showCreateTasksModal, setShowCreateTasksModal] =
         useState<boolean>(false);
+
+    const [title, setTitle] = useState<string>("");
+    const [description, setDescription] = useState<string>("");
+    const [due, setDue] = useState<string>("");
 
     const [isformSubmitting, setIsFormSubmitting] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);
 
     const { setItem } = useLocalStorage();
 
-    // const handleOnChangeTask = (value: string) => {
-    //     setTasks(value);
-    // };
+    const handleOnChangeTitle = (value: string) => {
+        setTitle(value);
+    };
 
-    // const handleOnChangeShowCreateTasksMOdal = (value: boolean) => {
-    //     setShowCreateTasksModal(value);
-    // };
+    const handleOnChangeDescription = (value: string) => {
+        setDescription(value);
+    };
 
-    const isFormSubmittable = tasks && showCreateTasksModal;
+    const handleOnChangeDue = (value: string) => {
+        setDue(value);
+    };
+    const isFormSubmittable = title && description && due;
+
+    const createPersonalTask = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        try {
+            setIsFormSubmitting(true);
+
+            const response = await TeamMemberPersonalTasks.createTask({
+                title,
+                description,
+                due
+            });
+
+            setIsFormSubmitting(false);
+            setTitle("");
+            setDescription("");
+            setDue("");
+            setShowCreateTasksModal(false);
+        } catch (error) {
+            if (error instanceof Error) {
+                setIsFormSubmitting(false);
+
+                toast.error(error.message);
+            }
+        }
+    };
 
     return (
         <PageBase>
-            {!tasks.length ? (
+            {!personalTasks.length ? (
                 <NoDataPlaceholder
                     illustrationUrl={noTasks}
                     text="You don't have any task yet!"
@@ -54,47 +88,62 @@ const TeamMemberPersonalTasks = () => {
                     buttonAction={() => setShowCreateTasksModal(true)}
                 />
             ) : (
-                <h1>Task</h1>
+                <h1>Personal Tasks</h1>
             )}
-            <Modal show={showCreateTasksModal} position="center">
-                <CreateTasksModalTitle variant="paragraphLG" weight="medium">
-                    New Task
-                </CreateTasksModalTitle>
-                <Inputs>
-                    <Input
-                        placeholder="Task"
-                        value=""
-                        onChange={() => {}}
-                        shape="rounded"
-                        size="lg"
-                    />
-                    <Input
-                        type="textarea"
-                        placeholder="Description"
-                        value=""
-                        onChange={() =>
-                            setShowCreateTasksModal((prevState) => !prevState)
-                        }
-                        shape="rounded"
-                        size="lg"
-                    />
-                </Inputs>
-                <Buttons>
-                    <Button
-                        color="secondary"
-                        size="lg"
-                        shape="rounded"
-                        variant="outlined"
-                        fullWidth
-                        onClick={() => setShowCreateTasksModal(false)}
+            <form onSubmit={createPersonalTask}>
+                <Modal show={showCreateTasksModal} position="center">
+                    <CreateTasksModalTitle
+                        variant="paragraphLG"
+                        weight="medium"
                     >
-                        Cancel
-                    </Button>
-                    <Button size="lg" shape="rounded" color="primary" fullWidth>
-                        Save
-                    </Button>
-                </Buttons>
-            </Modal>
+                        New Task
+                    </CreateTasksModalTitle>
+                    <Inputs>
+                        <Input
+                            placeholder="Title"
+                            value={title}
+                            onChange={handleOnChangeTitle}
+                            shape="rounded"
+                            size="lg"
+                        />
+                        <Input
+                            type="textarea"
+                            placeholder="Description"
+                            value={description}
+                            onChange={handleOnChangeDescription}
+                            shape="rounded"
+                            size="lg"
+                        />
+                        <Input
+                            placeholder="Due Date"
+                            value={due}
+                            onChange={handleOnChangeDue}
+                            shape="rounded"
+                            size="lg"
+                        />
+                    </Inputs>
+                    <Buttons>
+                        <Button
+                            color="secondary"
+                            size="lg"
+                            shape="rounded"
+                            variant="outlined"
+                            fullWidth
+                            onClick={() => setShowCreateTasksModal(false)}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            size="lg"
+                            shape="rounded"
+                            color="primary"
+                            fullWidth
+                        >
+                            Save
+                        </Button>
+                    </Buttons>
+                </Modal>
+            </form>
         </PageBase>
     );
 };
