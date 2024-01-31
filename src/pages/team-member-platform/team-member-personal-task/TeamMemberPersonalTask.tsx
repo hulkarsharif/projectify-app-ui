@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Input, Modal, Typography, Button } from "../../../design-system";
 import { NoDataPlaceholder } from "../../components/NoDataPlaceHolder";
 import noTasks from "../../../assets/illustrations/no-task.svg";
-import { teamMember } from "../../../api";
+import { teamMemberPersonalTasks } from "../../../api";
 import { useLocalStorage } from "../../../hooks";
 import toast from "react-hot-toast";
 
@@ -58,7 +58,7 @@ const TeamMemberPersonalTasks = () => {
         try {
             setIsFormSubmitting(true);
 
-            const response = await TeamMemberPersonalTasks.createTask({
+            const response = await teamMemberPersonalTasks.createTask({
                 title,
                 description,
                 due
