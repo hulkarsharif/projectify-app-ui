@@ -24,57 +24,17 @@ const Buttons = styled.div`
 `;
 const TeamMemberProjects = () => {
     const [projects, setProject] = useState<string[]>([]);
-    const [showCreateProjectModal, setShowCreateProjectModal] =
-        useState<boolean>(false);
+
     return (
         <PageBase>
             {!projects.length ? (
                 <NoDataPlaceholder
                     illustrationUrl={noProject}
                     text="You don't have any projects yet!"
-                    buttonText="Add a Project"
-                    buttonAction={() => setShowCreateProjectModal(true)}
                 />
             ) : (
                 <h1>Projects</h1>
             )}
-            <Modal show={showCreateProjectModal} position="center">
-                <CreateProjectModalTitle variant="paragraphLG" weight="medium">
-                    New Project
-                </CreateProjectModalTitle>
-                <Inputs>
-                    <Input
-                        placeholder="Project Name"
-                        value=""
-                        onChange={() => {}}
-                        shape="rounded"
-                        size="lg"
-                    />
-                    <Input
-                        type="textarea"
-                        placeholder="Project Description"
-                        value=""
-                        onChange={() => {}}
-                        shape="rounded"
-                        size="lg"
-                    />
-                </Inputs>
-                <Buttons>
-                    <Button
-                        color="secondary"
-                        size="lg"
-                        shape="rounded"
-                        variant="outlined"
-                        fullWidth
-                        onClick={() => setShowCreateProjectModal(false)}
-                    >
-                        Cancel
-                    </Button>
-                    <Button size="lg" shape="rounded" color="primary" fullWidth>
-                        Save
-                    </Button>
-                </Buttons>
-            </Modal>
         </PageBase>
     );
 };

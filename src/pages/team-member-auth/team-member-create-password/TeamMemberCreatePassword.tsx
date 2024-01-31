@@ -57,7 +57,6 @@ const TeamMemberCreatePassword = () => {
                 inviteToken as string
             );
             setIsFormSubmitting(false);
-
             setEmail("");
             setPassword("");
             setPasswordConfirm("");

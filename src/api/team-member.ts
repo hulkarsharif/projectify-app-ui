@@ -26,16 +26,16 @@ class TeamMember {
 
     async createPassword(input: CreatePasswordInput, inviteToken: string) {
         try {
-            const response = await fetch(
-                `${this.url}/create-password?inviteToken=${inviteToken}`,
-                {
-                    method: "PATCH",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(input)
-                }
-            );
+            console.log(inviteToken);
+
+            const response = await fetch(`${this.url}/create-password`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${inviteToken}`
+                },
+                body: JSON.stringify(input)
+            });
             if (!response.ok) {
                 const data = await response.json();
                 throw new Error(data.message);
@@ -45,6 +45,7 @@ class TeamMember {
             throw error;
         }
     }
+
     async signIn(input: SignInInput): Promise<{ token: string }> {
         try {
             const response = await fetch(`${this.url}/login`, {
