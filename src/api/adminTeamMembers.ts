@@ -1,4 +1,4 @@
-interface createTeamMemberInput {
+interface CreateTeamMemberInput {
     firstName: string;
     lastName: string;
     position: string;
@@ -15,7 +15,7 @@ class AdminTeamMembers {
         }/team-members`;
     }
 
-    async create(input: createTeamMemberInput) {
+    async create(input: CreateTeamMemberInput) {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
