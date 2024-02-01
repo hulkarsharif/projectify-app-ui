@@ -1,6 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Input, Modal, Typography, Button } from "../../../design-system";
+import {
+    Input,
+    Modal,
+    Typography,
+    Button,
+    DatePickerV1
+} from "../../../design-system";
 import { NoDataPlaceholder } from "../../components/NoDataPlaceHolder";
 import noTasks from "../../../assets/illustrations/no-task.svg";
 import { teamMemberPersonalTasks } from "../../../api";
@@ -32,7 +38,7 @@ const TeamMemberPersonalTasks = () => {
 
     const [title, setTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
-    const [due, setDue] = useState<string>("");
+    const [due, setDue] = useState<Date>();
 
     const [isformSubmitting, setIsFormSubmitting] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);
@@ -47,7 +53,7 @@ const TeamMemberPersonalTasks = () => {
         setDescription(value);
     };
 
-    const handleOnChangeDue = (value: string) => {
+    const handleOnChangeDue = (value: Date) => {
         setDue(value);
     };
     const isFormSubmittable = title && description && due;
@@ -57,7 +63,9 @@ const TeamMemberPersonalTasks = () => {
 
         try {
             setIsFormSubmitting(true);
-
+            if (!due) {
+                throw new Error("Due date is required."); // or handle the absence of due date appropriately
+            }
             const response = await teamMemberPersonalTasks.createTask({
                 title,
                 description,
@@ -67,7 +75,7 @@ const TeamMemberPersonalTasks = () => {
             setIsFormSubmitting(false);
             setTitle("");
             setDescription("");
-            setDue("");
+            setDue(undefined);
             setShowCreateTasksModal(false);
         } catch (error) {
             if (error instanceof Error) {
@@ -114,12 +122,12 @@ const TeamMemberPersonalTasks = () => {
                             shape="rounded"
                             size="lg"
                         />
-                        <Input
-                            placeholder="Due Date"
-                            value={due}
-                            onChange={handleOnChangeDue}
+                        <DatePickerV1
+                            inputSize="lg"
                             shape="rounded"
-                            size="lg"
+                            placeholder="Due Date"
+                            selected={due}
+                            onChange={handleOnChangeDue}
                         />
                     </Inputs>
                     <Buttons>
