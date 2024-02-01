@@ -48,12 +48,11 @@ const Badge: React.FC<BadgeProps> = ({
     return (
         <div className={trimWhiteSpaces(finalClassNames)}>
             {icon && !status && !iconName ? icon : null}
-            {iconName && !status && !iconName ? (
-                <Icon iconName={iconName} />
-            ) : null}
+            {iconName && !status && !icon ? <Icon iconName={iconName} /> : null}
             {status && !icon && !iconName ? (
                 <div className="badge__status" />
             ) : null}
+
             <span className="badge__text">{label}</span>
         </div>
     );
