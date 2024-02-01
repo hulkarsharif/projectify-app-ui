@@ -25,11 +25,12 @@ export interface TeamMemberUser extends User {
     adminId: string;
 }
 export type TaskStatus = "TODO" | "INPROGRESS" | "DONE";
+
 export interface Task {
     id: string;
     title: string;
     description: string;
-    due: string;
+    due: Date;
     status: TaskStatus;
 }
 

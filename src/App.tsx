@@ -1,24 +1,14 @@
-import React, {
-    useState,
-    createContext,
-    Dispatch,
-    SetStateAction,
-    useContext
-} from "react";
-import { Badge, Icon } from "./design-system";
 import { Link } from "react-router-dom";
+import { DatePickerV1 } from "./design-system";
+import { useState } from "react";
+import { Icon, Badge } from "./design-system";
 
 import styled from "styled-components";
+import { TaskCard, TaskCardProps } from "./pages/components";
 
-type AppContectType = {
-    counter: number;
-    setCounter: Dispatch<SetStateAction<number>>;
-};
-
-export const AppContext = createContext<AppContectType>({
-    counter: 0,
-    setCounter: () => {}
-});
+// const App = () => {
+//     const [date, setDate] = useState<Date>();
+// };
 
 const Form = styled.form`
     padding: 2rem;
@@ -32,7 +22,11 @@ const Form = styled.form`
     }
 `;
 
+const TaskDue = styled(Badge)`
+    align-self: flex-end;
+`;
 const App = () => {
+    const [date, setDate] = useState<Date>();
     return (
         <Form>
             <Link to="admin/sign-up">Admin Sign Up</Link>
@@ -53,6 +47,16 @@ const App = () => {
                 Team Member Tasks
             </Link>
             <Link to="team-member/platform">Team Member Platform</Link>
+
+            <div>
+                <DatePickerV1
+                    selected={date}
+                    onChange={(date) => setDate(date)}
+                    placeholder="Select Deadline"
+                    shape="circle"
+                    inputSize="lg"
+                />
+            </div>
             <div>
                 <Badge label="Badge" color="gray" />
                 <Badge
@@ -154,12 +158,6 @@ const App = () => {
                     variant="contained"
                     color="green"
                     icon={<Icon iconName="flag" />}
-                />
-                <Badge
-                    label="Badge"
-                    shape="circle"
-                    variant="contained"
-                    color="green"
                 />
             </div>
         </Form>
