@@ -8,9 +8,13 @@ export type IconName =
     | "log-out"
     | "chevron-right"
     | "flag"
-    | "check";
+    | "check"
+    | "three-dots"
+    | "edit"
+    | "delete";
 
 export type IconProps = {
     iconName: IconName;
     className?: string;
+    onClick?: () => void;
 };
