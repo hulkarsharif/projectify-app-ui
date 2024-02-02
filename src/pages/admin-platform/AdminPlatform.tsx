@@ -6,8 +6,8 @@ import {
     Toaster
 } from "../../design-system";
 import { AppContent, AppLayout, SideBarUser } from "../components";
-import { Actions } from "../../store/actions";
 import { useLocalStorage, useStore } from "../../hooks";
+import { Actions } from "../../store";
 
 const links: SideBarLinkGroup[] = [
     {

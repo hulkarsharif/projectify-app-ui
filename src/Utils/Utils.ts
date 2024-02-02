@@ -10,9 +10,13 @@ export const groupTasksByStatus = (data: Task[]): GroupedTasks => {
         INPROGRESS: [],
         DONE: []
     };
+
     data.forEach((task) => {
         const { status } = task;
         grouped[status].push(task);
     });
+
+    console.log(grouped);
+
     return grouped;
 };
