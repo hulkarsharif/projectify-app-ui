@@ -5,7 +5,7 @@ import { Icon, Badge } from "./design-system";
 import { OptionValue } from "./design-system/Select/types";
 
 import styled from "styled-components";
-import { TaskCard, TaskCardProps } from "./pages/components";
+import { KanbanCard, KanbanCardProps } from "./pages/components/KanbanCard";
 import { Select } from "./design-system/Select";
 
 // const App = () => {
