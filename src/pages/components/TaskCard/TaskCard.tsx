@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import { TaskCardProps } from "./types";
 import { Badge, Bar, Menu, Typography } from "../../../design-system";
 import { format } from "date-fns";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const TaskCardBase = styled.div<{ $isDragging: boolean }>`
     background-color: var(--white);
@@ -14,7 +14,8 @@ const TaskCardBase = styled.div<{ $isDragging: boolean }>`
     flex-direction: column;
     gap: var(--space-12);
 
-    transition: opasity 0.5s;
+    transition: opacity 0.5s;
+
     ${(props) =>
         props.$isDragging &&
         css`
@@ -25,31 +26,36 @@ const TaskCardBase = styled.div<{ $isDragging: boolean }>`
         margin-bottom: var(--space-10);
     }
 `;
+
 const TaskCardHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
 `;
+
 const TaskTitle = styled(Typography)`
     margin-bottom: var(--space-4);
 `;
+
 const TaskDescription = styled(Typography)`
     color: var(--jaguar-500);
 `;
+
 const TaskDue = styled(Badge)`
     align-self: flex-end;
 `;
+
 enum StatusToColor {
     TODO = "gray",
     INPROGRESS = "orange",
     DONE = "green"
 }
+
 enum StatusToIcon {
     TODO = "flag",
     INPROGRESS = "flag",
     DONE = "check"
 }
-
 const TaskCard: React.FC<TaskCardProps> = ({
     task,
     menuActions,
@@ -65,6 +71,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
     const onDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
         setIsDragging(false);
     };
+
     const handleOnSelectMenuItem = (value: string) => {
         onSelectMenuAction(value, task.id);
     };
@@ -98,4 +105,5 @@ const TaskCard: React.FC<TaskCardProps> = ({
         </TaskCardBase>
     );
 };
+
 export { TaskCard };

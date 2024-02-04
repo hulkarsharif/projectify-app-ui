@@ -26,8 +26,6 @@ class TeamMember {
 
     async createPassword(input: CreatePasswordInput, inviteToken: string) {
         try {
-            console.log(inviteToken);
-
             const response = await fetch(`${this.url}/create-password`, {
                 method: "PATCH",
                 headers: {

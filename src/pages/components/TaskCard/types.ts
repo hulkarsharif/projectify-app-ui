@@ -1,5 +1,5 @@
-import { Task } from "../../../types";
 import { MenuItem } from "../../../design-system";
+import { Task } from "../../../types";
 
 export type TaskCardProps = {
     task: Task;

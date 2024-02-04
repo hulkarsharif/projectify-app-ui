@@ -28,6 +28,7 @@ const TeamMemberCreatePassword = () => {
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
 
     const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
@@ -40,14 +41,13 @@ const TeamMemberCreatePassword = () => {
     };
 
     const isFormSubmittable = email && password && passwordConfirm;
-    const navigate = useNavigate();
 
     const createPassword = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const inviteToken = searchParams.get("inviteToken");
-
         try {
             setIsFormSubmitting(true);
+
             await teamMember.createPassword(
                 {
                     email,

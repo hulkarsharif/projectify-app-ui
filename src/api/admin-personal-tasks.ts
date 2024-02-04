@@ -98,19 +98,18 @@ class AdminPersonalTasks {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
-
-            const response = await fetch(`${this.url}/tasks/${taskId}/`, {
+            const response = await fetch(`${this.url}/tasks/${taskId}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
                     authorization: `Bearer ${authToken}`
-                }
+                },
+                body: JSON.stringify(input)
             });
             if (!response.ok) {
                 const data = await response.json();
                 throw new Error(data.message);
             }
-            return response.json();
         } catch (error) {
             throw error;
         }
