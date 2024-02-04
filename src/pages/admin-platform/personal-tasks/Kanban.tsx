@@ -4,13 +4,12 @@ import toast from "react-hot-toast";
 import { GroupedTasks } from "../../../Utils";
 import { useStore } from "../../../hooks";
 import { Actions, ChangeTaskStatusAction } from "../../../store";
-import { adminTaskService } from "../../../api";
+import { adminTaskskService } from "../../../api";
 import { Typography } from "../../../design-system";
 import { TaskStatus } from "../../../types";
-import { KanbanCard } from "../../components";
+import { KanbanCard } from "../../components/KanbanCard";
 import { EditTaskModal } from "./EditTaskModal";
 import { DeleteTaskModal } from "./DeleteTaskModal";
-import { TaskCard } from "../../components";
 
 type KanbanProps = {
     groupedTasks: GroupedTasks;
@@ -56,7 +55,7 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
     const onDrop = (e: React.DragEvent<HTMLDivElement>, status: TaskStatus) => {
         const task = JSON.parse(e.dataTransfer.getData("application/json"));
 
-        adminTaskService
+        adminTaskskService
             .updateTask(task.id, { status: status })
             .then((_) => {
                 const action: ChangeTaskStatusAction = {

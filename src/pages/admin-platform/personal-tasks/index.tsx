@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Typography, Button } from "../../../design-system";
 import { NoDataPlaceholder } from "../../components";
 import noTask from "../../../assets/illustrations/no-task.svg";
-import { adminPersonalTasks as adminPersonalTasksService } from "../../../api";
+import { adminTaskskService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, PopulateTasksAction } from "../../../store";
 import { groupTasksByStatus } from "../../../Utils";
@@ -34,7 +34,7 @@ const AdminTasksPage = () => {
     } = useStore();
 
     useEffect(() => {
-        adminPersonalTasksService
+        adminTaskskService
             .getTasks()
             .then((data) => {
                 setIsTasksFetching(false);

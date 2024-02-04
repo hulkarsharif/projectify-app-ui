@@ -1,2 +1,2 @@
-export * from "./TaskCard";
+export * from "./KanbanCard";
 export * from "./types";
