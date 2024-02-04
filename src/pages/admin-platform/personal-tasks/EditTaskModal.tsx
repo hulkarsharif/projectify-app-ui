@@ -121,6 +121,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                     onChange={(value) => setTaskTitle(value)}
                     shape="rounded"
                     size="lg"
+                    placeholder="Title"
                 />
                 <Input
                     type="textarea"
@@ -130,6 +131,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                     }}
                     shape="rounded"
                     size="lg"
+                    placeholder="Text"
                 />
                 <DatePickerV1
                     inputSize="lg"

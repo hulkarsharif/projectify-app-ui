@@ -15,8 +15,8 @@ const Form = styled.form`
     gap: var(--space-20);
 `;
 const AdminForgotPassword = () => {
-    const [email, setEmail] = useState<string>("");
-    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
+    const [email, setEmail] = useState("");
+    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);

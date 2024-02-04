@@ -13,8 +13,8 @@ const Form = styled.form`
 `;
 
 const TeamMemberForgotPassword = () => {
-    const [email, setEmail] = useState<string>("");
-    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
+    const [email, setEmail] = useState("");
+    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);

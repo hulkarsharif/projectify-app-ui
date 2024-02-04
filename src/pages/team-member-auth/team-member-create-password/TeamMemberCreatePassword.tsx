@@ -22,10 +22,10 @@ const StyledButton = styled(Button)`
     grid-column: 1/3;
 `;
 const TeamMemberCreatePassword = () => {
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [passwordConfirm, setPasswordConfirm] = useState<string>("");
-    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState("");
+    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();

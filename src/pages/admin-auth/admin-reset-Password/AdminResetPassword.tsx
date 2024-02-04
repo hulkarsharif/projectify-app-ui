@@ -16,9 +16,9 @@ const Form = styled.form`
     margin-bottom: var(--space-40);
 `;
 const AdminResetPassword = () => {
-    const [password, setPassword] = useState<string>("");
-    const [passwordConfirm, setPasswordConfirm] = useState<string>("");
-    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
+    const [password, setPassword] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState("");
+    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
     const [searchParams] = useSearchParams();
     const passwordResetToken = searchParams.get("passwordResetToken");
 

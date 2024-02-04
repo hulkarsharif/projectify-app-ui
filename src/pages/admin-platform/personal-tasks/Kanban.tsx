@@ -72,7 +72,7 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
             });
     };
 
-    const onSeelectKanbanCardMenuAction = (value: string, taskId: string) => {
+    const onSelectKanbanCardMenuAction = (value: string, taskId: string) => {
         setSelectedTaskId(taskId);
         if (value === "editTask") {
             setShowEditTaskModal(true);
@@ -108,18 +108,18 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
                                             {
                                                 label: "Edit",
                                                 value: "editTask",
-                                                variant: "primary",
+                                                color: "primary",
                                                 iconName: "edit"
                                             },
                                             {
                                                 label: "Delete",
                                                 value: "deleteTask",
-                                                variant: "danger",
+                                                color: "danger",
                                                 iconName: "delete"
                                             }
                                         ]}
                                         onSelectMenuAction={
-                                            onSeelectKanbanCardMenuAction
+                                            onSelectKanbanCardMenuAction
                                         }
                                     />
                                 );
@@ -129,10 +129,11 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
                 })}
             </TasksColumns>
             <EditTaskModal
-                show={showDeleteTaskModal}
-                closeModal={() => setShowDeleteTaskModal(false)}
+                show={showEditTaskModal}
+                closeModal={() => setShowEditTaskModal(false)}
                 taskId={selectedTaskId}
             />
+
             <DeleteTaskModal
                 show={showDeleteTaskModal}
                 closeModal={() => setShowDeleteTaskModal(false)}
