@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 import { DatePickerV1 } from "./design-system";
 import { useState } from "react";
 import { Icon, Badge } from "./design-system";
+import { OptionValue } from "./design-system/Select/types";
 
 import styled from "styled-components";
 import { TaskCard, TaskCardProps } from "./pages/components";
+import { Select } from "./design-system/Select";
 
 // const App = () => {
 //     const [date, setDate] = useState<Date>();
@@ -27,6 +29,7 @@ const TaskDue = styled(Badge)`
 `;
 const App = () => {
     const [date, setDate] = useState<Date>();
+    const [value, setValue] = useState<OptionValue>("");
     return (
         <Form>
             <Link to="admin/sign-up">Admin Sign Up</Link>
@@ -160,6 +163,21 @@ const App = () => {
                     icon={<Icon iconName="flag" />}
                 />
             </div>
+            <Select
+                options={[
+                    { label: "Option1", value: "option1" },
+                    { label: "Option2", value: "option2" },
+                    { label: "Option3", value: "option3" },
+                    { label: "Option4", value: "option4" },
+                    { label: "Option5", value: "option5" },
+                    { label: "Option6", value: "option6" }
+                ]}
+                headerPlaceholder="Select Option"
+                onSelect={(option) => setValue(option.value)}
+                size="md"
+                shape="circle"
+                value={value}
+            />
         </Form>
     );
 };

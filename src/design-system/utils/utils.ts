@@ -1,5 +1,3 @@
-import { Task } from "../../types";
-
 export const trimWhiteSpaces = (str: string) => {
     return str
         .split(" ")

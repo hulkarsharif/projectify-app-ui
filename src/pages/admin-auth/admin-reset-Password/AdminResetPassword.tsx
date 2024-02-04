@@ -4,7 +4,7 @@ import { AuthWrapper, AuthActionLink } from "../../components";
 import flatIronBuilding from "../../../assets/image/flatIronBuilding.jpg";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { admin } from "../../../api";
+import { adminService } from "../../../api";
 import toast from "react-hot-toast";
 
 const Form = styled.form`
@@ -37,7 +37,7 @@ const AdminResetPassword = () => {
 
         try {
             setIsFormSubmitting(true);
-            const response = await admin.resetPassword(
+            const response = await adminService.resetPassword(
                 password,
                 passwordConfirm,
                 passwordResetToken as string

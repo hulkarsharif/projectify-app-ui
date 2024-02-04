@@ -2,7 +2,7 @@ import { AuthWrapper, AuthActionLink } from "../../components";
 import { Button, Input } from "../../../design-system";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { admin } from "../../../api";
+import { adminService } from "../../../api";
 import samarkand from "../../../assets/image/samarkand-min.jpeg";
 import styled from "styled-components";
 import { useLocalStorage } from "../../../hooks";
@@ -46,7 +46,7 @@ const Signin = () => {
         e.preventDefault();
         try {
             setIsFormSubmitting(true);
-            const { token } = await admin.signIn({
+            const { token } = await adminService.signIn({
                 email,
                 password
             });

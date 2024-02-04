@@ -3,7 +3,7 @@ import { Button, Input } from "../../../design-system";
 import { useState } from "react";
 import flatIronBuilding from "../../../assets/image/flatIronBuilding.jpg";
 import styled from "styled-components";
-import { teamMember } from "../../../api";
+import { teamMemberService } from "../../../api";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
@@ -48,7 +48,7 @@ const TeamMemberCreatePassword = () => {
         try {
             setIsFormSubmitting(true);
 
-            await teamMember.createPassword(
+            await teamMemberService.createPassword(
                 {
                     email,
                     password,
