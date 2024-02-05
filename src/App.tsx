@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Checkbox } from "./design-system";
 
-import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
-import { OptionValue, Select } from "./design-system";
 
 const Base = styled.div`
     font-size: 1.6rem;
@@ -14,7 +13,7 @@ const Base = styled.div`
 `;
 
 const App = () => {
-    const [value, setValue] = useState<OptionValue>("");
+    const [value, setValue] = useState(false);
     return (
         <Base>
             <h1>Welcome </h1>
@@ -36,20 +35,23 @@ const App = () => {
                 Team Member Reset Password
             </Link>
             <Link to="team-member/platform">Team Member Platform</Link>
-            <Select
-                options={[
-                    { label: "Option1", value: "option1" },
-                    { label: "Option2", value: "option2" },
-                    { label: "Option3", value: "option3" },
-                    { label: "Option4", value: "option4" },
-                    { label: "Option5", value: "option5" },
-                    { label: "Option6", value: "option6" }
-                ]}
-                headerPlaceholder="Select Option"
-                onSelect={(option) => setValue(option.value)}
-                size="md"
+
+            <Checkbox
+                label="Hello world"
+                id="checkbox"
+                checked={value}
+                onChange={(value) => setValue(value)}
+                shape="rounded"
+                indeterminate
+                position="end"
+            />
+            <Checkbox
+                label="Hello Uzbekistan"
+                id="checkbox"
+                checked={value}
+                onChange={(value) => setValue(value)}
                 shape="circle"
-                value={value}
+                position="end"
             />
         </Base>
     );
