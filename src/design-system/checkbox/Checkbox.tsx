@@ -1,8 +1,9 @@
-import React, { FC } from "react";
+import React from "react";
 import "./Checkbox.css";
 import { Label } from "../Label";
 import { CheckboxShape, CheckboxProps } from "./types";
 import { Icon, IconName } from "../Icon";
+import { trimWhiteSpaces } from "../utils";
 
 const shapeClassNames = {
     rounded: "checkbox__custom--rounded",
@@ -22,46 +23,72 @@ const iconNames: {
     }
 };
 
-type CheckboxColor = "primary" | "danger" | "success";
-
-type CheckboxProps = {
-    className?: string;
-    disabled?: boolean;
-    checked?: boolean;
-    color?: CheckboxColor;
-    label: React.ReactNode;
-    onChange?: (checked: boolean) => void;
-};
-
-const colorClassNames = {
-    primary: "btn-primary",
-    danger: "btn-danger",
-    success: "btn-jaguar"
-};
-
-const Checkbox: FC<CheckboxProps> = (props) => {
-    const { className, color, disabled, checked, label, onChange } = props;
-
-    const colorClassName = color !== undefined ? colorClassNames[color] : "";
-    const finalClassNames = `checkbox ${colorClassName}${className || ""}`;
-
-    const handleCheckboxChange = () => {
-        if (onChange) {
-            onChange(!checked);
+const getFinalIconName = (
+    shape: CheckboxShape | undefined,
+    indeterminate: boolean | undefined
+): IconName => {
+    if (shape) {
+        if (indeterminate) {
+            return iconNames[shape].indeterminate;
+        } else {
+            return iconNames[shape].checked;
         }
+    }
+
+    return indeterminate ? "minus-sharp" : "check-sharp";
+};
+
+const Checkbox: React.FC<CheckboxProps> = ({
+    id,
+    checked,
+    label,
+    onChange,
+    className,
+    shape,
+    indeterminate,
+    disabled,
+    position
+}) => {
+    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(e.target.checked);
+        onChange(e.target.checked);
     };
+    const checkboxWrapperClassName = trimWhiteSpaces(
+        `checkbox ${className || ""}`
+    );
+
+    const shapeClassName = shape ? shapeClassNames[shape] : "";
+    const checkedClassName = checked ? "checkbox__custom--checked" : "";
+    const disabledClassName = disabled ? "checkbox__custom--disabled" : "";
+    const customCheckboxClassName = trimWhiteSpaces(
+        `checkbox__custom ${checkedClassName} ${shapeClassName} ${disabledClassName}`
+    );
+
+    const labelClassName = `checkbox__label ${
+        position ? "checkbox__label--end" : ""
+    }`;
+
+    const iconName = getFinalIconName(shape, indeterminate);
 
     return (
-        <label className={finalClassNames}>
-            <input
-                type="checkbox"
-                checked={checked}
-                onChange={handleCheckboxChange}
-                disabled={disabled}
-            />
-            <span className="checkmark"></span>
-            <span className="label">{label}</span>
-        </label>
+        <div className={checkboxWrapperClassName}>
+            <Label htmlFor={id} className={labelClassName} disabled={disabled}>
+                <div className={customCheckboxClassName}>
+                    <input
+                        type="checkbox"
+                        id={id}
+                        checked={checked}
+                        onChange={handleOnChange}
+                        className="checkbox__input"
+                        disabled={disabled}
+                    />
+                    {checked && (
+                        <Icon iconName={iconName} className="checkbox__icon" />
+                    )}
+                </div>
+                {label && <span>{label}</span>}
+            </Label>
+        </div>
     );
 };
 
