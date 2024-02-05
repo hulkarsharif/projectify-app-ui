@@ -33,15 +33,14 @@ const Buttons = styled.div`
 `;
 const TeamMemberPersonalTasks = () => {
     const [personalTasks, setPersonalTasks] = useState<string[]>([]);
-    const [showCreateTasksModal, setShowCreateTasksModal] =
-        useState<boolean>(false);
+    const [showCreateTasksModal, setShowCreateTasksModal] = useState(false);
 
-    const [title, setTitle] = useState<string>("");
-    const [description, setDescription] = useState<string>("");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
     const [due, setDue] = useState<Date>();
 
-    const [isformSubmitting, setIsFormSubmitting] = useState<boolean>(false);
-    const [isError, setIsError] = useState<boolean>(false);
+    const [isformSubmitting, setIsFormSubmitting] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     const { setItem } = useLocalStorage();
 

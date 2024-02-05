@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import styled from "styled-components";
 
 import flatIronBuilding from "../../../assets/image/flatIronBuilding.jpg";
-import { admin } from "../../../api";
+import { adminService } from "../../../api";
 import { AuthWrapper } from "../../components";
 
 const Form = styled.form`
@@ -15,8 +15,8 @@ const Form = styled.form`
     gap: var(--space-20);
 `;
 const AdminForgotPassword = () => {
-    const [email, setEmail] = useState<string>("");
-    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
+    const [email, setEmail] = useState("");
+    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
@@ -28,7 +28,7 @@ const AdminForgotPassword = () => {
 
         try {
             setIsFormSubmitting(true);
-            const response = await admin.forgetPassword(email);
+            const response = await adminService.forgetPassword(email);
 
             setIsFormSubmitting(false);
             setEmail("");

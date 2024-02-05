@@ -16,7 +16,5 @@ export const groupTasksByStatus = (data: Task[]): GroupedTasks => {
         grouped[status].push(task);
     });
 
-    console.log(grouped);
-
     return grouped;
 };

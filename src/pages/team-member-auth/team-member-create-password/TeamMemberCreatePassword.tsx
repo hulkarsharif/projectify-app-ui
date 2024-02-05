@@ -3,7 +3,7 @@ import { Button, Input } from "../../../design-system";
 import { useState } from "react";
 import flatIronBuilding from "../../../assets/image/flatIronBuilding.jpg";
 import styled from "styled-components";
-import { teamMember } from "../../../api";
+import { teamMemberService } from "../../../api";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
@@ -22,10 +22,10 @@ const StyledButton = styled(Button)`
     grid-column: 1/3;
 `;
 const TeamMemberCreatePassword = () => {
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [passwordConfirm, setPasswordConfirm] = useState<string>("");
-    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState("");
+    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
@@ -48,7 +48,7 @@ const TeamMemberCreatePassword = () => {
         try {
             setIsFormSubmitting(true);
 
-            await teamMember.createPassword(
+            await teamMemberService.createPassword(
                 {
                     email,
                     password,

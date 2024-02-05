@@ -133,4 +133,4 @@ class TeamMember {
     }
 }
 
-export const teamMember = new TeamMember();
+export const teamMemberService = new TeamMember();

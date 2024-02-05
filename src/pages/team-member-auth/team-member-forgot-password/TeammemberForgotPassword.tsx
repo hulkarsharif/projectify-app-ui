@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { AuthWrapper } from "../../components";
 import { Input, Button } from "../../../design-system";
 import flatbuilding from "../../../assets/image/flatIronBuilding.jpg";
-import { teamMember } from "../../../api";
+import { teamMemberService } from "../../../api";
 
 const Form = styled.form`
     width: 100%;
@@ -13,8 +13,8 @@ const Form = styled.form`
 `;
 
 const TeamMemberForgotPassword = () => {
-    const [email, setEmail] = useState<string>("");
-    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
+    const [email, setEmail] = useState("");
+    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
@@ -26,7 +26,7 @@ const TeamMemberForgotPassword = () => {
         e.preventDefault();
         try {
             setIsFormSubmitting(true);
-            const response = await teamMember.forgotPassword(email);
+            const response = await teamMemberService.forgotPassword(email);
 
             setIsFormSubmitting(false);
             setEmail("");

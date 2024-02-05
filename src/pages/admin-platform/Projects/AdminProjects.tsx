@@ -26,14 +26,13 @@ const Buttons = styled.div`
 `;
 const AdminProjects = () => {
     const [projects, setProjects] = useState<string[]>([]);
-    const [showCreateProjectModal, setShowCreateProjectModal] =
-        useState<boolean>(false);
+    const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
 
-    const [name, setName] = useState<string>("");
-    const [description, setDescription] = useState<string>("");
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
 
-    const [isError, setIsError] = useState<boolean>(false);
-    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
+    const [isError, setIsError] = useState(false);
+    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
     const handleOnChangeName = (value: string) => {
         setName(value);

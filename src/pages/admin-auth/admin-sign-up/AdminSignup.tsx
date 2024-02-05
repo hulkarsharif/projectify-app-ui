@@ -2,7 +2,7 @@ import { Button, Input, Toaster } from "../../../design-system";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import flatIronBuilding from "../../../assets/image/flatIronBuilding.jpg";
-import { admin } from "../../../api";
+import { adminService } from "../../../api";
 import { AuthActionLink, AuthWrapper } from "../../components";
 import styled from "styled-components";
 
@@ -23,16 +23,16 @@ const StyledButton = styled(Button)`
     grid-column: 1 / 3;
 `;
 const AdminSignup = () => {
-    const [firstName, setFirstName] = useState<string>("");
-    const [lastName, setLastName] = useState<string>("");
-    const [preferredName, setPreferredName] = useState<string>("");
-    const [company, setCompany] = useState<string>("");
-    const [position, setPosition] = useState<string>("");
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [preferredName, setPreferredName] = useState("");
+    const [company, setCompany] = useState("");
+    const [position, setPosition] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState("");
 
-    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
+    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
     const handleOnChangeFirstName = (value: string) => {
         setFirstName(value);
@@ -66,7 +66,7 @@ const AdminSignup = () => {
         e.preventDefault();
         setIsFormSubmitting(true);
         try {
-            const response = await admin.signUp({
+            const response = await adminService.signUp({
                 firstName,
                 lastName,
                 preferredName: preferredName,
