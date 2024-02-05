@@ -1,6 +1,26 @@
 import React, { FC } from "react";
-
 import "./Checkbox.css";
+import { Label } from "../Label";
+import { CheckboxShape, CheckboxProps } from "./types";
+import { Icon, IconName } from "../Icon";
+
+const shapeClassNames = {
+    rounded: "checkbox__custom--rounded",
+    circle: "checkbox__custom--circle"
+};
+
+const iconNames: {
+    [Key in CheckboxShape]: { indeterminate: IconName; checked: IconName };
+} = {
+    rounded: {
+        indeterminate: "minus",
+        checked: "check"
+    },
+    circle: {
+        indeterminate: "minus",
+        checked: "check"
+    }
+};
 
 type CheckboxColor = "primary" | "danger" | "success";
 
