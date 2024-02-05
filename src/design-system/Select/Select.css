@@ -5,7 +5,7 @@
 
 .btn-secondary.select__header {
     background-color: var(--white);
-    /* justify-content: space-between; */
+    justify-content: space-between;
     padding: 0 var(--space-8) 0 var(--space-16);
     font-weight: var(--font-weight-400);
 }
