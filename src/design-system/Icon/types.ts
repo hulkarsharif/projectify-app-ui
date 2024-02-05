@@ -18,5 +18,7 @@ export type IconName =
 export type IconProps = {
     iconName: IconName;
     className?: string;
+    height?: string;
+    width?: string;
     onClick?: () => void;
 };

@@ -1,5 +1,5 @@
 import { Option, OptionValue, SelectProps } from "./types";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Label } from "../Label";
 import { Button } from "../Button";
 import "./Select.css";

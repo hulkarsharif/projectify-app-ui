@@ -13,7 +13,7 @@ export interface SelectProps {
     value?: OptionValue;
     onSelect: (value: Option) => void;
     label?: string;
-    headerPlaceholder: string;
+    headerPlaceholder?: string;
     size?: SelectSize;
     shape?: SelectShape;
     disabled?: true;

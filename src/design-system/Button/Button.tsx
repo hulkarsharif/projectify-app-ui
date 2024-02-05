@@ -1,31 +1,13 @@
-import React, { FC } from "react";
+import { FC } from "react";
+import { trimWhiteSpaces } from "../utils";
+import {
+    sizeClassNames,
+    shapeClassNames,
+    colorClassNames,
+    variantClassNames
+} from "./classnames";
 import { ButtonProps } from "./types";
 import "./Button.css";
-import { trimWhiteSpaces } from "../utils";
-
-const sizeClassNames = {
-    sm: "btn-small",
-    md: "btn-medium",
-    lg: "btn-large"
-};
-
-const shapeClassNames = {
-    rounded: "btn-rounded",
-    circle: "btn-circle"
-};
-
-const colorClassNames = {
-    primary: "btn-primary",
-    secondary: "btn-secondary",
-    danger: "btn-danger",
-    success: "btn-success"
-};
-
-const variantClassNames = {
-    contained: "btn-contained",
-    outlined: "btn-outlined",
-    text: "btn-text"
-};
 
 const Button: FC<ButtonProps> = (props) => {
     const {
@@ -49,11 +31,14 @@ const Button: FC<ButtonProps> = (props) => {
 
     const variantClassName =
         variant !== undefined ? variantClassNames[variant] : "";
+
     const fullWidthClassName = fullWidth ? "btn-full-width" : "";
 
-    const finalClassNames = `btn ${colorClassName} ${sizeClassName} ${shapeClassName} ${fullWidthClassName} ${variantClassName} ${
-        className || ""
-    }`;
+    const finalClassNames = trimWhiteSpaces(
+        `btn ${colorClassName} ${sizeClassName} ${shapeClassName} ${fullWidthClassName} ${variantClassName} ${
+            className || ""
+        }`
+    );
 
     return (
         <button
