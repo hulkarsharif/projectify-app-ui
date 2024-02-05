@@ -1,4 +1,3 @@
-import { GlobalState, initialState } from "../state";
 import {
     ActionType,
     Actions,
@@ -8,6 +7,7 @@ import {
     RemoveTaskAction,
     UpdateTaskAction
 } from "../actions";
+import { GlobalState, initialState } from "../state";
 
 export const userReducer = (
     state: GlobalState,
@@ -22,16 +22,21 @@ export const userReducer = (
         return initialState;
     } else if (action.type === Actions.POPULATE_TASKS) {
         const payload = action.payload as PopulateTasksAction["payload"];
+
         return {
             ...state,
             adminPersonalTasks: payload
         };
     } else if (action.type === Actions.ADD_TASK) {
         const payload = action.payload as AddTaskAction["payload"];
+
         if (state.adminPersonalTasks) {
             return {
                 ...state,
-                adminPersonalTasks: [...state.adminPersonalTasks, payload]
+                adminPersonalTasks: [
+                    ...state.adminPersonalTasks,
+                    action.payload as AddTaskAction["payload"]
+                ]
             };
         } else {
             return {
@@ -62,6 +67,7 @@ export const userReducer = (
                 return { ...task };
             }
         });
+
         return {
             ...state,
             adminPersonalTasks: updatedTasks
@@ -76,5 +82,6 @@ export const userReducer = (
             )
         };
     }
+
     return state;
 };

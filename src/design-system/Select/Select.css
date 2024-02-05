@@ -5,13 +5,13 @@
 
 .btn-secondary.select__header {
     background-color: var(--white);
-    justify-content: space-between;
+    /* justify-content: space-between; */
     padding: 0 var(--space-8) 0 var(--space-16);
     font-weight: var(--font-weight-400);
 }
 
 .btn-secondary.select__header:hover {
-    border-color: var(--primary-500);
+    border: 1px solid var(--primary-500);
     background-color: var(--white);
 }
 
@@ -20,9 +20,10 @@
 }
 
 .btn-secondary.select__header:focus {
-    border-color: var(--primary-500);
+    border: 1px solid var(--primary-500);
     background-color: var(--white);
 }
+
 .select__body {
     position: absolute;
     top: calc(100% + var(--space-4));

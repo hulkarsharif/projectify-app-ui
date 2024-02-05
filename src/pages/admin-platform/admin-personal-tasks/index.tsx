@@ -25,8 +25,7 @@ const PageContent = styled.section`
 const AdminTasksPage = () => {
     const [isTasksFetching, setIsTasksFetching] = useState(true);
 
-    const [showCreateTaskModal, setShowCreateTaskModal] =
-        useState<boolean>(false);
+    const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
 
     const {
         state: { adminPersonalTasks },
