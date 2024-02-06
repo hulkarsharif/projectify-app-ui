@@ -1,7 +1,12 @@
-import { Task } from "../types";
+import { Task, TaskStatus } from "../types";
 
 type TaskCreateInput = Omit<Task, "id" | "status">;
-type TaskUpdateInput = Omit<Task, "id">;
+type TaskUpdateInput = {
+    title?: string;
+    description?: string;
+    due?: Date;
+    status?: TaskStatus;
+};
 
 interface GetAllTasksResponse {
     data: {
@@ -13,7 +18,7 @@ interface TaskCreateResponse {
     data: Task;
 }
 
-class TeamMemberPersonalTasks {
+class TeamMemberTasksService {
     url: string;
     constructor() {
         this.url = `${
@@ -47,7 +52,7 @@ class TeamMemberPersonalTasks {
         }
     }
 
-    async getTasks(): Promise<{ data: GetAllTasksResponse }> {
+    async getTasks(): Promise<GetAllTasksResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
@@ -95,6 +100,7 @@ class TeamMemberPersonalTasks {
             const response = await fetch(`${this.url}/tasks/${taskId}/`, {
                 method: "PATCH",
                 headers: {
+                    "Content-Type": "application/json",
                     authorization: `Bearer ${authToken}`
                 }
             });
@@ -109,4 +115,4 @@ class TeamMemberPersonalTasks {
     }
 }
 
-export const teamMemberPersonalTasks = new TeamMemberPersonalTasks();
+export const teamMemberTasksService = new TeamMemberTasksService();
