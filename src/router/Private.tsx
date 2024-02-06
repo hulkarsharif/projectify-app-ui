@@ -15,7 +15,6 @@ const Private: React.FC<ProtectedRouteProps> = ({ component, userType }) => {
     const { getItem, setItem } = useLocalStorage();
     const { dispatch } = useStore();
     const navigate = useNavigate();
-
     let isAuthTokenExists = getItem("authToken");
 
     useEffect(() => {

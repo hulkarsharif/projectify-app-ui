@@ -3,12 +3,12 @@ export * from "./admin-auth/admin-sign-in/AdminSignin";
 export * from "./admin-auth/admin-forgot-password/AdminForgotPassword";
 export * from "./admin-auth/admin-reset-Password/AdminResetPassword";
 export * from "./admin-platform/admin-personal-tasks";
-export * from "./admin-platform/team-members/team-members";
 
 export * from ".//admin-platform/AdminPlatform";
 export * from "./admin-platform/Projects/AdminProjects";
 export * from "./admin-platform/admin-personal-tasks";
 export * from "./admin-platform/admin-stories/stories";
+export * from "./admin-platform/admin-team-members/AdminTeamMembers";
 
 export * from "./team-member-auth/team-member-create-password/TeamMemberCreatePassword";
 export * from "./team-member-auth/team-member-reset-password/TeamMemberResetPassword";

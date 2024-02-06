@@ -15,10 +15,10 @@ import {
     AdminTasksPage,
     AdminTeamMembers,
     TeamMemberCreatePassword,
-    TeamMemberResetPassword,
-    TeamMemberForgotPassword,
     TeamMemberSignin,
     TeamMemberPlatform,
+    TeamMemberResetPassword,
+    TeamMemberForgotPassword,
     TeamMemberPersonalTasks,
     TeamMemberProjects,
     TeamMemberStories
@@ -81,16 +81,6 @@ export const router = createBrowserRouter(
                 <Route path="personal-tasks" element={<AdminTasksPage />} />
                 <Route path="team-members" element={<AdminTeamMembers />} />
             </Route>
-
-            <Route
-                path="team-member/reset-password"
-                element={
-                    <Auth
-                        component={<TeamMemberResetPassword />}
-                        userType={UserRole.teamMember}
-                    />
-                }
-            />
             <Route
                 path="team-member/create-password"
                 element={
@@ -101,6 +91,25 @@ export const router = createBrowserRouter(
                 }
             />
             <Route
+                path="team-member/sign-in"
+                element={
+                    <Auth
+                        component={<TeamMemberSignin />}
+                        userType={UserRole.teamMember}
+                    />
+                }
+            />
+            <Route
+                path="team-member/reset-password"
+                element={
+                    <Auth
+                        component={<TeamMemberResetPassword />}
+                        userType={UserRole.teamMember}
+                    />
+                }
+            />
+
+            <Route
                 path="team-member/forget-password"
                 element={
                     <Auth
@@ -109,7 +118,7 @@ export const router = createBrowserRouter(
                     />
                 }
             />
-            <Route path="/team-member/sign-in" element={<TeamMemberSignin />} />
+
             <Route
                 path="/team-member/platform"
                 element={

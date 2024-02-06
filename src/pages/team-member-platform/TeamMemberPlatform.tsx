@@ -1,10 +1,9 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { SideBar, SideBarLinks, SideBarLinkGroup } from "../../design-system";
 import { AppContent, AppLayout, SideBarUser } from "../components";
-import { Actions } from "../../store";
 import { useLocalStorage, useStore } from "../../hooks";
-import userImage from "../../assets/image/userImage.jpg";
-import { Toaster } from "react-hot-toast";
+
+import { Actions } from "../../store";
 
 const links: SideBarLinkGroup[] = [
     {
@@ -56,28 +55,26 @@ const TeamMemberPlatform = () => {
         removeItem("authToken");
         removeItem("userRole");
         dispatch({ type: Actions.RESET_STATE });
-        navigate("team-member/sign-in");
+
+        navigate("/team-member/sign-in");
     };
     return (
-        <>
-            <AppLayout>
-                <SideBar>
-                    <SideBarUser
-                        details={{
-                            firstName: user?.firstName || "",
-                            lastName: user?.lastName || "",
-                            imageUrl: "",
-                            email: user?.email || ""
-                        }}
-                    />
-                    <SideBarLinks links={links} logOut={logOut} />
-                </SideBar>
-                <AppContent>
-                    <Outlet />
-                </AppContent>
-            </AppLayout>
-            <Toaster />
-        </>
+        <AppLayout>
+            <SideBar>
+                <SideBarUser
+                    details={{
+                        firstName: user?.firstName || "",
+                        lastName: user?.lastName || "",
+                        imageUrl: "",
+                        email: user?.email || ""
+                    }}
+                />
+                <SideBarLinks links={links} logOut={logOut} />
+            </SideBar>
+            <AppContent>
+                <Outlet />
+            </AppContent>
+        </AppLayout>
     );
 };
 

@@ -1,10 +1,10 @@
 import { AuthActionLink, AuthWrapper } from "../../components";
 import { Button, Input } from "../../../design-system";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { teamMemberService } from "../../../api";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import { useLocalStorage, useStore } from "../../../hooks";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocalStorage } from "../../../hooks";
 
 import samarkand from "../../../assets/image/samarkand.jpeg";
 import styled from "styled-components";
@@ -27,7 +27,13 @@ const TeamMemberSignin = () => {
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
     const [isError, setIsError] = useState(false);
     const navigate = useNavigate();
-    const { setItem, getItem } = useLocalStorage();
+    const { setItem } = useLocalStorage();
+    const [searchParams] = useSearchParams();
+    const inviteToken = searchParams.get("inviteToken");
+
+    useEffect(() => {
+        if (!inviteToken) navigate("/team-member/sign-in");
+    }, [inviteToken, navigate]);
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
