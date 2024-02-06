@@ -19,7 +19,7 @@ import {
     TeamMemberPlatform,
     TeamMemberResetPassword,
     TeamMemberForgotPassword,
-    TeamMemberPersonalTasks,
+    TeamMemberTasksPage,
     TeamMemberProjects,
     TeamMemberStories
 } from "../pages";
@@ -132,7 +132,7 @@ export const router = createBrowserRouter(
                 <Route path="stories" element={<TeamMemberStories />} />
                 <Route
                     path="personal-tasks"
-                    element={<TeamMemberPersonalTasks />}
+                    element={<TeamMemberTasksPage />}
                 />
             </Route>
         </>

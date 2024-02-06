@@ -17,5 +17,5 @@ export * from "./team-member-auth/team-member-signin/TeamMemberSignin";
 
 export * from "./team-member-platform/TeamMemberPlatform";
 export * from "./team-member-platform/team-member-projects/TeamMemberProjects";
-export * from "./team-member-platform/team-member-personal-task/TeamMemberPersonalTask";
+export * from "./team-member-platform/team-member-personal-task";
 export * from "./team-member-platform/team-member-stories/TeamMemberStories";
