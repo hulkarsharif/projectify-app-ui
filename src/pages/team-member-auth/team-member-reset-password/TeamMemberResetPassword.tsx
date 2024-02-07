@@ -23,6 +23,7 @@ const TeamMemberResetPassword = () => {
     const [searchParams] = useSearchParams();
     const passwordResetToken = searchParams.get("passwordResetToken");
     const navigate = useNavigate();
+
     useEffect(() => {
         if (!passwordResetToken) navigate("/team-member/forgot-password");
     }, [passwordResetToken, navigate]);

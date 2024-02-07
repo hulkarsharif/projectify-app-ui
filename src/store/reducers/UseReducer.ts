@@ -25,7 +25,8 @@ export const userReducer = (
 
         return {
             ...state,
-            adminPersonalTasks: payload
+            adminPersonalTasks: payload,
+            teamMemberPersonalTasks: payload
         };
     } else if (action.type === Actions.ADD_TASK) {
         const payload = action.payload as AddTaskAction["payload"];
@@ -35,6 +36,10 @@ export const userReducer = (
                 ...state,
                 adminPersonalTasks: [
                     ...state.adminPersonalTasks,
+                    action.payload as AddTaskAction["payload"]
+                ],
+                teamMemberPersonalTasks: [
+                    ...state.teamMemberPersonalTasks,
                     action.payload as AddTaskAction["payload"]
                 ]
             };
@@ -53,10 +58,20 @@ export const userReducer = (
                 return { ...task };
             }
         });
+        const updatedTeamMemberTasks = state.teamMemberPersonalTasks.map(
+            (task) => {
+                if (task.id === payload.id) {
+                    return { ...task, status: payload.status };
+                } else {
+                    return { ...task };
+                }
+            }
+        );
 
         return {
             ...state,
-            adminPersonalTasks: updatedTasks
+            adminPersonalTasks: updatedTasks,
+            teamMemberPersonalTasks: updatedTeamMemberTasks
         };
     } else if (action.type === Actions.UPDATE_TASK) {
         const payload = action.payload as UpdateTaskAction["payload"];
@@ -67,10 +82,20 @@ export const userReducer = (
                 return { ...task };
             }
         });
+        const updatedTeamMemberTasks = state.teamMemberPersonalTasks.map(
+            (task) => {
+                if (task.id === payload.id) {
+                    return payload;
+                } else {
+                    return { ...task };
+                }
+            }
+        );
 
         return {
             ...state,
-            adminPersonalTasks: updatedTasks
+            adminPersonalTasks: updatedTasks,
+            teamMemberPersonalTasks: updatedTeamMemberTasks
         };
     } else if (action.type === Actions.REMOVE_TASK) {
         const payload = action.payload as RemoveTaskAction["payload"];
@@ -78,6 +103,9 @@ export const userReducer = (
         return {
             ...state,
             adminPersonalTasks: state.adminPersonalTasks.filter(
+                (task) => task.id !== payload.id
+            ),
+            teamMemberPersonalTasks: state.teamMemberPersonalTasks.filter(
                 (task) => task.id !== payload.id
             )
         };
