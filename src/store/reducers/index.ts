@@ -1,1 +1,1 @@
-export * from "./UseReducer";
+export * from "./rootReducer";
