@@ -1,7 +1,7 @@
-import { ActionType } from "../actions";
-import { GlobalState } from "../state";
-import { userReducer } from "./UserReducer";
+import { userReducer } from "./UseReducer";
 import { adminTasksReducer } from "./adminTasksReducer";
+import { GlobalState } from "../state";
+import { ActionType } from "../actions";
 
 const rootReducer = (state: GlobalState, action: ActionType): GlobalState => {
     const newState: GlobalState = {
@@ -11,4 +11,5 @@ const rootReducer = (state: GlobalState, action: ActionType): GlobalState => {
 
     return newState;
 };
+
 export { rootReducer };

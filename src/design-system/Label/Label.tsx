@@ -9,13 +9,17 @@ type LabelProps = {
     disabled?: boolean;
     className?: string;
 };
+
 const Label: React.FC<LabelProps> = (props) => {
     const { htmlFor, error, disabled, children, className } = props;
+
     const errorClassName = error ? "label-error" : "";
     const disabledClassName = disabled ? "label-disabled" : "";
+
     const finalClassNames = trimWhiteSpaces(
         `label ${className || ""} ${errorClassName} ${disabledClassName} `
     );
+
     return (
         <label className={finalClassNames} htmlFor={htmlFor}>
             {children}

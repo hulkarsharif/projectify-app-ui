@@ -3,10 +3,10 @@ import ReactDatePicker, { ReactDatePickerProps } from "react-datepicker";
 import { InputSize } from "../Input";
 import { trimWhiteSpaces } from "../utils";
 import getDate from "date-fns/getDate";
-import { Icon } from "../Icon";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./DatePicker.css";
+import { Icon } from "../Icon";
 
 const inputSizeClassNames = {
     sm: "input-small",
