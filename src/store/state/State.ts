@@ -6,11 +6,11 @@ export type TaskState = Task[];
 export interface GlobalState {
     user: UserState;
     adminPersonalTasks: TaskState;
-    // teamMemberPersonalTasks: Task[];
+    teamMemberPersonalTasks: Task[];
 }
 
 export const initialState: GlobalState = {
     user: null,
-    adminPersonalTasks: []
-    // teamMemberPersonalTasks: []
+    adminPersonalTasks: [],
+    teamMemberPersonalTasks: []
 };

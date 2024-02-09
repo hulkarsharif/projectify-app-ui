@@ -11,7 +11,7 @@ import {
 } from "../actions";
 import { TaskState } from "../state";
 
-const adminTasksReducer = produce(
+const teamMemberTasksReducer = produce(
     (draft: TaskState, action: ActionType): TaskState => {
         switch (action.type) {
             case Actions.POPULATE_TASKS: {
@@ -66,4 +66,4 @@ const adminTasksReducer = produce(
     }
 );
 
-export { adminTasksReducer };
+export { teamMemberTasksReducer };

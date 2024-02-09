@@ -1,4 +1,4 @@
-import { teamMemberService, teamMemberTasksService } from "../../../api";
+import { teamMemberTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, RemoveTaskAction } from "../../../store";
 import { ConfirmationModal } from "../../components";

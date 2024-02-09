@@ -88,7 +88,6 @@ class AdminPersonalTasks {
                 const data = await response.json();
                 throw new Error(data.message);
             }
-            return response.json();
         } catch (error) {
             throw error;
         }
