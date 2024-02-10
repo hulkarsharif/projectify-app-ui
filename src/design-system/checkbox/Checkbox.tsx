@@ -1,9 +1,10 @@
 import React from "react";
-import "./Checkbox.css";
 import { Label } from "../Label";
-import { CheckboxShape, CheckboxProps } from "./types";
-import { Icon, IconName } from "../Icon";
+import { CheckboxProps, CheckboxShape } from "./types";
+
+import "./Checkbox.css";
 import { trimWhiteSpaces } from "../utils";
+import { Icon, IconName } from "../Icon";
 
 const shapeClassNames = {
     rounded: "checkbox__custom--rounded",
@@ -73,15 +74,15 @@ const Checkbox: React.FC<CheckboxProps> = ({
     return (
         <div className={checkboxWrapperClassName}>
             <Label htmlFor={id} className={labelClassName} disabled={disabled}>
+                <input
+                    type="checkbox"
+                    id={id}
+                    checked={checked}
+                    onChange={handleOnChange}
+                    className="checkbox__hidden-input"
+                    disabled={disabled}
+                />
                 <div className={customCheckboxClassName}>
-                    <input
-                        type="checkbox"
-                        id={id}
-                        checked={checked}
-                        onChange={handleOnChange}
-                        className="checkbox__input"
-                        disabled={disabled}
-                    />
                     {checked && (
                         <Icon iconName={iconName} className="checkbox__icon" />
                     )}

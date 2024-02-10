@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Checkbox } from "./design-system";
+import { Checkbox, LinearProgress, Switch } from "./design-system";
 
 import { useState } from "react";
 
@@ -36,23 +36,49 @@ const App = () => {
             </Link>
             <Link to="team-member/platform">Team Member Platform</Link>
 
-            <Checkbox
-                label="Hello world"
-                id="checkbox"
-                checked={value}
-                onChange={(value) => setValue(value)}
-                shape="rounded"
-                indeterminate
-                position="end"
-            />
-            <Checkbox
-                label="Hello Uzbekistan"
-                id="checkbox"
-                checked={value}
-                onChange={(value) => setValue(value)}
-                shape="circle"
-                position="end"
-            />
+            <div>
+                <Checkbox
+                    label="Hello world"
+                    id="checkbox"
+                    checked={value}
+                    onChange={(value) => setValue(value)}
+                    shape="rounded"
+                />
+                <Switch
+                    checked={value}
+                    onSwitch={(value) => setValue(value)}
+                    shape="circle"
+                    id="switch"
+                    position="end"
+                />
+            </div>
+            <div>
+                <LinearProgress value={50} color="orange" error />
+                <LinearProgress value={40} color="blue" />
+                <LinearProgress value={40} color="green" />
+                <LinearProgress value={40} color="red" />
+                <LinearProgress
+                    value={50}
+                    color="orange"
+                    error
+                    shape="rounded"
+                />
+                <LinearProgress
+                    value={40}
+                    color="blue"
+                    shape="rounded"
+                    size="md"
+                />
+                <LinearProgress
+                    value={100}
+                    color="green"
+                    shape="rounded"
+                    size="lg"
+                />
+                <LinearProgress value={40} color="red" error shape="rounded" />
+
+                <LinearProgress value={99} />
+            </div>
         </Base>
     );
 };
