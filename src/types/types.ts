@@ -1,3 +1,5 @@
+import exp from "constants";
+
 export enum UserRole {
     admin = "admin",
     teamMember = "teamMember"
@@ -34,7 +36,18 @@ export interface Task {
     status: TaskStatus;
 }
 
+export type TeamMemberStatus = "ACTIVE" | "INACTIVE" | "DEACTIVATED";
 export type TaskStatus = "TODO" | "INPROGRESS" | "DONE";
+
+export interface TeamMember {
+    id: string;
+    status: TeamMemberStatus;
+    firstName: string;
+    lastName: string;
+    position: string;
+    email: string;
+    joinDate: Date;
+}
 
 export interface Project {
     id: string;
