@@ -1,10 +1,11 @@
 import { TeamMember, TeamMemberUser } from "../types";
 
-type CreatePasswordInput = {
+interface CreatePasswordInput {
     email: string;
     password: string;
     passwordConfirm: string;
-};
+}
+
 type SignInInput = {
     email: string;
     password: string;
@@ -23,6 +24,7 @@ type CreateInputResponse = {
 type GetAllTeamMembersResponse = {
     data: TeamMember[];
 };
+
 class TeamMemberService {
     url: string;
     constructor() {
@@ -109,7 +111,6 @@ class TeamMemberService {
                 const data = await response.json();
                 throw new Error(data.message);
             }
-
             return response.json();
         } catch (error) {
             throw error;
@@ -131,6 +132,7 @@ class TeamMemberService {
                 const data = await response.json();
                 throw new Error(data.message);
             }
+
             return response.json();
         } catch (error) {
             throw error;
@@ -164,6 +166,7 @@ class TeamMemberService {
             throw error;
         }
     }
+
     async getMe(): Promise<GetMeResponseType> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");

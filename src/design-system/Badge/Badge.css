@@ -52,10 +52,12 @@
 .badge-gray.badge-contained {
     background-color: var(--jaguar-50);
 }
+
 .badge-gray.badge-outlined {
     background-color: var(--jaguar-25);
     border-color: var(--jaguar-200);
 }
+
 .badge-gray .badge__text {
     color: var(--jaguar-600);
 }
@@ -72,10 +74,12 @@
 .badge-violet.badge-contained {
     background-color: var(--primary-50);
 }
+
 .badge-violet.badge-outlined {
     background-color: var(--primary-25);
     border-color: var(--primary-200);
 }
+
 .badge-violet .badge__text {
     color: var(--primary-600);
 }
@@ -92,10 +96,12 @@
 .badge-orange.badge-contained {
     background-color: var(--sunglow-50);
 }
+
 .badge-orange.badge-outlined {
     background-color: var(--sunglow-25);
     border-color: var(--sunglow-200);
 }
+
 .badge-orange .badge__text {
     color: var(--sunglow-600);
 }
@@ -112,10 +118,12 @@
 .badge-blue.badge-contained {
     background-color: var(--blue-ribbon-50);
 }
+
 .badge-blue.badge-outlined {
     background-color: var(--blue-ribbon-25);
     border-color: var(--blue-ribbon-200);
 }
+
 .badge-blue .badge__text {
     color: var(--blue-ribbon-600);
 }
@@ -132,10 +140,12 @@
 .badge-red.badge-contained {
     background-color: var(--red-orange-50);
 }
+
 .badge-red.badge-outlined {
     background-color: var(--red-orange-25);
     border-color: var(--red-orange-200);
 }
+
 .badge-red .badge__text {
     color: var(--red-orange-600);
 }
@@ -151,10 +161,12 @@
 .badge-purple.badge-contained {
     background-color: var(--purple-50);
 }
+
 .badge-purple.badge-outlined {
     background-color: var(--purple-25);
     border-color: var(--purple-200);
 }
+
 .badge-purple .badge__text {
     color: var(--purple-600);
 }
@@ -171,10 +183,12 @@
 .badge-green.badge-contained {
     background-color: var(--green-50);
 }
+
 .badge-green.badge-outlined {
     background-color: var(--green-25);
     border-color: var(--green-200);
 }
+
 .badge-green .badge__text {
     color: var(--green-600);
 }

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { NoDataPlaceholder, Page, PageContent } from "../../components";
 import { CreateTeamMemberModal } from "./CreateTeamMemberModal";
-import noTeamMember from "../../../assets/illustrations/no-team-member.svg";
+import noTeamMember from "../../../assets/illustrations/no-teamMember.svg";
 import { useStore } from "../../../hooks";
 import { teamMemberService } from "../../../api";
 import { Actions, AdminPopulateTeamMemberAction } from "../../../store";
 import toast from "react-hot-toast";
-import { PageHeader } from "../../components/";
+import { PageHeader } from "../../components";
 import { TeamMemberFilters } from "./TeamMemberFilters";
 import { TeamMembersTable } from "./TeamMembersTable";
 

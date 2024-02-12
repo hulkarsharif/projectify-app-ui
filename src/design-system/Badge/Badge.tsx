@@ -9,6 +9,11 @@ const shapeClassNames = {
     circle: "badge-circle"
 };
 
+const variantClassNames = {
+    contained: "badge-contained",
+    outlined: "badge-outlined"
+};
+
 const colorClassNames = {
     violet: "badge-violet",
     orange: "badge-orange",
@@ -19,23 +24,18 @@ const colorClassNames = {
     gray: "badge-gray"
 };
 
-const variantClassNames = {
-    contained: "badge-contained",
-    outlined: "badge-outlined"
-};
-
 const Badge: React.FC<BadgeProps> = ({
     label,
-    shape,
     color,
+    shape,
+    variant,
     status,
     iconName,
-    variant,
     className
 }) => {
-    const colorClassName = color !== undefined ? colorClassNames[color] : "";
-
     const shapeClassName = shape !== undefined ? shapeClassNames[shape] : "";
+
+    const colorClassName = color !== undefined ? colorClassNames[color] : "";
 
     const variantClassName =
         variant !== undefined ? variantClassNames[variant] : "";
@@ -48,7 +48,6 @@ const Badge: React.FC<BadgeProps> = ({
         <div className={trimWhiteSpaces(finalClassNames)}>
             {!status && iconName ? <Icon iconName={iconName} /> : null}
             {status && !iconName ? <div className="badge__status" /> : null}
-
             <span className="badge__text">{label}</span>
         </div>
     );

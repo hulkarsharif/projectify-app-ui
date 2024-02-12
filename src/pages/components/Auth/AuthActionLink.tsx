@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Typography } from "../../design-system";
+import { Typography } from "../../../design-system";
 import styled from "styled-components";
 import React from "react";
 

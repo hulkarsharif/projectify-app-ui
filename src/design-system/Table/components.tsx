@@ -6,7 +6,7 @@ export const TableRowBase = styled.tr<BaseRowProps>`
     grid-template-columns: ${(props) => props.$columns.join(" ")};
     align-items: center;
     padding: 0 var(--space-16);
-    border-radius: var(--border-radius-24);
+    border-radius: var(--border-radius-16);
     box-shadow: var(--shadow-xs);
 `;
 
@@ -33,6 +33,7 @@ export const TableHeadCellBase = styled.th<BaseCellProps>`
 export const TableBody = styled.tbody`
     ${TableRowBase} {
         height: 8.2rem;
+        box-shadow: var(--shadow-xs);
     }
     ${TableRowBase}:not(:last-child) {
         margin-bottom: var(--space-10);

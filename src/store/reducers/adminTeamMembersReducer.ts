@@ -17,7 +17,7 @@ const adminTeamMemberReducer = produce(
                 draft.push(payload);
                 return draft;
             }
-            case Actions.ADMIN_POPULATE_TEAM_MEMBER: {
+            case Actions.ADMIN_POPULATE_TEAM_MEMBERS: {
                 const payload =
                     action.payload as AdminPopulateTeamMemberAction["payload"];
                 return payload;
