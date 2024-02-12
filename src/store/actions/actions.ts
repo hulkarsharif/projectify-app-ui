@@ -16,7 +16,7 @@ export enum Actions {
     REMOVE_TASK = "REMOVE_TASK",
 
     ADMIN_ADD_TEAM_MEMBER = "ADMIN_ADD_TEAM_MEMBER",
-    ADMIN_POPULATE_TEAM_MEMBER = "ADMIN_POPULATE_TEAM_MEMBER"
+    ADMIN_POPULATE_TEAM_MEMBERS = "ADMIN_POPULATE_TEAM_MEMBERS"
 }
 
 export interface InitUserAction {
@@ -63,7 +63,7 @@ export type AdminAddTeamMemberAction = {
 };
 
 export type AdminPopulateTeamMemberAction = {
-    type: Actions.ADMIN_POPULATE_TEAM_MEMBER;
+    type: Actions.ADMIN_POPULATE_TEAM_MEMBERS;
     payload: TeamMember[];
 };
 export type ActionType =

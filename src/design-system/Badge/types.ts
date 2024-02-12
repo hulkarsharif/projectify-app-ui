@@ -15,7 +15,6 @@ type BadgeVariant = "contained" | "outlined";
 
 type BadgePropsBase = {
     label: string;
-    icon?: React.ReactNode;
     shape?: BadgeShape;
     color?: BadgeColors;
     status?: boolean;
