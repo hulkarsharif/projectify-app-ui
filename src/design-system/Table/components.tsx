@@ -7,7 +7,6 @@ export const TableRowBase = styled.tr<BaseRowProps>`
     align-items: center;
     padding: 0 var(--space-16);
     border-radius: var(--border-radius-16);
-    box-shadow: var(--shadow-xs);
 `;
 
 const Cell = css<BaseCellProps>`

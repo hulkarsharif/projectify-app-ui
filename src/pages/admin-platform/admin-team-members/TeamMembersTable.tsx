@@ -82,22 +82,17 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                                 </Typography>
                             </TableBodyCell>
                             <TableBodyCell>
-                                <Typography
-                                    variant="paragraphSM"
-                                    weight="medium"
-                                >
-                                    <Badge
-                                        color={
-                                            mapsStatusToBadgeColors[
-                                                teamMember.status
-                                            ] as BadgeColors
-                                        }
-                                        label={teamMember.status}
-                                        variant="outlined"
-                                        shape="rounded"
-                                        status
-                                    />
-                                </Typography>
+                                <Badge
+                                    color={
+                                        mapsStatusToBadgeColors[
+                                            teamMember.status
+                                        ] as BadgeColors
+                                    }
+                                    label={teamMember.status}
+                                    variant="outlined"
+                                    shape="rounded"
+                                    status
+                                />
                             </TableBodyCell>
                         </TableRow>
                     );
