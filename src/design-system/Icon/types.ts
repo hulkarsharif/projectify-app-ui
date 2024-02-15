@@ -17,7 +17,7 @@ export type IconName =
     | "check-sharp"
     | "minus-sharp"
     | "minus"
-    | "info-in-circle"
+    | "info-in-circle-filled"
     | "check-in-circle-filled"
     | "info-in-circle-sharp-filled"
     | "check-in-circle-sharp-filled"

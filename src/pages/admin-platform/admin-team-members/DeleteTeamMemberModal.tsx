@@ -1,7 +1,11 @@
 import toast from "react-hot-toast";
 import { teamMemberService } from "../../../api";
 import { useStore } from "../../../hooks";
-import { Actions, AdminAddTeamMemberAction } from "../../../store";
+import {
+    Actions,
+    AdminAddTeamMemberAction,
+    AdminRemoveTeamMemberAction
+} from "../../../store";
 import { ConfirmationModal } from "../../components";
 
 type DeleteTeamMemberModalProps = {
@@ -20,7 +24,7 @@ const DeleteTeamMemberModal: React.FC<DeleteTeamMemberModalProps> = ({
         teamMemberService
             .delete(teamMemberId)
             .then((_) => {
-                const action: AdminAddTeamMemberAction = {
+                const action: AdminRemoveTeamMemberAction = {
                     type: Actions.ADMIN_REMOVE_TEAM_MEMBER,
                     payload: { id: teamMemberId }
                 };
