@@ -1,4 +1,4 @@
-import { adminTaskskService } from "../../../api";
+import { adminTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, RemoveTaskAction } from "../../../store";
 import { ConfirmationModal } from "../../components";
@@ -16,7 +16,7 @@ const DeleteTaskModal: React.FC<DeleteTaskModalProps> = ({
 }) => {
     const { dispatch } = useStore();
     const deleteTask = () => {
-        adminTaskskService
+        adminTasksService
             .deleteTask(taskId)
             .then((_) => {
                 const action: RemoveTaskAction = {

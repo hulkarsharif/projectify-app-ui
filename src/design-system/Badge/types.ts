@@ -1,6 +1,6 @@
 import { IconName } from "../Icon";
 
-type BadgeColors =
+export type BadgeColors =
     | "violet"
     | "orange"
     | "green"
@@ -13,19 +13,18 @@ type BadgeShape = "rounded" | "circle";
 
 type BadgeVariant = "contained" | "outlined";
 
-type BadgePropsBase = {
+interface BadgePropsBase {
     label: string;
-    icon?: React.ReactNode;
+    color: BadgeColors;
     shape?: BadgeShape;
-    color?: BadgeColors;
-    status?: boolean;
     variant?: BadgeVariant;
+    status?: boolean;
     className?: string;
     iconName?: IconName;
-};
+}
 
-type ExlusiveBadgeProps =
+type ExclusiveBadgeProps =
     | { status?: BadgePropsBase["status"]; iconName?: never }
     | { iconName?: BadgePropsBase["iconName"]; status?: never };
 
-export type BadgeProps = BadgePropsBase & ExlusiveBadgeProps;
+export type BadgeProps = BadgePropsBase & ExclusiveBadgeProps;

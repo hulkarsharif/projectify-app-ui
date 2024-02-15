@@ -1,7 +1,7 @@
 import { FC, ReactNode } from "react";
 import styled from "styled-components";
 
-import { Logo, Toaster } from "../../design-system";
+import { Logo, Toaster } from "../../../design-system";
 
 type AuthWrapperProps = {
     imageUrl: string;

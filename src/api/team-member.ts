@@ -1,17 +1,17 @@
 import { TeamMember, TeamMemberUser } from "../types";
 
-type CreatePasswordInput = {
+export type GetMeResponseType = {
+    data: TeamMemberUser;
+};
+interface CreatePasswordInput {
     email: string;
     password: string;
     passwordConfirm: string;
-};
+}
+
 type SignInInput = {
     email: string;
     password: string;
-};
-
-export type GetMeResponseType = {
-    data: TeamMemberUser;
 };
 
 type CreateInput = Omit<TeamMember, "id" | "status">;
@@ -23,6 +23,7 @@ type CreateInputResponse = {
 type GetAllTeamMembersResponse = {
     data: TeamMember[];
 };
+
 class TeamMemberService {
     url: string;
     constructor() {
@@ -109,7 +110,6 @@ class TeamMemberService {
                 const data = await response.json();
                 throw new Error(data.message);
             }
-
             return response.json();
         } catch (error) {
             throw error;
@@ -131,6 +131,7 @@ class TeamMemberService {
                 const data = await response.json();
                 throw new Error(data.message);
             }
+
             return response.json();
         } catch (error) {
             throw error;
@@ -164,6 +165,7 @@ class TeamMemberService {
             throw error;
         }
     }
+
     async getMe(): Promise<GetMeResponseType> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
@@ -179,6 +181,25 @@ class TeamMemberService {
             }
 
             return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async delete(teamMemberId: string) {
+        const rawAuthToken = localStorage.getItem("authToken");
+        const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+        try {
+            const response = await fetch(`${this.url}/${teamMemberId}/delete`, {
+                method: "DELETE",
+                headers: {
+                    authorization: `Bearer${authToken}`
+                }
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
         } catch (error) {
             throw error;
         }
