@@ -83,22 +83,9 @@ export const router = createBrowserRouter(
             </Route>
             <Route
                 path="team-member/create-password"
-                element={
-                    <Auth
-                        component={<TeamMemberCreatePassword />}
-                        userType={UserRole.teamMember}
-                    />
-                }
+                element={<TeamMemberCreatePassword />}
             />
-            <Route
-                path="team-member/sign-in"
-                element={
-                    <Auth
-                        component={<TeamMemberSignin />}
-                        userType={UserRole.teamMember}
-                    />
-                }
-            />
+            <Route path="team-member/sign-in" element={<TeamMemberSignin />} />
             <Route
                 path="team-member/reset-password"
                 element={

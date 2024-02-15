@@ -1,4 +1,4 @@
-import { userReducer } from "./UseReducer";
+import { userReducer } from "./UserReducer";
 import { adminTasksReducer } from "./adminTasksReducer";
 import { GlobalState } from "../state";
 import { ActionType } from "../actions";

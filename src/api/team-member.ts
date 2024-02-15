@@ -1,5 +1,8 @@
 import { TeamMember, TeamMemberUser } from "../types";
 
+export type GetMeResponseType = {
+    data: TeamMemberUser;
+};
 interface CreatePasswordInput {
     email: string;
     password: string;
@@ -9,10 +12,6 @@ interface CreatePasswordInput {
 type SignInInput = {
     email: string;
     password: string;
-};
-
-export type GetMeResponseType = {
-    data: TeamMemberUser;
 };
 
 type CreateInput = Omit<TeamMember, "id" | "status">;
@@ -182,6 +181,25 @@ class TeamMemberService {
             }
 
             return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async delete(teamMemberId: string) {
+        const rawAuthToken = localStorage.getItem("authToken");
+        const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+        try {
+            const response = await fetch(`${this.url}/${teamMemberId}/delete`, {
+                method: "DELETE",
+                headers: {
+                    authorization: `Bearer${authToken}`
+                }
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
         } catch (error) {
             throw error;
         }
