@@ -14,9 +14,11 @@ import {
     TableHeadCell,
     TableRow
 } from "../../../design-system/Table";
-import { TeamMember, TeamMemberStatus } from "../../../types";
+import { TeamMember } from "../../../types";
 import { useState } from "react";
 import { DeleteTeamMemberModal } from "./DeleteTeamMemberModal";
+import { DeactivateTeamMemberModal } from "./DeactivateTeamMemberModal";
+import { ReactivateTeamMemberModal } from "./ReactivateTeamMberModal";
 import { EditTeamMemberModal } from "./EditTeamMemberModal";
 
 type TeamMembersTableProps = {
@@ -29,6 +31,7 @@ enum TeamMemberActions {
     reactivate = "reactivate",
     deactivate = "deactivate"
 }
+
 const options: MenuOption[] = [
     { label: "Edit", iconName: "edit", value: "edit", color: "primary" },
     {
@@ -61,13 +64,13 @@ const mapsStatusToBadgeColors = {
 
 const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
     const [selectedTeamMemberId, setSelectedTeamMemberId] = useState("");
+    const [showEditTeamMemberModal, setShowEditTeamMemberModal] =
+        useState(false);
     const [showDeleteTeamMemberModal, setShowDeleteTeamMemberModal] =
         useState(false);
     const [showDeactivateTeamMemberModal, setShowDeactivateTeamMemberModal] =
         useState(false);
     const [showReactivateTeamMemberModal, setShowReactivateTeamMemberModal] =
-        useState(false);
-    const [showUpdateTeamMemberModal, setShowUpdateTeamMemberModal] =
         useState(false);
 
     const onSelectActionCellMenu = (
@@ -75,20 +78,21 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
         action: TeamMemberActions
     ) => {
         setSelectedTeamMemberId(teamMemberId);
+        if (action === "edit") {
+            setShowEditTeamMemberModal(true);
+        }
         if (action === "delete") {
             setShowDeleteTeamMemberModal(true);
-        } else if (action === "deactivate") {
+        }
+        if (action === "deactivate") {
             setShowDeactivateTeamMemberModal(true);
-        } else if (action === "reactivate") {
+        }
+        if (action === "reactivate") {
             setShowReactivateTeamMemberModal(true);
-        } else if (action === "edit") {
-            setShowUpdateTeamMemberModal(true);
         }
     };
-
     return (
         <>
-            {" "}
             <Table>
                 <TableHead>
                     <TableRow columns={columns}>
@@ -179,15 +183,25 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                     })}
                 </TableBody>
             </Table>
+            <EditTeamMemberModal
+                show={showEditTeamMemberModal}
+                closeModal={() => setShowEditTeamMemberModal(false)}
+                teamMemberId={selectedTeamMemberId}
+            />
             <DeleteTeamMemberModal
                 show={showDeleteTeamMemberModal}
                 teamMemberId={selectedTeamMemberId}
                 closeModal={() => setShowDeleteTeamMemberModal(false)}
             />
-            <EditTeamMemberModal
-                show={showUpdateTeamMemberModal}
+            <DeactivateTeamMemberModal
+                show={showDeactivateTeamMemberModal}
                 teamMemberId={selectedTeamMemberId}
-                classModal={() => setShowUpdateTeamMemberModal(false)}
+                closeModal={() => setShowDeactivateTeamMemberModal(false)}
+            />
+            <ReactivateTeamMemberModal
+                show={showReactivateTeamMemberModal}
+                teamMemberId={selectedTeamMemberId}
+                closeModal={() => setShowReactivateTeamMemberModal(false)}
             />
         </>
     );

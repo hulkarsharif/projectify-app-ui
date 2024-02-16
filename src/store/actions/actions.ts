@@ -3,7 +3,8 @@ import {
     AdminUser,
     TeamMemberUser,
     TaskStatus,
-    TeamMember
+    TeamMember,
+    TeamMemberStatus
 } from "../../types";
 
 export enum Actions {
@@ -82,6 +83,7 @@ export type AdminDeactivateTeamMemberAction = {
     type: Actions.ADMIN_DEACTIVATE_TEAM_MEMBER;
     payload: {
         id: string;
+        status: TeamMemberStatus;
     };
 };
 
@@ -89,6 +91,7 @@ export type AdminReactivateTeamMemberAction = {
     type: Actions.ADMIN_REACTIVATE_TEAM_MEMBER;
     payload: {
         id: string;
+        status: TeamMemberStatus;
     };
 };
 

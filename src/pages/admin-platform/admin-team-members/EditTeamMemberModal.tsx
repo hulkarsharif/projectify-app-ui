@@ -1,30 +1,28 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { parseISO } from "date-fns";
 import {
     Modal,
     Typography,
     Button,
     Input,
     DatePickerV1,
-    Select,
-   } from "../../../design-system";
-import { parseISO} from "date-fns";
+    Select
+} from "../../../design-system";
 import { useStore } from "../../../hooks";
-import {
-    TeamMemberUpdateInput,
-       teamMemberService
-} from "../../../api";
+import { TeamMemberStatus } from "../../../types";
+import { TeamMemberUpdateInput, teamMemberService } from "../../../api";
 import toast from "react-hot-toast";
 import { Actions, AdminUpdateTeamMemberAction } from "../../../store";
-import{positions}from "./CreateTeamMemberModal"
+import { positions } from "./CreateTeamMemberModal";
 
 type EditTeamMemberModalProps = {
     show: boolean;
-    classModal: () => void;
+    closeModal: () => void;
     teamMemberId: string;
 };
 
-const ModalTitle = styled(Typography)`
+const EditTeamMemberModalTitle = styled(Typography)`
     margin-bottom: var(--space-24);
 `;
 
@@ -49,10 +47,12 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
         dispatch,
         state: { adminTeamMembers }
     } = useStore();
+
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [position, setPosition] = useState("");
+    const [status, setStatus] = useState<TeamMemberStatus>();
     const [joinDate, setJoinDate] = useState<Date>();
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
@@ -65,6 +65,7 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
             setFirstName(teamMember.firstName);
             setLastName(teamMember.lastName);
             setEmail(teamMember.email);
+            setStatus(teamMember.status);
             setPosition(teamMember.position);
             setJoinDate(parseISO((teamMember?.joinDate).toString()));
         }
@@ -74,8 +75,8 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
         const updatedTeamMember: TeamMemberUpdateInput = {
             firstName: firstName,
             lastName: lastName,
-            email: email,
             position: position,
+            email: email,
             joinDate: joinDate
         };
         setIsFormSubmitting(true);
@@ -87,14 +88,16 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
                     type: Actions.ADMIN_UPDATE_TEAM_MEMBER,
                     payload: {
                         id: teamMemberId,
+                        status: status!,
                         firstName: firstName,
                         lastName: lastName,
                         email: email,
                         position: position,
-                        joinDate: joinDate as Date!
+                        joinDate: joinDate as Date
                     }
-                    dispatch(action);
-                    closeModal();
+                };
+                dispatch(action);
+                closeModal();
             })
             .catch((e) => {
                 const err = e as Error;
@@ -102,11 +105,12 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
                 toast.error(err.message);
             });
     };
+
     return (
         <Modal show={show} position="center">
-            <ModalTitle variant="paragraphLG" weight="medium">
+            <EditTeamMemberModalTitle variant="paragraphLG" weight="medium">
                 Edit Team Member
-            </ModalTitle>
+            </EditTeamMemberModalTitle>
             <Inputs>
                 <Input
                     value={firstName}
@@ -137,7 +141,7 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
                 <DatePickerV1
                     inputSize="lg"
                     shape="rounded"
-                    placeholder="Select Join Date"
+                    placeholder="Join Date"
                     selected={joinDate}
                     onChange={(date) => setJoinDate(date)}
                 />
@@ -162,7 +166,7 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
                     onClick={updateTeamMember}
                     disabled={isFormSubmitting}
                 >
-                    Save
+                    Update
                 </Button>
             </Buttons>
         </Modal>

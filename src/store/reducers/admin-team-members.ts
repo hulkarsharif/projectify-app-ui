@@ -1,18 +1,17 @@
 import { produce } from "immer";
-
 import { TeamMemberState } from "../state";
 import {
     ActionType,
     Actions,
     AdminPopulateTeamMemberAction,
     AdminAddTeamMemberAction,
-    AdminDeactivateTeamMemberAction,
-    AdminUpdateTeamMemberAction,
     AdminRemoveTeamMemberAction,
-    AdminReactivateTeamMemberAction
+    AdminDeactivateTeamMemberAction,
+    AdminReactivateTeamMemberAction,
+    AdminUpdateTeamMemberAction
 } from "../actions";
 
-const adminTeamMemberReducer = produce(
+const adminTeamMembersReducer = produce(
     (draft: TeamMemberState, action: ActionType) => {
         switch (action.type) {
             case Actions.ADMIN_ADD_TEAM_MEMBER: {
@@ -29,6 +28,7 @@ const adminTeamMemberReducer = produce(
             case Actions.ADMIN_REMOVE_TEAM_MEMBER: {
                 const payload =
                     action.payload as AdminRemoveTeamMemberAction["payload"];
+
                 return draft.filter(
                     (teamMember) => teamMember.id !== payload.id
                 );
@@ -78,4 +78,4 @@ const adminTeamMemberReducer = produce(
     }
 );
 
-export { adminTeamMemberReducer };
+export { adminTeamMembersReducer };

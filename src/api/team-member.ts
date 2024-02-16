@@ -201,9 +201,10 @@ class TeamMemberService {
             const response = await fetch(`${this.url}/${teamMemberId}/delete`, {
                 method: "DELETE",
                 headers: {
-                    authorization: `Bearer${authToken}`
+                    authorization: `Bearer ${authToken}`
                 }
             });
+
             if (!response.ok) {
                 const data = await response.json();
                 throw new Error(data.message);
@@ -215,7 +216,7 @@ class TeamMemberService {
 
     async deactivate(teamMemberId: string) {
         try {
-            const rawAuthToken = localStorage.getItem("autthToken");
+            const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
 
             const response = await fetch(
@@ -223,6 +224,7 @@ class TeamMemberService {
                 {
                     method: "PATCH",
                     headers: {
+                        "Content-Type": "application/json",
                         authorization: `Bearer ${authToken}`
                     }
                 }
@@ -238,7 +240,7 @@ class TeamMemberService {
 
     async reactivate(teamMemberId: string) {
         try {
-            const rawAuthToken = localStorage.getItem("autthToken");
+            const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
 
             const response = await fetch(
@@ -246,6 +248,7 @@ class TeamMemberService {
                 {
                     method: "PATCH",
                     headers: {
+                        "Content-Type": "application/json",
                         authorization: `Bearer ${authToken}`
                     }
                 }
@@ -258,10 +261,12 @@ class TeamMemberService {
             throw error;
         }
     }
+
     async update(teamMemberId: string, input: TeamMemberUpdateInput) {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+
             const response = await fetch(`${this.url}/${teamMemberId}`, {
                 method: "PATCH",
                 headers: {
