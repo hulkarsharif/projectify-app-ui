@@ -6,8 +6,7 @@ import {
     Actions,
     AdminPopulateTeamMemberAction,
     AdminAddTeamMemberAction,
-    AdminDeactivateAction,
-    AdminReactivateAction,
+    AdminDeactivateTeamMemberAction,
     AdminUpdateTeamMemberAction,
     AdminRemoveTeamMemberAction,
     AdminReactivateTeamMemberAction
@@ -36,7 +35,7 @@ const adminTeamMemberReducer = produce(
             }
             case Actions.ADMIN_DEACTIVATE_TEAM_MEMBER: {
                 const payload =
-                    action.payload as AdminDeactivateAction["payload"];
+                    action.payload as AdminDeactivateTeamMemberAction["payload"];
 
                 for (let i = 0; i < draft.length; i++) {
                     const teamMember = draft[i];
