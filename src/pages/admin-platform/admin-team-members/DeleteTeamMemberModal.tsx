@@ -1,11 +1,7 @@
 import toast from "react-hot-toast";
 import { teamMemberService } from "../../../api";
 import { useStore } from "../../../hooks";
-import {
-    Actions,
-    AdminAddTeamMemberAction,
-    AdminRemoveTeamMemberAction
-} from "../../../store";
+import { Actions, AdminRemoveTeamMemberAction } from "../../../store";
 import { ConfirmationModal } from "../../components";
 
 type DeleteTeamMemberModalProps = {
