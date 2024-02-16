@@ -7,10 +7,9 @@ import {
     Input,
     DatePickerV1,
     Select,
-    Option
-} from "../../../design-system";
+   } from "../../../design-system";
+import { parseISO} from "date-fns";
 import { useStore } from "../../../hooks";
-import { TaskStatus } from "../../../types";
 import {
     TeamMemberUpdateInput,
        teamMemberService
@@ -53,7 +52,7 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
-    const [position, setPosition] = useState<Option>();
+    const [position, setPosition] = useState("");
     const [joinDate, setJoinDate] = useState<Date>();
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
@@ -67,7 +66,7 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
             setLastName(teamMember.lastName);
             setEmail(teamMember.email);
             setPosition(teamMember.position);
-            setJoinDate(teamMember.joinDate);
+            setJoinDate(parseISO((teamMember?.joinDate).toString()));
         }
     }, [teamMemberId]);
 
@@ -81,7 +80,7 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
         };
         setIsFormSubmitting(true);
         teamMemberService
-            .updateTeamMember(teamMemberId, updatedTeamMember)
+            .update(teamMemberId, updatedTeamMember)
             .then((_) => {
                 setIsFormSubmitting(false);
                 const action: AdminUpdateTeamMemberAction = {
@@ -92,7 +91,7 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
                         lastName: lastName,
                         email: email,
                         position: position,
-                        joinDate: joinDate!
+                        joinDate: joinDate as Date!
                     }
                     dispatch(action);
                     closeModal();

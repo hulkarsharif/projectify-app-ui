@@ -19,7 +19,8 @@ export enum Actions {
     ADMIN_POPULATE_TEAM_MEMBERS = "ADMIN_POPULATE_TEAM_MEMBERS",
     ADMIN_REMOVE_TEAM_MEMBER = "ADMIN_REMOVE_TEAM_MEMBER",
     ADMIN_DEACTIVATE_TEAM_MEMBER = "ADMIN_DEACTIVATE_TEAM_MEMBER",
-    ADMIN_REACTIVATE_TEAM_MEMBER = "ADMIN_REACTIVATE_TEAM_MEMBER"
+    ADMIN_REACTIVATE_TEAM_MEMBER = "ADMIN_REACTIVATE_TEAM_MEMBER",
+    ADMIN_UPDATE_TEAM_MEMBER = "ADMIN_UPDATE_TEAM_MEMBER"
 }
 
 export interface InitUserAction {
@@ -90,6 +91,11 @@ export type AdminReactivateAction = {
         id: string;
     };
 };
+
+export type AdminUpdateTeamMemberAction = {
+    type: Actions.ADMIN_UPDATE_TEAM_MEMBER;
+    payload: TeamMember;
+};
 export type ActionType =
     | InitUserAction
     | ResetStateAction
@@ -103,4 +109,5 @@ export type ActionType =
     | AdminPopulateTeamMemberAction
     | AdminRemoveTeamMemberAction
     | AdminDeactivateAction
-    | AdminReactivateAction;
+    | AdminReactivateAction
+    | AdminUpdateTeamMemberAction;
