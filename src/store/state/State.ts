@@ -7,6 +7,7 @@ export type TeamMemberState = TeamMember[];
 export interface GlobalState {
     user: UserState;
     adminPersonalTasks: TaskState;
+    adminTeamMembers: TeamMemberState;
     teamMemberPersonalTasks: Task[];
     teamMembers: TeamMemberState;
 }
@@ -14,6 +15,7 @@ export interface GlobalState {
 export const initialState: GlobalState = {
     user: null,
     adminPersonalTasks: [],
+    adminTeamMembers: [],
     teamMemberPersonalTasks: [],
     teamMembers: []
 };
