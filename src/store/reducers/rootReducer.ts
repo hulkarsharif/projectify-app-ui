@@ -13,7 +13,8 @@ const rootReducer = (state: GlobalState, action: ActionType): GlobalState => {
         teamMemberPersonalTasks: teamMemberTasksReducer(
             state.teamMemberPersonalTasks,
             action
-        )
+        ),
+        adminTea
     };
 
     return newState;

@@ -78,14 +78,14 @@ export type AdminRemoveTeamMemberAction = {
     };
 };
 
-export type AdminDeactivateAction = {
+export type AdminDeactivateTeamMemberAction = {
     type: Actions.ADMIN_DEACTIVATE_TEAM_MEMBER;
     payload: {
         id: string;
     };
 };
 
-export type AdminReactivateAction = {
+export type AdminReactivateTeamMemberAction = {
     type: Actions.ADMIN_REACTIVATE_TEAM_MEMBER;
     payload: {
         id: string;
@@ -108,6 +108,6 @@ export type ActionType =
     | AdminPopulateTeamMemberAction
     | AdminPopulateTeamMemberAction
     | AdminRemoveTeamMemberAction
-    | AdminDeactivateAction
-    | AdminReactivateAction
+    | AdminDeactivateTeamMemberAction
+    | AdminReactivateTeamMemberAction
     | AdminUpdateTeamMemberAction;
