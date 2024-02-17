@@ -14,7 +14,11 @@ import {
     TableHeadCell,
     TableRow
 } from "../../../design-system/Table";
-import { TeamMember } from "../../../types";
+import {
+    TeamMember,
+    AdminTeamMemberActions,
+    AdminTeamMemberStatusChange
+} from "../../../types";
 import { useState } from "react";
 import { DeleteTeamMemberModal } from "./DeleteTeamMemberModal";
 import { DeactivateTeamMemberModal } from "./DeactivateTeamMemberModal";
@@ -91,6 +95,7 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
             setShowReactivateTeamMemberModal(true);
         }
     };
+
     return (
         <>
             <Table>

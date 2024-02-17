@@ -33,10 +33,18 @@ export interface Task {
     due: Date;
     status: TaskStatus;
 }
-
-export type TeamMemberStatus = "ACTIVE" | "INACTIVE" | "DEACTIVATED";
 export type TaskStatus = "TODO" | "INPROGRESS" | "DONE";
 
+export type TeamMemberStatus = "ACTIVE" | "INACTIVE" | "DEACTIVATED";
+
+export enum AdminTeamMemberActions {
+    edit = "edit",
+    delete = "delete",
+    reactivate = "reactivate",
+    deactivate = "deactivate"
+}
+
+export type AdminTeamMemberStatusChange = "reactivate" | "deactivate";
 export interface TeamMember {
     id: string;
     status: TeamMemberStatus;
@@ -47,6 +55,12 @@ export interface TeamMember {
     joinDate: Date;
 }
 
+export interface TeamMemberUpdate {
+    firstName?: string;
+    lastName?: string;
+    position?: string;
+    joinDate?: Date;
+}
 export interface Project {
     id: string;
     name: string;

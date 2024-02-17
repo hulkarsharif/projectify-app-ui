@@ -1,4 +1,10 @@
-import { TeamMember, TeamMemberUser } from "../types";
+import {
+    AdminTeamMemberActions,
+    AdminTeamMemberStatusChange,
+    TeamMemberUpdate,
+    TeamMember,
+    TeamMemberUser
+} from "../types";
 
 export type GetMeResponseType = {
     data: TeamMemberUser;
@@ -214,6 +220,30 @@ class TeamMemberService {
         }
     }
 
+    async changeStatus(
+        teamMemberId: string,
+        changeStatus: AdminTeamMemberStatusChange
+    ) {
+        const rawAuthToken = localStorage.getItem("authToken");
+        const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+        try {
+            const response = await fetch(
+                `${this.url}/${teamMemberId}/${changeStatus}`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        authorization: `Bearer ${authToken}`
+                    }
+                }
+            );
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
     async deactivate(teamMemberId: string) {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
@@ -262,18 +292,16 @@ class TeamMemberService {
         }
     }
 
-    async update(teamMemberId: string, input: TeamMemberUpdateInput) {
+    async update(teamMemberId: string, updateData: TeamMemberUpdate) {
+        const rawAuthToken = localStorage.getItem("authToken");
+        const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
         try {
-            const rawAuthToken = localStorage.getItem("authToken");
-            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
-
-            const response = await fetch(`${this.url}/${teamMemberId}`, {
+            const response = await fetch(`${this.url}/${teamMemberId}/update`, {
                 method: "PATCH",
                 headers: {
-                    "Content-Type": "application/json",
                     authorization: `Bearer ${authToken}`
                 },
-                body: JSON.stringify(input)
+                body: JSON.stringify(updateData)
             });
             if (!response.ok) {
                 const data = await response.json();
