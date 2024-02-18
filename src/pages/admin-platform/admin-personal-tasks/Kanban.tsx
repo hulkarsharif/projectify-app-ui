@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import toast from "react-hot-toast";
-import { GroupedTasks } from "../../../utils";
+import { GroupedTasks } from "../../../Utils";
 import { useStore } from "../../../hooks";
 import { Actions, ChangeTaskStatusAction } from "../../../store";
 import { adminTasksService } from "../../../api";

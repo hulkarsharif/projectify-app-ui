@@ -1,4 +1,6 @@
 import format from "date-fns/format";
+import styled from "styled-components";
+import { Scrollable } from "../../components";
 import {
     Badge,
     BadgeColors,
@@ -36,6 +38,9 @@ enum TeamMemberActions {
     deactivate = "deactivate"
 }
 
+const TableContainer = styled(Scrollable)`
+    height: calc(100% - 13rem);
+`;
 const options: MenuOption[] = [
     { label: "Edit", iconName: "edit", value: "edit", color: "primary" },
     {
@@ -76,28 +81,33 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
         useState(false);
     const [showReactivateTeamMemberModal, setShowReactivateTeamMemberModal] =
         useState(false);
+    const [changeStatus, setChangeStatus] =
+        useState<AdminTeamMemberStatusChange>();
+    const [
+        showChangeTeamMemberStatusModal,
+        setShowChangeTeamMemberStatusModal
+    ] = useState(false);
 
     const onSelectActionCellMenu = (
         teamMemberId: string,
         action: TeamMemberActions
     ) => {
         setSelectedTeamMemberId(teamMemberId);
-        if (action === "edit") {
-            setShowEditTeamMemberModal(true);
-        }
-        if (action === "delete") {
+        if (action === TeamMemberActions.delete) {
             setShowDeleteTeamMemberModal(true);
-        }
-        if (action === "deactivate") {
-            setShowDeactivateTeamMemberModal(true);
-        }
-        if (action === "reactivate") {
-            setShowReactivateTeamMemberModal(true);
+        } else if (
+            action === TeamMemberActions.deactivate ||
+            action === TeamMemberActions.reactivate
+        ) {
+            setChangeStatus(action);
+            setShowChangeTeamMemberStatusModal(true);
+        } else if (action === TeamMemberActions.edit) {
+            setShowEditTeamMemberModal(true);
         }
     };
 
     return (
-        <>
+        <TableContainer>
             <Table>
                 <TableHead>
                     <TableRow columns={columns}>
@@ -208,7 +218,7 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                 teamMemberId={selectedTeamMemberId}
                 closeModal={() => setShowReactivateTeamMemberModal(false)}
             />
-        </>
+        </TableContainer>
     );
 };
 
