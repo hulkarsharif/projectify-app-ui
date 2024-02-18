@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { parseISO } from "date-fns";
 import {
     Modal,
     Typography,
@@ -11,10 +10,11 @@ import {
     Option
 } from "../../../design-system";
 import { useStore } from "../../../hooks";
-import { TaskStatus } from "../../../types";
-import { TaskUpdateInput, adminTasksService } from "../../../api";
+import { TaskStatus, TaskUpdate } from "../../../types";
+import { adminTasksService } from "../../../api";
 import toast from "react-hot-toast";
 import { Actions, UpdateTaskAction } from "../../../store";
+import { toDateObj, toIso8601 } from "../../../Utils";
 
 type EditTaskModalProps = {
     show: boolean;
@@ -66,38 +66,33 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
     useEffect(() => {
-        const task = adminPersonalTasks.find((task) => task.id === taskId);
+        const task = adminPersonalTasks[taskId];
 
         if (task) {
-            setTaskDue(parseISO((task?.due).toString()));
+            setTaskDue(toDateObj((task?.due).toString()));
             setTaskDescription(task.description);
             setTaskTitle(task?.title);
             setSelectedStatus({ value: task.status, label: task.status });
         }
-
-        /* Task Id, We setting task id in Kanban.tsx when someone clicks the menu. So, initially taskId would be undefined when component mounts. But, when taskId is set, then we want to make sure this useEffect will run and set inputs default fields.   */
     }, [taskId]);
 
     const updateTask = () => {
-        const updatedTask: TaskUpdateInput = {
+        const updateData: TaskUpdate = {
             title: taskTitle,
             description: taskDescription,
-            due: taskDue,
+            due: toIso8601(taskDue!),
             status: selectedStatus?.value as TaskStatus
         };
         setIsFormSubmitting(true);
         adminTasksService
-            .updateTask(taskId, updatedTask)
+            .updateTask(taskId, updateData)
             .then((_) => {
                 setIsFormSubmitting(false);
                 const action: UpdateTaskAction = {
                     type: Actions.UPDATE_TASK,
                     payload: {
                         id: taskId,
-                        title: taskTitle,
-                        description: taskDescription,
-                        due: taskDue as Date,
-                        status: selectedStatus?.value as TaskStatus
+                        data: updateData
                     }
                 };
                 dispatch(action);

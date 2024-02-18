@@ -3,6 +3,7 @@ import {
     AdminUser,
     TeamMemberUser,
     TaskStatus,
+    TaskUpdate,
     TeamMember,
     TeamMemberStatus,
     TeamMemberUpdate
@@ -54,7 +55,10 @@ export type ChangeTaskStatusAction = {
 
 export type UpdateTaskAction = {
     type: Actions.UPDATE_TASK;
-    payload: Task;
+    payload: {
+        id: string;
+        data: TaskUpdate;
+    };
 };
 
 export type RemoveTaskAction = {

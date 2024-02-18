@@ -1,14 +1,9 @@
-import styled, { css } from "styled-components";
-import { KanbanCardProps } from "./types";
-import {
-    Badge,
-    Bar,
-    Menu,
-    LinearProgress,
-    Typography
-} from "../../../design-system";
-import { format } from "date-fns";
 import { useState } from "react";
+import styled, { css } from "styled-components";
+import { format } from "date-fns";
+import { KanbanCardProps } from "./types";
+import { Badge, Bar, Menu, Typography } from "../../../design-system";
+import { toDateObj } from "../../../Utils";
 
 const KanbanCardBase = styled.div<{ $isDragging: boolean }>`
     background-color: var(--white);
@@ -102,7 +97,7 @@ const KanbanCard: React.FC<KanbanCardProps> = ({
                 </TaskDescription>
             </div>
             <TaskDue
-                label={format(task.due, "MMMM d")}
+                label={format(toDateObj(task.due), "MMMM d")}
                 color={StatusToColor[task.status]}
                 iconName={StatusToIcon[task.status]}
                 variant="contained"
