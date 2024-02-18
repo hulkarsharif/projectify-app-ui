@@ -48,6 +48,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
 
     const createTask = () => {
         setIsFormSubmitting(true);
+
         const input: TaskCreateInput = {
             title: taskTitle,
             description: taskDescription,

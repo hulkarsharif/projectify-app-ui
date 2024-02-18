@@ -8,6 +8,7 @@ import {
     DatePickerV1,
     Button
 } from "../../../design-system";
+import { toIso8601 } from "../../../Utils";
 
 import { TaskCreateInput, teamMemberTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
@@ -50,7 +51,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
         const input: TaskCreateInput = {
             title: taskTitle,
             description: taskDescription,
-            due: taskDue!
+            due: toIso8601(taskDue!)
         };
 
         teamMemberTasksService

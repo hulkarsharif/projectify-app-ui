@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import toast from "react-hot-toast";
 import {
     Modal,
     Typography,
@@ -12,7 +13,6 @@ import {
 import { useStore } from "../../../hooks";
 import { TaskStatus, TaskUpdate } from "../../../types";
 import { adminTasksService } from "../../../api";
-import toast from "react-hot-toast";
 import { Actions, UpdateTaskAction } from "../../../store";
 import { toDateObj, toIso8601 } from "../../../Utils";
 
@@ -69,11 +69,13 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
         const task = adminPersonalTasks[taskId];
 
         if (task) {
-            setTaskDue(toDateObj((task?.due).toString()));
+            setTaskDue(toDateObj(task.due));
             setTaskDescription(task.description);
             setTaskTitle(task?.title);
             setSelectedStatus({ value: task.status, label: task.status });
         }
+
+        /* Task Id, We setting task id in Kanban.tsx when someone clicks the menu. So, initially taskId would be undefined when component mounts. But, when taskId is set, then we want to make sure this useEffect will run and set inputs default fields.   */
     }, [taskId]);
 
     const updateTask = () => {
@@ -116,7 +118,6 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                     onChange={(value) => setTaskTitle(value)}
                     shape="rounded"
                     size="lg"
-                    placeholder="Title"
                 />
                 <Input
                     type="textarea"
@@ -126,7 +127,6 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                     }}
                     shape="rounded"
                     size="lg"
-                    placeholder="Text"
                 />
                 <DatePickerV1
                     inputSize="lg"
