@@ -14,6 +14,7 @@ import {
 import { useStore } from "../../../hooks";
 import { Actions, AdminAddTeamMemberAction } from "../../../store";
 import { teamMemberService } from "../../../api";
+import { toIso8601 } from "../../../Utils";
 
 type ModalProps = {
     show: boolean;
@@ -36,7 +37,7 @@ const Buttons = styled.div`
     gap: var(--space-10);
 `;
 
-export const positions: Option[] = [
+const positions: Option[] = [
     { value: "Frontend Engineer", label: "Frontend Engineer" },
     { value: "Backend Engineer", label: "Backend Engineer" },
     { value: "Fullstack Engineer", label: "Fullstack Engineer" },
@@ -91,7 +92,7 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
             firstName,
             lastName,
             email,
-            joinDate: joinDate!,
+            joinDate: toIso8601(joinDate!),
             position: position?.value as string
         };
         try {
@@ -142,8 +143,9 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
                     onSelect={handleOnSelectPosition}
                     value={position?.value}
                     size="lg"
-                    shape="circle"
+                    shape="rounded"
                     headerPlaceholder="Select Position"
+                    searchable
                 />
                 <DatePickerV1
                     inputSize="lg"

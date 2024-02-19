@@ -1,46 +1,39 @@
-import format from "date-fns/format";
+import { useState } from "react";
 import styled from "styled-components";
-import { Scrollable } from "../../components";
+import format from "date-fns/format";
 import {
     Badge,
     BadgeColors,
     Menu,
     MenuOption,
-    Typography
-} from "../../../design-system";
-import {
+    Typography,
     Table,
     TableBody,
     TableBodyCell,
     TableHead,
     TableHeadCell,
     TableRow
-} from "../../../design-system/Table";
+} from "../../../design-system";
+
 import {
     TeamMember,
     AdminTeamMemberActions,
     AdminTeamMemberStatusChange
 } from "../../../types";
-import { useState } from "react";
 import { DeleteTeamMemberModal } from "./DeleteTeamMemberModal";
-import { DeactivateTeamMemberModal } from "./DeactivateTeamMemberModal";
-import { ReactivateTeamMemberModal } from "./ReactivateTeamMberModal";
+import { ChangeTeamMemberStatusModal } from "./ChangeTeamMemberStatusModal";
 import { EditTeamMemberModal } from "./EditTeamMemberModal";
+import { toDateObj } from "../../../Utils";
+import { Scrollable } from "../../components";
 
 type TeamMembersTableProps = {
     data: TeamMember[];
 };
 
-enum TeamMemberActions {
-    edit = "edit",
-    delete = "delete",
-    reactivate = "reactivate",
-    deactivate = "deactivate"
-}
-
 const TableContainer = styled(Scrollable)`
     height: calc(100% - 13rem);
 `;
+
 const options: MenuOption[] = [
     { label: "Edit", iconName: "edit", value: "edit", color: "primary" },
     {
@@ -73,13 +66,7 @@ const mapsStatusToBadgeColors = {
 
 const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
     const [selectedTeamMemberId, setSelectedTeamMemberId] = useState("");
-    const [showEditTeamMemberModal, setShowEditTeamMemberModal] =
-        useState(false);
     const [showDeleteTeamMemberModal, setShowDeleteTeamMemberModal] =
-        useState(false);
-    const [showDeactivateTeamMemberModal, setShowDeactivateTeamMemberModal] =
-        useState(false);
-    const [showReactivateTeamMemberModal, setShowReactivateTeamMemberModal] =
         useState(false);
     const [changeStatus, setChangeStatus] =
         useState<AdminTeamMemberStatusChange>();
@@ -87,21 +74,23 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
         showChangeTeamMemberStatusModal,
         setShowChangeTeamMemberStatusModal
     ] = useState(false);
+    const [showEditTeamMemberModal, setShowEditTeamMemberModal] =
+        useState(false);
 
     const onSelectActionCellMenu = (
         teamMemberId: string,
-        action: TeamMemberActions
+        action: AdminTeamMemberActions
     ) => {
         setSelectedTeamMemberId(teamMemberId);
-        if (action === TeamMemberActions.delete) {
+        if (action === AdminTeamMemberActions.delete) {
             setShowDeleteTeamMemberModal(true);
         } else if (
-            action === TeamMemberActions.deactivate ||
-            action === TeamMemberActions.reactivate
+            action === AdminTeamMemberActions.deactivate ||
+            action === AdminTeamMemberActions.reactivate
         ) {
             setChangeStatus(action);
             setShowChangeTeamMemberStatusModal(true);
-        } else if (action === TeamMemberActions.edit) {
+        } else if (action === AdminTeamMemberActions.edit) {
             setShowEditTeamMemberModal(true);
         }
     };
@@ -162,7 +151,7 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                                         weight="medium"
                                     >
                                         {format(
-                                            teamMember.joinDate,
+                                            toDateObj(teamMember.joinDate),
                                             "MMM d, yyyy"
                                         )}
                                     </Typography>
@@ -188,7 +177,7 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                                         onSelect={(value) =>
                                             onSelectActionCellMenu(
                                                 teamMember.id,
-                                                value as TeamMemberActions
+                                                value as AdminTeamMemberActions
                                             )
                                         }
                                     />
@@ -198,25 +187,21 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                     })}
                 </TableBody>
             </Table>
-            <EditTeamMemberModal
-                show={showEditTeamMemberModal}
-                closeModal={() => setShowEditTeamMemberModal(false)}
-                teamMemberId={selectedTeamMemberId}
-            />
             <DeleteTeamMemberModal
                 show={showDeleteTeamMemberModal}
                 teamMemberId={selectedTeamMemberId}
                 closeModal={() => setShowDeleteTeamMemberModal(false)}
             />
-            <DeactivateTeamMemberModal
-                show={showDeactivateTeamMemberModal}
+            <ChangeTeamMemberStatusModal
+                show={showChangeTeamMemberStatusModal}
                 teamMemberId={selectedTeamMemberId}
-                closeModal={() => setShowDeactivateTeamMemberModal(false)}
+                closeModal={() => setShowChangeTeamMemberStatusModal(false)}
+                changeStatus={changeStatus!}
             />
-            <ReactivateTeamMemberModal
-                show={showReactivateTeamMemberModal}
+            <EditTeamMemberModal
+                show={showEditTeamMemberModal}
                 teamMemberId={selectedTeamMemberId}
-                closeModal={() => setShowReactivateTeamMemberModal(false)}
+                closeModal={() => setShowEditTeamMemberModal(false)}
             />
         </TableContainer>
     );

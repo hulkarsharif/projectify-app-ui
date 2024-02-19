@@ -12,7 +12,11 @@ import {
 } from "../../../design-system";
 import { useStore } from "../../../hooks";
 import { TaskStatus, TaskUpdate } from "../../../types";
-import { teamMemberTasksService } from "../../../api";
+import {
+    // TaskUpdateInput,
+    // TeamMemberTaskUpdateInput,
+    teamMemberTasksService
+} from "../../../api";
 import toast from "react-hot-toast";
 import { Actions, UpdateTaskAction } from "../../../store";
 import { toDateObj, toIso8601 } from "../../../Utils";
@@ -67,10 +71,10 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
     useEffect(() => {
-        const task = teamMemberPersonalTasks.find((task) => task.id === taskId);
+        const task = teamMemberPersonalTasks[taskId];
 
         if (task) {
-            setTaskDue(parseISO((task?.due).toString()));
+            setTaskDue(toDateObj(task.due));
             setTaskDescription(task.description);
             setTaskTitle(task?.title);
             setSelectedStatus({ value: task.status, label: task.status });
@@ -93,10 +97,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                 setIsFormSubmitting(false);
                 const action: UpdateTaskAction = {
                     type: Actions.UPDATE_TASK,
-                    payload: {
-                        id: taskId,
-                        data: updateData
-                    }
+                    payload: { data: updateData, id: taskId }
                 };
                 dispatch(action);
                 closeModal();
@@ -119,7 +120,6 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                     onChange={(value) => setTaskTitle(value)}
                     shape="rounded"
                     size="lg"
-                    placeholder="Title"
                 />
                 <Input
                     type="textarea"
@@ -129,7 +129,6 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                     }}
                     shape="rounded"
                     size="lg"
-                    placeholder="Text"
                 />
                 <DatePickerV1
                     inputSize="lg"

@@ -61,7 +61,7 @@ const teamMemberTasksReducer = produce(
             }
 
             case Actions.RESET_STATE: {
-                return [];
+                return {};
             }
             default:
                 return draft;

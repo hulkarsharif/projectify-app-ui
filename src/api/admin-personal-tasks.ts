@@ -37,12 +37,10 @@ class AdminPersonalTasks {
             });
             if (!response.ok) {
                 const data = await response.json();
-
                 throw new Error(data.message);
             }
             return response.json();
         } catch (error) {
-            console.log(error);
             throw error;
         }
     }
@@ -60,6 +58,7 @@ class AdminPersonalTasks {
                 const data = await response.json();
                 throw new Error(data.message);
             }
+
             return response.json();
         } catch (error) {
             throw error;
@@ -90,6 +89,7 @@ class AdminPersonalTasks {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+
             const response = await fetch(`${this.url}/tasks/${taskId}`, {
                 method: "PATCH",
                 headers: {

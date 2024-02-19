@@ -4,7 +4,7 @@ type TaskCreateInput = Omit<Task, "id" | "status">;
 type TaskUpdateInput = {
     title?: string;
     description?: string;
-    due?: Date;
+    due?: string;
     status?: TaskStatus;
 };
 

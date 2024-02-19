@@ -50,6 +50,7 @@ export enum AdminTeamMemberActions {
 export type TeamMemberStatus = "ACTIVE" | "INACTIVE" | "DEACTIVATED";
 
 export type AdminTeamMemberStatusChange = "reactivate" | "deactivate";
+
 export interface TeamMember {
     id: string;
     status: TeamMemberStatus;
@@ -57,14 +58,14 @@ export interface TeamMember {
     lastName: string;
     position: string;
     email: string;
-    joinDate: Date;
+    joinDate: string;
 }
 
 export interface TeamMemberUpdate {
     firstName?: string;
     lastName?: string;
     position?: string;
-    joinDate?: Date;
+    joinDate?: string;
 }
 export interface Project {
     id: string;
