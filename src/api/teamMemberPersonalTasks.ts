@@ -1,16 +1,16 @@
-import { Task, TaskStatus } from "../types";
+import { Task, TaskUpdate, TaskStatus } from "../types";
 
 type TaskCreateInput = Omit<Task, "id" | "status">;
-type TaskUpdateInput = {
-    title?: string;
-    description?: string;
-    due?: string;
-    status?: TaskStatus;
-};
+// type TaskUpdateInput = {
+//     title?: string;
+//     description?: string;
+//     due?: string;
+//     status?: TaskStatus;
+// };
 
 interface GetAllTasksResponse {
     data: {
-        tasks: Task[] | [];
+        tasks: Task[];
     };
 }
 
@@ -91,7 +91,7 @@ class TeamMemberTasksService {
         }
     }
 
-    async updateTask(taskId: string, input: TaskUpdateInput) {
+    async updateTask(taskId: string, input: TaskUpdate) {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";

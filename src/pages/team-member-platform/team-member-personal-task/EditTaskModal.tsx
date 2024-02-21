@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { parseISO } from "date-fns";
+import toast from "react-hot-toast";
 import {
     Modal,
     Typography,
@@ -12,12 +12,7 @@ import {
 } from "../../../design-system";
 import { useStore } from "../../../hooks";
 import { TaskStatus, TaskUpdate } from "../../../types";
-import {
-    // TaskUpdateInput,
-    // TeamMemberTaskUpdateInput,
-    teamMemberTasksService
-} from "../../../api";
-import toast from "react-hot-toast";
+import { teamMemberTasksService } from "../../../api";
 import { Actions, UpdateTaskAction } from "../../../store";
 import { toDateObj, toIso8601 } from "../../../Utils";
 
@@ -97,7 +92,10 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                 setIsFormSubmitting(false);
                 const action: UpdateTaskAction = {
                     type: Actions.UPDATE_TASK,
-                    payload: { data: updateData, id: taskId }
+                    payload: {
+                        id: taskId,
+                        data: updateData
+                    }
                 };
                 dispatch(action);
                 closeModal();

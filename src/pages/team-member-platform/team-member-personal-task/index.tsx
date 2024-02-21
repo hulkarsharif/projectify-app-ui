@@ -9,6 +9,7 @@ import { groupTasksByStatus } from "../../../Utils";
 import { CreateTaskModal } from "./CreateTaskModal";
 import { Kanban } from "./Kanban";
 import { PageHeader } from "./PageHeader";
+import toast from "react-hot-toast";
 
 const PageBase = styled.main`
     position: relative;
@@ -42,9 +43,10 @@ const TeamMemberTasksPage = () => {
                 };
                 dispatch(action);
             })
-            .catch((error) => {
+            .catch((e) => {
+                const err = e as Error;
                 setIsTasksFetching(false);
-                console.log(error);
+                toast.error(err.message);
             });
     }, []);
 
@@ -52,11 +54,13 @@ const TeamMemberTasksPage = () => {
         return null;
     }
 
-    const groupedTasks = groupTasksByStatus(teamMemberPersonalTasks);
+    const tasksArray = Object.values(teamMemberPersonalTasks);
+
+    const groupedTasks = groupTasksByStatus(tasksArray);
 
     return (
-        <PageBase>
-            {!teamMemberPersonalTasks.length ? (
+        <>
+            {!tasksArray.length ? (
                 <NoDataPlaceholder
                     illustrationUrl={noTask}
                     text="You don’t have any tasks yet!"
@@ -64,18 +68,18 @@ const TeamMemberTasksPage = () => {
                     buttonAction={() => setShowCreateTaskModal(true)}
                 />
             ) : (
-                <PageContent>
+                <>
                     <PageHeader
                         openCreateTaskModal={() => setShowCreateTaskModal(true)}
                     />
                     <Kanban groupedTasks={groupedTasks} />
-                </PageContent>
+                </>
             )}
             <CreateTaskModal
                 show={showCreateTaskModal}
                 closeModal={() => setShowCreateTaskModal(false)}
             />
-        </PageBase>
+        </>
     );
 };
 

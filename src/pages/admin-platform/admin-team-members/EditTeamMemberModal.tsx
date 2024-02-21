@@ -6,9 +6,9 @@ import {
     Modal,
     Input,
     DatePickerV1,
-    Button
+    Button,
+    Icon
 } from "../../../design-system";
-
 import { useStore } from "../../../hooks";
 import { Actions, AdminUpdateTeamMemberAction } from "../../../store";
 import { teamMemberService } from "../../../api";
@@ -36,6 +36,22 @@ const Buttons = styled.div`
     gap: var(--space-10);
 `;
 
+const ActionLink = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: var(--space-24);
+    align-items: center;
+    cursor: pointer;
+    .plus-icon {
+        fill: var(--primary-500);
+        height: 1.6rem;
+        width: 1.6rem;
+        margin-right: 0.6rem;
+    }
+    .update-password__link {
+        color: var(--primary-500);
+    }
+`;
 const EditTeamMemberModal: React.FC<ModalProps> = ({
     show,
     closeModal,
@@ -49,6 +65,12 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
         dispatch,
         state: { teamMembers }
     } = useStore();
+    const [selectedTeammemberId, setSelectedTeamMemberId] = useState("");
+    const [showChangePasswordModal, setShowChangePasswordModal] =
+        useState(false);
+    const [newPassword, setNewPassword] = useState("");
+    const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
+    const [showAdditionalInputs, setShowAdditionalInputs] = useState(false);
 
     useEffect(() => {
         const teamMember = teamMembers[teamMemberId];
@@ -70,6 +92,11 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
 
     const handleOnChangePosition = (value: string) => {
         setPosition(value);
+    };
+
+    const handleOnClickUpdatePassword = (teamMemberId: string) => {
+        setSelectedTeamMemberId(teamMemberId);
+        setShowAdditionalInputs(true);
     };
 
     const updateTeamMember = () => {
@@ -137,6 +164,37 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
                     onChange={(date) => setJoinDate(date)}
                 />
             </Inputs>
+            <ActionLink
+                onClick={() => handleOnClickUpdatePassword(teamMemberId)}
+            >
+                <Icon iconName="plus" className="plus-icon" />
+                <Typography
+                    variant="paragraphSM"
+                    className="update-password__link"
+                >
+                    Update Password
+                </Typography>
+            </ActionLink>
+            {showAdditionalInputs && ( // Conditionally render additional inputs based on state
+                <Inputs>
+                    <Input
+                        type="password"
+                        value={newPassword}
+                        placeholder="New Password"
+                        onChange={(value) => setNewPassword(value)}
+                        shape="rounded"
+                        size="lg"
+                    />
+                    <Input
+                        type="password"
+                        value={newPasswordConfirm}
+                        placeholder="New Password Confirm"
+                        onChange={(value) => setNewPasswordConfirm(value)}
+                        shape="rounded"
+                        size="lg"
+                    />
+                </Inputs>
+            )}
             <Buttons>
                 <Button
                     color="secondary"
