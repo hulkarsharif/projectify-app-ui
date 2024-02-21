@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { Input, Modal, Typography, Button } from "../../../design-system";
-import { adminProjects } from "../../../api";
+import { adminProjectsService } from "../../../api";
 import toast from "react-hot-toast";
 import { NoDataPlaceholder } from "../../components/NoDataPlaceHolder";
 import noProject from "../../../assets/illustrations/no-project.svg";
@@ -49,7 +49,7 @@ const AdminProjects = () => {
 
         try {
             setIsFormSubmitting(true);
-            const response = await adminProjects.create({
+            const response = await adminProjectsService.create({
                 name,
                 description
             });
