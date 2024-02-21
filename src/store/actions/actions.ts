@@ -6,7 +6,8 @@ import {
     TaskUpdate,
     TeamMember,
     TeamMemberStatus,
-    TeamMemberUpdate
+    TeamMemberUpdate,
+    Project
 } from "../../types";
 
 export enum Actions {
@@ -25,7 +26,14 @@ export enum Actions {
     ADMIN_DEACTIVATE_TEAM_MEMBER = "ADMIN_DEACTIVATE_TEAM_MEMBER",
     ADMIN_REACTIVATE_TEAM_MEMBER = "ADMIN_REACTIVATE_TEAM_MEMBER",
     ADMIN_UPDATE_TEAM_MEMBER = "ADMIN_UPDATE_TEAM_MEMBER",
-    ADMIN_CHANGE_PASSWORD_TEAM_MEMBER = "ADMIN_CHANGE_PASSWORD_TEAM_MEMBER"
+    ADMIN_CHANGE_PASSWORD_TEAM_MEMBER = "ADMIN_CHANGE_PASSWORD_TEAM_MEMBER",
+
+    ADMIN_ADD_PROJECT = "ADMIN_ADD_PROJECT",
+    ADMIN_POPULATE_PROJECTS = "ADMIN_POPULATE_PROJECTS",
+    ADMIN_ARCHIVE_PROJECT = "ADMIN_ARCHIVE_PROJECT",
+    ADMIN_REMOVE_PROJECT = "ADMIN_REMOVE_PROJECT",
+    ADMIN_REACTIVATE_PROJECT = "ADMIN_REACTIVATE_PROJECT",
+    ADMIN_UPDATE_PROJECT = "ADMIN_UPDATE_PROJECT"
 }
 
 export interface InitUserAction {
@@ -124,6 +132,38 @@ export type AdminChangePasswordTeamMemberAction = {
         password: string;
     };
 };
+
+export type AdminAddProjectAction = {
+    type: Actions.ADMIN_ADD_PROJECT;
+    payload: Project;
+};
+
+export type AdminPopulateProjectsAction = {
+    type: Actions.ADMIN_POPULATE_PROJECTS;
+    payload: Project[];
+};
+export type AdminArchiveProjectAction = {
+    type: Actions.ADMIN_ARCHIVE_PROJECT;
+    payload: {
+        id: string;
+    };
+};
+export type AdminRemoveProjectAction = {
+    type: Actions.ADMIN_REMOVE_PROJECT;
+    payload: {
+        id: string;
+    };
+};
+export type AdminReactivateProjectAction = {
+    type: Actions.ADMIN_REACTIVATE_PROJECT;
+    payload: {
+        id: string;
+    };
+};
+export type AdminUpdateProjectAction = {
+    type: Actions.ADMIN_UPDATE_PROJECT;
+    payload: Project;
+};
 export type ActionType =
     | InitUserAction
     | ResetStateAction
@@ -139,4 +179,10 @@ export type ActionType =
     | AdminReactivateTeamMemberAction
     | AdminUpdateTeamMemberAction
     | AdminChangeTeamMemberStatusAction
-    | AdminChangePasswordTeamMemberAction;
+    | AdminChangePasswordTeamMemberAction
+    | AdminAddProjectAction
+    | AdminPopulateProjectsAction
+    | AdminArchiveProjectAction
+    | AdminRemoveProjectAction
+    | AdminReactivateProjectAction
+    | AdminUpdateProjectAction;
