@@ -10,8 +10,12 @@ import {
     Icon
 } from "../../../design-system";
 import { useStore } from "../../../hooks";
-import { Actions, AdminUpdateTeamMemberAction } from "../../../store";
-import { teamMemberService } from "../../../api";
+import {
+    Actions,
+    AdminChangePasswordTeamMemberAction,
+    AdminUpdateTeamMemberAction
+} from "../../../store";
+import { TeamMemberChangePasswordInput, teamMemberService } from "../../../api";
 import { toDateObj, toIso8601 } from "../../../Utils";
 
 type ModalProps = {
@@ -61,15 +65,15 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
     const [lastName, setLastName] = useState("");
     const [position, setPosition] = useState("");
     const [joinDate, setJoinDate] = useState<Date>();
+    const [newPassword, setNewPassword] = useState("");
+    const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
     const {
         dispatch,
         state: { teamMembers }
     } = useStore();
     const [selectedTeammemberId, setSelectedTeamMemberId] = useState("");
-    const [showChangePasswordModal, setShowChangePasswordModal] =
-        useState(false);
-    const [newPassword, setNewPassword] = useState("");
-    const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
+    const [showPasswordInputs, setShowPasswordInputs] = useState(false);
+
     const [showAdditionalInputs, setShowAdditionalInputs] = useState(false);
 
     useEffect(() => {
@@ -96,7 +100,7 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
 
     const handleOnClickUpdatePassword = (teamMemberId: string) => {
         setSelectedTeamMemberId(teamMemberId);
-        setShowAdditionalInputs(true);
+        setShowPasswordInputs(true);
     };
 
     const updateTeamMember = () => {
@@ -117,6 +121,31 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
                 dispatch(action);
                 closeModal();
                 toast.success("Team Member has been successfully updated");
+            })
+            .catch((e) => {
+                const err = e as Error;
+                toast.error(err.message);
+            });
+    };
+
+    const changePassword = () => {
+        const updateTeamMember: TeamMemberChangePasswordInput = {
+            newPassword: newPassword,
+            newPasswordConfirm: newPasswordConfirm
+        };
+
+        teamMemberService
+            .changePasswordByAdmin(teamMemberId, updateTeamMember)
+            .then((_) => {
+                const action: AdminChangePasswordTeamMemberAction = {
+                    type: Actions.ADMIN_CHANGE_PASSWORD_TEAM_MEMBER,
+                    payload: { id: teamMemberId, password: newPassword }
+                };
+                dispatch(action);
+                closeModal();
+                toast.success(
+                    "Team Member Password has been successfully updated"
+                );
             })
             .catch((e) => {
                 const err = e as Error;
@@ -166,6 +195,7 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
             </Inputs>
             <ActionLink
                 onClick={() => handleOnClickUpdatePassword(teamMemberId)}
+                style={{ display: showPasswordInputs ? "none" : "flex" }}
             >
                 <Icon iconName="plus" className="plus-icon" />
                 <Typography
@@ -175,7 +205,7 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
                     Update Password
                 </Typography>
             </ActionLink>
-            {showAdditionalInputs && ( // Conditionally render additional inputs based on state
+            {showPasswordInputs && (
                 <Inputs>
                     <Input
                         type="password"
@@ -211,7 +241,12 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
                     shape="rounded"
                     color="primary"
                     fullWidth
-                    onClick={updateTeamMember}
+                    onClick={() => {
+                        updateTeamMember();
+                        if (showPasswordInputs) {
+                            changePassword();
+                        }
+                    }}
                 >
                     Save
                 </Button>
