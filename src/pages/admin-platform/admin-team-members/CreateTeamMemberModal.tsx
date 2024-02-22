@@ -59,7 +59,7 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [position, setPosition] = useState<Option>();
-    const [joinDate, setJoinDate] = useState<Date>();
+    const [joinDate, setJoinDate] = useState<Date | null>();
 
     const { dispatch } = useStore();
 

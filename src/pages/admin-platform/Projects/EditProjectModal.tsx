@@ -47,7 +47,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [dueDate, setDueDate] = useState<Date>();
+    const [dueDate, setDueDate] = useState<Date | null>();
     const [status, setStatus] = useState<ProjectStatus>();
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 

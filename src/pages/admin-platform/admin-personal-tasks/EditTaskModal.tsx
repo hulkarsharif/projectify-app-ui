@@ -59,7 +59,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
         state: { adminPersonalTasks }
     } = useStore();
 
-    const [taskDue, setTaskDue] = useState<Date>();
+    const [taskDue, setTaskDue] = useState<Date | null>();
     const [taskTitle, setTaskTitle] = useState("");
     const [taskDescription, setTaskDescription] = useState("");
     const [selectedStatus, setSelectedStatus] = useState<Option | undefined>();

@@ -64,7 +64,7 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [position, setPosition] = useState("");
-    const [joinDate, setJoinDate] = useState<Date>();
+    const [joinDate, setJoinDate] = useState<Date | null>();
     const [newPassword, setNewPassword] = useState("");
     const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
     const {
