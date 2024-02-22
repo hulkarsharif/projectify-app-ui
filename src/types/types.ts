@@ -75,4 +75,15 @@ export interface Project {
     status: ProjectStatus;
     dueDate: string;
 }
+
+export type ProjectContributorStatus = "ACTIVE" | "INACTIVE";
+
+export interface ProjectContributor {
+    id: string;
+    teamMemberId: string;
+    adminId: string;
+    projectId: string;
+    status: ProjectContributorStatus;
+    joinDate: string;
+}
 export type ProjectStatus = "ACTIVE" | "ARCHIVED" | "COMPLETED";

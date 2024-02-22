@@ -1,17 +1,28 @@
-import { Project } from "../types";
+import { Project, ProjectContributor } from "../types";
 
 type CreateInput = Omit<Project, "id" | "status">;
 
 type CreateInputResponse = {
     data: Project;
 };
+
 type GetAllProjectsResponse = {
     data: Project[];
 };
+
 export type ProjectUpdateInput = {
     name?: string;
     description?: string;
     dueDate?: string;
+};
+
+type AddContributorInput = Omit<
+    ProjectContributor,
+    "id" | "status" | "adminId"
+>;
+
+type AddContributorInputResponse = {
+    data: ProjectContributor;
 };
 
 class AdminProjectsService {
@@ -28,8 +39,7 @@ class AdminProjectsService {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
-
-            const response = await fetch(`${this.url}/`, {
+            const response = await fetch(`${this.url}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -41,6 +51,7 @@ class AdminProjectsService {
                 const data = await response.json();
                 throw new Error(data.message);
             }
+
             return response.json();
         } catch (error) {
             throw error;
@@ -60,7 +71,28 @@ class AdminProjectsService {
                 const data = await response.json();
                 throw new Error(data.message);
             }
+
             return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async archive(projectId: string) {
+        const rawAuthToken = localStorage.getItem("authToken");
+        const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+        try {
+            const response = await fetch(`${this.url}/${projectId}/archive`, {
+                method: "PATCH",
+                headers: {
+                    authorization: `Bearer ${authToken}`
+                }
+            });
+
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
         } catch (error) {
             throw error;
         }
@@ -70,7 +102,7 @@ class AdminProjectsService {
         const rawAuthToken = localStorage.getItem("authToken");
         const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
         try {
-            const response = await fetch(`${this.url}/${projectId}/`, {
+            const response = await fetch(`${this.url}/${projectId}`, {
                 method: "DELETE",
                 headers: {
                     authorization: `Bearer ${authToken}`
@@ -87,20 +119,19 @@ class AdminProjectsService {
     }
 
     async reactivate(projectId: string) {
+        const rawAuthToken = localStorage.getItem("authToken");
+        const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
         try {
-            const rawAuthToken = localStorage.getItem("authToken");
-            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
-
             const response = await fetch(
                 `${this.url}/${projectId}/reactivate`,
                 {
                     method: "PATCH",
                     headers: {
-                        "Content-Type": "application/json",
                         authorization: `Bearer ${authToken}`
                     }
                 }
             );
+
             if (!response.ok) {
                 const data = await response.json();
                 throw new Error(data.message);
@@ -109,6 +140,7 @@ class AdminProjectsService {
             throw error;
         }
     }
+
     async updateProject(projectId: string, input: ProjectUpdateInput) {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
@@ -126,6 +158,31 @@ class AdminProjectsService {
                 const data = await response.json();
                 throw new Error(data.message);
             }
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async addContributor(
+        input: AddContributorInput
+    ): Promise<AddContributorInputResponse> {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+            const response = await fetch(`${this.url}/contributors/add`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${authToken}`
+                },
+                body: JSON.stringify(input)
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+
+            return response.json();
         } catch (error) {
             throw error;
         }

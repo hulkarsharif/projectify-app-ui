@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import toast from "react-hot-toast";
 import {
-    Typography,
     Modal,
+    Typography,
+    Button,
     Input,
-    DatePickerV1,
-    Button
+    DatePickerV1
 } from "../../../design-system";
 import { useStore } from "../../../hooks";
-import { ProjectStatus } from "../../../types";
+import toast from "react-hot-toast";
 import { Actions, AdminUpdateProjectAction } from "../../../store";
+import { ProjectStatus } from "../../../types";
+import { formatISO, parseISO } from "date-fns";
 import { ProjectUpdateInput, adminProjectsService } from "../../../api";
-import { toDateObj, toIso8601 } from "../../../Utils";
-import { formatISO } from "date-fns";
-import { parseISO } from "date-fns";
 
 type EditProjectModalProps = {
     show: boolean;
@@ -37,25 +35,25 @@ const Buttons = styled.div`
     display: flex;
     gap: var(--space-10);
 `;
-
 const EditProjectModal: React.FC<EditProjectModalProps> = ({
     show,
     closeModal,
     projectId
 }) => {
+    const {
+        dispatch,
+        state: { projects }
+    } = useStore();
+
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [dueDate, setDueDate] = useState<Date>();
     const [status, setStatus] = useState<ProjectStatus>();
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
-    const {
-        dispatch,
-        state: { projects }
-    } = useStore();
-
     useEffect(() => {
-        const project = projects[projectId];
+        const project = projects.find((project) => project.id === projectId);
+
         if (project) {
             setName(project.name);
             setDescription(project.description);
@@ -65,15 +63,16 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
     }, [projectId]);
 
     const updateProject = () => {
-        const updatedProject = {
-            name,
-            description,
+        const updatedProject: ProjectUpdateInput = {
+            name: name,
+            description: description,
             dueDate: formatISO(dueDate!)
         };
-
+        setIsFormSubmitting(true);
         adminProjectsService
-            .updateProject(projectId, updateProject)
+            .updateProject(projectId, updatedProject)
             .then((_) => {
+                setIsFormSubmitting(false);
                 const action: AdminUpdateProjectAction = {
                     type: Actions.ADMIN_UPDATE_PROJECT,
                     payload: {
@@ -90,6 +89,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
             })
             .catch((e) => {
                 const err = e as Error;
+                setIsFormSubmitting(false);
                 toast.error(err.message);
             });
     };
@@ -97,11 +97,11 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
     return (
         <Modal show={show} position="center">
             <ModalTitle variant="paragraphLG" weight="medium">
-                Update Member
+                Edit Project
             </ModalTitle>
             <Inputs>
                 <Input
-                    type="text"
+                    labelText="Project Name"
                     value={name}
                     onChange={(value) => setName(value)}
                     shape="rounded"
@@ -114,16 +114,14 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
                     shape="rounded"
                     size="lg"
                 />
-
                 <DatePickerV1
                     inputSize="lg"
                     shape="rounded"
-                    placeholder="select Due Date"
+                    placeholder="Select Due Date"
                     selected={dueDate}
                     onChange={(date) => setDueDate(date)}
                 />
             </Inputs>
-
             <Buttons>
                 <Button
                     color="secondary"

@@ -7,7 +7,8 @@ import {
     TeamMember,
     TeamMemberStatus,
     TeamMemberUpdate,
-    Project
+    Project,
+    ProjectContributor
 } from "../../types";
 
 export enum Actions {
@@ -166,10 +167,10 @@ export type AdminUpdateProjectAction = {
     payload: Project;
 };
 
-// export type AdminAddContributorProjectAction = {
-//     type: Actions.ADMIN_PROJECT_ADD_CONTRIBUTOR;
-//     payload: ProjectContributor;
-// };
+export type AdminAddContributorProjectAction = {
+    type: Actions.ADMIN_PROJECT_ADD_CONTRIBUTOR;
+    payload: ProjectContributor;
+};
 export type ActionType =
     | InitUserAction
     | ResetStateAction
@@ -191,5 +192,5 @@ export type ActionType =
     | AdminArchiveProjectAction
     | AdminRemoveProjectAction
     | AdminReactivateProjectAction
-    | AdminUpdateProjectAction;
-// | AdminAddContributorProjectAction;
+    | AdminUpdateProjectAction
+    | AdminAddContributorProjectAction;

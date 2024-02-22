@@ -1,38 +1,32 @@
 import styled from "styled-components";
 import { Option, OptionValue, Select } from "../../../design-system";
-import React from "react";
 
 const FiltersBase = styled.section`
     display: grid;
-    grid-template-columns: 20rem 20rem 1fr 20rem;
+    grid-template-columns: 20rem 1fr 20rem;
     align-items: center;
-    gap: var(--space-24);
     margin-bottom: var(--space-20);
-
-    .filter-by-status {
+    .filter-by-project {
         grid-column: 1 / 2;
     }
-
-    .search {
-        grid-column: 2 / 3;
-    }
-
-    .filter-by-project {
-        grid-column: 4 / 5;
+    .filter-by-status {
+        grid-column: 3 / 4;
     }
 `;
+
 const statusOptions = [
     { label: "Active", value: "ACTIVE" },
-    { label: "ARCHIEVED", value: "ARCHIEVED" },
+    { label: "ARCHIVED", value: "ARCHIVED" },
     { label: "Completed", value: "COMPLETED" },
     { label: "Default", value: "DEFAULT" }
 ];
 
-type ProjectFiltersProps = {
+type TeamMemberFiltersProps = {
     status: OptionValue | undefined;
     handleSetStatus: (value: Option) => void;
 };
-const ProjectFilters: React.FC<ProjectFiltersProps> = ({
+
+const ProjectFilters: React.FC<TeamMemberFiltersProps> = ({
     status,
     handleSetStatus
 }) => {
@@ -47,7 +41,6 @@ const ProjectFilters: React.FC<ProjectFiltersProps> = ({
                 headerPlaceholder="By Project"
                 className="filter-by-project"
             />
-
             <Select
                 value={status}
                 onSelect={handleSetStatus}

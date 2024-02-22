@@ -23,8 +23,8 @@ import { ArchiveProjectModal } from "./ArchiveProjectModal";
 import { DeleteProjectModal } from "./DeleteProjectModal";
 import { ReactivateProjectModal } from "./ReactivateProjectModal";
 import { EditProjectModal } from "./EditProjectModal";
-// import { ProjectContributors } from "./project-team-members/ProjectContributors";
-// import { AddContributorModal } from "./project-team-members/AddContributorModal";
+import { ProjectContributors } from "./project-team-members/ProjectContributors";
+import { AddContributorModal } from "./project-team-members/AddContributorModal";
 
 type ProjectsTableProps = {
     data: Project[];
