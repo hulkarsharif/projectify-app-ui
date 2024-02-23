@@ -40,40 +40,31 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
     show,
     closeModal
 }) => {
-    const [startDate, setStartDate] = useState<Date | null>();
-    const [endDate, setEndDate] = useState<Date | null>();
+    const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
+    const [startDate, setStartDate] = useState<Date | null>();
+    const [endDate, setEndDate] = useState<Date | null>();
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
+    const [isError, setIsError] = useState<boolean>(false);
+
     const { dispatch } = useStore();
 
-    const onChangeDatePicker = (dates: DatePickerOnChangeDateType) => {
-        if (Array.isArray(dates)) {
-            console.log(dates);
-            const [start, end] = dates;
-            setStartDate(start);
-            setEndDate(end);
-        }
-    };
-
-    const onChangeName = (value: string) => {
+    const handleOnChangeName = (value: string) => {
         setName(value);
     };
 
-    const onChangeDescription = (value: string) => {
+    const handleOnChangeDescription = (value: string) => {
         setDescription(value);
     };
 
-    const clearFields = () => {
+    const isFormSubmittable = name && description && startDate && endDate;
+
+    const resetFields = () => {
         setName("");
         setDescription("");
-        setStartDate(null);
-        setEndDate(null);
-    };
-
-    const cancel = () => {
-        clearFields();
-        closeModal();
+        setStartDate(undefined);
+        setEndDate(undefined);
     };
 
     const createProject = () => {
@@ -83,18 +74,24 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
             startDate: toIso8601(startDate!),
             endDate: toIso8601(endDate!)
         };
-
-        adminProjectsService
-            .create(input)
-            .then((data) => {
-                clearFields();
-                closeModal();
-                toast.success("Project has been successfully created"!);
-            })
-            .catch((e) => {
-                const err = e as Error;
-                toast.error(err.message);
-            });
+        try {
+            adminProjectsService
+                .create(input)
+                .then((data) => {
+                    const action: AdminAddProjectAction = {
+                        type: Actions.ADMIN_ADD_PROJECT,
+                        payload: data.data
+                    };
+                    dispatch(action);
+                    resetFields();
+                    closeModal();
+                    toast.success("Project has been successfully created"!);
+                })
+                .catch((e) => {
+                    const err = e as Error;
+                    toast.error(err.message);
+                });
+        } catch (error) {}
     };
     return (
         <Modal show={show} position="center">
@@ -103,9 +100,10 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
             </ModalTitle>
             <Inputs>
                 <Input
+                    type="text"
                     placeholder="Project Name"
                     value={name}
-                    onChange={onChangeName}
+                    onChange={handleOnChangeName}
                     shape="rounded"
                     size="lg"
                 />
@@ -113,18 +111,23 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
                     type="textarea"
                     placeholder="Project Description"
                     value={description}
-                    onChange={onChangeDescription}
+                    onChange={handleOnChangeDescription}
                     shape="rounded"
                     size="lg"
                 />
                 <DatePickerV1
                     inputSize="lg"
                     shape="rounded"
-                    placeholder="Star Date - End Date"
-                    onChange={onChangeDatePicker}
-                    selectsRange={true}
-                    startDate={startDate}
-                    endDate={endDate}
+                    placeholder="Star Date"
+                    onChange={(date) => setStartDate(date)}
+                    selected={startDate}
+                />
+                <DatePickerV1
+                    inputSize="lg"
+                    shape="rounded"
+                    placeholder="End Date"
+                    onChange={(date) => setEndDate(date)}
+                    selected={endDate}
                 />
             </Inputs>
             <Buttons>
@@ -134,7 +137,7 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
                     shape="rounded"
                     variant="outlined"
                     fullWidth
-                    onClick={cancel}
+                    onClick={() => closeModal()}
                 >
                     Cancel
                 </Button>
@@ -143,6 +146,7 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
                     shape="rounded"
                     color="primary"
                     fullWidth
+                    disabled={isFormSubmitting || !isFormSubmittable}
                     onClick={createProject}
                 >
                     Save

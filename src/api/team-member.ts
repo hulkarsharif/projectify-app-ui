@@ -5,13 +5,13 @@ import {
     TeamMemberUser
 } from "../types";
 
-export type GetMeResponseType = {
+export type GetMeAPIResponse = {
     data: TeamMemberUser;
 };
 interface CreatePasswordInput {
-    email: string;
     password: string;
     passwordConfirm: string;
+    email: string;
 }
 
 export type TeamMemberUpdateInput = {
@@ -34,11 +34,11 @@ type SignInInput = {
 
 type CreateInput = Omit<TeamMember, "id" | "status">;
 
-type CreateInputResponse = {
+type CreateAPIResponse = {
     data: TeamMember;
 };
 
-type GetAllTeamMembersResponse = {
+type GetAllAPIResponse = {
     data: TeamMember[];
 };
 
@@ -52,7 +52,7 @@ class TeamMemberService {
         }/team-members`;
     }
 
-    async create(input: CreateInput): Promise<CreateInputResponse> {
+    async create(input: CreateInput): Promise<CreateAPIResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
@@ -75,7 +75,7 @@ class TeamMemberService {
         }
     }
 
-    async getAll(): Promise<GetAllTeamMembersResponse> {
+    async getAll(): Promise<GetAllAPIResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
@@ -184,7 +184,7 @@ class TeamMemberService {
         }
     }
 
-    async getMe(): Promise<GetMeResponseType> {
+    async getMe(): Promise<GetMeAPIResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
