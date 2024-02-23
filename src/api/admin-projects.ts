@@ -6,9 +6,9 @@ type CreateInputResponse = {
     data: Project;
 };
 
-type GetAllProjectsResponse = {
-    data: Project[];
-};
+interface GetAllProjectsResponse {
+    data: { projects: Project[] };
+}
 
 export type ProjectUpdateInput = {
     name?: string;

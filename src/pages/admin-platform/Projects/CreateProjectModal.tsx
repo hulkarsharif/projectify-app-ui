@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import toast from "react-hot-toast";
 
 import {
     Input,
@@ -9,6 +10,10 @@ import {
     DatePickerOnChangeDateType
 } from "../../../design-system";
 import { useState } from "react";
+import { adminProjectsService } from "../../../api";
+import { toIso8601 } from "../../../Utils";
+import { Actions, AdminAddProjectAction } from "../../../store";
+import { useStore } from "../../../hooks";
 
 type CreateProjectModalProps = {
     show: boolean;
@@ -37,13 +42,59 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
 }) => {
     const [startDate, setStartDate] = useState<Date | null>();
     const [endDate, setEndDate] = useState<Date | null>();
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
+    const { dispatch } = useStore();
 
     const onChangeDatePicker = (dates: DatePickerOnChangeDateType) => {
         if (Array.isArray(dates)) {
-            const [startDate, endDate] = dates;
-            setStartDate(startDate);
-            setEndDate(endDate);
+            console.log(dates);
+            const [start, end] = dates;
+            setStartDate(start);
+            setEndDate(end);
         }
+    };
+
+    const onChangeName = (value: string) => {
+        setName(value);
+    };
+
+    const onChangeDescription = (value: string) => {
+        setDescription(value);
+    };
+
+    const clearFields = () => {
+        setName("");
+        setDescription("");
+        setStartDate(null);
+        setEndDate(null);
+    };
+
+    const cancel = () => {
+        clearFields();
+        closeModal();
+    };
+
+    const createProject = () => {
+        const input = {
+            name,
+            description,
+            startDate: toIso8601(startDate!),
+            endDate: toIso8601(endDate!)
+        };
+
+        adminProjectsService
+            .create(input)
+            .then((data) => {
+                clearFields();
+                closeModal();
+                toast.success("Project has been successfully created"!);
+            })
+            .catch((e) => {
+                const err = e as Error;
+                toast.error(err.message);
+            });
     };
     return (
         <Modal show={show} position="center">
@@ -53,16 +104,16 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
             <Inputs>
                 <Input
                     placeholder="Project Name"
-                    value=""
-                    onChange={() => {}}
+                    value={name}
+                    onChange={onChangeName}
                     shape="rounded"
                     size="lg"
                 />
                 <Input
                     type="textarea"
                     placeholder="Project Description"
-                    value=""
-                    onChange={() => {}}
+                    value={description}
+                    onChange={onChangeDescription}
                     shape="rounded"
                     size="lg"
                 />
@@ -70,7 +121,6 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
                     inputSize="lg"
                     shape="rounded"
                     placeholder="Star Date - End Date"
-                    selected={startDate}
                     onChange={onChangeDatePicker}
                     selectsRange={true}
                     startDate={startDate}
@@ -84,11 +134,17 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
                     shape="rounded"
                     variant="outlined"
                     fullWidth
-                    onClick={() => closeModal()}
+                    onClick={cancel}
                 >
                     Cancel
                 </Button>
-                <Button size="lg" shape="rounded" color="primary" fullWidth>
+                <Button
+                    size="lg"
+                    shape="rounded"
+                    color="primary"
+                    fullWidth
+                    onClick={createProject}
+                >
                     Save
                 </Button>
             </Buttons>

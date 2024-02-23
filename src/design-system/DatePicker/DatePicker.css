@@ -159,3 +159,8 @@
 .v1-date-picker__calendar-icon.react-datepicker__calendar-icon:hover + input {
     border-color: var(--primary-500) !important;
 }
+
+.react-datepicker__input-container.react-datepicker__view-calendar-icon:hover
+    svg {
+    fill: var(--primary-500);
+}
