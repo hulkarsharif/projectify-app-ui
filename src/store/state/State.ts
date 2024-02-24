@@ -9,7 +9,7 @@ import {
 export type UserState = AdminUser | TeamMemberUser | null;
 export type TaskState = { [taskId: string]: Task };
 export type TeamMemberState = { [teamMemberId: string]: TeamMember };
-export type ProjectState = Project[];
+export type ProjectState = { [projectId: string]: Project };
 
 export interface GlobalState {
     user: UserState;
@@ -26,5 +26,5 @@ export const initialState: GlobalState = {
     adminTeamMembers: {},
     teamMemberPersonalTasks: {},
     teamMembers: {},
-    projects: []
+    projects: {}
 };
