@@ -1,5 +1,6 @@
-import format from "date-fns/format";
+import { useState } from "react";
 import styled from "styled-components";
+import format from "date-fns/format";
 import {
     Badge,
     BadgeColors,
@@ -10,21 +11,14 @@ import {
 import {
     Table,
     TableBody,
-    TableBodyCellBase,
+    TableBodyCell,
     TableHead,
     TableHeadCell,
     TableRow
 } from "../../../design-system/Table";
-import { Project } from "../../../types";
-import { useState } from "react";
-import { parseISO } from "date-fns";
+import { ProjectActions, Project } from "../../../types";
+import { toDateObj } from "../../../Utils";
 import { Scrollable } from "../../components";
-import { ArchiveProjectModal } from "./ArchiveProjectModal";
-import { DeleteProjectModal } from "./DeleteProjectModal";
-import { ReactivateProjectModal } from "./ReactivateProjectModal";
-import { EditProjectModal } from "./EditProjectModal";
-import { ProjectContributors } from "./project-team-members/ProjectContributors";
-import { AddContributorModal } from "./project-team-members/AddContributorModal";
 
 type ProjectsTableProps = {
     data: Project[];
@@ -34,56 +28,48 @@ const TableContainer = styled(Scrollable)`
     height: calc(100% - 13rem);
 `;
 
-enum ProjectActions {
-    edit = "edit",
-    delete = "delete",
-    reactivate = "reactivate",
-    archive = "archive"
-}
 const options: MenuOption[] = [
-    { label: "Edit", iconName: "edit", value: "edit", color: "primary" },
     {
-        label: "Reactivate",
+        label: "Complete",
         iconName: "check-in-circle",
-        value: "reactivate",
+        value: "complete",
         color: "primary"
     },
-    { label: "Delete", iconName: "delete", value: "delete", color: "danger" },
     {
         label: "Archive",
-        iconName: "x-in-circle",
+        iconName: "check-in-circle",
         value: "archive",
-        color: "danger"
-    }
+        color: "primary"
+    },
+    { label: "Edit", iconName: "edit", value: "edit", color: "primary" },
+    { label: "Delete", iconName: "delete", value: "delete", color: "danger" }
 ];
 
 const allowedActions = {
-    ACTIVE: [options[0], options[3]],
-    ARCHIVED: [options[0], options[1], options[2]],
-    COMPLETED: [options[2], options[3]]
+    ACTIVE: [options[0], options[4]],
+    ONHOLD: [options[0], options[3]],
+    ARCHIVED: [options[0], options[2]],
+    COMPLETED: [options[0], options[1]]
 };
 
-const columns = ["12.5%", "15.5%", "10%", "20%", "12%", "25%", "5%"];
-
+const columns = ["30%", "15%", "20%", "30%", "5%"];
 const mapsStatusToBadgeColors = {
     ACTIVE: "violet",
+    ONHOLD: "orange",
     ARCHIVED: "gray",
     COMPLETED: "green"
 };
 
 const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
     const [selectedProjectId, setSelectedProjectId] = useState("");
-
+    const [showCompleteProjectModal, setShowECompleteProjectModal] =
+        useState(false);
+    const [showEditProjectModal, setShowEditProjectModal] = useState(false);
     const [showArchiveProjectModal, setShowArchiveProjectModal] =
         useState(false);
-
     const [showDeleteProjectModal, setShowDeleteProjectModal] = useState(false);
-
-    const [showReactivateProjectModal, setShowReactivateProjectModal] =
-        useState(false);
-
-    const [showUpdateProjectModal, setShowUpdateProjectModal] = useState(false);
-    const [showCreateAddContributorModal, setShowCreateAddContributorModal] =
+    const [changeStatus, setChangeStatus] = useState();
+    const [showChangeProjectStatusModal, setShowChangeProjectStatusModal] =
         useState(false);
 
     const onSelectActionCellMenu = (
@@ -91,15 +77,16 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
         action: ProjectActions
     ) => {
         setSelectedProjectId(projectId);
-
-        if (action === "delete") {
+        if (action === ProjectActions.edit) {
+            setShowEditProjectModal(true);
+        } else if (action === ProjectActions.delete) {
             setShowDeleteProjectModal(true);
-        } else if (action === "archive") {
-            setShowArchiveProjectModal(true);
-        } else if (action === "reactivate") {
-            setShowReactivateProjectModal(true);
-        } else if (action === "edit") {
-            setShowUpdateProjectModal(true);
+        } else if (
+            action === ProjectActions.complete ||
+            action === ProjectActions.archived
+        ) {
+            // setChangeStatus(action);
+            setShowChangeProjectStatusModal(true);
         }
     };
 
@@ -108,12 +95,12 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
             <Table>
                 <TableHead>
                     <TableRow columns={columns}>
-                        <TableHeadCell>Name</TableHeadCell>
-                        <TableHeadCell>Description</TableHeadCell>
+                        <TableHeadCell>
+                            Project name and description
+                        </TableHeadCell>
                         <TableHeadCell>Status</TableHeadCell>
-                        <TableHeadCell>Progress</TableHeadCell>
-                        <TableHeadCell>Due Date</TableHeadCell>
-                        <TableHeadCell>Team Members</TableHeadCell>
+                        <TableHeadCell>Due date</TableHeadCell>
+                        <TableHeadCell>Team members</TableHeadCell>
                         <TableHeadCell> </TableHeadCell>
                     </TableRow>
                 </TableHead>
@@ -121,23 +108,21 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                     {data.map((project) => {
                         return (
                             <TableRow key={project.id} columns={columns}>
-                                <TableBodyCellBase>
+                                <TableBodyCell>
                                     <Typography
                                         variant="paragraphSM"
                                         weight="medium"
                                     >
                                         {project.name}
                                     </Typography>
-                                </TableBodyCellBase>
-                                <TableBodyCellBase>
-                                    <Typography
-                                        variant="paragraphSM"
+                                    {/* <Typography
+                                        variant="subtitleSM"
                                         weight="medium"
                                     >
                                         {project.description}
-                                    </Typography>
-                                </TableBodyCellBase>
-                                <TableBodyCellBase>
+                                    </Typography> */}
+                                </TableBodyCell>
+                                <TableBodyCell>
                                     <Badge
                                         color={
                                             mapsStatusToBadgeColors[
@@ -149,31 +134,27 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                                         shape="rounded"
                                         status
                                     />
-                                </TableBodyCellBase>
-                                <TableBodyCellBase>Hello</TableBodyCellBase>
-                                <TableBodyCellBase>
+                                </TableBodyCell>
+                                <TableBodyCell>
                                     <Typography
                                         variant="paragraphSM"
                                         weight="medium"
                                     >
                                         {format(
-                                            parseISO(project.dueDate),
+                                            toDateObj(project.endDate),
                                             "MMM d, yyyy"
                                         )}
                                     </Typography>
-                                </TableBodyCellBase>
-                                <TableBodyCellBase>
-                                    <button
-                                        onClick={() =>
-                                            setShowCreateAddContributorModal(
-                                                true
-                                            )
-                                        }
+                                </TableBodyCell>
+                                <TableBodyCell>
+                                    <Typography
+                                        variant="paragraphSM"
+                                        weight="medium"
                                     >
-                                        Add Contributor
-                                    </button>
-                                </TableBodyCellBase>
-                                <TableBodyCellBase>
+                                        Team Members
+                                    </Typography>
+                                </TableBodyCell>
+                                <TableBodyCell>
                                     <Menu
                                         options={allowedActions[project.status]}
                                         onSelect={(value) =>
@@ -183,36 +164,28 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                                             )
                                         }
                                     />
-                                </TableBodyCellBase>
+                                </TableBodyCell>
                             </TableRow>
                         );
                     })}
                 </TableBody>
             </Table>
-            <ArchiveProjectModal
-                show={showArchiveProjectModal}
+            {/* <EditProjectModal
+                show={showEditProjectModal}
+                closeModal={() => setShowEditProjectModal(false)}
                 projectId={selectedProjectId}
-                closeModal={() => setShowArchiveProjectModal(false)}
             />
             <DeleteProjectModal
                 show={showDeleteProjectModal}
                 projectId={selectedProjectId}
                 closeModal={() => setShowDeleteProjectModal(false)}
             />
-            <ReactivateProjectModal
-                show={showReactivateProjectModal}
+            <ChangeProjectStatusModal
+                show={showChangeProjectStatusModal}
                 projectId={selectedProjectId}
-                closeModal={() => setShowReactivateProjectModal(false)}
-            />
-            <EditProjectModal
-                show={showUpdateProjectModal}
-                projectId={selectedProjectId}
-                closeModal={() => setShowUpdateProjectModal(false)}
-            />
-            <AddContributorModal
-                show={showCreateAddContributorModal}
-                closeModal={() => setShowCreateAddContributorModal(false)}
-            />
+                closeModal={() => setShowChangeProjectStatusModal(false)}
+                changeStatus={changeStatus!}
+            /> */}
         </TableContainer>
     );
 };

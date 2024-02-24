@@ -10,9 +10,9 @@ import {
 } from "../../../design-system";
 import { toIso8601 } from "../../../Utils";
 
-import { TaskCreateInput, teamMemberTasksService } from "../../../api";
+import { teamMemberTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
-import { Actions, AddTaskAction } from "../../../store";
+import { Actions, AdminAddTaskAction } from "../../../store";
 
 type CreateTaskModalProps = {
     show: boolean;
@@ -48,7 +48,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
 
     const createTask = () => {
         setIsFormSubmitting(true);
-        const input: TaskCreateInput = {
+        const input = {
             title: taskTitle,
             description: taskDescription,
             due: toIso8601(taskDue!)
@@ -57,8 +57,8 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
         teamMemberTasksService
             .createTask(input)
             .then((data) => {
-                const action: AddTaskAction = {
-                    type: Actions.ADD_TASK,
+                const action: AdminAddTaskAction = {
+                    type: Actions.ADMIN_ADD_TASK,
                     payload: data.data
                 };
                 dispatch(action);

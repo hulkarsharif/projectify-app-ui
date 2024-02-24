@@ -9,9 +9,9 @@ import {
     Button
 } from "../../../design-system";
 
-import { TaskCreateInput, adminTasksService } from "../../../api";
+import { CreateInput, adminTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
-import { Actions, AddTaskAction } from "../../../store";
+import { Actions, AdminAddTaskAction } from "../../../store";
 import { toIso8601 } from "../../../Utils";
 
 type CreateTaskModalProps = {
@@ -49,7 +49,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
     const createTask = () => {
         setIsFormSubmitting(true);
 
-        const input: TaskCreateInput = {
+        const input = {
             title: taskTitle,
             description: taskDescription,
             due: toIso8601(taskDue!)
@@ -58,8 +58,8 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
         adminTasksService
             .createTask(input)
             .then((data) => {
-                const action: AddTaskAction = {
-                    type: Actions.ADD_TASK,
+                const action: AdminAddTaskAction = {
+                    type: Actions.ADMIN_ADD_TASK,
                     payload: data.data
                 };
                 dispatch(action);

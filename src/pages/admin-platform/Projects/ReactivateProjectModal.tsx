@@ -1,8 +1,9 @@
 import toast from "react-hot-toast";
 import { useStore } from "../../../hooks";
-import { Actions, AdminReactivateProjectAction } from "../../../store";
+import { Actions, ReactivateProjectAction } from "../../../store";
 import { ConfirmationModal } from "../../components";
-import { adminProjectsService } from "../../../api";
+
+import { projectsService } from "../../../api/projects";
 
 type ReactivateProjectModalProps = {
     show: boolean;
@@ -17,11 +18,11 @@ const ReactivateProjectModal: React.FC<ReactivateProjectModalProps> = ({
 }) => {
     const { dispatch } = useStore();
     const reactivateProject = () => {
-        adminProjectsService
+        projectsService
             .reactivate(projectId)
             .then((_) => {
-                const action: AdminReactivateProjectAction = {
-                    type: Actions.ADMIN_REACTIVATE_PROJECT,
+                const action: ReactivateProjectAction = {
+                    type: Actions.REACTIVATE_PROJECT,
                     payload: { id: projectId }
                 };
                 dispatch(action);

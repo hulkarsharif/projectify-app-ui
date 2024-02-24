@@ -2,7 +2,7 @@ import { Project, ProjectContributor } from "../types";
 
 type CreateInput = Omit<Project, "id" | "status">;
 
-type CreateInputResponse = {
+type CreateAPIResponse = {
     data: Project;
 };
 
@@ -25,7 +25,7 @@ type AddContributorInputResponse = {
     data: ProjectContributor;
 };
 
-class AdminProjectsService {
+class ProjectsService {
     url: string;
     constructor() {
         this.url = `${
@@ -35,15 +35,15 @@ class AdminProjectsService {
         }/projects`;
     }
 
-    async create(input: CreateInput): Promise<CreateInputResponse> {
+    async create(input: CreateInput): Promise<CreateAPIResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
-            const response = await fetch(`${this.url}`, {
+            const response = await fetch(`${this.url}/`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
-                    authorization: `Bearer ${authToken}`
+                    authorization: `Bearer ${authToken}`,
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(input)
             });
@@ -189,4 +189,4 @@ class AdminProjectsService {
     }
 }
 
-export const adminProjectsService = new AdminProjectsService();
+export const projectsService = new ProjectsService();

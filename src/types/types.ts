@@ -77,7 +77,14 @@ export interface Project {
     endDate: string;
 }
 
-type ProjectStatus = "ACTIVE" | "ONHOLD" | "ARCHIVED" | "COMPLETED";
+export enum ProjectActions {
+    edit = "edit",
+    delete = "delete",
+    complete = " complete",
+    archived = " archived"
+}
+
+export type ProjectStatus = "ACTIVE" | "ONHOLD" | "ARCHIVED" | "COMPLETED";
 
 type ContributorStatus = "ACTIVE" | "INACTIVE";
 export interface ProjectContributor {

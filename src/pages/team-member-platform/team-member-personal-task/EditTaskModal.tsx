@@ -13,7 +13,7 @@ import {
 import { useStore } from "../../../hooks";
 import { TaskStatus, TaskUpdate } from "../../../types";
 import { teamMemberTasksService } from "../../../api";
-import { Actions, UpdateTaskAction } from "../../../store";
+import { Actions, AdminUpdateTaskAction } from "../../../store";
 import { toDateObj, toIso8601 } from "../../../Utils";
 
 type EditTaskModalProps = {
@@ -90,8 +90,8 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
             .updateTask(taskId, updateData)
             .then((_) => {
                 setIsFormSubmitting(false);
-                const action: UpdateTaskAction = {
-                    type: Actions.UPDATE_TASK,
+                const action: AdminUpdateTaskAction = {
+                    type: Actions.ADMIN_UPDATE_TASK,
                     payload: {
                         id: taskId,
                         data: updateData

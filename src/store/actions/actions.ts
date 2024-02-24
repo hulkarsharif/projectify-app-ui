@@ -14,11 +14,11 @@ import {
 export enum Actions {
     INIT_USER = "INIT_USER",
     RESET_STATE = "RESET_STATE",
-    POPULATE_TASKS = "POPULATE_TASKS",
-    ADD_TASK = "ADD_TASK",
-    CHANGE_TASK_STATUS = "CHANGE_TASK_STATUS",
-    UPDATE_TASK = "UPDATE_TASK",
-    REMOVE_TASK = "REMOVE_TASK",
+    ADMIN_POPULATE_TASKS = "ADMIN_POPULATE_TASKS",
+    ADMIN_ADD_TASK = "ADMIN_ADD_TASK",
+    ADMIN_CHANGE_TASK_STATUS = "ADMIN_CHANGE_TASK_STATUS",
+    ADMIN_UPDATE_TASK = "ADMIN_UPDATE_TASK",
+    ADMIN_REMOVE_TASK = "ADMIN_REMOVE_TASK",
 
     ADMIN_ADD_TEAM_MEMBER = "ADMIN_ADD_TEAM_MEMBER",
     ADMIN_POPULATE_TEAM_MEMBERS = "ADMIN_POPULATE_TEAM_MEMBERS",
@@ -29,13 +29,13 @@ export enum Actions {
     ADMIN_UPDATE_TEAM_MEMBER = "ADMIN_UPDATE_TEAM_MEMBER",
     ADMIN_CHANGE_PASSWORD_TEAM_MEMBER = "ADMIN_CHANGE_PASSWORD_TEAM_MEMBER",
 
-    ADMIN_ADD_PROJECT = "ADMIN_ADD_PROJECT",
-    ADMIN_POPULATE_PROJECTS = "ADMIN_POPULATE_PROJECTS",
-    ADMIN_ARCHIVE_PROJECT = "ADMIN_ARCHIVE_PROJECT",
-    ADMIN_REMOVE_PROJECT = "ADMIN_REMOVE_PROJECT",
-    ADMIN_REACTIVATE_PROJECT = "ADMIN_REACTIVATE_PROJECT",
-    ADMIN_UPDATE_PROJECT = "ADMIN_UPDATE_PROJECT",
-    ADMIN_PROJECT_ADD_CONTRIBUTOR = "ADMIN_PROJECT_ADD_CONTRIBUTOR"
+    ADD_PROJECT = "ADD_PROJECT",
+    POPULATE_PROJECTS = "POPULATE_PROJECTS",
+    ARCHIVE_PROJECT = "ARCHIVE_PROJECT",
+    REMOVE_PROJECT = "REMOVE_PROJECT",
+    REACTIVATE_PROJECT = "REACTIVATE_PROJECT",
+    UPDATE_PROJECT = "UPDATE_PROJECT",
+    PROJECT_ADD_CONTRIBUTOR = "PROJECT_ADD_CONTRIBUTOR"
 }
 
 export interface InitUserAction {
@@ -45,35 +45,34 @@ export interface InitUserAction {
 export interface ResetStateAction {
     type: Actions.RESET_STATE;
 }
-
-export interface PopulateTasksAction {
-    type: Actions.POPULATE_TASKS;
+export interface AdminPopulateTasksAction {
+    type: Actions.ADMIN_POPULATE_TASKS;
     payload: Task[];
 }
 
-export interface AddTaskAction {
-    type: Actions.ADD_TASK;
+export interface AdminAddTaskAction {
+    type: Actions.ADMIN_ADD_TASK;
     payload: Task;
 }
 
-export type ChangeTaskStatusAction = {
-    type: Actions.CHANGE_TASK_STATUS;
+export type AdminChangeTaskStatusAction = {
+    type: Actions.ADMIN_CHANGE_TASK_STATUS;
     payload: {
         id: string;
         status: TaskStatus;
     };
 };
 
-export type UpdateTaskAction = {
-    type: Actions.UPDATE_TASK;
+export type AdminUpdateTaskAction = {
+    type: Actions.ADMIN_UPDATE_TASK;
     payload: {
         id: string;
         data: TaskUpdate;
     };
 };
 
-export type RemoveTaskAction = {
-    type: Actions.REMOVE_TASK;
+export type AdminRemoveTaskAction = {
+    type: Actions.ADMIN_REMOVE_TASK;
     payload: {
         id: string;
     };
@@ -135,50 +134,50 @@ export type AdminChangePasswordTeamMemberAction = {
     };
 };
 
-export type AdminAddProjectAction = {
-    type: Actions.ADMIN_ADD_PROJECT;
+export type AddProjectAction = {
+    type: Actions.ADD_PROJECT;
     payload: Project;
 };
 
-export type AdminPopulateProjectsAction = {
-    type: Actions.ADMIN_POPULATE_PROJECTS;
+export type PopulateProjectsAction = {
+    type: Actions.POPULATE_PROJECTS;
     payload: Project[];
 };
-export type AdminArchiveProjectAction = {
-    type: Actions.ADMIN_ARCHIVE_PROJECT;
+export type ArchiveProjectAction = {
+    type: Actions.ARCHIVE_PROJECT;
     payload: {
         id: string;
     };
 };
-export type AdminRemoveProjectAction = {
-    type: Actions.ADMIN_REMOVE_PROJECT;
+export type RemoveProjectAction = {
+    type: Actions.REMOVE_PROJECT;
     payload: {
         id: string;
     };
 };
-export type AdminReactivateProjectAction = {
-    type: Actions.ADMIN_REACTIVATE_PROJECT;
+export type ReactivateProjectAction = {
+    type: Actions.REACTIVATE_PROJECT;
     payload: {
         id: string;
     };
 };
-export type AdminUpdateProjectAction = {
-    type: Actions.ADMIN_UPDATE_PROJECT;
+export type UpdateProjectAction = {
+    type: Actions.UPDATE_PROJECT;
     payload: Project;
 };
 
-export type AdminAddContributorProjectAction = {
-    type: Actions.ADMIN_PROJECT_ADD_CONTRIBUTOR;
+export type AddContributorProjectAction = {
+    type: Actions.PROJECT_ADD_CONTRIBUTOR;
     payload: ProjectContributor;
 };
 export type ActionType =
     | InitUserAction
     | ResetStateAction
-    | PopulateTasksAction
-    | AddTaskAction
-    | ChangeTaskStatusAction
-    | UpdateTaskAction
-    | RemoveTaskAction
+    | AdminPopulateTasksAction
+    | AdminAddTaskAction
+    | AdminChangeTaskStatusAction
+    | AdminUpdateTaskAction
+    | AdminRemoveTaskAction
     | AdminAddTeamMemberAction
     | AdminPopulateTeamMemberAction
     | AdminRemoveTeamMemberAction
@@ -187,10 +186,10 @@ export type ActionType =
     | AdminUpdateTeamMemberAction
     | AdminChangeTeamMemberStatusAction
     | AdminChangePasswordTeamMemberAction
-    | AdminAddProjectAction
-    | AdminPopulateProjectsAction
-    | AdminArchiveProjectAction
-    | AdminRemoveProjectAction
-    | AdminReactivateProjectAction
-    | AdminUpdateProjectAction
-    | AdminAddContributorProjectAction;
+    | AddProjectAction
+    | PopulateProjectsAction
+    | ArchiveProjectAction
+    | RemoveProjectAction
+    | ReactivateProjectAction
+    | UpdateProjectAction
+    | AddContributorProjectAction;

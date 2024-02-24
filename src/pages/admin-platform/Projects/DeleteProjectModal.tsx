@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
-import { adminProjectsService } from "../../../api";
+import { projectsService } from "../../../api/projects";
 import { useStore } from "../../../hooks";
-import { Actions, AdminRemoveProjectAction } from "../../../store";
+import { Actions, RemoveProjectAction } from "../../../store";
 import { ConfirmationModal } from "../../components";
 
 type DeleteProjectModalProps = {
@@ -17,11 +17,11 @@ const DeleteProjectModal: React.FC<DeleteProjectModalProps> = ({
 }) => {
     const { dispatch } = useStore();
     const deleteProject = () => {
-        adminProjectsService
+        projectsService
             .delete(projectId)
             .then((_) => {
-                const action: AdminRemoveProjectAction = {
-                    type: Actions.ADMIN_REMOVE_PROJECT,
+                const action: RemoveProjectAction = {
+                    type: Actions.REMOVE_PROJECT,
                     payload: { id: projectId }
                 };
                 dispatch(action);

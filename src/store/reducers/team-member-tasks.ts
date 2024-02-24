@@ -3,33 +3,33 @@ import { produce } from "immer";
 import {
     ActionType,
     Actions,
-    AddTaskAction,
-    ChangeTaskStatusAction,
-    PopulateTasksAction,
-    RemoveTaskAction,
-    UpdateTaskAction
+    AdminAddTaskAction,
+    AdminChangeTaskStatusAction,
+    AdminPopulateTasksAction,
+    AdminRemoveTaskAction,
+    AdminUpdateTaskAction
 } from "../actions";
 import { TaskState } from "../state";
 
 const teamMemberTasksReducer = produce(
     (draft: TaskState, action: ActionType): TaskState => {
         switch (action.type) {
-            case Actions.POPULATE_TASKS: {
+            case Actions.ADMIN_POPULATE_TASKS: {
                 const payload =
-                    action.payload as PopulateTasksAction["payload"];
+                    action.payload as AdminPopulateTasksAction["payload"];
                 return payload.reduce((acc: TaskState, teamMember) => {
                     acc[teamMember.id] = teamMember;
                     return acc;
                 }, {});
             }
-            case Actions.ADD_TASK: {
-                const payload = action.payload as AddTaskAction["payload"];
+            case Actions.ADMIN_ADD_TASK: {
+                const payload = action.payload as AdminAddTaskAction["payload"];
                 draft[payload.id] = payload;
                 return draft;
             }
-            case Actions.CHANGE_TASK_STATUS: {
+            case Actions.ADMIN_CHANGE_TASK_STATUS: {
                 const payload =
-                    action.payload as ChangeTaskStatusAction["payload"];
+                    action.payload as AdminChangeTaskStatusAction["payload"];
 
                 const task = draft[payload.id];
 
@@ -40,8 +40,9 @@ const teamMemberTasksReducer = produce(
                 return draft;
             }
 
-            case Actions.UPDATE_TASK: {
-                const payload = action.payload as UpdateTaskAction["payload"];
+            case Actions.ADMIN_UPDATE_TASK: {
+                const payload =
+                    action.payload as AdminUpdateTaskAction["payload"];
                 const { id, data } = payload;
                 const task = draft[id];
                 if (task) {
@@ -53,8 +54,9 @@ const teamMemberTasksReducer = produce(
                 return draft;
             }
 
-            case Actions.REMOVE_TASK: {
-                const payload = action.payload as RemoveTaskAction["payload"];
+            case Actions.ADMIN_REMOVE_TASK: {
+                const payload =
+                    action.payload as AdminRemoveTaskAction["payload"];
 
                 delete draft[payload.id];
                 return draft;

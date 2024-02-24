@@ -3,31 +3,30 @@ import { ProjectState } from "../state";
 import {
     ActionType,
     Actions,
-    AdminAddProjectAction,
-    AdminArchiveProjectAction,
-    AdminPopulateProjectsAction,
-    AdminReactivateProjectAction,
-    AdminRemoveProjectAction,
-    AdminUpdateProjectAction
+    AddProjectAction,
+    ArchiveProjectAction,
+    PopulateProjectsAction,
+    ReactivateProjectAction,
+    RemoveProjectAction,
+    UpdateProjectAction
 } from "../actions";
 
 const adminProjectsReducer = produce(
     (draft: ProjectState, action: ActionType) => {
         switch (action.type) {
-            case Actions.ADMIN_ADD_PROJECT: {
-                const payload =
-                    action.payload as AdminAddProjectAction["payload"];
+            case Actions.ADD_PROJECT: {
+                const payload = action.payload as AddProjectAction["payload"];
                 draft.push(payload);
                 return draft;
             }
-            case Actions.ADMIN_POPULATE_PROJECTS: {
+            case Actions.POPULATE_PROJECTS: {
                 const payload =
-                    action.payload as AdminPopulateProjectsAction["payload"];
+                    action.payload as PopulateProjectsAction["payload"];
                 return payload;
             }
-            case Actions.ADMIN_ARCHIVE_PROJECT: {
+            case Actions.ARCHIVE_PROJECT: {
                 const payload =
-                    action.payload as AdminArchiveProjectAction["payload"];
+                    action.payload as ArchiveProjectAction["payload"];
 
                 for (let i = 0; i < draft.length; i++) {
                     const project = draft[i];
@@ -39,15 +38,15 @@ const adminProjectsReducer = produce(
                 }
                 return draft;
             }
-            case Actions.ADMIN_REMOVE_PROJECT: {
+            case Actions.REMOVE_PROJECT: {
                 const payload =
-                    action.payload as AdminRemoveProjectAction["payload"];
+                    action.payload as RemoveProjectAction["payload"];
 
                 return draft.filter((project) => project.id !== payload.id);
             }
-            case Actions.ADMIN_REACTIVATE_PROJECT: {
+            case Actions.REACTIVATE_PROJECT: {
                 const payload =
-                    action.payload as AdminReactivateProjectAction["payload"];
+                    action.payload as ReactivateProjectAction["payload"];
                 for (let i = 0; i < draft.length; i++) {
                     const project = draft[i];
 
@@ -58,9 +57,9 @@ const adminProjectsReducer = produce(
                 }
                 return draft;
             }
-            case Actions.ADMIN_UPDATE_PROJECT: {
+            case Actions.UPDATE_PROJECT: {
                 const payload =
-                    action.payload as AdminUpdateProjectAction["payload"];
+                    action.payload as UpdateProjectAction["payload"];
 
                 for (let i = 0; i < draft.length; i++) {
                     const project = draft[i];

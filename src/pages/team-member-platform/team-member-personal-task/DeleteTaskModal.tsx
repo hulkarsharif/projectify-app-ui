@@ -1,6 +1,6 @@
 import { teamMemberTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
-import { Actions, RemoveTaskAction } from "../../../store";
+import { Actions, AdminRemoveTaskAction } from "../../../store";
 import { ConfirmationModal } from "../../components";
 
 type DeleteTaskModalProps = {
@@ -19,8 +19,8 @@ const DeleteTaskModal: React.FC<DeleteTaskModalProps> = ({
         teamMemberTasksService
             .deleteTask(taskId)
             .then((_) => {
-                const action: RemoveTaskAction = {
-                    type: Actions.REMOVE_TASK,
+                const action: AdminRemoveTaskAction = {
+                    type: Actions.ADMIN_REMOVE_TASK,
                     payload: { id: taskId }
                 };
                 dispatch(action);
