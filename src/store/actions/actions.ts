@@ -143,6 +143,7 @@ export type PopulateProjectsAction = {
     type: Actions.POPULATE_PROJECTS;
     payload: Project[];
 };
+
 export type ArchiveProjectAction = {
     type: Actions.ARCHIVE_PROJECT;
     payload: {

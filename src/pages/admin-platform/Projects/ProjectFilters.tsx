@@ -1,56 +1,63 @@
 import styled from "styled-components";
-import { Option, OptionValue, Select } from "../../../design-system";
+import { DatePickerV1, Input, Option, Select } from "../../../design-system";
+import React from "react";
+import { PageFilters } from "../../components/PageFilters";
 
-const FiltersBase = styled.section`
-    display: grid;
-    grid-template-columns: 20rem 1fr 20rem;
-    align-items: center;
-    margin-bottom: var(--space-20);
-    .filter-by-project {
-        grid-column: 1 / 2;
-    }
-    .filter-by-status {
-        grid-column: 3 / 4;
-    }
-`;
-
-const statusOptions = [
-    { label: "Active", value: "ACTIVE" },
-    { label: "ARCHIVED", value: "ARCHIVED" },
-    { label: "Completed", value: "COMPLETED" },
-    { label: "Default", value: "DEFAULT" }
-];
-
-type TeamMemberFiltersProps = {
-    status: OptionValue | undefined;
-    handleSetStatus: (value: Option) => void;
+type ProjectFiltersProps = {
+    selectedStatus: string;
+    setSelectedStatus: (option: Option) => void;
+    searchText: string;
+    setSearchText: (value: string) => void;
 };
 
-const ProjectFilters: React.FC<TeamMemberFiltersProps> = ({
-    status,
-    handleSetStatus
+const Filters = styled(PageFilters)`
+    .search {
+        margin-right: auto;
+    }
+`;
+const statusOptions = [
+    { label: "All", value: "all" },
+    { label: "Active", value: "ACTIVE" },
+    { label: "Onhold", value: "ONHOLD" },
+    { label: "Archived", value: "ARCHIVED" },
+    { label: "Completed", value: "COMPLETED" }
+];
+const ProjectFilters: React.FC<ProjectFiltersProps> = ({
+    selectedStatus,
+    setSelectedStatus,
+    searchText,
+    setSearchText
 }) => {
     return (
-        <FiltersBase>
+        <Filters>
             <Select
-                value=""
-                onSelect={() => {}}
-                options={[]}
-                shape="rounded"
-                size="md"
-                headerPlaceholder="By Project"
-                className="filter-by-project"
-            />
-            <Select
-                value={status}
-                onSelect={handleSetStatus}
+                value={selectedStatus}
+                onSelect={setSelectedStatus}
                 options={statusOptions}
                 shape="rounded"
                 size="md"
                 headerPlaceholder="By Status"
                 className="filter-by-status"
             />
-        </FiltersBase>
+            <Input
+                value={searchText}
+                onChange={setSearchText}
+                placeholder="Search..."
+                shape="rounded"
+                size="md"
+                className="search"
+            />
+
+            <Select
+                value=""
+                onSelect={() => {}}
+                options={[]}
+                shape="rounded"
+                size="md"
+                headerPlaceholder="By Due Date"
+                className="filter-by-due-date"
+            />
+        </Filters>
     );
 };
 

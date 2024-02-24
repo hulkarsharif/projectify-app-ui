@@ -60,7 +60,7 @@ const mapsStatusToBadgeColors = {
     COMPLETED: "green"
 };
 
-const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
+const ProjectTable: React.FC<ProjectsTableProps> = ({ data }) => {
     const [selectedProjectId, setSelectedProjectId] = useState("");
     const [showCompleteProjectModal, setShowECompleteProjectModal] =
         useState(false);
@@ -190,4 +190,4 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
     );
 };
 
-export { ProjectsTable };
+export { ProjectTable };
