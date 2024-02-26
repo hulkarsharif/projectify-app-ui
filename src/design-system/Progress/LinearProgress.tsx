@@ -14,13 +14,14 @@ const LinearProgress: React.FC<LinearProgressProps> = ({
     size
 }) => {
     const finalClassName = getFinalClassName(color, shape, size, className);
+    console.log(value);
 
     return (
         <div className={finalClassName}>
             <div className="linear-progress__max">
                 <div
                     className="linear-progress__progress"
-                    style={{ width: `${value}%` }}
+                    style={{ width: `${value || 0}%` }}
                 ></div>
             </div>
             <div className="linear-progress__progress-indicator">

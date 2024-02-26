@@ -52,6 +52,12 @@ export type TeamMemberStatus = "ACTIVE" | "INACTIVE" | "DEACTIVATED";
 
 export type AdminTeamMemberStatusChange = "reactivate" | "deactivate";
 
+export type ProjectStatusChange =
+    | "reactivate"
+    | "onhold"
+    | "complete"
+    | "archive";
+
 export interface TeamMember {
     id: string;
     status: TeamMemberStatus;
@@ -82,7 +88,9 @@ export enum ProjectActions {
     edit = "edit",
     delete = "delete",
     complete = " complete",
-    archived = " archived"
+    archived = " archived",
+    reactivate = "reactivate",
+    onhold = "onhold"
 }
 
 export type ProjectStatus = "ACTIVE" | "ONHOLD" | "ARCHIVED" | "COMPLETED";

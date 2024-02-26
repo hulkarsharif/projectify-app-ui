@@ -4,7 +4,7 @@ import {
     ActionType,
     Actions,
     AddProjectAction,
-    ArchiveProjectAction,
+    ChangeProjectStatusAction,
     PopulateProjectsAction,
     ReactivateProjectAction,
     RemoveProjectAction,
@@ -27,24 +27,21 @@ const adminProjectsReducer = produce(
                     return acc;
                 }, {});
             }
+
+            case Actions.CHANGE_PROJECT_STATUS: {
+                const payload =
+                    action.payload as ChangeProjectStatusAction["payload"];
+                const project = draft[payload.id];
+                if (project) {
+                    project.status = payload.status;
+                }
+
+                return draft;
+            }
         }
     }
 );
 
-//             case Actions.ARCHIVE_PROJECT: {
-//                 const payload =
-//                     action.payload as ArchiveProjectAction["payload"];
-
-//                 for (let i = 0; i < draft.length; i++) {
-//                     const project = draft[i];
-
-//                     if (project.id === payload.id) {
-//                         project.status = "ARCHIVED";
-//                         break;
-//                     }
-//                 }
-//                 return draft;
-//             }
 //             case Actions.REMOVE_PROJECT: {
 //                 const payload =
 //                     action.payload as RemoveProjectAction["payload"];
