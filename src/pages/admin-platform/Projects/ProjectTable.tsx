@@ -109,18 +109,20 @@ const ProjectTable: React.FC<ProjectsTableProps> = ({ data }) => {
                         return (
                             <TableRow key={project.id} columns={columns}>
                                 <TableBodyCell>
-                                    <Typography
-                                        variant="paragraphSM"
-                                        weight="medium"
-                                    >
-                                        {project.name}
-                                    </Typography>
-                                    {/* <Typography
-                                        variant="subtitleSM"
-                                        weight="medium"
-                                    >
-                                        {project.description}
-                                    </Typography> */}
+                                    <div>
+                                        <Typography
+                                            variant="paragraphSM"
+                                            weight="medium"
+                                        >
+                                            {project.name}
+                                        </Typography>
+                                        <Typography
+                                            variant="subtitleSM"
+                                            weight="medium"
+                                        >
+                                            {project.description}
+                                        </Typography>
+                                    </div>
                                 </TableBodyCell>
                                 <TableBodyCell>
                                     <Badge

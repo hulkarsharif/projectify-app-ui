@@ -6,8 +6,8 @@ type CreateAPIResponse = {
     data: Project;
 };
 
-interface GetAllProjectsResponse {
-    data: { projects: Project[] };
+interface GetAllAPIResponse {
+    data: Project[];
 }
 
 export type ProjectUpdateInput = {
@@ -58,7 +58,7 @@ class ProjectsService {
         }
     }
 
-    async getAll(): Promise<GetAllProjectsResponse> {
+    async getAll(): Promise<GetAllAPIResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
