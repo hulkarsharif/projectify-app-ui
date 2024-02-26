@@ -1,23 +1,22 @@
 import { useEffect, useState } from "react";
 
 import { NoDataPlaceholder, PageHeader } from "../../components";
-import noProject from "../../../assets/illustrations/no-project.svg";
-import { CreateProjectModal } from "./CreateProjectModal";
+import toast from "react-hot-toast";
+import { Option } from "../../../design-system";
 import { useStore } from "../../../hooks";
 import { projectsService } from "../../../api";
 import { Actions, PopulateProjectsAction } from "../../../store";
-import toast from "react-hot-toast";
+import { CreateProjectModal } from "./CreateProjectModal";
+import { ProjectsFilters } from "./ProjectsFilters";
 import { ProjectStatus } from "../../../types";
-import { Option } from "../../../design-system";
-import { ProjectFilters } from "./ProjectFilters";
-import { ProjectTable } from "./ProjectTable";
+import noProject from "../../../assets/illustrations/no-project.svg";
+import { ProjectsTable } from "./ProjectsTable";
 
 const AdminProjectsPage = () => {
     const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
     const [isProjectsFetching, setIsProjectsFetching] = useState(true);
     const [statusFilter, setStatusFilter] = useState("");
-    const [searchText, setSearchText] = useState("");
-
+    const [sortedBy, setSortedBy] = useState("");
     const {
         state: { projects },
         dispatch
@@ -36,49 +35,27 @@ const AdminProjectsPage = () => {
             })
             .catch((e) => {
                 const err = e as Error;
-                setIsProjectsFetching(false);
                 toast.error(err.message);
             });
     }, []);
 
+    if (isProjectsFetching) return null;
+
     const handleSetStatusFilter = (filter: Option) => {
         setStatusFilter(filter.value as ProjectStatus);
     };
-
-    if (isProjectsFetching) return null;
-
-    const projectsArr = Object.values(projects);
-
-    const filterProjects = () => {
-        let filteredProjects = projectsArr;
-        if (statusFilter && statusFilter !== "all") {
-            filteredProjects = filteredProjects.filter(
-                (project) => project.status === statusFilter
-            );
-        }
-        if (searchText) {
-            filteredProjects = filteredProjects.filter(
-                (project) =>
-                    project.name
-                        .toLowerCase()
-                        .includes(searchText.toLowerCase()) ||
-                    project.description
-                        .toLowerCase()
-                        .includes(searchText.toLowerCase())
-            );
-        }
-
-        return filteredProjects;
+    const handleSetSortBy = (sortedBy: Option) => {
+        setSortedBy(sortedBy.value as string);
     };
 
-    const filteredProjects = filterProjects();
+    const projectsArr = Object.values(projects);
 
     return (
         <>
             {!projectsArr.length ? (
                 <NoDataPlaceholder
                     illustrationUrl={noProject}
-                    text="You don't have any projects yet!"
+                    text="You don’t have any projects yet!"
                     buttonText="Add a Project"
                     buttonAction={() => setShowCreateProjectModal(true)}
                 />
@@ -91,13 +68,13 @@ const AdminProjectsPage = () => {
                             setShowCreateProjectModal(true)
                         }
                     />
-                    <ProjectFilters
-                        setSelectedStatus={handleSetStatusFilter}
+                    <ProjectsFilters
+                        sortedBy={sortedBy}
+                        setSortedBy={handleSetSortBy}
                         selectedStatus={statusFilter}
-                        searchText={searchText}
-                        setSearchText={setSearchText}
+                        setSelectedStatus={handleSetStatusFilter}
                     />
-                    <ProjectTable data={filteredProjects} />
+                    <ProjectsTable data={projectsArr} />
                 </>
             )}
             <CreateProjectModal

@@ -8,7 +8,8 @@ import {
     TeamMemberStatus,
     TeamMemberUpdate,
     Project,
-    ProjectContributor
+    ProjectContributor,
+    ProjectStatus
 } from "../../types";
 
 export enum Actions {
@@ -31,7 +32,7 @@ export enum Actions {
 
     ADD_PROJECT = "ADD_PROJECT",
     POPULATE_PROJECTS = "POPULATE_PROJECTS",
-    ARCHIVE_PROJECT = "ARCHIVE_PROJECT",
+    CHANGE_PROJECT_STATUS = "CHANGE_PROJECT_STATUS",
     REMOVE_PROJECT = "REMOVE_PROJECT",
     REACTIVATE_PROJECT = "REACTIVATE_PROJECT",
     UPDATE_PROJECT = "UPDATE_PROJECT",
@@ -144,10 +145,11 @@ export type PopulateProjectsAction = {
     payload: Project[];
 };
 
-export type ArchiveProjectAction = {
-    type: Actions.ARCHIVE_PROJECT;
+export type ChangeProjectStatusAction = {
+    type: Actions.CHANGE_PROJECT_STATUS;
     payload: {
         id: string;
+        status: ProjectStatus;
     };
 };
 export type RemoveProjectAction = {
@@ -189,7 +191,7 @@ export type ActionType =
     | AdminChangePasswordTeamMemberAction
     | AddProjectAction
     | PopulateProjectsAction
-    | ArchiveProjectAction
+    | ChangeProjectStatusAction
     | RemoveProjectAction
     | ReactivateProjectAction
     | UpdateProjectAction

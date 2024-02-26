@@ -1,13 +1,18 @@
-import { Project, ProjectContributor } from "../types";
+import {
+    Project,
+    ProjectContributor,
+    ProjectStatus,
+    ProjectWithContributors
+} from "../types";
 
-type CreateInput = Omit<Project, "id" | "status">;
+type CreateInput = Omit<Project, "id" | "status" | "progress">;
 
 type CreateAPIResponse = {
     data: Project;
 };
 
 interface GetAllAPIResponse {
-    data: Project[];
+    data: ProjectWithContributors[];
 }
 
 export type ProjectUpdateInput = {
@@ -78,16 +83,22 @@ class ProjectsService {
         }
     }
 
-    async archive(projectId: string) {
-        const rawAuthToken = localStorage.getItem("authToken");
-        const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+    async changeStatus(projectId: string, status: ProjectStatus) {
         try {
-            const response = await fetch(`${this.url}/${projectId}/archive`, {
-                method: "PATCH",
-                headers: {
-                    authorization: `Bearer ${authToken}`
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+
+            const response = await fetch(
+                `${this.url}/${projectId}/change-status`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        authorization: `Bearer ${authToken}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ status })
                 }
-            });
+            );
 
             if (!response.ok) {
                 const data = await response.json();
