@@ -116,6 +116,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
     const [changeStatusTo, setChangeStatusTo] = useState<ProjectStatus>();
     const [showChangeProjectStatusModal, setShowChangeProjectStatusModal] =
         useState(false);
+    const [showEditProjectModal, setshowEditProjectModal] = useState(false);
 
     const handleOnSelectCellMenu = (
         projectId: string,
@@ -125,6 +126,9 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
         if (statuses.includes(value)) {
             setShowChangeProjectStatusModal(true);
             setChangeStatusTo(value);
+        }
+        if (options[0].value) {
+            setshowEditProjectModal(true);
         }
     };
     return (

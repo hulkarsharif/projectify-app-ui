@@ -9,7 +9,8 @@ import {
     TeamMemberUpdate,
     Project,
     ProjectContributor,
-    ProjectStatus
+    ProjectStatus,
+    ProjectUpdate
 } from "../../types";
 
 export enum Actions {
@@ -166,7 +167,7 @@ export type ReactivateProjectAction = {
 };
 export type UpdateProjectAction = {
     type: Actions.UPDATE_PROJECT;
-    payload: Project;
+    payload: { id: string; data: ProjectUpdate };
 };
 
 export type AddContributorProjectAction = {

@@ -93,6 +93,13 @@ export enum ProjectActions {
     onhold = "onhold"
 }
 
+export type ProjectUpdate = {
+    name?: string;
+    description?: string;
+    startDate: string;
+    endDate: string;
+};
+
 export type ProjectStatus = "ACTIVE" | "ONHOLD" | "ARCHIVED" | "COMPLETED";
 
 type ContributorStatus = "ACTIVE" | "INACTIVE";
@@ -105,5 +112,5 @@ export interface ProjectContributor {
 }
 
 export interface ProjectWithContributors extends Project {
-    contributers: ProjectContributor[];
+    contributers?: ProjectContributor[];
 }
