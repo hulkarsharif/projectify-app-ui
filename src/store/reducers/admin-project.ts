@@ -38,47 +38,27 @@ const adminProjectsReducer = produce(
 
                 return draft;
             }
+
+            case Actions.UPDATE_PROJECT: {
+                const payload =
+                    action.payload as UpdateProjectAction["payload"];
+
+                const { id, data } = payload;
+                const project = draft[id];
+
+                if (project) {
+                    project.name = data.name || project.name;
+                    project.description =
+                        data.description || project.description;
+                    project.endDate = data.endDate || project.endDate;
+                }
+                return draft;
+            }
+
+            default:
+                return draft;
         }
     }
 );
-
-//             case Actions.REMOVE_PROJECT: {
-//                 const payload =
-//                     action.payload as RemoveProjectAction["payload"];
-
-//                 return draft.filter((project) => project.id !== payload.id);
-//             }
-//             case Actions.REACTIVATE_PROJECT: {
-//                 const payload =
-//                     action.payload as ReactivateProjectAction["payload"];
-//                 for (let i = 0; i < draft.length; i++) {
-//                     const project = draft[i];
-
-//                     if (project.id === payload.id) {
-//                         project.status = "ACTIVE";
-//                         break;
-//                     }
-//                 }
-//                 return draft;
-//             }
-//             case Actions.UPDATE_PROJECT: {
-//                 const payload =
-//                     action.payload as UpdateProjectAction["payload"];
-
-//                 for (let i = 0; i < draft.length; i++) {
-//                     const project = draft[i];
-
-//                     if (project.id === payload.id) {
-//                         draft[i] = payload;
-//                         break;
-//                     }
-//                 }
-//                 return draft;
-//             }
-//             default:
-//                 return draft;
-//         }
-//     }
-// );
 
 export { adminProjectsReducer };

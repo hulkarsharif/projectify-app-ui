@@ -2,6 +2,7 @@ import {
     Project,
     ProjectContributor,
     ProjectStatus,
+    ProjectUpdate,
     ProjectWithContributors
 } from "../types";
 
@@ -152,12 +153,12 @@ class ProjectsService {
         }
     }
 
-    async updateProject(projectId: string, input: ProjectUpdateInput) {
+    async update(projectId: string, input: ProjectUpdate) {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
 
-            const response = await fetch(`${this.url}/${projectId}`, {
+            const response = await fetch(`${this.url}/${projectId}/update`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
