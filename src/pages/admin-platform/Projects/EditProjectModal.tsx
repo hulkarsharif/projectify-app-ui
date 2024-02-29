@@ -13,18 +13,19 @@ import { useStore } from "../../../hooks";
 import {
     Actions,
     ChangeProjectStatusAction,
-    UpdateProjectAction
+    UpdateProjectAction,
+    AdminChangePasswordTeamMemberAction
 } from "../../../store";
-import { ProjectUpdateInput, projectsService } from "../../../api";
+import { projectsService } from "../../../api";
 import { toDateObj, toIso8601 } from "../../../Utils";
 
-type ProjectModalProps = {
+type EditProjectModalProps = {
     show: boolean;
     closeModal: () => void;
     projectId: string;
 };
 
-const ModalTitle = styled(Typography)`
+const EditProjectModalTitle = styled(Typography)`
     margin-bottom: var(--space-24);
 `;
 
@@ -40,23 +41,7 @@ const Buttons = styled.div`
     gap: var(--space-10);
 `;
 
-const ActionLink = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: var(--space-24);
-    align-items: center;
-    cursor: pointer;
-    .plus-icon {
-        fill: var(--primary-500);
-        height: 1.6rem;
-        width: 1.6rem;
-        margin-right: 0.6rem;
-    }
-    .update-password__link {
-        color: var(--primary-500);
-    }
-`;
-const EditProjectModal: React.FC<ProjectModalProps> = ({
+const EditProjectModal: React.FC<EditProjectModalProps> = ({
     show,
     closeModal,
     projectId
@@ -65,20 +50,20 @@ const EditProjectModal: React.FC<ProjectModalProps> = ({
     const [description, setDescription] = useState("");
     const [startDate, setStartDate] = useState<Date | null>();
     const [endDate, setEndDate] = useState<Date | null>();
-    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
-    const [isError, setIsError] = useState<boolean>(false);
 
     const {
         dispatch,
         state: { projects }
     } = useStore();
 
+    const [selectedProjectId, setSelectedProjectId] = useState("");
     useEffect(() => {
         const project = projects[projectId];
         if (project) {
             setName(project.name);
             setDescription(project.description);
             setStartDate(toDateObj(project.startDate));
+            setEndDate(toDateObj(project.endDate));
         }
     }, [projectId]);
 
@@ -99,7 +84,7 @@ const EditProjectModal: React.FC<ProjectModalProps> = ({
         };
 
         projectsService
-            .updateProject(projectId, updateData)
+            .update(projectId, updateData)
             .then((_) => {
                 const action: UpdateProjectAction = {
                     type: Actions.UPDATE_PROJECT,
@@ -117,13 +102,13 @@ const EditProjectModal: React.FC<ProjectModalProps> = ({
 
     return (
         <Modal show={show} position="center">
-            <ModalTitle variant="paragraphLG" weight="medium">
+            <EditProjectModalTitle variant="paragraphLG" weight="medium">
                 Edit Project
-            </ModalTitle>
+            </EditProjectModalTitle>
             <Inputs>
                 <Input
                     type="text"
-                    placeholder="Name"
+                    placeholder="Project Name"
                     value={name}
                     onChange={handleOnChangeName}
                     shape="rounded"
@@ -131,7 +116,7 @@ const EditProjectModal: React.FC<ProjectModalProps> = ({
                 />
                 <Input
                     type="text"
-                    placeholder="Last Name"
+                    placeholder="Project Description"
                     value={description}
                     onChange={handleOnChangeDescription}
                     shape="rounded"
@@ -144,6 +129,13 @@ const EditProjectModal: React.FC<ProjectModalProps> = ({
                     placeholder="Join Date"
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
+                />
+                <DatePickerV1
+                    inputSize="lg"
+                    shape="rounded"
+                    placeholder="Due Date"
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
                 />
             </Inputs>
 

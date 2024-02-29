@@ -165,9 +165,13 @@ export type ReactivateProjectAction = {
         id: string;
     };
 };
+
 export type UpdateProjectAction = {
     type: Actions.UPDATE_PROJECT;
-    payload: { id: string; data: ProjectUpdate };
+    payload: {
+        id: string;
+        data: ProjectUpdate;
+    };
 };
 
 export type AddContributorProjectAction = {

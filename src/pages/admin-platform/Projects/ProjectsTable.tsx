@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import {
     Badge,
-    BadgeColors,
     Menu,
     MenuOption,
     Typography,
@@ -14,10 +13,15 @@ import {
     LinearProgress
 } from "../../../design-system";
 import { Scrollable } from "../../components";
-import { ProjectStatus, ProjectWithContributors } from "../../../types";
+import {
+    ProjectStatus,
+    ProjectWithContributors,
+    ProjectActions
+} from "../../../types";
 import { formatAsMMMddYYYY, formatDeadline } from "../../../Utils";
 import { useState } from "react";
 import { ChangeProjectStatusModal } from "./ChangeProjectStatusModal";
+import { EditProjectModal } from "./EditProjectModal";
 
 type ProjectsTableProps = {
     data: ProjectWithContributors[];
@@ -39,6 +43,7 @@ const renderDeadline = (isoDate: string) => {
     );
 };
 const statuses = ["ACTIVE", "COMPLETED", "ARCHIVED", "ONHOLD"];
+
 const options: MenuOption[] = [
     { label: "Edit", iconName: "edit", value: "edit", color: "primary" },
     {
@@ -123,11 +128,10 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
         value: ProjectStatus
     ) => {
         setSelectedProjectId(projectId);
-        if (statuses.includes(value)) {
+        if (statuses.includes(value as ProjectStatus)) {
             setShowChangeProjectStatusModal(true);
-            setChangeStatusTo(value);
-        }
-        if (options[0].value) {
+            setChangeStatusTo(value as ProjectStatus);
+        } else if (options[0].value === "edit") {
             setshowEditProjectModal(true);
         }
     };
@@ -233,6 +237,11 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <EditProjectModal
+                show={showEditProjectModal}
+                closeModal={() => setshowEditProjectModal(false)}
+                projectId={selectedProjectId}
+            />
             <ChangeProjectStatusModal
                 show={showChangeProjectStatusModal}
                 changeStatusTo={changeStatusTo!}
