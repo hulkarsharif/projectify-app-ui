@@ -14,6 +14,7 @@ import { ProjectsTable } from "./ProjectsTable";
 
 const AdminProjectsPage = () => {
     const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
+
     const [isProjectsFetching, setIsProjectsFetching] = useState(true);
     const [statusFilter, setStatusFilter] = useState("");
     const [sortedBy, setSortedBy] = useState("");

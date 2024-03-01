@@ -1,17 +1,20 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 import toast from "react-hot-toast";
+
 import {
-    Typography,
-    Modal,
     Input,
+    Button,
+    Typography,
     DatePickerV1,
-    Button
+    Modal,
+    DatePickerOnChangeDateType
 } from "../../../design-system";
-import { useStore } from "../../../hooks";
-import { Actions, UpdateProjectAction } from "../../../store";
+import { useEffect, useState } from "react";
 import { projectsService } from "../../../api";
 import { toDateObj, toIso8601 } from "../../../Utils";
+import { useStore } from "../../../hooks";
+import { Actions, UpdateProjectAction } from "../../../store";
+import { ProjectUpdate } from "../../../types";
 
 type EditProjectModalProps = {
     show: boolean;
@@ -19,7 +22,7 @@ type EditProjectModalProps = {
     projectId: string;
 };
 
-const EditProjectModalTitle = styled(Typography)`
+const ModalTitle = styled(Typography)`
     margin-bottom: var(--space-24);
 `;
 
@@ -46,8 +49,6 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
     const [endDate, setEndDate] = useState<Date | null>();
     const { state } = useStore();
 
-    const { dispatch } = useStore();
-
     useEffect(() => {
         const { projects } = state;
         const project = projects[projectId];
@@ -59,15 +60,20 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
         }
     }, [projectId]);
 
+    const { dispatch } = useStore();
+
     const onChangeName = (value: string) => {
         setName(value);
     };
+
     const onChangeDescription = (value: string) => {
         setDescription(value);
     };
+
     const onChangeStartDate = (date: Date) => {
         setStartDate(date);
     };
+
     const onChangeEndDate = (date: Date) => {
         setEndDate(date);
     };
@@ -75,6 +81,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
     const cancel = () => {
         closeModal();
     };
+
     const updateProject = () => {
         const input: ProjectUpdate = {};
         if (name) {
@@ -93,26 +100,27 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
             .then((_) => {
                 const action: UpdateProjectAction = {
                     type: Actions.UPDATE_PROJECT,
-                    payload: { id: projectId, data: input }
+                    payload: {
+                        id: projectId,
+                        data: input
+                    }
                 };
                 dispatch(action);
                 closeModal();
-                toast.success("Project has been successfully updated");
+                toast.success("Project has been successfully updated"!);
             })
             .catch((e) => {
                 const err = e as Error;
                 toast.error(err.message);
             });
     };
-
     return (
         <Modal show={show} position="center">
-            <EditProjectModalTitle variant="paragraphLG" weight="medium">
-                Edit Project
-            </EditProjectModalTitle>
+            <ModalTitle variant="paragraphLG" weight="medium">
+                New Project
+            </ModalTitle>
             <Inputs>
                 <Input
-                    type="text"
                     placeholder="Project Name"
                     value={name}
                     onChange={onChangeName}
@@ -120,30 +128,28 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
                     size="lg"
                 />
                 <Input
-                    type="text"
+                    type="textarea"
                     placeholder="Project Description"
                     value={description}
                     onChange={onChangeDescription}
                     shape="rounded"
                     size="lg"
                 />
-
                 <DatePickerV1
                     inputSize="lg"
                     shape="rounded"
-                    placeholder="Join Date"
-                    selected={startDate}
+                    placeholder="Star Date"
                     onChange={onChangeStartDate}
+                    selected={startDate}
                 />
                 <DatePickerV1
                     inputSize="lg"
                     shape="rounded"
-                    placeholder="Due Date"
-                    selected={endDate}
+                    placeholder="End Date"
                     onChange={onChangeEndDate}
+                    selected={endDate}
                 />
             </Inputs>
-
             <Buttons>
                 <Button
                     color="secondary"

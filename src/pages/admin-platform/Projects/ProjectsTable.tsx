@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useState } from "react";
 import {
     Badge,
     Menu,
@@ -15,7 +16,6 @@ import {
 import { Scrollable } from "../../components";
 import { ProjectStatus, ProjectWithContributors } from "../../../types";
 import { formatAsMMMddYYYY, formatDeadline } from "../../../Utils";
-import { useState } from "react";
 import { ChangeProjectStatusModal } from "./ChangeProjectStatusModal";
 import { EditProjectModal } from "./EditProjectModal";
 
@@ -121,10 +121,10 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
 
     const handleOnSelectCellMenu = (
         projectId: string,
-        value: ProjectStatus | string
+        value: ProjectStatus | "edit"
     ) => {
         setSelectedProjectId(projectId);
-        if (statuses.includes(value as ProjectStatus)) {
+        if (statuses.includes(value)) {
             setShowChangeProjectStatusModal(true);
             setChangeStatusTo(value as ProjectStatus);
         } else if (options[0].value === "edit") {
@@ -148,7 +148,6 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                     </TableHead>
                     <TableBody>
                         {data.map((project) => {
-                            console.log(project);
                             return (
                                 <TableRow key={project.id} columns={columns}>
                                     <TableBodyCell>
@@ -222,7 +221,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                                             onSelect={(value) =>
                                                 handleOnSelectCellMenu(
                                                     project.id,
-                                                    value
+                                                    value as ProjectStatus
                                                 )
                                             }
                                         />
@@ -233,16 +232,17 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <EditProjectModal
-                show={showEditProjectModal}
-                closeModal={() => setshowEditProjectModal(false)}
-                projectId={selectedProjectId}
-            />
+
             <ChangeProjectStatusModal
                 show={showChangeProjectStatusModal}
                 changeStatusTo={changeStatusTo!}
                 projectId={selectedProjectId}
                 closeModal={() => setShowChangeProjectStatusModal(false)}
+            />
+            <EditProjectModal
+                show={showEditProjectModal}
+                closeModal={() => setshowEditProjectModal(false)}
+                projectId={selectedProjectId}
             />
         </>
     );

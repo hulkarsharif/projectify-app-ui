@@ -157,8 +157,7 @@ class ProjectsService {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
-
-            const response = await fetch(`${this.url}/${projectId}/update`, {
+            const response = await fetch(`${this.url}/${projectId}`, {
                 method: "PATCH",
                 headers: {
                     authorization: `Bearer ${authToken}`,

@@ -84,6 +84,10 @@ export interface Project {
     endDate: string;
 }
 
+export interface ProjectWithContributors extends Project {
+    contributers?: ProjectContributor[];
+}
+
 export enum ProjectActions {
     edit = "edit",
     delete = "delete",
@@ -93,13 +97,12 @@ export enum ProjectActions {
     onhold = "onhold"
 }
 
-export type ProjectUpdate = {
+export interface ProjectUpdate {
     name?: string;
     description?: string;
-    startDate: string;
-    endDate: string;
-};
-
+    startDate?: string;
+    endDate?: string;
+}
 export type ProjectStatus = "ACTIVE" | "ONHOLD" | "ARCHIVED" | "COMPLETED";
 
 type ContributorStatus = "ACTIVE" | "INACTIVE";
@@ -109,8 +112,4 @@ export interface ProjectContributor {
     lastName: string;
     joinedAt: string;
     status: ContributorStatus;
-}
-
-export interface ProjectWithContributors extends Project {
-    contributers?: ProjectContributor[];
 }
