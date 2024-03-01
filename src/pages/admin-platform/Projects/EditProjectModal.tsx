@@ -6,16 +6,10 @@ import {
     Modal,
     Input,
     DatePickerV1,
-    Button,
-    Icon
+    Button
 } from "../../../design-system";
 import { useStore } from "../../../hooks";
-import {
-    Actions,
-    ChangeProjectStatusAction,
-    UpdateProjectAction,
-    AdminChangePasswordTeamMemberAction
-} from "../../../store";
+import { Actions, UpdateProjectAction } from "../../../store";
 import { projectsService } from "../../../api";
 import { toDateObj, toIso8601 } from "../../../Utils";
 
@@ -56,7 +50,6 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
         state: { projects }
     } = useStore();
 
-    const [selectedProjectId, setSelectedProjectId] = useState("");
     useEffect(() => {
         const project = projects[projectId];
         if (project) {

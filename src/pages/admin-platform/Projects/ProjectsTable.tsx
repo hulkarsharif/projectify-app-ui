@@ -13,11 +13,7 @@ import {
     LinearProgress
 } from "../../../design-system";
 import { Scrollable } from "../../components";
-import {
-    ProjectStatus,
-    ProjectWithContributors,
-    ProjectActions
-} from "../../../types";
+import { ProjectStatus, ProjectWithContributors } from "../../../types";
 import { formatAsMMMddYYYY, formatDeadline } from "../../../Utils";
 import { useState } from "react";
 import { ChangeProjectStatusModal } from "./ChangeProjectStatusModal";
@@ -125,7 +121,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
 
     const handleOnSelectCellMenu = (
         projectId: string,
-        value: ProjectStatus
+        value: ProjectStatus | string
     ) => {
         setSelectedProjectId(projectId);
         if (statuses.includes(value as ProjectStatus)) {
@@ -226,7 +222,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                                             onSelect={(value) =>
                                                 handleOnSelectCellMenu(
                                                     project.id,
-                                                    value as ProjectStatus
+                                                    value
                                                 )
                                             }
                                         />
