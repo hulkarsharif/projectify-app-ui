@@ -153,18 +153,18 @@ class ProjectsService {
         }
     }
 
-    async update(projectId: string, updateData: ProjectUpdate) {
-        const rawAuthToken = localStorage.getItem("authToken");
-        const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
-
+    async update(projectId: string, input: ProjectUpdate) {
         try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+
             const response = await fetch(`${this.url}/${projectId}/update`, {
                 method: "PATCH",
                 headers: {
                     authorization: `Bearer ${authToken}`,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(updateData)
+                body: JSON.stringify(input)
             });
 
             if (!response.ok) {

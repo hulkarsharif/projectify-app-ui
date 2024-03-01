@@ -44,13 +44,12 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
     const [description, setDescription] = useState("");
     const [startDate, setStartDate] = useState<Date | null>();
     const [endDate, setEndDate] = useState<Date | null>();
+    const { state } = useStore();
 
-    const {
-        dispatch,
-        state: { projects }
-    } = useStore();
+    const { dispatch } = useStore();
 
     useEffect(() => {
+        const { projects } = state;
         const project = projects[projectId];
         if (project) {
             setName(project.name);
@@ -60,28 +59,41 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
         }
     }, [projectId]);
 
-    const handleOnChangeName = (value: string) => {
+    const onChangeName = (value: string) => {
         setName(value);
     };
-
-    const handleOnChangeDescription = (value: string) => {
+    const onChangeDescription = (value: string) => {
         setDescription(value);
     };
+    const onChangeStartDate = (date: Date) => {
+        setStartDate(date);
+    };
+    const onChangeEndDate = (date: Date) => {
+        setEndDate(date);
+    };
 
+    const cancel = () => {
+        closeModal();
+    };
     const updateProject = () => {
-        const updateData = {
-            name,
-            description,
-            startDate: toIso8601(startDate!),
-            endDate: toIso8601(endDate!)
-        };
+        const input: ProjectUpdate = {};
+        if (name) {
+            input.name = name;
+        }
+        if (description) {
+            input.description = description;
+        }
+        if (startDate && endDate) {
+            input.startDate = toIso8601(startDate);
+            input.endDate = toIso8601(endDate);
+        }
 
         projectsService
-            .update(projectId, updateData)
+            .update(projectId, input)
             .then((_) => {
                 const action: UpdateProjectAction = {
                     type: Actions.UPDATE_PROJECT,
-                    payload: { data: updateData, id: projectId }
+                    payload: { id: projectId, data: input }
                 };
                 dispatch(action);
                 closeModal();
@@ -103,7 +115,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
                     type="text"
                     placeholder="Project Name"
                     value={name}
-                    onChange={handleOnChangeName}
+                    onChange={onChangeName}
                     shape="rounded"
                     size="lg"
                 />
@@ -111,7 +123,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
                     type="text"
                     placeholder="Project Description"
                     value={description}
-                    onChange={handleOnChangeDescription}
+                    onChange={onChangeDescription}
                     shape="rounded"
                     size="lg"
                 />
@@ -121,14 +133,14 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
                     shape="rounded"
                     placeholder="Join Date"
                     selected={startDate}
-                    onChange={(date) => setStartDate(date)}
+                    onChange={onChangeStartDate}
                 />
                 <DatePickerV1
                     inputSize="lg"
                     shape="rounded"
                     placeholder="Due Date"
                     selected={endDate}
-                    onChange={(date) => setEndDate(date)}
+                    onChange={onChangeEndDate}
                 />
             </Inputs>
 
@@ -139,7 +151,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
                     shape="rounded"
                     variant="outlined"
                     fullWidth
-                    onClick={closeModal}
+                    onClick={cancel}
                 >
                     Cancel
                 </Button>
@@ -148,9 +160,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
                     shape="rounded"
                     color="primary"
                     fullWidth
-                    onClick={() => {
-                        updateProject();
-                    }}
+                    onClick={updateProject}
                 >
                     Save
                 </Button>
