@@ -1,7 +1,7 @@
 import React from "react";
 import { TopNavigation } from "./Section/Navigation/Top-navigation";
 import styled from "styled-components";
-
+import { Features } from "./Section/Features";
 const Base = styled.div`
     max-width: 144rem;
     margin: 0 auto;
@@ -14,6 +14,7 @@ const HomePage = () => {
         <Base>
             <h1>Get the best for your team</h1>
             <TopNavigation />
+            <Features />
         </Base>
     );
 };

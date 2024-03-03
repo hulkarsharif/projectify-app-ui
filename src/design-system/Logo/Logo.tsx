@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../assets/image/logo.jpg";
+import logo from "../../assets/illustrations/logo.svg";
 import { trimWhiteSpaces } from "../utils";
 
 import "./Logo.css";
