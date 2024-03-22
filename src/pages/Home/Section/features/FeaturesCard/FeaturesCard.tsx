@@ -1,13 +1,13 @@
 import styled, { css } from "styled-components";
-import { features } from "./Features";
-import { Typography } from "../../../../design-system";
+import { features } from "./data";
+import { Typography } from "../../../../../design-system";
 
-import frameIcon from "../../../../assets/illustrations/frame.icon.svg";
-import teamIcon from "../../../../assets/illustrations/team-icon.svg";
-import personIcon from "../../../../assets/illustrations/person.-icon.svg";
-import timeIcon from "../../../../assets/illustrations/time-icon.svg";
-import documentIcon from "../../../../assets/illustrations/document-icon.svg";
-import clockIcon from "../../../../assets/illustrations/clock-icon.svg";
+import frameIcon from "../../../../../assets/illustrations/frame.icon.svg";
+import teamIcon from "../../../../../assets/illustrations/team-icon.svg";
+import personIcon from "../../../../../assets/illustrations/person.-icon.svg";
+import timeIcon from "../../../../../assets/illustrations/time-icon.svg";
+import documentIcon from "../../../../../assets/illustrations/document-icon.svg";
+import clockIcon from "../../../../../assets/illustrations/clock-icon.svg";
 
 type Feature = {
     icon: string;

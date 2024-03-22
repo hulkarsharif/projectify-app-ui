@@ -1,10 +1,10 @@
-import frameIcon from "../../../../assets/illustrations/frame.icon.svg";
-import teamIcon from "../../../../assets/illustrations/team-icon.svg";
-import personIcon from "../../../../assets/illustrations/person.-icon.svg";
+import frameIcon from "../../../../../assets/illustrations/frame.icon.svg";
+import teamIcon from "../../../../../assets/illustrations/team-icon.svg";
+import personIcon from "../../../../../assets/illustrations/person.-icon.svg";
 
-import timeIcon from "../../../../assets/illustrations/time-icon.svg";
-import documentIcon from "../../../../assets/illustrations/document-icon.svg";
-import clockIcon from "../../../../assets/illustrations/clock-icon.svg";
+import timeIcon from "../../../../../assets/illustrations/time-icon.svg";
+import documentIcon from "../../../../../assets/illustrations/document-icon.svg";
+import clockIcon from "../../../../../assets/illustrations/clock-icon.svg";
 
 export const features = [
     {

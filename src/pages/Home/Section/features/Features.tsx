@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Button, Typography } from "../../../design-system";
+import { Button, Typography } from "../../../../design-system";
 import { FeaturesCard } from "./FeaturesCard/FeaturesCard";
-import { features } from "./FeaturesCard/Features";
+import { features } from "./FeaturesCard/data";
 
 const SectionBase = styled.section`
     max-width: 192rem;

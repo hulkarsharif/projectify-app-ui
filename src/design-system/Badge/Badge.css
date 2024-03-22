@@ -22,6 +22,10 @@
     border-style: solid;
 }
 
+.badge-contained {
+    padding: 0 var(--space-12);
+}
+
 .badge__text {
     font-family: inherit;
     font-size: var(--font-size-12);

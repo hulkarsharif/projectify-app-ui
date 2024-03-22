@@ -1,7 +1,7 @@
 import React from "react";
 import { TopNavigation } from "./Section/Navigation/Top-navigation";
 import styled from "styled-components";
-import { Features } from "./Section/Features";
+import { Features } from "./Section/features/Features";
 const Base = styled.div`
     max-width: 144rem;
     margin: 0 auto;

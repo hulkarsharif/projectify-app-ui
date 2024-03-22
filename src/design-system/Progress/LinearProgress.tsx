@@ -14,7 +14,6 @@ const LinearProgress: React.FC<LinearProgressProps> = ({
     size
 }) => {
     const finalClassName = getFinalClassName(color, shape, size, className);
-    console.log(value);
 
     return (
         <div className={finalClassName}>
