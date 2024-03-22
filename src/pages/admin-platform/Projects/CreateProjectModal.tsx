@@ -1,19 +1,19 @@
 import styled from "styled-components";
+import toast from "react-hot-toast";
 
 import {
     Input,
     Button,
     Typography,
     DatePickerV1,
-    Modal
+    Modal,
+    DatePickerOnChangeDateType
 } from "../../../design-system";
 import { useState } from "react";
-
-import { projectsService } from "../../../api/projects";
-import toast from "react-hot-toast";
+import { projectsService } from "../../../api";
 import { toIso8601 } from "../../../Utils";
-import { Actions, AddProjectAction } from "../../../store";
 import { useStore } from "../../../hooks";
+import { Actions, AddProjectAction } from "../../../store";
 
 type CreateProjectModalProps = {
     show: boolean;
@@ -40,25 +40,28 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
     show,
     closeModal
 }) => {
-    const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
-    const [name, setName] = useState<string>("");
-    const [description, setDescription] = useState<string>("");
     const [startDate, setStartDate] = useState<Date | null>();
     const [endDate, setEndDate] = useState<Date | null>();
-    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
-    const [isError, setIsError] = useState<boolean>(false);
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
 
     const { dispatch } = useStore();
 
-    const handleOnChangeName = (value: string) => {
+    const onChangeDatePicker = (dates: DatePickerOnChangeDateType) => {
+        if (Array.isArray(dates)) {
+            const [start, end] = dates;
+            setStartDate(start);
+            setEndDate(end);
+        }
+    };
+
+    const onChangeName = (value: string) => {
         setName(value);
     };
 
-    const handleOnChangeDescription = (value: string) => {
+    const onChangeDescription = (value: string) => {
         setDescription(value);
     };
-
-    const isFormSubmittable = name && description && startDate && endDate;
 
     const clearFields = () => {
         setName("");
@@ -83,6 +86,11 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
         projectsService
             .create(input)
             .then((data) => {
+                const action: AddProjectAction = {
+                    type: Actions.ADMIN_ADD_PROJECT,
+                    payload: data.data
+                };
+                dispatch(action);
                 clearFields();
                 closeModal();
                 toast.success("Project has been successfully created"!);
@@ -92,7 +100,6 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
                 toast.error(err.message);
             });
     };
-
     return (
         <Modal show={show} position="center">
             <ModalTitle variant="paragraphLG" weight="medium">
@@ -100,10 +107,9 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
             </ModalTitle>
             <Inputs>
                 <Input
-                    type="text"
                     placeholder="Project Name"
                     value={name}
-                    onChange={handleOnChangeName}
+                    onChange={onChangeName}
                     shape="rounded"
                     size="lg"
                 />
@@ -111,23 +117,18 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
                     type="textarea"
                     placeholder="Project Description"
                     value={description}
-                    onChange={handleOnChangeDescription}
+                    onChange={onChangeDescription}
                     shape="rounded"
                     size="lg"
                 />
                 <DatePickerV1
                     inputSize="lg"
                     shape="rounded"
-                    placeholder="Start Date"
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                />
-                <DatePickerV1
-                    inputSize="lg"
-                    shape="rounded"
-                    placeholder="End Date"
-                    selected={endDate}
-                    onChange={(date) => setEndDate(date)}
+                    placeholder="Star Date - End Date"
+                    onChange={onChangeDatePicker}
+                    selectsRange={true}
+                    startDate={startDate}
+                    endDate={endDate}
                 />
             </Inputs>
             <Buttons>
@@ -146,7 +147,6 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
                     shape="rounded"
                     color="primary"
                     fullWidth
-                    disabled={isFormSubmitting || !isFormSubmittable}
                     onClick={createProject}
                 >
                     Save

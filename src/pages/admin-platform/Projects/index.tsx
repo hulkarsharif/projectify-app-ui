@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-
-import { NoDataPlaceholder, PageHeader } from "../../components";
 import toast from "react-hot-toast";
+import { NoDataPlaceholder, PageHeader } from "../../components";
 import { Option } from "../../../design-system";
 import { useStore } from "../../../hooks";
 import { projectsService } from "../../../api";
-import { Actions, PopulateProjectsAction } from "../../../store";
+import { Actions, AdminPopulateProjectsAction } from "../../../store";
 import { CreateProjectModal } from "./CreateProjectModal";
 import { ProjectsFilters } from "./ProjectsFilters";
 import { ProjectStatus } from "../../../types";
@@ -14,9 +13,8 @@ import { ProjectsTable } from "./ProjectsTable";
 
 const AdminProjectsPage = () => {
     const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
-
     const [isProjectsFetching, setIsProjectsFetching] = useState(true);
-    const [statusFilter, setStatusFilter] = useState("");
+    const [statusFilter, setStatusFilter] = useState("all");
     const [sortedBy, setSortedBy] = useState("");
     const {
         state: { projects },
@@ -24,11 +22,11 @@ const AdminProjectsPage = () => {
     } = useStore();
 
     useEffect(() => {
-        projectsService
+        projectService
             .getAll()
             .then((data) => {
-                const action: PopulateProjectsAction = {
-                    type: Actions.POPULATE_PROJECTS,
+                const action: AdminPopulateProjectsAction = {
+                    type: Actions.ADMIN_POPULATE_PROJECTS,
                     payload: data.data
                 };
                 dispatch(action);
@@ -50,6 +48,12 @@ const AdminProjectsPage = () => {
     };
 
     const projectsArr = Object.values(projects);
+
+    const filterProjects = (value: string) => {
+        if (value === "all") return projectsArr;
+        return projectsArr.filter((project) => project.status === value);
+    };
+    const filteredProjects = filterProjects(statusFilter);
 
     return (
         <>
@@ -75,7 +79,7 @@ const AdminProjectsPage = () => {
                         selectedStatus={statusFilter}
                         setSelectedStatus={handleSetStatusFilter}
                     />
-                    <ProjectsTable data={projectsArr} />
+                    <ProjectsTable data={filteredProjects} />
                 </>
             )}
             <CreateProjectModal
