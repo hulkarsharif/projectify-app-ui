@@ -1,3 +1,9 @@
+export interface ApiError {
+    message: string;
+    isOperational: boolean;
+    success: boolean;
+}
+
 export enum UserRole {
     admin = "admin",
     teamMember = "teamMember"
@@ -48,10 +54,9 @@ export enum AdminTeamMemberActions {
     reactivate = "reactivate",
     deactivate = "deactivate"
 }
+
 export type TeamMemberStatus = "ACTIVE" | "INACTIVE" | "DEACTIVATED";
-
 export type AdminTeamMemberStatusChange = "reactivate" | "deactivate";
-
 export type ProjectStatusChange =
     | "reactivate"
     | "onhold"
@@ -74,6 +79,29 @@ export interface TeamMemberUpdate {
     position?: string;
     joinDate?: string;
 }
+
+export type ProjectStatus = "ACTIVE" | "ONHOLD" | "ARCHIVED" | "COMPLETED";
+export type ContributorStatus = "ACTIVE" | "INACTIVE";
+
+export interface ProjectContributorBase {
+    id: string;
+    firstName: string;
+    lastName: string;
+    position: string;
+}
+
+export interface ProjectContributor extends ProjectContributorBase {
+    joinedAt: string;
+    status: ContributorStatus;
+}
+
+export interface AssignedContrubtorsState {
+    [projectId: string]: ProjectContributor;
+}
+
+export interface NotAssignedContributorsState {
+    [projectId: string]: ProjectContributorBase;
+}
 export interface Project {
     id: string;
     name: string;
@@ -85,16 +113,11 @@ export interface Project {
 }
 
 export interface ProjectWithContributors extends Project {
-    contributers?: ProjectContributor[];
-}
-
-export enum ProjectActions {
-    edit = "edit",
-    delete = "delete",
-    complete = " complete",
-    archived = " archived",
-    reactivate = "reactivate",
-    onhold = "onhold"
+    numberOfContributors: number;
+    contributors: {
+        assignedContributors: AssignedContrubtorsState;
+        notAssignedContributors: NotAssignedContributorsState;
+    };
 }
 
 export interface ProjectUpdate {
@@ -102,14 +125,4 @@ export interface ProjectUpdate {
     description?: string;
     startDate?: string;
     endDate?: string;
-}
-export type ProjectStatus = "ACTIVE" | "ONHOLD" | "ARCHIVED" | "COMPLETED";
-
-type ContributorStatus = "ACTIVE" | "INACTIVE";
-export interface ProjectContributor {
-    id: string;
-    firstName: string;
-    lastName: string;
-    joinedAt: string;
-    status: ContributorStatus;
 }

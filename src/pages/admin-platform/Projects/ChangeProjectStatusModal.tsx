@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
-import { projectsService } from "../../../api";
+import { projectService } from "../../../api";
 import { useStore } from "../../../hooks";
-import { Actions, AdminChangeProjectStatusAction } from "../../../store";
+import { Actions, ChangeProjectStatusAction } from "../../../store";
 import { ConfirmationModal } from "../../components";
 import { ProjectStatus } from "../../../types";
 
@@ -38,10 +38,10 @@ const ChangeProjectStatusModal: React.FC<ChangeProjectStatusModalProps> = ({
     const { dispatch } = useStore();
 
     const changeProjectStatus = () => {
-        projectsService
+        projectService
             .changeStatus(projectId, changeStatusTo)
             .then((_) => {
-                const action: AdminChangeProjectStatusAction = {
+                const action: ChangeProjectStatusAction = {
                     type: Actions.ADMIN_CHANGE_PROJECT_STATUS,
                     payload: {
                         id: projectId,

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Modal } from "../../../design-system";
-import { projectsService } from "../../../api";
+import { projectService } from "../../../api";
 import { useStore } from "../../../hooks";
 import {
     Actions,

@@ -10,7 +10,7 @@ import {
     DatePickerOnChangeDateType
 } from "../../../design-system";
 import { useState } from "react";
-import { projectsService } from "../../../api";
+import { projectService } from "../../../api";
 import { toIso8601 } from "../../../Utils";
 import { useStore } from "../../../hooks";
 import { Actions, AddProjectAction } from "../../../store";
@@ -83,7 +83,7 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
             endDate: toIso8601(endDate!)
         };
 
-        projectsService
+        projectService
             .create(input)
             .then((data) => {
                 const action: AddProjectAction = {

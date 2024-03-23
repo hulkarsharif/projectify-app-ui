@@ -14,9 +14,9 @@ type CreateAPIResponse = {
     data: Project;
 };
 
-type GetAllAPIResponse {
+type GetAllAPIResponse = {
     data: ProjectWithContributors[];
-}
+};
 
 type GetContributorsAPIResponse = {
     data: {
@@ -33,11 +33,7 @@ type AddContributorAPIResponse = {
     };
 };
 
-
-
-
-
-class ProjectsService {
+class ProjectService {
     url: string;
     constructor() {
         this.url = `${
@@ -63,7 +59,6 @@ class ProjectsService {
                 const data = await response.json();
                 throw new Error(data.message);
             }
-
             return response.json();
         } catch (error) {
             throw error;
@@ -94,7 +89,6 @@ class ProjectsService {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
-
             const response = await fetch(
                 `${this.url}/${projectId}/change-status`,
                 {
@@ -104,49 +98,6 @@ class ProjectsService {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({ status })
-                }
-            );
-
-            if (!response.ok) {
-                const data = await response.json();
-                throw new Error(data.message);
-            }
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    async delete(projectId: string) {
-        const rawAuthToken = localStorage.getItem("authToken");
-        const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
-        try {
-            const response = await fetch(`${this.url}/${projectId}`, {
-                method: "DELETE",
-                headers: {
-                    authorization: `Bearer ${authToken}`
-                }
-            });
-
-            if (!response.ok) {
-                const data = await response.json();
-                throw new Error(data.message);
-            }
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    async reactivate(projectId: string) {
-        const rawAuthToken = localStorage.getItem("authToken");
-        const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
-        try {
-            const response = await fetch(
-                `${this.url}/${projectId}/reactivate`,
-                {
-                    method: "PATCH",
-                    headers: {
-                        authorization: `Bearer ${authToken}`
-                    }
                 }
             );
 
@@ -181,6 +132,60 @@ class ProjectsService {
         }
     }
 
+    async getContributors(
+        projectId: string
+    ): Promise<GetContributorsAPIResponse> {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+
+            const response = await fetch(
+                `${this.url}/${projectId}/contributors`,
+                {
+                    headers: {
+                        authorization: `Bearer ${authToken}`
+                    }
+                }
+            );
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async changeContributorStatus(
+        projectId: string,
+        teamMemberId: string,
+        status: ContributorStatus
+    ) {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+
+            const response = await fetch(
+                `${this.url}/${projectId}/contributors/${teamMemberId}/change-status`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        authorization: `Bearer ${authToken}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ status })
+                }
+            );
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
+
     private async addContributor(
         teamMemberId: string,
         projectId: string
@@ -195,9 +200,9 @@ class ProjectsService {
                     method: "POST",
                     headers: {
                         authorization: `Bearer ${authToken}`,
-                        "Content-Type": "application/json",
+                        "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ teamMemberId }),
+                    body: JSON.stringify({ teamMemberId })
                 }
             );
             if (!response.ok) {
@@ -234,4 +239,4 @@ class ProjectsService {
     }
 }
 
-export const projectsService = new ProjectsService();
+export const projectService = new ProjectService();

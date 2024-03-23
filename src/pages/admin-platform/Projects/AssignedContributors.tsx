@@ -14,7 +14,7 @@ import {
 } from "../../../design-system";
 import { Scrollable } from "../../components";
 import { ProjectContributor } from "./ProjectContributor";
-import { formatAsMMMddYYYY } from "../../../utils";
+import { formatAsMMMddYYYY } from "../../../Utils";
 import { projectService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, AdminUpdateProjectContributorStatus } from "../../../store";

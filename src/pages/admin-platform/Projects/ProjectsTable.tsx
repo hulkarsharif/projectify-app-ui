@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { useState } from "react";
+import styled from "styled-components";
 import {
     Badge,
     Menu,
@@ -16,12 +16,16 @@ import {
 import { Scrollable } from "../../components";
 import { ProjectStatus, ProjectWithContributors } from "../../../types";
 import { formatAsMMMddYYYY, formatDeadline } from "../../../Utils";
+
 import { ChangeProjectStatusModal } from "./ChangeProjectStatusModal";
 import { EditProjectModal } from "./EditProjectModal";
+import { ManageContributorsModal } from "./ManageContributorsModal";
 
 type ProjectsTableProps = {
     data: ProjectWithContributors[];
 };
+
+type ActionsOnProject = ProjectStatus | "edit" | "contributors";
 
 const renderDeadline = (isoDate: string) => {
     const formattedDeadline = formatDeadline(isoDate);
@@ -39,7 +43,6 @@ const renderDeadline = (isoDate: string) => {
     );
 };
 const statuses = ["ACTIVE", "COMPLETED", "ARCHIVED", "ONHOLD"];
-
 const options: MenuOption[] = [
     { label: "Edit", iconName: "edit", value: "edit", color: "primary" },
     {
@@ -65,14 +68,20 @@ const options: MenuOption[] = [
         iconName: "pause-in-circle",
         value: statuses[3],
         color: "danger"
+    },
+    {
+        label: "Manage Contributors",
+        iconName: "members",
+        value: "contributors",
+        color: "primary"
     }
 ];
 
 const allowedActions = {
-    ACTIVE: [options[0], options[2], options[3], options[4]],
-    ARCHIVED: [options[0], options[1], options[2], options[4]],
-    ONHOLD: [options[0], options[1], options[2], options[3]],
-    COMPLETED: [options[0], options[1], options[3], options[4]]
+    ACTIVE: [options[5], options[0], options[2], options[3], options[4]],
+    ARCHIVED: [options[5], options[0], options[1], options[2], options[4]],
+    ONHOLD: [options[5], options[0], options[1], options[2], options[3]],
+    COMPLETED: [options[5], options[0], options[1], options[3], options[4]]
 };
 
 const columns = ["20%", "10%", "20%", "15%", "15%", "10%", "10%"];
@@ -117,18 +126,23 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
     const [changeStatusTo, setChangeStatusTo] = useState<ProjectStatus>();
     const [showChangeProjectStatusModal, setShowChangeProjectStatusModal] =
         useState(false);
-    const [showEditProjectModal, setshowEditProjectModal] = useState(false);
+    const [showEditProjectModal, setShowEditProjectModal] = useState(false);
+    const [showManageContributorsModel, setShowManageContributorsModal] =
+        useState(false);
 
     const handleOnSelectCellMenu = (
         projectId: string,
-        value: ProjectStatus | "edit"
+        value: ActionsOnProject
     ) => {
         setSelectedProjectId(projectId);
         if (statuses.includes(value)) {
             setShowChangeProjectStatusModal(true);
             setChangeStatusTo(value as ProjectStatus);
-        } else if (options[0].value === "edit") {
-            setshowEditProjectModal(true);
+            return;
+        } else if (value === "edit") {
+            setShowEditProjectModal(true);
+        } else if (value === "contributors") {
+            setShowManageContributorsModal(true);
         }
     };
     return (
@@ -198,19 +212,14 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                                         </Typography>
                                     </TableBodyCell>
                                     <TableBodyCell>
-                                        <Typography
-                                            variant="paragraphSM"
-                                            weight="medium"
-                                        >
-                                            {renderDeadline(project.endDate)}
-                                        </Typography>
+                                        {renderDeadline(project.endDate)}
                                     </TableBodyCell>
                                     <TableBodyCell>
                                         <Typography
                                             variant="paragraphSM"
                                             weight="medium"
                                         >
-                                            {project.contributers?.length || 0}
+                                            {project.numberOfContributors || 0}
                                         </Typography>
                                     </TableBodyCell>
                                     <TableBodyCell>
@@ -221,7 +230,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                                             onSelect={(value) =>
                                                 handleOnSelectCellMenu(
                                                     project.id,
-                                                    value as ProjectStatus
+                                                    value as ActionsOnProject
                                                 )
                                             }
                                         />
@@ -232,7 +241,6 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                     </TableBody>
                 </Table>
             </TableContainer>
-
             <ChangeProjectStatusModal
                 show={showChangeProjectStatusModal}
                 changeStatusTo={changeStatusTo!}
@@ -241,8 +249,13 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
             />
             <EditProjectModal
                 show={showEditProjectModal}
-                closeModal={() => setshowEditProjectModal(false)}
+                closeModal={() => setShowEditProjectModal(false)}
                 projectId={selectedProjectId}
+            />
+            <ManageContributorsModal
+                show={showManageContributorsModel}
+                projectId={selectedProjectId}
+                closeModal={() => setShowManageContributorsModal(false)}
             />
         </>
     );

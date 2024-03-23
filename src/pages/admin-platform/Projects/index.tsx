@@ -3,8 +3,8 @@ import toast from "react-hot-toast";
 import { NoDataPlaceholder, PageHeader } from "../../components";
 import { Option } from "../../../design-system";
 import { useStore } from "../../../hooks";
-import { projectsService } from "../../../api";
-import { Actions, AdminPopulateProjectsAction } from "../../../store";
+import { projectService } from "../../../api";
+import { Actions, PopulateProjectsAction } from "../../../store";
 import { CreateProjectModal } from "./CreateProjectModal";
 import { ProjectsFilters } from "./ProjectsFilters";
 import { ProjectStatus } from "../../../types";
@@ -25,7 +25,7 @@ const AdminProjectsPage = () => {
         projectService
             .getAll()
             .then((data) => {
-                const action: AdminPopulateProjectsAction = {
+                const action: PopulateProjectsAction = {
                     type: Actions.ADMIN_POPULATE_PROJECTS,
                     payload: data.data
                 };

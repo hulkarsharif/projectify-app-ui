@@ -5,7 +5,7 @@ import { Button, Checkbox, Icon, Typography } from "../../../design-system";
 import { Scrollable } from "../../components";
 import { ProjectContributor } from "./ProjectContributor";
 import { useState } from "react";
-import { projectsService } from "../../../api";
+import { projectService } from "../../../api";
 import { Actions, AdminUpdateProjectContributorsList } from "../../../store";
 import { useStore } from "../../../hooks";
 

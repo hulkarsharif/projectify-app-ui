@@ -9,8 +9,11 @@ import {
     TeamMemberUpdate,
     Project,
     ProjectContributor,
+    ProjectContributorBase,
     ProjectStatus,
-    ProjectUpdate
+    ProjectUpdate,
+    ProjectWithContributors,
+    ContributorStatus
 } from "../../types";
 
 export enum Actions {
@@ -31,13 +34,13 @@ export enum Actions {
     ADMIN_UPDATE_TEAM_MEMBER = "ADMIN_UPDATE_TEAM_MEMBER",
     ADMIN_CHANGE_PASSWORD_TEAM_MEMBER = "ADMIN_CHANGE_PASSWORD_TEAM_MEMBER",
 
-    ADD_PROJECT = "ADD_PROJECT",
-    POPULATE_PROJECTS = "POPULATE_PROJECTS",
-    CHANGE_PROJECT_STATUS = "CHANGE_PROJECT_STATUS",
-    REMOVE_PROJECT = "REMOVE_PROJECT",
-    REACTIVATE_PROJECT = "REACTIVATE_PROJECT",
-    UPDATE_PROJECT = "UPDATE_PROJECT",
-    PROJECT_ADD_CONTRIBUTOR = "PROJECT_ADD_CONTRIBUTOR"
+    ADMIN_ADD_PROJECT = "ADMIN_ADD_PROJECT",
+    ADMIN_POPULATE_PROJECTS = "ADMIN_POPULATE_PROJECTS",
+    ADMIN_CHANGE_PROJECT_STATUS = "ADMIN_CHANGE_PROJECT_STATUS",
+    ADMIN_UPDATE_PROJECT = "ADMIN_UPDATE_PROJECT",
+    ADMIN_POPULATE_PROJECT_CONTRIBUTORS = "ADMIN_POPULATE_PROJECT_CONTRIBUTORS",
+    ADMIN_UPDATE_PROJECT_CONTRIBUTOR_STATUS = "ADMIN_UPDATE_PROJECT_CONTRIBUTOR_STATUS",
+    ADMIN_UPDATE_PROJECT_CONTRIBUTORS_LIST = "ADMIN_UPDATE_PROJECT_CONTRIBUTORS_LIST"
 }
 
 export interface InitUserAction {
@@ -137,46 +140,61 @@ export type AdminChangePasswordTeamMemberAction = {
 };
 
 export type AddProjectAction = {
-    type: Actions.ADD_PROJECT;
+    type: Actions.ADMIN_ADD_PROJECT;
     payload: Project;
 };
 
 export type PopulateProjectsAction = {
-    type: Actions.POPULATE_PROJECTS;
-    payload: Project[];
+    type: Actions.ADMIN_POPULATE_PROJECTS;
+    payload: ProjectWithContributors[];
 };
 
 export type ChangeProjectStatusAction = {
-    type: Actions.CHANGE_PROJECT_STATUS;
+    type: Actions.ADMIN_CHANGE_PROJECT_STATUS;
     payload: {
         id: string;
         status: ProjectStatus;
     };
 };
-export type RemoveProjectAction = {
-    type: Actions.REMOVE_PROJECT;
-    payload: {
-        id: string;
-    };
-};
-export type ReactivateProjectAction = {
-    type: Actions.REACTIVATE_PROJECT;
-    payload: {
-        id: string;
-    };
-};
 
 export type UpdateProjectAction = {
-    type: Actions.UPDATE_PROJECT;
+    type: Actions.ADMIN_UPDATE_PROJECT;
     payload: {
         id: string;
         data: ProjectUpdate;
     };
 };
 
-export type AddContributorProjectAction = {
-    type: Actions.PROJECT_ADD_CONTRIBUTOR;
-    payload: ProjectContributor;
+export type AdminPopulateProjectContributorsAction = {
+    type: Actions.ADMIN_POPULATE_PROJECT_CONTRIBUTORS;
+    payload: {
+        id: string;
+        data: {
+            assignedContributors: ProjectContributor[];
+            notAssignedContributors: ProjectContributorBase[];
+        };
+    };
+};
+
+export type AdminUpdateProjectContributorStatus = {
+    type: Actions.ADMIN_UPDATE_PROJECT_CONTRIBUTOR_STATUS;
+    payload: {
+        id: string;
+        status: ContributorStatus;
+        teamMemberId: string;
+    };
+};
+
+export type AdminUpdateProjectContributorsList = {
+    type: Actions.ADMIN_UPDATE_PROJECT_CONTRIBUTORS_LIST;
+    payload: {
+        id: string;
+        newContributors: {
+            teamMemberId: string;
+            status: ContributorStatus;
+            joinedAt: string;
+        }[];
+    };
 };
 export type ActionType =
     | InitUserAction
@@ -197,7 +215,7 @@ export type ActionType =
     | AddProjectAction
     | PopulateProjectsAction
     | ChangeProjectStatusAction
-    | RemoveProjectAction
-    | ReactivateProjectAction
     | UpdateProjectAction
-    | AddContributorProjectAction;
+    | AdminPopulateProjectContributorsAction
+    | AdminUpdateProjectContributorStatus
+    | AdminUpdateProjectContributorsList;

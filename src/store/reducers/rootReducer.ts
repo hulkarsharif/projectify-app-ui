@@ -1,25 +1,24 @@
 import { userReducer } from "./User";
 import { adminTasksReducer } from "./admin-tasks";
-import { GlobalState } from "../state";
-import { ActionType } from "../actions";
-import { teamMemberTasksReducer } from "./team-member-tasks";
+import { GlobalState, initialState } from "../state";
+import { ActionType, Actions } from "../actions";
 import { adminTeamMembersReducer } from "./admin-team-members";
-import { adminProjectsReducer } from "./admin-project";
+import { projectsReducer } from "./admin-project";
+import { teamMemberTasksReducer } from "./team-member-tasks";
 
 const rootReducer = (state: GlobalState, action: ActionType): GlobalState => {
+    if (action.type === Actions.RESET_STATE) {
+        return initialState;
+    }
     const newState: GlobalState = {
         user: userReducer(state.user, action),
         adminPersonalTasks: adminTasksReducer(state.adminPersonalTasks, action),
         teamMembers: adminTeamMembersReducer(state.teamMembers, action),
+        projects: projectsReducer(state.projects, action),
         teamMemberPersonalTasks: teamMemberTasksReducer(
             state.teamMemberPersonalTasks,
             action
-        ),
-        adminTeamMembers: adminTeamMembersReducer(
-            state.adminTeamMembers,
-            action
-        ),
-        projects: adminProjectsReducer(state.projects, action)
+        )
     };
 
     return newState;
