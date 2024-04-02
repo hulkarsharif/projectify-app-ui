@@ -26,6 +26,7 @@ const App = () => {
                 <Link to="admin/forgot-password">Admin Forgot Password</Link>
                 <Link to="admin/reset-password">Admin Reset Password</Link>
                 <Link to="admin/platform">Admin Platform</Link>
+
                 <Link to="team-member/create-password">
                     Team Member Create Password
                 </Link>

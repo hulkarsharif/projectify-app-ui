@@ -8,7 +8,6 @@ import styled from "styled-components";
 
 const Form = styled.form`
     width: 100%;
-
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-20);
