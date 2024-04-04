@@ -2,7 +2,7 @@ import React from "react";
 import { Label } from "../Label";
 import { CheckboxProps, CheckboxShape } from "./types";
 
-import "./Checkbox.css";
+import "./Checkingbox.css";
 import { trimWhiteSpaces } from "../utils";
 import { Icon, IconName } from "../Icon";
 
