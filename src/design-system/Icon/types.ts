@@ -32,7 +32,7 @@ export type IconName =
     | "play-in-circle";
 
 export type IconProps = {
-    iconName?: IconName;
+    iconName: IconName | string;
     className?: string;
     height?: string;
     width?: string;

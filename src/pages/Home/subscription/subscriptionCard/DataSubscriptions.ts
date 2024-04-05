@@ -1,49 +1,50 @@
 import starter from "../../../../assets/illustrations/starter.svg";
 import professional from "../../../../assets/illustrations/professional.svg";
 import enterprise from "../../../../assets/illustrations/enterprise.svg";
-export const subscriptions = [
+
+export const rightPlans = [
     {
-        paragraph: "FOR INDIVIDUALS",
-        icon: starter,
+        type: "secondary",
+        subtitle: "For Individuals",
+        iconName: "paperPlane",
+        checkColor: "check-green",
         title: "Starter",
-        price: "$9.99 / month",
-        description: [
-            "Projects: 10",
-            "Users: 10",
-            "Storage: 10 GB",
-            "Email Support"
-        ],
-        button: "Try free for 15 days"
+        priceMonthly: "$9.99",
+        priceYearly: "$102.99",
+        projects: "10",
+        users: "10",
+        storage: "10GB",
+        extras: ["Email Support"]
     },
     {
-        paragraph: "FOR SMALL TEAMS",
-        icon: professional,
+        type: "primary",
+        subtitle: "For Small Teams",
+        iconName: "airplane",
+        checkColor: "check-orange",
         title: "Professional",
-        price: "$29.99 / month",
-        description: [
-            "Projects: Unlimited",
-            "Users: 25",
-            "Storage: 50 GB",
-            "Priority Email Support",
-            "Advenced Analytics"
-        ],
-        button: "Try free for 15 days"
+        priceMonthly: "$29.99",
+        priceYearly: "$311.99",
+        projects: "Unlimited",
+        users: "25",
+        storage: "50GB",
+        extras: ["Priority Email Support", "Advanced Analytics"]
     },
     {
-        paragraph: "FOR LARGE TEAMS",
-        icon: enterprise,
+        type: "secondary",
+        subtitle: "For Large Teams",
+        iconName: "rocket",
+        checkColor: "check-green",
         title: "Enterprise",
-        price: "$99.99 / month",
-        description: [
-            "Projects: Unlimited",
-            "Users: Scalable",
-            "Storage: Scalable",
+        priceMonthly: "$99.99",
+        priceYearly: "$1080.99",
+        projects: "Unlimited",
+        users: "Scalable",
+        storage: "Scalable",
+        extras: [
             "24/7 Priority Support",
-            "Dedicating Account Managing",
-            "Advenced Analytics",
+            "Dedicated Account Manager",
             "Single Sign-On (SSO)",
-            "Custom Integratetion"
-        ],
-        button: "Try free for 15 days"
+            "Custom Integrations"
+        ]
     }
 ];
