@@ -110,7 +110,7 @@ export const router = createBrowserRouter(
             />
 
             <Route
-                path="team-member/forget-password"
+                path="team-member/forgot-password"
                 element={
                     <Auth
                         component={<TeamMemberForgotPassword />}

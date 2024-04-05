@@ -63,7 +63,6 @@ const Signin = () => {
             toast.error(error.message);
         }
     };
-
     return (
         <AuthWrapper imageUrl={samarkand} pageTitle="Sign In">
             <Form onSubmit={signIn}>

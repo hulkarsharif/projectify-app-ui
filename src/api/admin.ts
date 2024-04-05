@@ -65,6 +65,7 @@ class Admin {
             throw error;
         }
     }
+
     async forgetPassword(email: string) {
         try {
             const response = await fetch(`${this.url}/forgot-password`, {

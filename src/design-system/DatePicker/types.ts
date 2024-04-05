@@ -9,7 +9,7 @@ interface BaseDataPickerProps {
     disabled?: boolean;
     inputSize?: InputSize;
     shape?: "rounded" | "circle";
-    toggleCalendarOnIconClick?: boolean;
+    // toggleCalendarOnIconClick?: boolean;
 }
 
 type SelectsRangeProps =
