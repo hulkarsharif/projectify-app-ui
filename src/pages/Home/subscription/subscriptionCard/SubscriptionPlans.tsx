@@ -1,7 +1,7 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { rightPlans } from "./DataSubscriptions";
 import { Switch } from "../../../../design-system";
-import { Button, Typography } from "../../../../design-system";
+import { Typography } from "../../../../design-system";
 import { useState } from "react";
 import Subscription from "../Subscription";
 
