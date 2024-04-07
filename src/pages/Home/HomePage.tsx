@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Features } from "./Section/features/Features";
 import SubscriptionPlans from "./subscription/subscriptionCard/SubscriptionPlans";
 import Clients from "./clients/Clients";
+import Footer from "./footer/footer";
 
 const Base = styled.div`
     max-width: 144rem;
@@ -20,6 +21,7 @@ const HomePage = () => {
                 <Features />
                 <SubscriptionPlans />
                 <Clients />
+                <Footer />
             </Base>
         </>
     );
