@@ -5,6 +5,7 @@ import { Features } from "./Section/features/Features";
 import SubscriptionPlans from "./subscription/subscriptionCard/SubscriptionPlans";
 import Clients from "./clients/Clients";
 import Footer from "./footer/footer";
+import Demo from "./demo/Demo";
 
 const Base = styled.div`
     max-width: 144rem;
@@ -21,6 +22,7 @@ const HomePage = () => {
                 <Features />
                 <SubscriptionPlans />
                 <Clients />
+                <Demo />
                 <Footer />
             </Base>
         </>

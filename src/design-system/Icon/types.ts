@@ -29,7 +29,8 @@ export type IconName =
     | "plus"
     | "x-in-circle"
     | "pause-in-circle"
-    | "play-in-circle";
+    | "play-in-circle"
+    | "user";
 
 export type IconProps = {
     iconName: IconName | string;
