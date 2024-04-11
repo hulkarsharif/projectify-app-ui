@@ -6,6 +6,7 @@ import SubscriptionPlans from "./subscription/subscriptionCard/SubscriptionPlans
 import Clients from "./clients/Clients";
 import Footer from "./footer/footer";
 import Demo from "./demo/Demo";
+import Contact from "./contact/Contact";
 
 const Base = styled.div`
     max-width: 144rem;
@@ -24,6 +25,7 @@ const HomePage = () => {
                 <Clients />
                 <Demo />
                 <Footer />
+                <Contact />
             </Base>
         </>
     );
