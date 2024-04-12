@@ -27,30 +27,31 @@ const Header = styled(Typography)`
 const BaseWrapper = styled.div`
     /* gap: var(--space-34); */
     display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: var(--space-30);
 `;
 
 const ImageWrapper = styled.div`
-    width: 100%;
-    display: flex;
-    margin-bottom: var(--space-80);
-    align-items: center;
-    justify-content: center;
+    width: 50%;
 `;
 const Image = styled.img`
-    width: 50%;
+    width: 100%;
 `;
 
 const RightForm = styled.form`
-    width: 100%;
+    width: 50%;
     display: flex;
     flex-direction: column;
+    gap: var(--space-20);
 
-    *:not(:nth-child(3)) {
+    /* *:not(:nth-child(3)) {
         margin-bottom: var(--space-20);
     }
     *:nth-child(3) {
         margin-bottom: var(--space-30);
-    }
+    } */
 `;
 const InputWrapper = styled.div`
     /* background-color: green; */

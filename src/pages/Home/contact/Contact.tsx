@@ -10,21 +10,28 @@ const ContactSectionBase = styled.div`
     display: flex;
     gap: var(--space-30);
     padding: var(--space-100) 0;
-    flex-direction: row;
 `;
 
 const ContactLeft = styled.div`
-    display: flex;
     flex-direction: column;
-    gap: var(--space-18);
+    align-items: unset;
+    justify-content: unset;
+    display: flex;
+    gap: var(--space-30);
+    width: calc(100% - 37rem);
 `;
 
-const ContactText = styled(Typography)``;
+const ContactText = styled(Typography)`
+    width: 50%;
+    font-weight: var(--font-weight-700);
+`;
 
 const SocialWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: var(--space-30);
+
+    width: calc(100% - 37rem);
 `;
 
 const ContactWrapper = styled.div`
@@ -54,7 +61,8 @@ const SocialIcon = styled(Icon)`
 `;
 
 const ImageWrapper = styled.div`
-    display: flex;
+    /* display: flex;
+    width: calc(100% - 37rem); */
 `;
 
 const Image = styled.img`
@@ -65,7 +73,9 @@ const Contact = () => {
         <ContactSection id="contact">
             <ContactSectionBase>
                 <ContactLeft>
-                    <Logo size="sm" layout="horizontal" />
+                    <Link href="#home">
+                        <Logo size="sm" layout="horizontal" />
+                    </Link>
 
                     <ContactText variant="paragraphSM" weight="bold">
                         Unleashing Success One Project at a Time!

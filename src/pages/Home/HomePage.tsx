@@ -24,8 +24,8 @@ const HomePage = () => {
                 <SubscriptionPlans />
                 <Clients />
                 <Demo />
-                <Footer />
                 <Contact />
+                <Footer />
             </Base>
         </>
     );
