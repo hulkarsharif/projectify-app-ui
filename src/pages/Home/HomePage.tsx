@@ -8,6 +8,7 @@ import Footer from "./footer/footer";
 import Demo from "./demo/Demo";
 import Contact from "./contact/Contact";
 import Hero from "./hero/Hero";
+import Brands from "./brands/Brands";
 
 const Base = styled.div`
     max-width: 144rem;
@@ -22,6 +23,7 @@ const HomePage = () => {
                 <h1>Get the best for your team</h1>
                 <TopNavigation />
                 <Hero />
+                <Brands />
                 <Features />
                 <SubscriptionPlans />
                 <Clients />

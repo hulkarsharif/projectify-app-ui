@@ -8,13 +8,13 @@ type PropsType = {
 };
 
 const StyledLink = styled(Link)`
-    color: var(--primary-500);
-    font-weight: var(--font-weight-600);
+    color: var(--jaguar-900);
+    font-weight: var(--font-weight-500);
 `;
 
 const NavigationLink: React.FC<PropsType> = ({ linkText, linkTo }) => {
     return (
-        <StyledLink to={linkTo} className="paragraph-md">
+        <StyledLink to={linkTo} className="paragraph-sm">
             {linkText}
         </StyledLink>
     );

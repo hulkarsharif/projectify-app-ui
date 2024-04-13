@@ -1,13 +1,19 @@
 import styled from "styled-components";
 import { Typography, Button } from "../../../design-system";
+import { SectionBase, Container } from "../components";
 import LayoutWrapper from "../components/LayoutWrapper";
 
 import members from "../Images/TFrame.svg";
 import completed from "../Images/completed.svg";
+import google from "../Images/googleImage.svg";
+import march from "../Images/march.svg";
+import team from "../Images/2.svg";
 
-const HeroSectionBase = styled(LayoutWrapper)``;
+const HeroSectionBase = styled(SectionBase)`
+    padding-bottom: 0;
+`;
 
-const HeroContainer = styled.div`
+const HeroContainer = styled(Container)`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,10 +42,35 @@ const HeroImage = styled.img`
     height: auto;
 `;
 
-const GreenIcon = styled.img`
+const GreenBadge = styled.img`
     position: absolute;
     top: 40%;
-    right: 0;
+    right: -4%;
+    width: 12.5%;
+`;
+
+const GoogleImage = styled.img`
+    position: absolute;
+    bottom: 2%;
+    right: -8%;
+    width: 27%;
+    max-width: 100%;
+    height: auto;
+`;
+
+const DataImage = styled.img`
+    position: absolute;
+    top: 18%;
+    left: -3%;
+    width: 11%;
+`;
+
+const Team = styled.img`
+    position: absolute;
+    bottom: 12%;
+    left: -12%;
+    width: 25%;
+    height: auto;
 `;
 const Hero = () => {
     return (
@@ -64,7 +95,10 @@ const Hero = () => {
 
                 <HeroImageWrapper>
                     <HeroImage src={members} alt="Kanban Board" />
-                    <GreenIcon src={completed} alt="Green" />
+                    <GreenBadge src={completed} alt="Green" />
+                    <GoogleImage src={google} alt="" />
+                    <DataImage src={march} alt="" />
+                    <Team src={team} alt="" />
                 </HeroImageWrapper>
             </HeroContainer>
         </HeroSectionBase>

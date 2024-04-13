@@ -1,22 +1,31 @@
 import styled from "styled-components";
 import { NavigationLink } from "./Links";
 import { Button, Logo } from "../../../../design-system";
+import { Container, SectionSidePadding } from "../../components";
 
 const links = [
-    { text: "About", link: "https://google.com" },
-    { text: "Testimonial", link: "https://info.com" },
-    { text: "Contact Us", link: "" }
+    { text: "About", link: "#about" },
+    { text: "Testimonials", link: "#testimonials" },
+    { text: "Contact", link: "#contact" }
 ];
 
-const HeaderBase = styled.header`
+const Base = styled.nav`
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    max-width: 192rem;
-    padding: 1rem 15.2rem;
+    height: 7.2rem;
+    padding: 0 var(--space-100);
+
+    ${SectionSidePadding}
 `;
 
-const NavigationLinks = styled.header`
+const TopNavigationContainer = styled(Container)`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+const NavigationLinks = styled.div`
     display: flex;
     gap: var(--space-40);
 `;
@@ -28,37 +37,40 @@ const Buttons = styled.div`
 
 const TopNavigation = () => {
     return (
-        <HeaderBase>
-            <Logo size="sm" layout="horizontal" />
-            <NavigationLinks>
-                {links.map((link, idx) => (
-                    <NavigationLink
-                        key={idx}
-                        linkText={link.text}
-                        linkTo={link.link}
-                    />
-                ))}
-            </NavigationLinks>
-            <Buttons>
-                <Button
-                    variant="outlined"
-                    shape="rounded"
-                    size="md"
-                    color="primary"
-                    onClick={() => {}}
-                >
-                    Sign Up
-                </Button>
-                <Button
-                    shape="rounded"
-                    size="md"
-                    color="primary"
-                    onClick={() => {}}
-                >
-                    Sign In
-                </Button>
-            </Buttons>
-        </HeaderBase>
+        <Base>
+            {" "}
+            <TopNavigationContainer>
+                <Logo size="sm" layout="horizontal" />
+                <NavigationLinks>
+                    {links.map((link, index) => (
+                        <NavigationLink
+                            key={index}
+                            linkText={link.text}
+                            linkTo={link.link}
+                        />
+                    ))}
+                </NavigationLinks>
+                <Buttons>
+                    <Button
+                        variant="outlined"
+                        size="md"
+                        shape="rounded"
+                        color="primary"
+                        onClick={() => {}}
+                    >
+                        Sign Up
+                    </Button>
+                    <Button
+                        size="md"
+                        shape="rounded"
+                        color="primary"
+                        onClick={() => {}}
+                    >
+                        Sign In
+                    </Button>
+                </Buttons>
+            </TopNavigationContainer>
+        </Base>
     );
 };
 
