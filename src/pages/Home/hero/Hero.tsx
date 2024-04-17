@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { Typography, Button } from "../../../design-system";
 import { SectionBase, Container } from "../components";
-import LayoutWrapper from "../components/LayoutWrapper";
 
 import members from "../Images/TFrame.svg";
 import completed from "../Images/completed.svg";

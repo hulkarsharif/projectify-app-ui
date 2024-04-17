@@ -6,7 +6,7 @@ import creative from "../Images/creative.svg";
 import shopify from "../Images/shopify.svg";
 import amazon from "../Images/amazon.svg";
 
-const companies = [google, amazon, airbnb, creative, shopify];
+const companies = [google, airbnb, creative, shopify, amazon];
 
 const BrandSectionBase = styled(SectionBase)`
     padding-top: 3.5rem;

@@ -1,43 +1,40 @@
 import React from "react";
 import { Typography, Logo, Icon } from "../../../design-system";
 import map from "../Images/map.png";
-import LayoutWrapper from "../components/LayoutWrapper";
+import { Container, SectionBase } from "../components";
 import styled from "styled-components";
 
-const ContactSection = styled(LayoutWrapper)``;
+const ContactSection = styled(SectionBase)``;
 
-const ContactSectionBase = styled.div`
+const ContactSectionContainer = styled(Container)`
     display: flex;
     gap: var(--space-30);
-    padding: var(--space-100) 0;
 `;
 
-const ContactLeft = styled.div`
+const ContactLeftLogo = styled.div`
     flex-direction: column;
     align-items: unset;
     justify-content: unset;
     display: flex;
     gap: var(--space-30);
-    width: calc(100% - 37rem);
+    width: calc((100% - 6rem) / 3);
 `;
 
 const ContactText = styled(Typography)`
-    width: 50%;
-    font-weight: var(--font-weight-700);
+    width: 70%;
 `;
 
 const SocialWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: var(--space-30);
-
-    width: calc(100% - 37rem);
+    width: calc((100% -6rem) / 3);
 `;
 
 const ContactWrapper = styled.div`
     display: flex;
     align-items: center;
-    gap: var(--space-20);
+    gap: var(--space-12);
 `;
 const ContactIcon = styled(Icon)`
     width: var(--space-20);
@@ -61,18 +58,17 @@ const SocialIcon = styled(Icon)`
 `;
 
 const ImageWrapper = styled.div`
-    /* display: flex;
-    width: calc(100% - 37rem); */
+    width: calc((100% - 6rem) / 3);
+    height: auto;
+    border-radius: var(--border-radius-32);
+    border: 0;
 `;
 
-const Image = styled.img`
-    width: 37rem;
-`;
 const Contact = () => {
     return (
         <ContactSection id="contact">
-            <ContactSectionBase>
-                <ContactLeft>
+            <ContactSectionContainer>
+                <ContactLeftLogo>
                     <Link href="#home">
                         <Logo size="sm" layout="horizontal" />
                     </Link>
@@ -80,7 +76,7 @@ const Contact = () => {
                     <ContactText variant="paragraphSM" weight="bold">
                         Unleashing Success One Project at a Time!
                     </ContactText>
-                </ContactLeft>
+                </ContactLeftLogo>
                 <SocialWrapper>
                     <ContactWrapper>
                         <ContactIcon iconName="phone" />
@@ -118,14 +114,9 @@ const Contact = () => {
                 </SocialWrapper>
                 <ImageWrapper>
                     {" "}
-                    <Link
-                        href="https://www.google.com/maps/dir/40.721471,-73.7644025/205+Allen+St,+New+York,+NY+10002/@40.7379299,-74.0472305,11z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x89c2598474c10bcf:0xd62d514f22a03f04!2m2!1d-73.9890753!2d40.7227487?entry=ttu"
-                        target="_blank"
-                    >
-                        <Image src={map} alt="office location" />
-                    </Link>
+                    <img src={map} alt="Map" />
                 </ImageWrapper>
-            </ContactSectionBase>
+            </ContactSectionContainer>
         </ContactSection>
     );
 };

@@ -30,7 +30,13 @@ export type IconName =
     | "x-in-circle"
     | "pause-in-circle"
     | "play-in-circle"
-    | "user";
+    | "user"
+    | "management"
+    | "collaboration"
+    | "ui"
+    | "workflow"
+    | "analytics"
+    | "reminders";
 
 export type IconProps = {
     iconName: IconName | string;

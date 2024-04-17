@@ -10,8 +10,21 @@
 
 html {
     font-size: 62.5%; /*it sets base font size to 10px*/
+    scroll-behavior: smooth;
+    scroll-padding: 7.2rem;
 }
-html,
+@media screen and (max-width: 80em) {
+    html {
+        font-size: 56.25%; /* 9px */
+    }
+}
+
+@media screen and (max-width: 30em) {
+    html {
+        font-size: 50%; /* 8px */
+    }
+}
+
 body {
     font-family: "Inter", sans-serif;
 }

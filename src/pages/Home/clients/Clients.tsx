@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import data from "./data";
 import styled from "styled-components";
 import { Icon, Typography } from "../../../design-system";
-import LayoutWrapper from "../components/LayoutWrapper";
+import { Container, SectionBase } from "../components";
 
-const ClientSection = styled(LayoutWrapper)``;
-const ClientSectionContainer = styled.div`
+const ClientSection = styled(SectionBase)``;
+const ClientSectionContainer = styled(Container)`
     text-align: center;
 `;
 
