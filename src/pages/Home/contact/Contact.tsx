@@ -85,7 +85,7 @@ const Contact = () => {
                     <ContactWrapper>
                         <ContactIcon iconName="phone" />
                         <Link href="tel:+1(555) 555-11234">
-                            +1 (555)555 11234
+                            +1 (555)555 1234
                         </Link>
                     </ContactWrapper>
                     <ContactWrapper>
