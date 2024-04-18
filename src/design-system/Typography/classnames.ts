@@ -4,7 +4,7 @@ export const variantClassNames = {
     h1: "heading-1",
     h2: "heading-2",
     h3: "heading-3",
-    h4: "heaing-4",
+    h4: "heading-4",
     h5: "heading-5",
     h6: "heading-6",
 
@@ -18,10 +18,10 @@ export const variantClassNames = {
 };
 
 export const weightClassNames = {
-    normal: "font-weigth-normal",
-    medium: "font-weigth-medium",
-    semibold: "font-weigth-semibold",
-    bold: "font-weigth-bold"
+    normal: "font-weight-normal",
+    medium: "font-weight-medium",
+    semibold: "font-weight-semibold",
+    bold: "font-weight-bold"
 };
 
 export const alignClassNames = {

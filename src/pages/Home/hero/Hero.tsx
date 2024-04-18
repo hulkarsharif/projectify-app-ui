@@ -20,21 +20,56 @@ const HeroContainer = styled(Container)`
 
 const HeroHeading = styled(Typography)`
     color: var(--jaguar-900);
+
+    @media screen and (max-width: 70em) {
+        font-size: var(--font-size-56);
+        line-height: var(--line-height-64);
+    }
+
+    @media screen and (max-width: 60em) {
+        font-size: var(--font-size-48);
+        line-height: var(--line-height-56);
+    }
+
+    @media screen and (max-width: 50em) {
+        font-size: var(--font-size-40);
+        line-height: var(--line-height-48);
+    }
+
+    @media screen and (max-width: 40em) {
+        font-size: var(--font-size-32);
+        line-height: var(--line-height-40);
+    }
 `;
 
 const HeroDescription = styled(Typography)`
-    width: 60%;
+    max-width: calc(var(--font-size-64) * 12);
     color: var(--jaguar-500);
     margin-bottom: var(--space-30);
+
+    @media screen and (max-width: 70em) {
+        max-width: calc(var(--font-size-56) * 12);
+    }
+
+    @media screen and (max-width: 60em) {
+        max-width: calc(var(--font-size-48) * 12);
+    }
+
+    @media screen and (max-width: 35em) {
+        font-size: var(--font-size-16);
+        line-height: var(--line-height-20);
+    }
 `;
 
 const DemoButton = styled(Button)`
     max-width: 17rem;
     margin-bottom: var(--space-40);
+    margin: 0 auto;
 `;
 
 const HeroImageWrapper = styled.div`
     position: relative;
+    z-index: -1;
 `;
 const HeroImage = styled.img`
     width: 100%;
@@ -46,6 +81,11 @@ const GreenBadge = styled.img`
     top: 40%;
     right: -4%;
     width: 12.5%;
+
+    @media (max-width: 90em) {
+        top: 70%;
+        right: 14%;
+    }
 `;
 
 const GoogleImage = styled.img`
@@ -55,6 +95,11 @@ const GoogleImage = styled.img`
     width: 27%;
     max-width: 100%;
     height: auto;
+
+    @media (max-width: 90em) {
+        bottom: 40%;
+        right: 2%;
+    }
 `;
 
 const DataImage = styled.img`
@@ -62,6 +107,11 @@ const DataImage = styled.img`
     top: 18%;
     left: -3%;
     width: 11%;
+
+    @media (max-width: 90em) {
+        top: 49%;
+        left: 4%;
+    }
 `;
 
 const Team = styled.img`
@@ -70,6 +120,11 @@ const Team = styled.img`
     left: -12%;
     width: 25%;
     height: auto;
+
+    @media (max-width: 90em) {
+        bottom: -10%;
+        left: 14%;
+    }
 `;
 const Hero = () => {
     return (

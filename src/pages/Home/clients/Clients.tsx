@@ -5,8 +5,10 @@ import { Icon, Typography } from "../../../design-system";
 import { Container, SectionBase } from "../components";
 
 const ClientSection = styled(SectionBase)``;
+
 const ClientSectionContainer = styled(Container)`
     text-align: center;
+    position: relative;
 `;
 
 const Header = styled(Typography)`
@@ -15,7 +17,7 @@ const Header = styled(Typography)`
 
 const ContentWrapper = styled.div`
     height: 50rem;
-    position: relative;
+
     overflow: hidden;
 `;
 
@@ -41,17 +43,12 @@ const Article = styled.article`
 `;
 
 const Avatar = styled.img`
-    width: 12rem;
-    height: 12rem;
+    width: 17rem;
+    height: 17rem;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: var(--space-20);
     box-shadow: 0 var(--space-6) var(--space-16) rgba(0, 0, 0, 0.2);
-
-    @media (min-width: 700px) {
-        width: 17rem;
-        height: 17rem;
-    }
 `;
 
 const Name = styled(Typography)`
@@ -67,8 +64,8 @@ const StarsWrapper = styled.div`
     width: max-content;
     margin: 0 auto;
     display: flex;
-    gap: var(--space-18);
-    margin-bottom: var(--space-36);
+    gap: var(--space-16);
+    margin-bottom: var(--space-32);
 `;
 
 const Description = styled(Typography)`
@@ -82,33 +79,27 @@ const PageCountWrapper = styled.div`
     width: max-content;
     margin: 0 auto;
     display: flex;
-    gap: var(--space-20);
+    gap: var(--space-24);
 `;
 
 const PageCount = styled.div<{ $active: boolean }>`
     cursor: pointer;
-    width: var(--space-14);
-    height: var(--space-14);
+    width: var(--space-20);
+    height: var(--space-20);
     border: none;
-    border-radius: var(--space-4);
+    border-radius: var(--space-8);
     background-color: ${(props) =>
         props.$active ? "var(--primary-500)" : "var(--jaguar-100)"};
-
-    @media (min-width: 700px) {
-        width: var(--space-20);
-        height: var(--space-20);
-        border-radius: var(--space-8);
-    }
 `;
 
 const PrevButton = styled.button`
     position: absolute;
     left: 0;
-    top: 20rem;
+    top: 50%;
     transform: translateY(-50%);
-    width: 4.4rem;
-    height: 4.4rem;
-    border-radius: var(--space-10);
+    width: 8.4rem;
+    height: 8.4rem;
+    border-radius: var(--border-radius-24);
     border: 0.15rem solid var(--jaguar-100);
     background-color: var(--white);
     cursor: pointer;
@@ -128,43 +119,31 @@ const PrevButton = styled.button`
         }
     }
 
-    @media (min-width: 400px) {
+    @media (max-width: 60em) {
         width: 5.4rem;
         height: 5.4rem;
-        border-radius: var(--space-16);
-    }
-
-    @media (min-width: 700px) {
-        width: 8.4rem;
-        height: 8.4rem;
-        border-radius: var(--space-24);
+        border-radius: var(--space-18);
     }
 `;
 
 const PrevIcon = styled(Icon)`
-    width: 2.7rem;
-    height: 2.7rem;
+    width: 3.6rem;
+    height: 3.6rem;
 
-    @media (min-width: 400px) {
-        width: 3rem;
-        height: 3rem;
-    }
-
-    @media (min-width: 700px) {
-        width: 4rem;
-        height: 4rem;
+    @media (max-width: 60em) {
+        width: 2.6rem;
+        height: 2.6rem;
     }
 `;
 
 const NextButton = styled.button`
     position: absolute;
     right: 0;
-    top: 20rem;
-    top: 20rem;
+    top: 50%;
     transform: translateY(-50%);
-    width: 4.4rem;
-    height: 4.4rem;
-    border-radius: var(--space-10);
+    width: 8.4rem;
+    height: 8.4rem;
+    border-radius: var(--border-radius-24);
     border: 0.15rem solid var(--jaguar-100);
     background-color: var(--white);
     cursor: pointer;
@@ -184,31 +163,20 @@ const NextButton = styled.button`
         }
     }
 
-    @media (min-width: 400px) {
+    @media (max-width: 60em) {
         width: 5.4rem;
         height: 5.4rem;
-        border-radius: var(--space-16);
-    }
-
-    @media (min-width: 700px) {
-        width: 8.4rem;
-        height: 8.4rem;
-        border-radius: var(--space-24);
+        border-radius: var(--space-18);
     }
 `;
 
 const NextIcon = styled(Icon)`
-    width: 1.7rem;
-    height: 1.7rem;
+    width: 3.6rem;
+    height: 3.6rem;
 
-    @media (min-width: 400px) {
-        width: 2rem;
-        height: 2rem;
-    }
-
-    @media (min-width: 700px) {
-        width: 3rem;
-        height: 3rem;
+    @media (max-width: 60em) {
+        width: 2.6rem;
+        height: 2.6rem;
     }
 `;
 
@@ -239,7 +207,7 @@ const Clients = () => {
     }, [index]);
 
     return (
-        <ClientSection id="testimonials">
+        <ClientSection id="data">
             <ClientSectionContainer>
                 <Header variant="h5" weight="bold">
                     Trust Our Clients

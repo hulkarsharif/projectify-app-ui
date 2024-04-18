@@ -22,7 +22,9 @@ type TypographyVariant =
     | "subtitleLG"
     | "subtitleMD"
     | "subtitleSM";
+
 type TypographyWeight = "normal" | "medium" | "semibold" | "bold";
+
 type TypographyAlign = "center" | "left" | "right" | "justify" | "inherit";
 
 type TypographyProps = {
@@ -32,6 +34,7 @@ type TypographyProps = {
     className?: string;
     children: React.ReactNode;
 };
+
 export const Typography: React.FC<TypographyProps> = ({
     variant,
     weight,
@@ -43,11 +46,13 @@ export const Typography: React.FC<TypographyProps> = ({
     const weightClassName =
         weight !== undefined ? weightClassNames[weight] : "";
     const alignClassName = align !== undefined ? alignClassNames[align] : "";
+
     const finalClassName = trimWhiteSpaces(
         `${variantClassName} ${weightClassName} ${alignClassName} ${
             className || ""
         }`
     );
+
     if (
         variant === "displayLG" ||
         variant === "displaySM" ||
@@ -74,5 +79,6 @@ export const Typography: React.FC<TypographyProps> = ({
     ) {
         return <p className={finalClassName}>{children}</p>;
     }
+
     return <h1>{children}</h1>;
 };
