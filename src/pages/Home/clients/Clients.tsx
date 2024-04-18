@@ -4,9 +4,9 @@ import styled from "styled-components";
 import { Icon, Typography } from "../../../design-system";
 import { Container, SectionBase } from "../components";
 
-const ClientSection = styled(SectionBase)``;
+const TestimonialsSection = styled(SectionBase)``;
 
-const ClientSectionContainer = styled(Container)`
+const TestimonialsSectionContainer = styled(Container)`
     text-align: center;
     position: relative;
 `;
@@ -17,7 +17,7 @@ const Header = styled(Typography)`
 
 const ContentWrapper = styled.div`
     height: 50rem;
-
+    position: relative;
     overflow: hidden;
 `;
 
@@ -70,9 +70,13 @@ const StarsWrapper = styled.div`
 
 const Description = styled(Typography)`
     color: var(--jaguar-700);
-    max-width: 60rem;
+    max-width: 70%;
     margin: 0 auto;
     margin-bottom: var(--space-50);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 3; /* Number of lines to display */
 `;
 
 const PageCountWrapper = styled.div`
@@ -84,10 +88,10 @@ const PageCountWrapper = styled.div`
 
 const PageCount = styled.div<{ $active: boolean }>`
     cursor: pointer;
-    width: var(--space-20);
-    height: var(--space-20);
+    width: 2rem;
+    height: 2rem;
     border: none;
-    border-radius: var(--space-8);
+    border-radius: var(--border-radius-8);
     background-color: ${(props) =>
         props.$active ? "var(--primary-500)" : "var(--jaguar-100)"};
 `;
@@ -119,10 +123,10 @@ const PrevButton = styled.button`
         }
     }
 
-    @media (max-width: 60em) {
+    @media screen and (max-width: 60em) {
         width: 5.4rem;
         height: 5.4rem;
-        border-radius: var(--space-18);
+        border-radius: var(--border-radius-18);
     }
 `;
 
@@ -130,7 +134,7 @@ const PrevIcon = styled(Icon)`
     width: 3.6rem;
     height: 3.6rem;
 
-    @media (max-width: 60em) {
+    @media screen and (max-width: 60em) {
         width: 2.6rem;
         height: 2.6rem;
     }
@@ -163,24 +167,25 @@ const NextButton = styled.button`
         }
     }
 
-    @media (max-width: 60em) {
+    @media screen and (max-width: 60em) {
         width: 5.4rem;
         height: 5.4rem;
-        border-radius: var(--space-18);
+        border-radius: var(--border-radius-18);
     }
 `;
 
 const NextIcon = styled(Icon)`
+    transform: rotate(180deg);
     width: 3.6rem;
     height: 3.6rem;
 
-    @media (max-width: 60em) {
+    @media screen and (max-width: 60em) {
         width: 2.6rem;
         height: 2.6rem;
     }
 `;
 
-const Clients = () => {
+const Testimonials = () => {
     const [people] = useState(data);
     const [index, setIndex] = useState(0);
     const [activePage, setActivePage] = useState(0);
@@ -207,8 +212,8 @@ const Clients = () => {
     }, [index]);
 
     return (
-        <ClientSection id="data">
-            <ClientSectionContainer>
+        <TestimonialsSection id="testimonials">
+            <TestimonialsSectionContainer>
                 <Header variant="h5" weight="bold">
                     Trust Our Clients
                 </Header>
@@ -264,12 +269,12 @@ const Clients = () => {
                         <PrevIcon iconName="arrow-left" />
                     </PrevButton>
                     <NextButton onClick={() => setIndex(index + 1)}>
-                        <NextIcon iconName="arrow-right" />
+                        <NextIcon iconName="arrow-left" />
                     </NextButton>
                 </ContentWrapper>
-            </ClientSectionContainer>
-        </ClientSection>
+            </TestimonialsSectionContainer>
+        </TestimonialsSection>
     );
 };
 
-export default Clients;
+export default Testimonials;

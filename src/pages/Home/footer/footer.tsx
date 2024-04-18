@@ -1,55 +1,34 @@
 import styled from "styled-components";
-
 import { Typography } from "../../../design-system";
+import { Container, SectionSidePadding } from "../components";
 
 const FooterSection = styled.footer`
-    border: 0.1rem solid var(--jaguar-100);
-    padding: 0 2rem;
+    padding: var(--space-20) var(--space-100);
+    border-top: 1px solid var(--jaguar-200);
 
-    @media (min-width: 1275px) {
-        padding: 0 15rem;
-    }
-
-    @media (min-width: 1720px) {
-        padding: 0 37.5rem;
-    }
+    ${SectionSidePadding}
 `;
 
-const FooterContainer = styled.div`
+const FooterContainer = styled(Container)`
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: var(--space-24) 0;
+    justify-content: space-between;
 
-    @media (min-width: 850px) {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+    @media (max-width: 50em) {
+        flex-direction: column;
+        gap: var(--space-12);
     }
 `;
 const CopyrightText = styled(Typography)`
     color: var(--jaguar-500);
-    margin-bottom: var(--space-14);
-
-    @media (max-width: 451px) {
-        font-size: var(--space-14);
-    }
-
-    @media (min-width: 850px) {
-        margin-bottom: 0;
-    }
+    /* margin-bottom: var(--space-14); */
 `;
 
 const NavWrapper = styled.nav``;
 
 const UnorderedList = styled.ul`
     display: flex;
-    gap: var(--space-28);
-
-    @media (min-width: 450px) {
-        gap: var(--space-48);
-    }
+    gap: var(--space-48);
 `;
 
 const List = styled.li`

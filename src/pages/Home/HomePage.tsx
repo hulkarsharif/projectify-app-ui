@@ -10,27 +10,18 @@ import Contact from "./contact/Contact";
 import Hero from "./hero/Hero";
 import Brands from "./brands/Brands";
 
-const Base = styled.div`
-    max-width: 144rem;
-    margin: 0 auto;
-    font-size: 0;
-`;
-
 const HomePage = () => {
     return (
         <>
-            <Base>
-                <h1>Get the best for your team</h1>
-                <TopNavigation />
-                <Hero />
-                <Brands />
-                <Features />
-                <SubscriptionPlans />
-                <Clients />
-                <Demo />
-                <Contact />
-                <Footer />
-            </Base>
+            <TopNavigation />
+            <Hero />
+            <Brands />
+            <Features />
+            <SubscriptionPlans />
+            <Clients />
+            <Demo />
+            <Contact />
+            <Footer />
         </>
     );
 };

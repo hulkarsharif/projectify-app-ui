@@ -1,34 +1,79 @@
 import React from "react";
 import { Typography, Logo, Icon } from "../../../design-system";
 import map from "../Images/map.png";
+import { useEffect } from "react";
 import { Container, SectionBase } from "../components";
 import styled from "styled-components";
 
 const ContactSection = styled(SectionBase)``;
 
 const ContactSectionContainer = styled(Container)`
-    display: flex;
+    display: grid;
     gap: var(--space-30);
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: "logo contact map";
+
+    @media screen and (max-width: 55em) {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas:
+            "logo logo"
+            "contact map";
+    }
+    @media screen and (max-width: 30em) {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-30);
+    }
 `;
 
-const ContactLeftLogo = styled.div`
+const ContactLeftLogoWrapper = styled.div`
+    grid-area: logo;
+    grid-row: 1;
+    grid-column: 1 / 2;
+
+    display: grid;
+    grid-template-columns: 1fr;
+
+    @media screen and (max-width: 55em) {
+        grid-row: 1;
+        grid-column: 1 / 3;
+        gap: var(--space-30);
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @media screen and (max-width: 30em) {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-10);
+    }
+`;
+const Description = styled(Typography)`
+    width: 23ch;
+    white-space: wrap;
+
+    @media screen and (max-width: 55em) {
+        width: 100%;
+    }
+`;
+
+const ContactInfoWrapper = styled.div`
+    grid-area: contact;
+    grid-row: 1;
+    grid-column: 2 / 3;
+    display: flex;
     flex-direction: column;
-    align-items: unset;
-    justify-content: unset;
-    display: flex;
     gap: var(--space-30);
-    width: calc((100% - 6rem) / 3);
-`;
 
-const ContactText = styled(Typography)`
-    width: 70%;
-`;
+    @media screen and (max-width: 55em) {
+        grid-row: 2;
+        grid-column: 1 / 2;
+        gap: var(--space-20);
+    }
 
-const SocialWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-30);
-    width: calc((100% -6rem) / 3);
+    @media screen and (max-width: 30em) {
+        grid-row: 3;
+    }
 `;
 
 const ContactWrapper = styled.div`
@@ -36,62 +81,76 @@ const ContactWrapper = styled.div`
     align-items: center;
     gap: var(--space-12);
 `;
-const ContactIcon = styled(Icon)`
-    width: var(--space-20);
-    height: var(--space-20);
-`;
+
 const Link = styled.a`
     color: var(--jaguar-900);
     font-size: var(--space-16);
     line-height: var(--space-20);
+
+    @media screen and (max-width: 55em) {
+        width: 100%;
+    }
 `;
 
-const SocialMediWrapper = styled.div`
-    display: flex;
-    gap: var(--space-20);
+const SocialMediaWrapper = styled.div`
+    :not(:last-child) {
+        margin-right: var(--space-20);
+    }
 `;
 
 const SocialIcon = styled(Icon)`
     cursor: pointer;
-    width: var(--space-32);
-    height: var(--space-32);
+    width: 3.2rem;
+    height: 3.2rem;
 `;
 
-const ImageWrapper = styled.div`
-    width: calc((100% - 6rem) / 3);
+const MapWrapper = styled.div`
+    grid-area: map;
+    grid-column: 3 / 4;
+    grid-row: 1;
+    width: 100%;
     height: auto;
     border-radius: var(--border-radius-32);
     border: 0;
+
+    @media screen and (max-width: 55em) {
+        grid-row: 2;
+        grid-column: 2 / 3;
+    }
+
+    @media screen and (max-width: 30em) {
+        height: 25rem;
+    }
 `;
 
 const Contact = () => {
     return (
         <ContactSection id="contact">
             <ContactSectionContainer>
-                <ContactLeftLogo>
+                <ContactLeftLogoWrapper>
                     <Link href="#home">
                         <Logo size="sm" layout="horizontal" />
                     </Link>
 
-                    <ContactText variant="paragraphSM" weight="bold">
+                    <Description variant="paragraphSM" weight="bold">
                         Unleashing Success One Project at a Time!
-                    </ContactText>
-                </ContactLeftLogo>
-                <SocialWrapper>
+                    </Description>
+                </ContactLeftLogoWrapper>
+                <ContactInfoWrapper>
                     <ContactWrapper>
-                        <ContactIcon iconName="phone" />
+                        <Icon iconName="phone" />
                         <Link href="tel:+1(555) 555-11234">
                             +1 (555)555 1234
                         </Link>
                     </ContactWrapper>
                     <ContactWrapper>
-                        <ContactIcon iconName="email-purple" />
+                        <Icon iconName="email-purple" />
                         <Link href="mailto:info@projectify.com">
                             info@projectify.com
                         </Link>
                     </ContactWrapper>
                     <ContactWrapper>
-                        <ContactIcon iconName="location" />
+                        <Icon iconName="location" />
                         <Link
                             href="https://www.google.com/search?q=205+Allen+St%2C+New+York%2C+NY+10002%2C+USA&rlz=1C5CHFA_enUS964US964&oq=205+Allen+St%2C+New+York%2C+NY+10002%2C+USA&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg70gEHMzg5ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8"
                             target="_blank"
@@ -100,7 +159,7 @@ const Contact = () => {
                         </Link>
                     </ContactWrapper>
 
-                    <SocialMediWrapper>
+                    <SocialMediaWrapper>
                         <Link href="https://www.facebook.com/" target="_blank">
                             <SocialIcon iconName="facebook" />
                         </Link>
@@ -110,12 +169,12 @@ const Contact = () => {
                         <Link href="https://www.instagram.com/" target="_blank">
                             <SocialIcon iconName="instagram" />
                         </Link>
-                    </SocialMediWrapper>
-                </SocialWrapper>
-                <ImageWrapper>
+                    </SocialMediaWrapper>
+                </ContactInfoWrapper>
+                <MapWrapper>
                     {" "}
                     <img src={map} alt="Map" />
-                </ImageWrapper>
+                </MapWrapper>
             </ContactSectionContainer>
         </ContactSection>
     );
