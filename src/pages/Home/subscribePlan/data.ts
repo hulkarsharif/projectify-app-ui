@@ -1,13 +1,26 @@
-import starter from "../../../../assets/illustrations/starter.svg";
-import professional from "../../../../assets/illustrations/professional.svg";
-import enterprise from "../../../../assets/illustrations/enterprise.svg";
+import { IconName } from "../../../design-system";
 
-export const rightPlans = [
+export type PlanProps = {
+    type: string;
+    subtitle: string;
+    iconName: IconName;
+    checkColor: IconName;
+    title: string;
+    priceMonthly: string;
+    priceYearly: string;
+    isMonthly: boolean;
+    projects: string;
+    users: string;
+    storage: string;
+    extras: string[];
+};
+
+export const plans = [
     {
         type: "secondary",
         subtitle: "For Individuals",
-        iconName: "paperPlane",
-        checkColor: "check-green",
+        iconName: "paperplane" as IconName,
+        checkColor: "check-green" as IconName,
         title: "Starter",
         priceMonthly: "$9.99",
         priceYearly: "$102.99",
@@ -19,8 +32,8 @@ export const rightPlans = [
     {
         type: "primary",
         subtitle: "For Small Teams",
-        iconName: "airplane",
-        checkColor: "check-orange",
+        iconName: "airplane" as IconName,
+        checkColor: "check-orange" as IconName,
         title: "Professional",
         priceMonthly: "$29.99",
         priceYearly: "$311.99",
@@ -32,8 +45,8 @@ export const rightPlans = [
     {
         type: "secondary",
         subtitle: "For Large Teams",
-        iconName: "rocket",
-        checkColor: "check-green",
+        iconName: "rocket" as IconName,
+        checkColor: "check-green" as IconName,
         title: "Enterprise",
         priceMonthly: "$99.99",
         priceYearly: "$1080.99",

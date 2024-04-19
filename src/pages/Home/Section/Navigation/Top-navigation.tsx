@@ -3,9 +3,10 @@ import { NavigationLink } from "./Links";
 import { Button, Logo } from "../../../../design-system";
 import { Container, SectionSidePadding } from "../../components";
 import { MobileNavigation } from "./MobileNavigation";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import burgerIcon from "../../Images/burgerIcon.svg";
+import LoginModal from "../../components/LoginModal";
 
 const links = [
     { text: "About", link: "#about" },
@@ -69,11 +70,17 @@ const MenuButton = styled(Button)`
         }
     }
     img {
-        height: 2.4rem;
-        width: 2.4rem;
+        height: 3rem;
+        width: 3rem;
     }
 `;
 
+const NavLink = styled.a`
+    color: var(--jaguar-900);
+    font-size: var(--font-size-16);
+    line-height: var(--line-height-24);
+    font-weight: var(--font-weight-500);
+`;
 const MobileButton = styled(Button)`
     margin-right: auto;
     width: 11rem;
@@ -81,6 +88,13 @@ const MobileButton = styled(Button)`
 
 const TopNavigation = () => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
+    const [active, setActive] = useState(false);
+    const navigate = useNavigate();
+    const [showSignInModal, setShowSignInModal] = useState(false);
+
+    const closeModal = () => {
+        setShowMobileMenu(false);
+    };
 
     return (
         <Base>
@@ -90,11 +104,9 @@ const TopNavigation = () => {
                 </LogoLink>
                 <NavigationLinks>
                     {links.map((link, index) => (
-                        <NavigationLink
-                            key={index}
-                            linkText={link.text}
-                            linkTo={link.link}
-                        />
+                        <NavLink key={index} href={link.text}>
+                            {link.text}
+                        </NavLink>
                     ))}
                 </NavigationLinks>
                 <Buttons>
@@ -103,7 +115,7 @@ const TopNavigation = () => {
                         size="md"
                         shape="rounded"
                         color="primary"
-                        onClick={() => {}}
+                        onClick={() => navigate("admin/sign-up")}
                     >
                         Sign Up
                     </Button>
@@ -111,7 +123,7 @@ const TopNavigation = () => {
                         size="md"
                         shape="rounded"
                         color="primary"
-                        onClick={() => {}}
+                        onClick={() => setShowSignInModal(true)}
                     >
                         Log In
                     </Button>
@@ -130,11 +142,9 @@ const TopNavigation = () => {
             >
                 <MobileActions>
                     {links.map((link, index) => (
-                        <NavigationLink
-                            key={index}
-                            linkText={link.text}
-                            linkTo={link.link}
-                        />
+                        <NavLink key={index} href={link.link}>
+                            {link.text}
+                        </NavLink>
                     ))}
 
                     <MobileButton
@@ -142,7 +152,9 @@ const TopNavigation = () => {
                         size="md"
                         shape="rounded"
                         color="primary"
-                        onClick={() => {}}
+                        onClick={() => {
+                            navigate("admin/sign-up");
+                        }}
                     >
                         Sign Up
                     </MobileButton>
@@ -150,12 +162,15 @@ const TopNavigation = () => {
                         size="md"
                         shape="rounded"
                         color="primary"
-                        onClick={() => {}}
+                        onClick={() => {
+                            setShowSignInModal(true);
+                        }}
                     >
-                        Log In
+                        Sign In
                     </MobileButton>
                 </MobileActions>
             </MobileNavigation>
+            <LoginModal show={showSignInModal} closeModal={closeModal} />
         </Base>
     );
 };

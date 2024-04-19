@@ -1,27 +1,13 @@
 import styled from "styled-components";
-import { Button, Typography, Icon } from "../../../design-system";
-
-type PlanProps = {
-    type: string;
-    subtitle: string;
-    iconName: string;
-    checkColor: string;
-    title: string;
-    priceMonthly: string;
-    priceYearly: string;
-    isMonthly: boolean;
-    projects: string;
-    users: string;
-    storage: string;
-    extras: string[];
-};
+import { Button, Icon, Typography } from "../../../design-system";
+import { PlanProps } from "./data";
 
 const PlanCardWrapper = styled.div<{ $type: string }>`
     display: flex;
     flex-direction: column;
     flex: 1;
     padding: var(--space-30);
-    border: 0.1rem solid var(--jaguar-100);
+    border: 1px solid var(--jaguar-100);
     border-radius: var(--space-40);
 
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.08);
@@ -34,7 +20,6 @@ const HeaderWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-
     margin-bottom: var(--space-30);
 `;
 
@@ -45,39 +30,29 @@ const Subtitle = styled(Typography)<{ $type: string }>`
 `;
 
 const IconWrapper = styled.div<{ $type: string }>`
-    padding: var(--space-20);
-    border-radius: var(--space-24);
+    padding: var(--space-28);
+    border-radius: var(--space-32);
     margin-bottom: var(--space-24);
 
     background-color: ${(props) =>
         props.$type === "primary" ? "var(--sunglow-400)" : "var(--primary-50)"};
-    border: 0.1rem solid
+    border: 1px solid
         ${(props) =>
             props.$type === "primary"
                 ? "var(--sunglow-400)"
                 : "var(--primary-100)"};
-
-    @media (min-width: 700px) {
-        padding: var(--space-28);
-        border-radius: var(--space-32);
-    }
 `;
 
 const PlanIcon = styled(Icon)`
-    width: var(--space-30);
-    height: var(--space-30);
-
-    @media (min-width: 700px) {
-        width: var(--space-50);
-        height: var(--space-50);
-    }
+    width: 5rem;
+    height: 5rem;
 `;
 
 const Title = styled(Typography)<{ $type: string }>`
     color: ${(props) => (props.$type === "primary" ? "var(--white)" : "")};
 
-    @media (max-width: 701px) {
-        font-size: var(--space-24);
+    @media screen and (max-width: 60em) {
+        font-size: var(--font-size-32);
     }
 `;
 
@@ -99,7 +74,6 @@ const ServicesWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: var(--space-12);
-
     margin-bottom: var(--space-30);
 `;
 
@@ -135,7 +109,7 @@ const CtaButton = styled(Button)<{ $type: string }>`
     }
 `;
 
-const Subscription: React.FC<PlanProps> = ({
+const SubscribePlanCard: React.FC<PlanProps> = ({
     type,
     subtitle,
     iconName,
@@ -231,4 +205,4 @@ const Subscription: React.FC<PlanProps> = ({
     );
 };
 
-export default Subscription;
+export { SubscribePlanCard };

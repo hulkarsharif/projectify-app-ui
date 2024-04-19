@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Typography, Modal, Button } from "../../../design-system";
 import { useNavigate } from "react-router-dom";
 
-type CreateTaskModalProps = {
+type CreateTasksModalProps = {
     show: boolean;
     closeModal: () => void;
 };
@@ -13,13 +13,12 @@ const ModalTitle = styled(Typography)`
     text-align: center;
     margin-bottom: var(--space-24);
 `;
-
 const Buttons = styled.div`
     display: flex;
     gap: var(--space-30);
 `;
 
-const LoginModal: React.FC<CreateTaskModalProps> = ({ show, closeModal }) => {
+const LoginModal: React.FC<CreateTasksModalProps> = ({ show, closeModal }) => {
     const navigate = useNavigate();
 
     return (
@@ -30,7 +29,7 @@ const LoginModal: React.FC<CreateTaskModalProps> = ({ show, closeModal }) => {
             onClose={closeModal}
         >
             <ModalTitle variant="paragraphLG" weight="medium">
-                To begin, please select your role and sign in:
+                Please, select your role and log in:
             </ModalTitle>
             <Buttons>
                 <Button
@@ -62,4 +61,4 @@ const LoginModal: React.FC<CreateTaskModalProps> = ({ show, closeModal }) => {
     );
 };
 
-export { LoginModal };
+export default LoginModal;

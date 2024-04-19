@@ -1,20 +1,13 @@
 import styled from "styled-components";
-import { rightPlans } from "./DataSubscriptions";
-import { Switch } from "../../../../design-system";
-import { Typography } from "../../../../design-system";
+import { Switch, Typography } from "../../../design-system";
+import { plans } from "./data";
+import { SubscribePlanCard } from "./SubscribePlanCard";
 import { useState } from "react";
-import Subscription from "../Subscription";
+import { Container, SectionBase } from "../../Home/components";
 
-const SectionBase = styled.section`
-    padding: 0 2rem;
-`;
-const PricePlanSectionContainer = styled.div`
-    padding: 7rem 0 var(--space-80) 0;
+const PricePlanSection = styled(SectionBase)``;
 
-    @media (min-width: 1000px) {
-        padding: 10rem 0 var(--space-80) 0;
-    }
-`;
+const PricePlanSectionContainer = styled(Container)``;
 
 const HeaderWrapper = styled.div`
     text-align: center;
@@ -63,7 +56,7 @@ const SubscriptionPlans = () => {
     const [monthly, setMonthly] = useState(true);
 
     return (
-        <SectionBase id="price-plan">
+        <PricePlanSection id="price-plan">
             <PricePlanSectionContainer>
                 <HeaderWrapper>
                     <Subtitle variant="subtitleLG" weight="semibold">
@@ -92,8 +85,8 @@ const SubscriptionPlans = () => {
                     </ToggleWrapper>
                 </HeaderWrapper>
                 <PricePlansWrapper>
-                    {rightPlans.map((plan, idx) => (
-                        <Subscription
+                    {plans.map((plan, idx) => (
+                        <SubscribePlanCard
                             key={idx}
                             type={plan.type}
                             subtitle={plan.subtitle}
@@ -111,8 +104,8 @@ const SubscriptionPlans = () => {
                     ))}
                 </PricePlansWrapper>
             </PricePlanSectionContainer>
-        </SectionBase>
+        </PricePlanSection>
     );
 };
 
-export default SubscriptionPlans;
+export { SubscriptionPlans };
