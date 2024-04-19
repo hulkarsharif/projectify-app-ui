@@ -1,8 +1,14 @@
 import styled from "styled-components";
-import { Typography, Button, Icon } from "../../../design-system";
+import { Typography, Button } from "../../../design-system";
 import paperMail from "../Images/paperMail.png";
 import { Container, SectionBase } from "../components";
+import user from "../../Home/Images/user.svg";
+import email from "../../Home/Images/email.svg";
+import company from "../../Home/Images/company.svg";
 
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+    icon?: string;
+}
 const DemoSection = styled(SectionBase)`
     background: linear-gradient(81.95deg, #6826f7 0%, #bb9cfb 100%);
 `;
@@ -64,28 +70,23 @@ const RightForm = styled.form`
         width: 100%;
     }
 `;
-const InputWrapper = styled.div`
-    /* background-color: green; */
-    position: relative;
-    display: flex;
-    align-items: center;
-`;
 
-const Input = styled.input`
+const Input = styled.input<InputProps>`
     width: 100%;
-    padding: var(--space-16) var(--space-48) !important;
+    padding: var(--space-16) var(--space-48);
     border: 0.3rem solid var(--jaguar-100);
     border-radius: var(--space-16);
+    background-color: var(--white);
+    background-image: url(${(props) => props.icon});
+    background-size: 2.4rem;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    transition: border-color 0.3s ease;
 
     &:focus {
         outline: none;
-        border: 0.3rem solid var(--primary-500);
+        border-color: var(--primary-500);
     }
-`;
-
-const InputIcon = styled(Icon)`
-    position: absolute;
-    left: var(--space-12);
 `;
 
 const RequestButton = styled(Button)`
@@ -105,19 +106,15 @@ const Demo = () => {
                         <Image src={paperMail} alt="PaperMail Image" />
                     </ImageWrapper>
                     <RightForm>
-                        <InputWrapper>
-                            <InputIcon iconName="user" />
-                            <Input placeholder="Name" type="text"></Input>
-                        </InputWrapper>
-                        <InputWrapper>
-                            <InputIcon iconName="email" />
-                            <Input placeholder="Email" type="email"></Input>
-                        </InputWrapper>
-                        <InputWrapper>
-                            <InputIcon iconName="company" />
-                            <Input placeholder="Company" type="text"></Input>
-                        </InputWrapper>
-                        <RequestButton fullWidth shape="rounded" size="lg">
+                        <Input icon={user} placeholder="Name" type="text" />
+                        <Input icon={email} placeholder="Email" type="email" />
+                        <Input
+                            icon={company}
+                            placeholder="Company"
+                            type="text"
+                        />
+
+                        <RequestButton fullWidth shape="circle" size="lg">
                             Request a Demo
                         </RequestButton>
                     </RightForm>

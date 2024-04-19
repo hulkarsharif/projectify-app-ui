@@ -19,19 +19,14 @@ const CloseButton = styled.button`
 `;
 
 const Padding = css`
-    @media screen and (max-width: 60em) {
-        padding-right: var(--space-32);
-        padding-left: var(--space-32);
-    }
-
     @media screen and (max-width: 50em) {
-        padding-right: var(--space-24);
-        padding-left: var(--space-24);
+        padding-right: var(--space-12);
+        padding-left: var(--space-12);
     }
 
     @media screen and (max-width: 30em) {
-        padding-right: var(--space-16);
-        padding-left: var(--space-16);
+        padding-right: var(--space-10);
+        padding-left: var(--space-10);
     }
 `;
 
@@ -56,8 +51,8 @@ const MobileNavOverlay = styled.div<{ show: boolean }>`
     transition: all ease-in-out 0.3s;
     display: flex;
     justify-content: flex-end;
-
-    @media screen and (min-width: 961px) {
+    z-index: 4;
+    @media screen and (min-width: 50em) {
         display: none;
     }
 `;
@@ -83,6 +78,7 @@ const MobileNavHeader = styled.div`
     border-top-left-radius: var(--border-radius-10);
 
     ${Padding}
+    padding-left: var(--space-16);
 
     @media screen and (max-width: 40em) {
         justify-content: space-between;
@@ -90,8 +86,8 @@ const MobileNavHeader = styled.div`
 `;
 
 const MobileNavLinks = styled.div`
-    padding-top: var(--space-32);
-    padding-bottom: var(--space-32);
+    padding: var(--space-32) var(--space-16);
+    border-top: 1px solid var(--jaguar-100);
     list-style-type: none;
 
     ${Padding}
@@ -116,6 +112,9 @@ interface MobileNavProps {
     show: boolean;
 }
 const MobileNavigation: FC<MobileNavProps> = ({ children, onClose, show }) => {
+    const handleOnClick = () => {
+        onClose();
+    };
     return (
         <MobileNavOverlay show={show}>
             <MobileNavContent>
@@ -128,7 +127,11 @@ const MobileNavigation: FC<MobileNavProps> = ({ children, onClose, show }) => {
                         <img src={closeIcon} alt="Close" />
                     </CloseButton>
                 </MobileNavHeader>
-                <MobileNavLinks>{children}</MobileNavLinks>
+                <MobileNavLinks>
+                    {React.Children.map(children, (child) =>
+                        React.cloneElement(child, { onClick: handleOnClick })
+                    )}
+                </MobileNavLinks>
             </MobileNavContent>
         </MobileNavOverlay>
     );
