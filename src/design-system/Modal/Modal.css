@@ -30,3 +30,17 @@
 .modal-overlay--right .modal {
     border-radius: 0;
 }
+.close-btn {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    margin-left: auto;
+    margin-bottom: var(--space-12);
+}
+
+.colose-icon {
+    height: 2.4rem;
+    width: 2.4rem;
+}
