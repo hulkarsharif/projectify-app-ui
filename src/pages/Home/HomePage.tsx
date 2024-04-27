@@ -8,12 +8,15 @@ import Contact from "./contact/Contact";
 import Hero from "./hero/Hero";
 import Brands from "./brands/Brands";
 import { SubscriptionPlans } from "./subscribePlan/SubscriptionPlans";
+import { Header } from "./components/Header";
 
 const HomePage = () => {
     return (
         <>
-            <TopNavigation />
-            <Hero />
+            <Header>
+                <TopNavigation />
+                <Hero />
+            </Header>
             <Brands />
             <Features />
             <SubscriptionPlans />

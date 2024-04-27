@@ -2,13 +2,14 @@ import styled from "styled-components";
 import { Typography, Button } from "../../../design-system";
 import { SectionBase, Container } from "../components";
 
-import members from "../Images/TFrame.svg";
-import completed from "../Images/completed.svg";
-import google from "../Images/googleImage.svg";
-import march from "../Images/march.svg";
-import team from "../Images/2.svg";
+import members from "../Images/HeroImage/TFrame.svg";
+import completed from "../Images/HeroImage/completed.svg";
+import google from "../Images/HeroImage/googleImage.svg";
+import march from "../Images/HeroImage/march.svg";
+import team from "../Images/HeroImage/2.svg";
 
 const HeroSectionBase = styled(SectionBase)`
+    padding-top: var(--space-100);
     padding-bottom: 0;
 `;
 
@@ -69,7 +70,7 @@ const DemoButton = styled(Button)`
 
 const HeroImageWrapper = styled.div`
     position: relative;
-    z-index: -1;
+    z-index: 2;
 `;
 const HeroImage = styled.img`
     width: 100%;

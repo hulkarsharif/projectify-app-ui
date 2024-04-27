@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { Typography, Button } from "../../../design-system";
 import paperMail from "../Images/paperMail.png";
 import { Container, SectionBase } from "../components";
-import user from "../../Home/Images/user.svg";
-import email from "../../Home/Images/email.svg";
-import company from "../../Home/Images/company.svg";
+import user from "../../Home/Images/DemoImage/user.svg";
+import email from "../../Home/Images/DemoImage/email.svg";
+import company from "../../Home/Images/DemoImage/company.svg";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     icon?: string;

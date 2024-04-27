@@ -1,6 +1,6 @@
-import guy1 from "../Images/guy1.png";
-import guy2 from "../Images/guy2.png";
-import lady from "../Images/lady-red.png";
+import guy1 from "../Images/ClientImage/guy1.png";
+import guy2 from "../Images/ClientImage/guy2.png";
+import lady from "../Images/ClientImage/lady-red.png";
 
 const data = [
     {
