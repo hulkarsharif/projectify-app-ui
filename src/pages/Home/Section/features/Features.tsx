@@ -3,6 +3,12 @@ import { Button, Typography } from "../../../../design-system";
 import { FeaturesCard } from "./FeaturesCard/FeaturesCard";
 import { features } from "./FeaturesCard/data";
 import { Container, SectionBase } from "../../components";
+import background from "../../Images/DemoImage/bgEffect-demo.png";
+
+const FeaturesSection = styled(SectionBase)`
+    background: url(${background}) no-repeat bottom center;
+    background-size: cover;
+`;
 
 const FeaturesContainer = styled(Container)`
     display: flex;
@@ -42,7 +48,7 @@ const ButtonWrapper = styled(Button)`
 
 const Features = () => {
     return (
-        <SectionBase>
+        <FeaturesSection id="about">
             <FeaturesContainer>
                 <FeaturesTitle variant="h5" weight="bold">
                     Get the best for your team
@@ -79,7 +85,7 @@ const Features = () => {
                     Try a Demo
                 </ButtonWrapper>
             </FeaturesContainer>
-        </SectionBase>
+        </FeaturesSection>
     );
 };
 

@@ -3,8 +3,12 @@ import data from "./data";
 import styled from "styled-components";
 import { Icon, Typography } from "../../../design-system";
 import { Container, SectionBase } from "../components";
+import background from "../Images/ClientImage/bgeffect-Client.png";
 
-const TestimonialsSection = styled(SectionBase)``;
+const TestimonialsSection = styled(SectionBase)`
+    background: url(${background}) no-repeat top center;
+    background-size: cover;
+`;
 
 const TestimonialsSectionContainer = styled(Container)`
     text-align: center;
