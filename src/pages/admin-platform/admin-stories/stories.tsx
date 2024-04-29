@@ -1,5 +1,5 @@
 const AdminStories = () => {
-    return <div>Team Member Stories</div>;
+    return <div>Stories</div>;
 };
 
 export { AdminStories };

@@ -5,7 +5,6 @@ import { Container, SectionBase } from "../components";
 import user from "../../Home/Images/DemoImage/user.svg";
 import email from "../../Home/Images/DemoImage/email.svg";
 import company from "../../Home/Images/DemoImage/company.svg";
-import background from "../Images/DemoImage/bgEffect-demo.png";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     icon?: string;
