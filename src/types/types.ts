@@ -82,6 +82,7 @@ export interface TeamMemberUpdate {
 
 export type ProjectStatus = "ACTIVE" | "ONHOLD" | "ARCHIVED" | "COMPLETED";
 export type ContributorStatus = "ACTIVE" | "INACTIVE";
+export type StoryStatus = "TODO" | "INPROGRESS" | "DONE" | "ARCHIVED";
 
 export interface ProjectContributorBase {
     id: string;
@@ -110,6 +111,13 @@ export interface Project {
     progress: number;
     startDate: string;
     endDate: string;
+}
+
+export interface Story {
+    id: string;
+    title: string;
+    description: string;
+    status: string;
 }
 
 export interface ProjectWithContributors extends Project {

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Input, Option, Select } from "../../../design-system";
 import { PageFilters } from "../../components/PageFilters";
 
-type ServiceProps = {
+type StoriesProps = {
     selectedStatus: string;
     setSelectedStatus: (option: Option) => void;
     searchText: string;
@@ -21,7 +21,7 @@ const statusOptions = [
     { label: "Project C", value: "project c" },
     { label: "Project D", value: "project d" }
 ];
-const ServiceFilters: React.FC<ServiceProps> = ({
+const StoriesFilter: React.FC<StoriesProps> = ({
     selectedStatus,
     setSelectedStatus,
     searchText,
@@ -48,3 +48,5 @@ const ServiceFilters: React.FC<ServiceProps> = ({
         </Filters>
     );
 };
+
+export { StoriesFilter };

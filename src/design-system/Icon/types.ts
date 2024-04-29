@@ -36,7 +36,8 @@ export type IconName =
     | "ui"
     | "workflow"
     | "analytics"
-    | "reminders";
+    | "reminders"
+    | "comban";
 
 export type IconProps = {
     iconName: IconName | string;
