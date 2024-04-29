@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { NoDataPlaceholder } from "../../components";
+import { Icon } from "../../../design-system";
 import { StoriesFilter } from "./storiesFilter";
 import { Option } from "../../../design-system";
 import { PageHeader } from "../../components";
@@ -20,9 +21,10 @@ const AdminStories = () => {
                 actionButtonText="Comban view"
                 actionButtonOnClick={() => {}}
             />
+
             <StoriesFilter
-                setSelectedStatus={handleSetStatusFilter}
-                selectedStatus={statusFilter}
+                setSelectProject={handleSetStatusFilter}
+                selectProject={statusFilter}
                 searchText={searchText}
                 setSearchText={setSearchText}
             />

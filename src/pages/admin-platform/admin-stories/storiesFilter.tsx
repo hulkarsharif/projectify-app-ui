@@ -1,10 +1,13 @@
 import styled from "styled-components";
 import { Input, Option, Select } from "../../../design-system";
 import { PageFilters } from "../../components/PageFilters";
+import { useEffect, useState } from "react";
+import { projectService } from "../../../api";
+import { ProjectWithContributors } from "../../../types";
 
 type StoriesProps = {
-    selectedStatus: string;
-    setSelectedStatus: (option: Option) => void;
+    selectProject: string;
+    setSelectProject: (option: Option) => void;
     searchText: string;
     setSearchText: (value: string) => void;
 };
@@ -15,35 +18,45 @@ const Filters = styled(PageFilters)`
     }
 `;
 
-const statusOptions = [
-    { label: "Project A", value: "project a" },
-    { label: "Project B", value: "project b" },
-    { label: "Project C", value: "project c" },
-    { label: "Project D", value: "project d" }
-];
 const StoriesFilter: React.FC<StoriesProps> = ({
-    selectedStatus,
-    setSelectedStatus,
-    searchText,
-    setSearchText
+    selectProject,
+    setSelectProject
 }) => {
+    const [projectOption, setProjectOption] = useState<Option[]>([]);
+    const [isProjectFetching, setIsProjectFetching] = useState(true);
+
+    useEffect(() => {
+        const fetchProjects = async () => {
+            try {
+                const response = await projectService.getAll();
+                const projects: ProjectWithContributors[] = response.data;
+
+                const options = projects.map((project) => ({
+                    label: project.name,
+                    value: project.id
+                }));
+                setProjectOption(options);
+                setIsProjectFetching(false);
+            } catch (error) {
+                console.error("Error fetching projects", error);
+                setIsProjectFetching(false);
+            }
+        };
+        fetchProjects();
+    }, []);
+
+    if (isProjectFetching) return null;
+
     return (
         <Filters>
             <Select
-                value={selectedStatus}
-                onSelect={setSelectedStatus}
-                options={statusOptions}
+                value={selectProject}
+                onSelect={setSelectProject}
+                options={projectOption}
                 shape="rounded"
                 size="md"
                 headerPlaceholder="Show"
                 className="status-filter"
-            />
-            <Input
-                value={searchText}
-                onChange={setSearchText}
-                placeholder="Search..."
-                shape="rounded"
-                size="md"
             />
         </Filters>
     );

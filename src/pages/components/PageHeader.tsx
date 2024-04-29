@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 type PageHeaderProps = {
     pageTitle: string;
-    actionButtonText: string;
-    actionButtonOnClick: () => void;
+    actionButtonText?: string;
+    actionButtonOnClick?: () => void;
 };
 
 const PageHeaderBase = styled.header`
