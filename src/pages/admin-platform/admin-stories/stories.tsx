@@ -5,6 +5,7 @@ import { StoriesFilter } from "./storiesFilter";
 import { Option } from "../../../design-system";
 import { PageHeader } from "../../components";
 import { StoryStatus } from "../../../types";
+import noStory from "../../../assets/illustrations/no-story.svg";
 
 const AdminStories = () => {
     const [statusFilter, setStatusFilter] = useState("");
@@ -16,6 +17,13 @@ const AdminStories = () => {
 
     return (
         <>
+            <NoDataPlaceholder
+                illustrationUrl={noStory}
+                text="You don't have any stories yet!"
+                buttonText="Add a Story"
+                buttonAction={() => {}}
+            ></NoDataPlaceholder>
+
             <PageHeader
                 pageTitle="Stories"
                 actionButtonText="Comban view"
