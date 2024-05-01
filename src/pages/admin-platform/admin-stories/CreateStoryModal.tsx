@@ -12,9 +12,11 @@ import {
 } from "../../../design-system";
 import { ProjectWithContributors } from "../../../types";
 import { projectService } from "../../../api";
+import { storyService } from "../../../api";
 
 import { useStore } from "../../../hooks";
 import { toIso8601 } from "../../../Utils";
+import { Actions, AddStoryAction } from "../../../store";
 
 type StoryModalProps = {
     show: boolean;

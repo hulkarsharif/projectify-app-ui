@@ -5,6 +5,7 @@ import { ActionType, Actions } from "../actions";
 import { adminTeamMembersReducer } from "./admin-team-members";
 import { projectsReducer } from "./admin-project";
 import { teamMemberTasksReducer } from "./team-member-tasks";
+import { storiesReducer } from "./stories";
 
 const rootReducer = (state: GlobalState, action: ActionType): GlobalState => {
     if (action.type === Actions.RESET_STATE) {
@@ -14,11 +15,12 @@ const rootReducer = (state: GlobalState, action: ActionType): GlobalState => {
         user: userReducer(state.user, action),
         adminPersonalTasks: adminTasksReducer(state.adminPersonalTasks, action),
         teamMembers: adminTeamMembersReducer(state.teamMembers, action),
-        projects: projectsReducer(state.projects, action),
         teamMemberPersonalTasks: teamMemberTasksReducer(
             state.teamMemberPersonalTasks,
             action
-        )
+        ),
+        projects: projectsReducer(state.projects, action),
+        stories: storiesReducer(state.stories, action)
     };
 
     return newState;
