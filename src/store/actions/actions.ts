@@ -10,6 +10,8 @@ import {
     Project,
     ProjectContributor,
     ProjectContributorBase,
+    ProjectWithStories,
+    Story,
     ProjectStatus,
     ProjectUpdate,
     ProjectWithContributors,
@@ -40,7 +42,10 @@ export enum Actions {
     ADMIN_UPDATE_PROJECT = "ADMIN_UPDATE_PROJECT",
     ADMIN_POPULATE_PROJECT_CONTRIBUTORS = "ADMIN_POPULATE_PROJECT_CONTRIBUTORS",
     ADMIN_UPDATE_PROJECT_CONTRIBUTOR_STATUS = "ADMIN_UPDATE_PROJECT_CONTRIBUTOR_STATUS",
-    ADMIN_UPDATE_PROJECT_CONTRIBUTORS_LIST = "ADMIN_UPDATE_PROJECT_CONTRIBUTORS_LIST"
+    ADMIN_UPDATE_PROJECT_CONTRIBUTORS_LIST = "ADMIN_UPDATE_PROJECT_CONTRIBUTORS_LIST",
+
+    ADMIN_ADD_STORY = "ADMIN_ADD_STORY",
+    ADMIN_POPULATE_STORIES = "ADMIN_POPULATE_STORIES"
 }
 
 export interface InitUserAction {
@@ -196,6 +201,23 @@ export type AdminUpdateProjectContributorsList = {
         }[];
     };
 };
+
+export type AddStoryAction = {
+    type: Actions.ADMIN_ADD_STORY;
+    payload: Story;
+};
+
+export type AdminPopulateStoriesAction = {
+    type: Actions.ADMIN_POPULATE_STORIES;
+    payload: ProjectWithStories[];
+};
+
+export const populateStories = (
+    stories: ProjectWithStories[]
+): AdminPopulateStoriesAction => ({
+    type: Actions.ADMIN_POPULATE_STORIES,
+    payload: stories
+});
 export type ActionType =
     | InitUserAction
     | ResetStateAction
@@ -218,4 +240,7 @@ export type ActionType =
     | UpdateProjectAction
     | AdminPopulateProjectContributorsAction
     | AdminUpdateProjectContributorStatus
-    | AdminUpdateProjectContributorsList;
+    | AdminUpdateProjectContributorsList
+    | AdminUpdateProjectContributorsList
+    | AddStoryAction
+    | AdminPopulateStoriesAction;

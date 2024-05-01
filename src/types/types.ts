@@ -82,7 +82,6 @@ export interface TeamMemberUpdate {
 
 export type ProjectStatus = "ACTIVE" | "ONHOLD" | "ARCHIVED" | "COMPLETED";
 export type ContributorStatus = "ACTIVE" | "INACTIVE";
-export type StoryStatus = "TODO" | "INPROGRESS" | "DONE" | "ARCHIVED";
 
 export interface ProjectContributorBase {
     id: string;
@@ -113,13 +112,6 @@ export interface Project {
     endDate: string;
 }
 
-export interface Story {
-    id: string;
-    title: string;
-    description: string;
-    status: string;
-}
-
 export interface ProjectWithContributors extends Project {
     numberOfContributors: number;
     contributors: {
@@ -128,9 +120,33 @@ export interface ProjectWithContributors extends Project {
     };
 }
 
+export interface ProjectWithStories extends Project {
+    stories: Story[];
+}
+
 export interface ProjectUpdate {
     name?: string;
     description?: string;
     startDate?: string;
     endDate?: string;
+}
+
+export type StoryStatus = "TODO" | "INPROGRESS" | "DONE" | "ARCHIVED";
+export interface SubTasks {
+    id: string;
+    title: string;
+    description?: string;
+    due: string;
+    status: TaskStatus;
+}
+export interface Story {
+    id: string;
+    projectId: string;
+    title: string;
+    description?: string;
+    status: StoryStatus;
+    point?: string;
+    due?: string;
+    assigneeId?: string;
+    subTasks: SubTasks;
 }

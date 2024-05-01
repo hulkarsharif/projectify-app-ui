@@ -6,8 +6,11 @@ import { Option } from "../../../design-system";
 import { PageHeader } from "../../components";
 import { StoryStatus } from "../../../types";
 import noStory from "../../../assets/illustrations/no-story.svg";
+import { CreateStoryModal } from "./CreateStoryModal";
 
 const AdminStories = () => {
+    const [showCreateStoryMOdal, setShowCreateStoryModal] = useState(false);
+    const [isProjectsFetching, setIsProjectsFetching] = useState(true);
     const [statusFilter, setStatusFilter] = useState("");
     const [searchText, setSearchText] = useState("");
 
@@ -21,13 +24,13 @@ const AdminStories = () => {
                 illustrationUrl={noStory}
                 text="You don't have any stories yet!"
                 buttonText="Add a Story"
-                buttonAction={() => {}}
+                buttonAction={() => setShowCreateStoryModal(true)}
             ></NoDataPlaceholder>
 
             <PageHeader
                 pageTitle="Stories"
                 actionButtonText="Comban view"
-                actionButtonOnClick={() => {}}
+                actionButtonOnClick={() => setShowCreateStoryModal(true)}
             />
 
             <StoriesFilter
@@ -35,6 +38,10 @@ const AdminStories = () => {
                 selectProject={statusFilter}
                 searchText={searchText}
                 setSearchText={setSearchText}
+            />
+            <CreateStoryModal
+                show={showCreateStoryMOdal}
+                closeModal={() => setShowCreateStoryModal(false)}
             />
         </>
     );
