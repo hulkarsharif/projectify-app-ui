@@ -8,11 +8,13 @@ import {
     DatePickerV1,
     Button,
     Select,
-    Option
+    Option,
+    Label
 } from "../../../design-system";
 import {
     AdminTeamMemberActions,
-    ProjectWithContributors
+    ProjectWithContributors,
+    TeamMember
 } from "../../../types";
 import { projectService, teamMemberService } from "../../../api";
 import { storyService } from "../../../api";
@@ -25,7 +27,8 @@ import {
     AdminAddTeamMemberAction,
     AdminChangePasswordTeamMemberAction,
     AdminPopulateTasksAction,
-    AdminPopulateTeamMemberAction
+    AdminPopulateTeamMemberAction,
+    TeamMemberState
 } from "../../../store";
 
 type StoryModalProps = {
@@ -163,24 +166,29 @@ const CreateStoryModal: React.FC<StoryModalProps> = ({ show, closeModal }) => {
     }, []);
 
     useEffect(() => {
-        teamMemberService
-            .getAll()
-            .then((data) => {
-                const action: AdminPopulateTeamMemberAction = {
-                    type: Actions.ADMIN_POPULATE_TEAM_MEMBERS,
-                    payload: data.data
-                };
-                dispatch(action);
+        const fetchteamMemberService = async () => {
+            try {
+                const response = await teamMemberService.getAll();
+                const teamMembers: TeamMember[] = response.data; // Fix type mismatch
+
+                const options = teamMembers.map((teamMember) => ({
+                    // Explicitly type teamMember
+                    label: `${teamMember.firstName} ${teamMember.lastName}`,
+                    value: teamMember.id
+                }));
+
+                setAssigneeOptions(options);
                 setIsTeamMembersFetching(false);
-            })
-            .catch((e) => {
-                const err = e as Error;
-                setIsTeamMembersFetching(false);
-                toast.error(err.message);
-            });
+            } catch (error) {
+                console.error("Error fetching projects:", error);
+                setIsProjectsFetching(false);
+            }
+        };
+        fetchteamMemberService();
     }, []);
 
     if (isTeamMembersFetching) return null;
+
     return (
         <Modal show={show} position="center">
             <ModalTitle variant="paragraphLG" weight="medium">
