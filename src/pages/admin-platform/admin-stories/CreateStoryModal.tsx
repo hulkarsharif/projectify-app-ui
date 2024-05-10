@@ -10,13 +10,23 @@ import {
     Select,
     Option
 } from "../../../design-system";
-import { ProjectWithContributors } from "../../../types";
-import { projectService } from "../../../api";
+import {
+    AdminTeamMemberActions,
+    ProjectWithContributors
+} from "../../../types";
+import { projectService, teamMemberService } from "../../../api";
 import { storyService } from "../../../api";
 
 import { useStore } from "../../../hooks";
 import { toIso8601 } from "../../../Utils";
-import { Actions, AddStoryAction } from "../../../store";
+import {
+    Actions,
+    AddStoryAction,
+    AdminAddTeamMemberAction,
+    AdminChangePasswordTeamMemberAction,
+    AdminPopulateTasksAction,
+    AdminPopulateTeamMemberAction
+} from "../../../store";
 
 type StoryModalProps = {
     show: boolean;
@@ -47,14 +57,20 @@ const CreateStoryModal: React.FC<StoryModalProps> = ({ show, closeModal }) => {
     const [description, setDescription] = useState<string>("");
     const [storyPoint, setStoryPoint] = useState<string>("");
     const [due, setDue] = useState<Date | null>();
-    const [assigneeId, setAssigneeId] = useState<string>(""); // Initialize with null
+    // const [assigneeId, setAssigneeId] = useState<string>(""); // Initialize with null
+    const [teamMemberId, setTeamMemberId] = useState<string>("");
+
+    const [isTeamMembersFetching, setIsTeamMembersFetching] = useState(true);
 
     type OptionValue = string | number;
 
     const [selectedProject, setSelectedProject] = useState<
         OptionValue | undefined
     >(undefined);
-    const [selectedAssignee, setSelectedAssignee] = useState<
+    // const [selectedAssignee, setSelectedAssignee] = useState<
+    //     OptionValue | undefined
+    // >(undefined);
+    const [selectedTeamMember, setSelectedTeamMember] = useState<
         OptionValue | undefined
     >(undefined);
 
@@ -87,7 +103,8 @@ const CreateStoryModal: React.FC<StoryModalProps> = ({ show, closeModal }) => {
         setStoryPoint("");
         setDue(null);
         setProjectId("");
-        setAssigneeId("");
+        setTeamMemberId("");
+        // setAssigneeId("");
     };
 
     const cancel = () => {
@@ -101,7 +118,8 @@ const CreateStoryModal: React.FC<StoryModalProps> = ({ show, closeModal }) => {
             description,
             storyPoint,
             due: toIso8601(due!),
-            assigneeId
+            teamMemberId
+            // assigneeId
         };
         try {
             storyService
@@ -144,6 +162,25 @@ const CreateStoryModal: React.FC<StoryModalProps> = ({ show, closeModal }) => {
         fetchProjects();
     }, []);
 
+    useEffect(() => {
+        teamMemberService
+            .getAll()
+            .then((data) => {
+                const action: AdminPopulateTeamMemberAction = {
+                    type: Actions.ADMIN_POPULATE_TEAM_MEMBERS,
+                    payload: data.data
+                };
+                dispatch(action);
+                setIsTeamMembersFetching(false);
+            })
+            .catch((e) => {
+                const err = e as Error;
+                setIsTeamMembersFetching(false);
+                toast.error(err.message);
+            });
+    }, []);
+
+    if (isTeamMembersFetching) return null;
     return (
         <Modal show={show} position="center">
             <ModalTitle variant="paragraphLG" weight="medium">
@@ -191,8 +228,8 @@ const CreateStoryModal: React.FC<StoryModalProps> = ({ show, closeModal }) => {
                     onChange={(date) => setDue(date)}
                 />
                 <Select
-                    value={selectedAssignee}
-                    onSelect={(option) => setSelectedAssignee(option?.value)}
+                    value={selectedTeamMember}
+                    onSelect={(option) => setSelectedTeamMember(option?.value)}
                     options={assigneeOptions}
                     shape="rounded"
                     size="md"
