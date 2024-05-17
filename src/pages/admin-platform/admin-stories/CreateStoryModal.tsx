@@ -172,7 +172,6 @@ const CreateStoryModal: React.FC<StoryModalProps> = ({ show, closeModal }) => {
                 const teamMembers: TeamMember[] = response.data; // Fix type mismatch
 
                 const options = teamMembers.map((teamMember) => ({
-                    // Explicitly type teamMember
                     label: `${teamMember.firstName} ${teamMember.lastName}`,
                     value: teamMember.id
                 }));
