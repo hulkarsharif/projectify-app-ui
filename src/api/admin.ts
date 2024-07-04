@@ -35,18 +35,16 @@ class Admin {
                 body: JSON.stringify(input)
             });
             if (!response.ok) {
-                console.log("hello");
                 const data = await response.json();
-                console.log(data);
                 throw new Error(data.message);
             }
             return response.json();
         } catch (error) {
-            console.log(error);
             throw error;
         }
     }
     async signIn(input: SignInInput): Promise<{ token: string }> {
+        console.log(input);
         try {
             const response = await fetch(`${this.url}/login`, {
                 method: "POST",
