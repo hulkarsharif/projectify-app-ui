@@ -3,7 +3,7 @@ import { Switch, Typography } from "../../../design-system";
 import { plans } from "./data";
 import { SubscribePlanCard } from "./SubscribePlanCard";
 import { useState } from "react";
-import { Container, SectionBase } from "../../Home/components";
+import { Container, SectionBase } from "../components";
 
 const PricePlanSection = styled(SectionBase)`
     background-color: var(--jaguar-25);

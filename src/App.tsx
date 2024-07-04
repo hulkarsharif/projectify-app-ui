@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Checkbox, LinearProgress, Switch } from "./design-system";
 import { useState } from "react";
-import { NavigationLink } from "./pages/Home/Section/Navigation/Links";
-import { TopNavigation } from "./pages/Home/Section/Navigation/Top-navigation";
-import { HomePage } from "./pages/Home/HomePage";
+import { NavigationLink } from "./application/Home/Section/Navigation/Links";
+import { TopNavigation } from "./application/Home/Section/Navigation/Top-navigation";
+import { HomePage } from "./application/Home/HomePage";
 
 const Base = styled.div`
     font-size: 1.6rem;

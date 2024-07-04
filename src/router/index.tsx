@@ -22,7 +22,7 @@ import {
     TeamMemberProjects,
     TeamMemberStories,
     AdminTeamMembersPage
-} from "../pages";
+} from "../application";
 import { UserRole } from "../types";
 import { Private } from "./Private";
 import { Auth } from "./Auth";
