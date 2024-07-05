@@ -1,4 +1,4 @@
-import { AuthWrapper, AuthActionLink } from "../../components";
+import { AuthWrapper, AuthActionLink } from "../../../application/components";
 import { Button, Input } from "../../../design-system";
 import { useState } from "react";
 import toast from "react-hot-toast";

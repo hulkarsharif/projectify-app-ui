@@ -1,6 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import { GlobalState, initialState, rootReducer, ActionType } from "../store";
-
+import { GlobalState, initialState, rootReducer, ActionType } from "store";
 type AppContextType = {
     state: GlobalState;
     dispatch(action: ActionType): void;

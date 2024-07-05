@@ -7,9 +7,9 @@ import {
     ProgressColor,
     Toaster,
     Typography
-} from "design-system";
-import { adminService } from "api";
-import { AuthActionLink } from "application/components";
+} from "../../../design-system";
+import { adminService } from "../../../api";
+import { AuthActionLink } from "../../../application/components";
 
 const Page = styled.main`
     height: 100vh;

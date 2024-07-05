@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Input, Button, Toaster } from "../../../design-system";
-import { AuthWrapper, AuthActionLink } from "../../components";
+import { AuthWrapper, AuthActionLink } from "../../../application/components";
 import flatIronBuilding from "../../../assets/image/flatIronBuilding.jpg";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -9,11 +9,10 @@ import toast from "react-hot-toast";
 
 const Form = styled.form`
     width: 100%;
-
     display: flex;
     flex-direction: column;
     gap: var(--space-20);
-    margin-bottom: var(--space-40);
+    /* margin-bottom: var(--space-40); */
 `;
 const AdminResetPassword = () => {
     const [password, setPassword] = useState("");
@@ -89,7 +88,7 @@ const AdminResetPassword = () => {
                         color="primary"
                         size="lg"
                         shape="rounded"
-                        disabled={isFormSubmitting || !isFormSubmittable}
+                        // disabled={isFormSubmitting || !isFormSubmittable}
                     >
                         Reset Password
                     </Button>

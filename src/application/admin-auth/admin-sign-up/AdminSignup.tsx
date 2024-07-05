@@ -3,7 +3,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import flatIronBuilding from "../../../assets/image/flatIronBuilding.jpg";
 import { adminService } from "../../../api";
-import { AuthActionLink, AuthWrapper } from "../../components";
+import { AuthActionLink, AuthWrapper } from "../../../application/components";
 import styled from "styled-components";
 
 const Form = styled.form`

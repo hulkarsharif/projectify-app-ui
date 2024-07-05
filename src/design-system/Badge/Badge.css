@@ -72,27 +72,27 @@
     background-color: var(--jaguar-600);
 }
 
-/* Violet Badge */
+/* Primary Badge */
 
 .badge-violet.badge-contained {
-    background-color: var(--primary-50);
+    background-color: var(--violet-50);
 }
 
 .badge-violet.badge-outlined {
-    background-color: var(--primary-25);
-    border-color: var(--primary-200);
+    background-color: var(--violet-25);
+    border-color: var(--violet-200);
 }
 
 .badge-violet .badge__text {
-    color: var(--primary-600);
+    color: var(--violet-600);
 }
 
 .badge-violet svg {
-    fill: var(--primary-600);
+    fill: var(--violet-600);
 }
 
 .badge-violet .badge__status {
-    background-color: var(--primary-600);
+    background-color: var(--violet-600);
 }
 
 /* Orange Badge */

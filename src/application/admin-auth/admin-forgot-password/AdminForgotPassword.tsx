@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import flatIronBuilding from "../../../assets/image/flatIronBuilding.jpg";
 import { adminService } from "../../../api";
-import { AuthActionLink, AuthWrapper } from "application/components";
+import { AuthActionLink, AuthWrapper } from "../../../application/components";
 
 const Form = styled.form`
     width: 100%;
