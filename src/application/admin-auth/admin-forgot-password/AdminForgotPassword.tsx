@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import flatIronBuilding from "../../../assets/image/flatIronBuilding.jpg";
 import { adminService } from "../../../api";
-import { AuthWrapper } from "../../components";
+import { AuthActionLink, AuthWrapper } from "application/components";
 
 const Form = styled.form`
     width: 100%;
@@ -45,7 +45,7 @@ const AdminForgotPassword = () => {
         <>
             <AuthWrapper
                 imageUrl={flatIronBuilding}
-                pageTitle="Forgot Password"
+                pageTitle="Forgot Password ?"
                 switchLayout
             >
                 <Form onSubmit={getInstructions}>
@@ -62,11 +62,17 @@ const AdminForgotPassword = () => {
                         color="primary"
                         size="lg"
                         shape="rounded"
-                        disabled={isFormSubmitting || !isFormSubmittable}
+                        className="forget-password__submit-button"
                     >
                         Get Instructions
                     </Button>
                 </Form>
+
+                <AuthActionLink
+                    linkText="Sign In"
+                    hintText="Remember your password?"
+                    linkTo="../admin/sign-in"
+                />
             </AuthWrapper>
             <Toaster />
         </>
