@@ -2,14 +2,19 @@ import React from "react";
 import sprite from "./sprite.svg";
 import { IconProps } from "./types";
 
-const Icon: React.FC<IconProps> = ({ iconName, className, onClick }) => {
+const Icon: React.FC<IconProps> = ({
+    iconName,
+    className,
+    onClick,
+    size = 24
+}) => {
     const handleOnClick = () => {
         onClick && onClick();
     };
     return (
         <svg
-            height="2.4rem"
-            width="2.4rem"
+            width={`${size / 10}rem`}
+            height={`${size / 10}rem`}
             className={className || ""}
             onClick={handleOnClick}
         >

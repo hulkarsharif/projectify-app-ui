@@ -39,7 +39,7 @@
 }
 
 .react-datepicker__day.v1-date-picker__day-wrapper:hover {
-    background-color: var(--primary-50);
+    background-color: var(--violet-50);
 }
 
 .v1-date-picker .react-datepicker__day--outside-month {
@@ -67,7 +67,7 @@
 .react-datepicker__month-text--keyboard-selected,
 .react-datepicker__quarter-text--keyboard-selected,
 .react-datepicker__year-text--keyboard-selected {
-    background-color: var(--primary-500) !important;
+    background-color: var(--violet-500) !important;
     color: var(--white) !important;
 }
 
@@ -83,7 +83,7 @@
 .react-datepicker__year-text--selected,
 .react-datepicker__year-text--in-selecting-range,
 .react-datepicker__year-text--in-range {
-    background-color: var(--primary-500) !important;
+    background-color: var(--violet-500) !important;
     color: var(--white) !important;
 }
 
@@ -138,7 +138,7 @@
 
 .v1-date-picker .react-datepicker__navigation-icon::before,
 .v1-date-picker .react-datepicker__navigation-icon::after {
-    border-color: var(--primary-500);
+    border-color: var(--violet-500);
     border-width: 2px 2px 0 0;
 }
 
@@ -157,10 +157,10 @@
 }
 
 .v1-date-picker__calendar-icon.react-datepicker__calendar-icon:hover + input {
-    border-color: var(--primary-500) !important;
+    border-color: var(--violet-500) !important;
 }
 
 .react-datepicker__input-container.react-datepicker__view-calendar-icon:hover
     svg {
-    fill: var(--primary-500);
+    fill: var(--violet-500);
 }

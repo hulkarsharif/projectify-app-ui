@@ -39,10 +39,13 @@ export type IconName =
     | "reminders"
     | "comban";
 
+export type IconSize = 24 | 36 | 48;
+
 export type IconProps = {
     iconName: IconName | string;
     className?: string;
     height?: string;
     width?: string;
     onClick?: () => void;
+    size?: IconSize;
 };
