@@ -42,11 +42,11 @@ input::placeholder,
 }
 
 .input:hover:not(.input-error, :disabled) {
-    border: 0.15rem solid var(--primary-500);
+    border: 0.15rem solid var(--violet-500);
 }
 
 .input:focus:not(.input-error) {
-    border: 0.15rem solid var(--primary-500);
+    border: 0.15rem solid var(--violet-500);
 }
 
 .input-error {
