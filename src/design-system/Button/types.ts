@@ -1,11 +1,14 @@
+import React from "react";
 import { To } from "react-router-dom";
+import { IconName } from "../Icon";
+
 export type ButtonSize = "sm" | "md" | "lg";
 export type ButtonShape = "rounded" | "circle";
 export type ButtonColor = "primary" | "secondary" | "danger" | "success";
 export type ButtonVariant = "contained" | "outlined" | "text";
 export type RenderableAs = "link" | "navLink";
 
-export type ButtonBaseProps = {
+interface ButtonBaseProps {
     size?: ButtonSize;
     shape?: ButtonShape;
     fullWidth?: boolean;
@@ -14,8 +17,10 @@ export type ButtonBaseProps = {
     disabled?: boolean;
     className?: string;
     children: React.ReactNode;
+    startIcon?: React.ReactNode | IconName;
+    endIcon?: React.ReactNode | IconName;
     onClick?: () => void;
-};
+}
 
 export type ButtonProps =
     | (ButtonBaseProps & { renderAs: RenderableAs; navigateTo: To })

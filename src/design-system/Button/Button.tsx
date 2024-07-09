@@ -2,31 +2,14 @@ import { FC, forwardRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { ButtonProps } from "./types";
 import { trimWhiteSpaces } from "../utils";
+import {
+    sizeClassNames,
+    shapeClassNames,
+    colorClassNames,
+    variantClassNames
+} from "./classnames";
 import "./Button.css";
-
-const sizeClassNames = {
-    sm: "btn-small",
-    md: "btn-medium",
-    lg: "btn-large"
-};
-
-const shapeClassNames = {
-    rounded: "btn-rounded",
-    circle: "btn-circle"
-};
-
-const colorClassNames = {
-    primary: "btn-primary",
-    secondary: "btn-secondary",
-    danger: "btn-danger",
-    success: "btn-success"
-};
-
-const variantClassNames = {
-    contained: "btn-contained",
-    outlined: "btn-outlined",
-    text: "btn-text"
-};
+import { Icon, IconName } from "../Icon";
 
 const Button: FC<ButtonProps> = forwardRef(
     (props, ref: React.ForwardedRef<HTMLButtonElement>) => {
@@ -41,7 +24,9 @@ const Button: FC<ButtonProps> = forwardRef(
             children,
             onClick,
             renderAs,
-            navigateTo
+            navigateTo,
+            endIcon,
+            startIcon
         } = props;
 
         const sizeClassName = size !== undefined ? sizeClassNames[size] : "";
@@ -80,7 +65,17 @@ const Button: FC<ButtonProps> = forwardRef(
                     onClick={onClick}
                     ref={ref}
                 >
+                    {startIcon && typeof startIcon === "string" ? (
+                        <Icon iconName={startIcon as IconName} />
+                    ) : (
+                        startIcon
+                    )}
                     {children}
+                    {endIcon && typeof endIcon === "string" ? (
+                        <Icon iconName={endIcon as IconName} />
+                    ) : (
+                        endIcon
+                    )}
                 </button>
             );
         };
