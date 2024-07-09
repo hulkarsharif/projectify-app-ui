@@ -6,7 +6,7 @@ import { trimWhiteSpaces } from "../utils";
 import { useCloseWhenClickOutside } from "../hooks";
 
 const colorClassNames = {
-    primary: "menu__option--primary",
+    primary: "menu__option--violet",
     danger: "menu__option--danger"
 };
 

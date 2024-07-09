@@ -1,37 +1,57 @@
-import React from "react";
-import { LinearProgressProps } from "./types";
-import { getFinalClassName } from "./utils";
-import { LinearProgressIndicator } from "./LinearProgressIndicator";
+import { LinearProgressShape, LinearProgressIndicatorProps } from "./types";
 
-import "./LinearProgress.css";
+import { IconName, Icon } from "../Icon";
+import { Typography } from "../Typography";
 
-const LinearProgress: React.FC<LinearProgressProps> = ({
-    color,
-    value,
-    error,
-    className,
-    shape,
-    size
-}) => {
-    const finalClassName = getFinalClassName(color, shape, size, className);
-
-    return (
-        <div className={finalClassName}>
-            <div className="linear-progress__max">
-                <div
-                    className="linear-progress__progress"
-                    style={{ width: `${value || 0}%` }}
-                ></div>
-            </div>
-            <div className="linear-progress__progress-indicator">
-                <LinearProgressIndicator
-                    error={error}
-                    value={value}
-                    shape={shape}
-                />
-            </div>
-        </div>
-    );
+const iconNames: {
+    [key: string]: {
+        [key in LinearProgressShape]: IconName;
+    };
+} = {
+    error: {
+        rounded: "info-in-circle-filled",
+        sharp: "info-in-circle-sharp-filled"
+    },
+    completed: {
+        rounded: "check-in-circle-filled",
+        sharp: "check-in-circle-sharp-filled"
+    }
 };
 
-export { LinearProgress };
+export const LinearProgressIndicator: React.FC<
+    LinearProgressIndicatorProps
+> = ({ error, value, shape }): JSX.Element => {
+    const isCompleted = value === 100;
+
+    let status = "";
+    let finalShape: LinearProgressShape = "sharp";
+    if (shape) {
+        finalShape = shape;
+    }
+    if (error) {
+        status = "error";
+    }
+    if (isCompleted) {
+        status = "completed";
+    }
+
+    if (isCompleted || error) {
+        return (
+            <Icon
+                iconName={iconNames[status][finalShape]}
+                className="linear-progress__indicator-icon"
+            />
+        );
+    }
+
+    return (
+        <Typography
+            variant="paragraph-sm"
+            weight="medium"
+            color="neutral"
+            className="linear-progress__indicator-text"
+        >
+            {value || 0}%
+        </Typography>
+    );
+};

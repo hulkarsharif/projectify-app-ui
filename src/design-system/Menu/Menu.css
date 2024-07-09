@@ -65,10 +65,10 @@
     fill: var(--red-orange-500);
 }
 
-.menu__option.menu__option--primary {
-    color: var(--primary-500);
+.menu__option.menu__option--violet {
+    color: var(--violet-500);
 }
 
-.menu__option.menu__option--primary svg {
-    fill: var(--primary-500);
+.menu__option.menu__option--violet svg {
+    fill: var(--violet-500);
 }

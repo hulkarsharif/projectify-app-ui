@@ -12,7 +12,7 @@
 }
 
 .btn-secondary.select__header:hover {
-    border-color: var(--primary-500);
+    border-color: var(--violet-500);
     background-color: var(--white);
 }
 
@@ -21,7 +21,7 @@
 }
 
 .btn-secondary.select__header:focus {
-    border-color: var(--primary-500);
+    border-color: var(--violet-500);
     background-color: var(--white);
 }
 
@@ -119,7 +119,7 @@
 }
 
 .select__selected-icon {
-    fill: var(--primary-500);
+    fill: var(--violet-500);
 }
 
 /* Select Items */

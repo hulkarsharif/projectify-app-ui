@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Checkbox, LinearProgress, Switch } from "./design-system";
 import { useState } from "react";
-import { NavigationLink } from "./application/Home/Section/Navigation/Links";
-import { TopNavigation } from "./application/Home/Section/Navigation/Top-navigation";
-import { HomePage } from "./application/Home/HomePage";
+import { NavigationLink } from "./marketing/Home/Sections/Navigation/Links";
+import { TopNavigation } from "./marketing/Home/Sections/Navigation/Top-navigation";
+import { Home } from "./marketing/Home";
 
 const Base = styled.div`
     font-size: 1.6rem;
@@ -19,7 +19,7 @@ const App = () => {
     return (
         <>
             {" "}
-            <HomePage />
+            <Home />
             <Base>
                 <Link to="admin/sign-up">Admin Sign up</Link>
                 <Link to="admin/sign-in">Admin Sign in</Link>
