@@ -1,47 +1,26 @@
-export type IconName =
-    | "tasks"
-    | "support"
-    | "stories"
-    | "settings"
-    | "projects"
-    | "members"
-    | "log-out"
-    | "chevron-right"
-    | "flag"
-    | "check"
-    | "three-dots"
-    | "edit"
-    | "delete"
-    | "chevron-down"
-    | "calendar"
-    | "check-sharp"
-    | "minus-sharp"
-    | "minus"
-    | "archive"
-    | "clipboard-list"
-    | "clock-check"
-    | "clock-heart"
-    | "document-chart"
-    | "user-check"
-    | "x"
-    | "arrow-left"
-    | "rocket"
-    | "send"
-    | "plane-filled"
-    | "info-in-circle-filled"
-    | "check-in-circle-filled"
-    | "info-in-circle-sharp-filled"
-    | "check-in-circle-sharp-filled"
-    | "check-in-circle"
-    | "x-in-circle"
-    | "pause-in-circle"
-    | "play-in-circle";
+import { IconName } from "../Icon/types";
 
-export type IconSize = 24 | 36 | 48;
+export type IconCardColor =
+    | "green"
+    | "sunglow"
+    | "primary"
+    | "red"
+    | "blue"
+    | "purple"
+    | "green-light"
+    | "sunglow-light"
+    | "primary-light"
+    | "red-light"
+    | "blue-light"
+    | "purple-light";
 
-export type IconProps = {
+export type IconCardSize = "sm" | "md" | "lg";
+export type IconCardShape = "rounded" | "circle";
+
+export interface IconCardProps {
+    color: IconCardColor;
+    size: IconCardSize;
     iconName: IconName;
+    shape: IconCardShape;
     className?: string;
-    onClick?: () => void;
-    size?: IconSize;
-};
+}
