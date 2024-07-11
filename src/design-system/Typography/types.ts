@@ -44,7 +44,7 @@ export type TypographyColor =
     | "error-extra-strong";
 
 export type TypographyProps = {
-    variant?: TypographyVariant;
+    variant: TypographyVariant;
     weight?: TypographyWeight;
     align?: TypographyAlign;
     className?: string;

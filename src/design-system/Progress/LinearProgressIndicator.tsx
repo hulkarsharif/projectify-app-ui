@@ -46,8 +46,9 @@ export const LinearProgressIndicator: React.FC<
 
     return (
         <Typography
-            variant="paragraphSM"
+            variant="paragraph-sm"
             weight="medium"
+            color="neutral"
             className="linear-progress__indicator-text"
         >
             {value || 0}%

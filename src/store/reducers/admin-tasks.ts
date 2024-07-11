@@ -9,7 +9,7 @@ import {
     AdminRemoveTaskAction,
     AdminUpdateTaskAction
 } from "../actions";
-import { TaskState } from "../state";
+import { TaskState } from "store/state";
 import { Task } from "../../types";
 
 const adminTasksReducer = produce(

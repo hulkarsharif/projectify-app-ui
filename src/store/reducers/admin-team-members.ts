@@ -1,5 +1,5 @@
 import { produce } from "immer";
-import { TeamMemberState } from "../state";
+import { TeamMemberState } from "store/state";
 import {
     ActionType,
     Actions,

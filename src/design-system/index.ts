@@ -21,5 +21,6 @@ export * from "./Table";
 export * from "./IconCard";
 export * from "./BaseCard";
 export * from "./IconButton";
+export * from "./Progress";
 
 export * from "./utils";

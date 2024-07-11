@@ -1,7 +1,7 @@
 import { userReducer } from "./User";
 import { adminTasksReducer } from "./admin-tasks";
-import { GlobalState, initialState } from "../state";
-import { ActionType, Actions } from "../actions";
+import { GlobalState, initialState } from "store/state";
+import { ActionType, Actions } from "store/actions";
 import { adminTeamMembersReducer } from "./admin-team-members";
 import { projectsReducer } from "./admin-project";
 import { teamMemberTasksReducer } from "./team-member-tasks";

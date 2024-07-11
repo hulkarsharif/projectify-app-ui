@@ -5,7 +5,7 @@ import {
     Task,
     TeamMember,
     TeamMemberUser
-} from "../../types";
+} from "types";
 
 export type UserState = AdminUser | TeamMemberUser | null;
 export type TaskState = { [taskId: string]: Task };

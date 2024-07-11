@@ -1,5 +1,5 @@
-import { ActionType, Actions, InitUserAction } from "../actions";
-import { UserState } from "../state";
+import { ActionType, Actions, InitUserAction } from "store/actions";
+import { UserState } from "store/state";
 
 export const userReducer = (
     state: UserState,

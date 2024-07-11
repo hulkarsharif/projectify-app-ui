@@ -1,4 +1,4 @@
-export type ProgressColor = "orange" | "blue" | "green" | "red";
+export type ProgressColor = "primary" | "orange" | "green" | "red";
 export type LinearProgressSize = "md" | "lg";
 export type LinearProgressShape = "rounded" | "sharp";
 

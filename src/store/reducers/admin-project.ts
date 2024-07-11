@@ -9,8 +9,8 @@ import {
     UpdateProjectAction,
     AdminUpdateProjectContributorStatus,
     AdminUpdateProjectContributorsList
-} from "../actions";
-import { ProjectState } from "../state";
+} from "store/actions";
+import { ProjectState } from "store/state";
 import {
     AssignedContrubtorsState,
     NotAssignedContributorsState,

@@ -7,9 +7,9 @@ import {
     ProgressColor,
     Toaster,
     Typography
-} from "../../../design-system";
-import { adminService } from "../../../api";
-import { AuthActionLink } from "../../../application/components";
+} from "design-system";
+import { adminService } from "api";
+import { AuthActionLink } from "application/components";
 
 const Page = styled.main`
     height: 100vh;
@@ -46,53 +46,56 @@ const AdminAccountActivation = () => {
         let interval: NodeJS.Timeout | string | number | undefined;
         interval = setInterval(incrementProgress, 75);
 
-        let timeOutId: NodeJS.Timeout | string | number | undefined =
+        let timeoutId: NodeJS.Timeout | string | number | undefined =
             setTimeout(() => {
                 if (activationToken) {
-                    adminService.activeAccount(activationToken)
-                    .then((data) => {
-                        clearInterval(interval);
-                        setProgress(100);
-                        setMessage("Account Activated");
-                    });
-                    .catch((e) => {
-                        const err = e as Error;
-                        setError(true);
-                        clearInterval(interval);
-                        setProgress(0);
-                        setMessage("Account Activation Failed");
-                        setProgressColor("red");
-                        toast.error(err.message);
-                    });
+                    adminService
+                        .activateAccount(activationToken)
+                        .then((data) => {
+                            clearInterval(interval);
+                            setProgress(100);
+                            setMessage("Account Activated");
+                        })
+                        .catch((e) => {
+                            const err = e as Error;
+                            setError(true);
+                            clearInterval(interval);
+                            setProgress(0);
+                            setMessage("Account Activation Failed");
+                            setProgressColor("red");
+                            toast.error(err.message);
+                        });
                 }
-            },300);
-            return () => {
-                clearTimeout(timeoutId);
-                clearInterval(interval);
-            };
-        }, []);
-        return (
-            <Page>
-                <Container>
-                    <Typography variant="h6">{message}</Typography>
-                    <LinearProgress
-                        value={progress}
-                        color={progressColor}
-                        shape="rounded"
-                        size="lg"
-                        error={error}
+            }, 3000);
+
+        return () => {
+            clearTimeout(timeoutId);
+            clearInterval(interval);
+        };
+    }, []);
+
+    return (
+        <Page>
+            <Container>
+                <Typography variant="h6">{message}</Typography>
+                <LinearProgress
+                    value={progress}
+                    color={progressColor}
+                    shape="rounded"
+                    size="lg"
+                    error={error}
+                />
+                {progress === 100 && !error && (
+                    <AuthActionLink
+                        hintText="Let's get things done"
+                        linkText="Sign in"
+                        linkTo="../admin/sign-in"
                     />
-                    {progress === 100 && !error && (
-                        <AuthActionLink
-                            hintText="Let's get things done"
-                            linkText="Sign in"
-                            linkTo="../admin/sign-in"
-                        />
-                    )}
-                </Container>
-                <Toaster />
-            </Page>
-        );
-    };
-    
-    export { AdminAccountActivation };
+                )}
+            </Container>
+            <Toaster />
+        </Page>
+    );
+};
+
+export { AdminAccountActivation };
