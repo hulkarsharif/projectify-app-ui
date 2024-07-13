@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Input, Button, Toaster } from "../../../design-system";
 import { AuthWrapper, AuthActionLink } from "../../../application/components";
-import flatIronBuilding from "../../../assets/image/flatIronBuilding.jpg";
+import flatIronBuilding from "application/assets/image/flatIronBuilding.jpg";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { adminService } from "../../../api";

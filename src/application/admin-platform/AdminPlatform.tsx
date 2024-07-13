@@ -2,14 +2,14 @@ import { Outlet, useNavigate } from "react-router-dom";
 import {
     SideBar,
     SideBarLinks,
-    SideBarLinkGroup,
+    SideBarLinksGroup,
     Toaster
-} from "../../design-system";
-import { AppPage, AppLayout, SideBarUser } from "../components";
-import { useLocalStorage, useStore } from "../../hooks";
-import { Actions } from "../../store";
+} from "design-system";
+import { AppPage, AppLayout, SideBarUser } from "application/components";
+import { Actions } from "store";
+import { useLocalStorage, useStore } from "hooks";
 
-const links: SideBarLinkGroup[] = [
+const links: SideBarLinksGroup[] = [
     {
         title: "Menu",
         links: [
@@ -52,12 +52,12 @@ const links: SideBarLinkGroup[] = [
     }
 ];
 
-const AdminPlatform = () => {
-    const navigate = useNavigate();
+const Platform = () => {
     const {
         state: { user },
         dispatch
     } = useStore();
+    const navigate = useNavigate();
     const { removeItem } = useLocalStorage();
 
     const logOut = () => {
@@ -90,4 +90,4 @@ const AdminPlatform = () => {
     );
 };
 
-export { AdminPlatform };
+export { Platform as AdminPlatform };

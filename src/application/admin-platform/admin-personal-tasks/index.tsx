@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NoDataPlaceholder, PageHeader } from "../../components";
-import noTask from "../../../assets/illustrations/no-task.svg";
+import noTask from "application/assets/illustrations/no-task.svg";
 import { adminTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, AdminPopulateTasksAction } from "../../../store";

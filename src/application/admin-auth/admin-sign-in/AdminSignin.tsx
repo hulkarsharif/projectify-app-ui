@@ -3,7 +3,7 @@ import { Button, Input } from "../../../design-system";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { adminService } from "../../../api";
-import samarkand from "../../../assets/image/samarkand-min.jpeg";
+import samarkand from "application/assets/image/samarkand-min.jpeg";
 import styled from "styled-components";
 import { useLocalStorage } from "../../../hooks";
 
