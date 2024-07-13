@@ -6,12 +6,12 @@ type SideBarLink = {
     iconName: IconName;
 };
 
-export type SideBarLinkGroup = {
+export type SideBarLinksGroup = {
     title: string;
     links: SideBarLink[];
 };
 
 export type SideBarLinksProps = {
-    links: SideBarLinkGroup[];
+    links: SideBarLinksGroup[];
     logOut: () => void;
 };

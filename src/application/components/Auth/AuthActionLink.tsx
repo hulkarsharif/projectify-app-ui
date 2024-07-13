@@ -15,9 +15,6 @@ const ActionLinkWrapper = styled.div`
     gap: var(--space-8);
 `;
 
-const HintTextTypography = styled(Typography)`
-    color: var(--jaguar-400);
-`;
 const StyledLink = styled(Link)`
     color: var(--primary-500);
     font-weight: var(--font-weight-600);
@@ -30,9 +27,9 @@ const AuthActionLink: React.FC<PropsType> = ({
 }) => {
     return (
         <ActionLinkWrapper>
-            <HintTextTypography variant="paragraphSM" weight="medium">
+            <Typography variant="paragraph-sm" weight="medium" color="neutral">
                 {hintText}
-            </HintTextTypography>
+            </Typography>
             <StyledLink to={linkTo} className="paragraph-sm">
                 {linkText}
             </StyledLink>
