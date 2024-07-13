@@ -34,7 +34,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     return (
         <Modal show={show} position="center">
             {confirmationMessage && (
-                <ConfirmationText variant="paragraphSM">
+                <ConfirmationText variant="paragraph-sm">
                     {confirmationMessage}
                 </ConfirmationText>
             )}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled, { css } from "styled-components";
-import { format } from "date-fns";
+import { formatAsMMMd } from "Utils";
 import { KanbanCardProps } from "./types";
 import { Badge, Bar, Menu, Typography } from "../../../design-system";
 import { toDateObj } from "../../../Utils";
@@ -24,7 +24,7 @@ export const KanbanCardBase = styled.div<{ $isDragging: boolean }>`
         `}
 
     &:not(:last-of-type) {
-        margin-bottom: var(--space-10);
+        margin-bottom: var(--space-12);
     }
 `;
 
@@ -89,15 +89,19 @@ const KanbanCard: React.FC<KanbanCardProps> = ({
                 <Menu options={menuActions} onSelect={handleOnSelectMenuItem} />
             </KanbanCardHeader>
             <div>
-                <TaskTitle variant="paragraphLG" weight="semibold">
+                <TaskTitle variant="paragraph-lg" weight="semibold">
                     {task?.title}
                 </TaskTitle>
-                <TaskDescription variant="subtitleLG" weight="medium">
+                <TaskDescription
+                    variant="subtitle-lg"
+                    weight="medium"
+                    color="neutral"
+                >
                     {task?.description}
                 </TaskDescription>
             </div>
             <TaskDue
-                label={format(toDateObj(task.due), "MMMM d")}
+                label={formatAsMMMd(task.due)}
                 color={StatusToColor[task.status]}
                 iconName={StatusToIcon[task.status]}
                 variant="contained"
