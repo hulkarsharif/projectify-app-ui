@@ -103,6 +103,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
                     }}
                     shape="rounded"
                     size="lg"
+                    clearable
                 />
                 <DatePickerV1
                     inputSize="lg"

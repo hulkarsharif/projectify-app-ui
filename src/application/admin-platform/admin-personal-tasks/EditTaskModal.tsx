@@ -142,6 +142,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                     headerPlaceholder="Select Due Data"
                     shape="rounded"
                     size="lg"
+                    clearable
                 />
             </Inputs>
             <Buttons>

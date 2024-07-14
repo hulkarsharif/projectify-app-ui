@@ -182,11 +182,11 @@
 }
 
 .btn-secondary.btn-outlined:hover {
-    background-color: var(--black-50);
+    background-color: var(--jaguar-12);
 }
 
 .btn-secondary.btn-outlined:focus {
-    background-color: var(--black-100);
+    background-color: var(--jaguar-25);
 }
 
 .btn-secondary.btn-outlined:disabled {

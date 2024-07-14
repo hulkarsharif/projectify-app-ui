@@ -132,6 +132,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
                     onChange={onChangeName}
                     shape="rounded"
                     size="lg"
+                    clearable
                 />
                 <Input
                     type="textarea"

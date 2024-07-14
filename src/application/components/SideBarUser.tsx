@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Avatar } from "../../design-system";
-import { Icon, Typography } from "../../design-system";
+import { Icon, Typography, Avatar } from "../../design-system";
 
 const UserBase = styled.div`
     width: calc(100% - 1.6rem);
@@ -36,10 +35,6 @@ type UserProps = {
     onClick?: () => void;
 };
 
-const EmailTypography = styled(Typography)`
-    color: var(--jaguar-500);
-`;
-
 const SideBarUser: React.FC<UserProps> = ({ details, onClick }) => {
     return (
         <UserBase onClick={onClick}>
@@ -51,13 +46,17 @@ const SideBarUser: React.FC<UserProps> = ({ details, onClick }) => {
                 shape="rounded"
             />
             <UserDetails>
-                <Typography variant="paragraphSM" weight="medium">
+                <Typography variant="display-sm" weight="medium">
                     {details.firstName} {details.lastName}
                 </Typography>
-                <EmailTypography variant="subtitleSM" weight="medium">
-                    {details.email}
-                </EmailTypography>
             </UserDetails>
+            <Typography variant="paragraph-sm" weight="medium">
+                {details.firstName}
+                {details.lastName}
+            </Typography>
+            <Typography variant="subtitle-sm" weight="medium" color="neutral">
+                {details.email}
+            </Typography>
             <Icon iconName="chevron-right" />
         </UserBase>
     );

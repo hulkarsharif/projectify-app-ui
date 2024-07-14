@@ -120,6 +120,7 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
                     onChange={onChangeDescription}
                     shape="rounded"
                     size="lg"
+                    clearable
                 />
                 <DatePickerV1
                     inputSize="lg"
