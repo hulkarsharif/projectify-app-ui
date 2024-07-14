@@ -1,9 +1,9 @@
 import React from "react";
 import { InputProps } from "./types";
-
-import { trimWhiteSpaces } from "../utils";
 import { Label } from "../Label";
+import { trimWhiteSpaces } from "../utils";
 import "./Input.css";
+import { Icon } from "../Icon";
 
 const sizeClassNames = {
     sm: "input-small",
@@ -25,11 +25,14 @@ const Input: React.FC<InputProps> = (props) => {
         shape,
         size,
         hintMessage,
-        labelText,
+        label,
         className,
         id,
         onChange,
-        value
+        value,
+        clearable,
+        iconName,
+        autoFocus
     } = props;
 
     const sizeClassName = size !== undefined ? sizeClassNames[size] : "";
@@ -38,12 +41,18 @@ const Input: React.FC<InputProps> = (props) => {
 
     const errorClassName = error ? "input-error" : "";
     const textareaClassName = type === "textarea" ? "input-textarea" : "";
+    const clearableClassName = clearable ? "input-clearable" : "";
+
     const finalClassNames = trimWhiteSpaces(
-        `input  ${sizeClassName} ${shapeClassName} ${errorClassName} ${textareaClassName}`
+        `input ${sizeClassName} ${shapeClassName} ${errorClassName} ${textareaClassName} ${clearableClassName}`
     );
+
     const hintMessageClass = trimWhiteSpaces(
-        `hint-message ${error ? "hint-message--error" : ""}`
+        `input-hintMessage ${error ? "input-hintMessage--error" : ""} ${
+            disabled ? "input-hintMessage--disabled" : ""
+        }`
     );
+
     const handleOnChange = (
         e:
             | React.ChangeEvent<HTMLTextAreaElement>
@@ -52,33 +61,48 @@ const Input: React.FC<InputProps> = (props) => {
         onChange(e.target.value);
     };
 
+    const clearInput = () => {
+        onChange("");
+    };
+
     return (
-        <div className={`input-wrapper ${className || ""}`}>
-            {labelText ? (
+        <div className={`input-control ${className || ""} `}>
+            {label ? (
                 <Label htmlFor={id} disabled={disabled} error={error}>
-                    {labelText}
+                    {label}
                 </Label>
             ) : null}
-            {type === "textarea" ? (
-                <textarea
-                    placeholder={placeholder}
-                    className={finalClassNames}
-                    disabled={disabled}
-                    id={id}
-                    onChange={handleOnChange}
-                    value={value}
-                />
-            ) : (
-                <input
-                    className={finalClassNames}
-                    type={type || "text"}
-                    placeholder={placeholder}
-                    disabled={disabled}
-                    id={id}
-                    onChange={handleOnChange}
-                    value={value}
-                />
-            )}
+            <div className="input-base">
+                {type === "textarea" ? (
+                    <textarea
+                        placeholder={placeholder}
+                        className={finalClassNames}
+                        disabled={disabled}
+                        id={id}
+                        onChange={handleOnChange}
+                        value={value}
+                        autoFocus={autoFocus}
+                    />
+                ) : (
+                    <input
+                        className={finalClassNames}
+                        type={type || "text"}
+                        placeholder={placeholder}
+                        disabled={disabled}
+                        id={id}
+                        onChange={handleOnChange}
+                        value={value}
+                        autoFocus={autoFocus}
+                    />
+                )}
+                {clearable && value.length > 0 && (
+                    <Icon
+                        iconName="x-in-circle"
+                        className="input-clearIcon"
+                        onClick={clearInput}
+                    />
+                )}
+            </div>
 
             {hintMessage ? (
                 <span className={hintMessageClass}>{hintMessage}</span>
