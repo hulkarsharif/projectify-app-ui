@@ -134,6 +134,7 @@ const Select: React.FC<SelectProps> = (props) => {
                                                 shape ? "check" : "check-sharp"
                                             }
                                             className="select__selected-icon"
+                                            size={20}
                                         />
                                     )}
                                 </li>

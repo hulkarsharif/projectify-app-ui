@@ -18,34 +18,32 @@ export type IconName =
     | "minus-sharp"
     | "minus"
     | "archive"
+    | "clipboard-list"
+    | "clock-check"
+    | "clock-heart"
+    | "document-chart"
+    | "user-check"
     | "x"
     | "arrow-left"
+    | "arrow-right"
+    | "rocket"
+    | "send"
+    | "star-filled"
+    | "plane-filled"
     | "info-in-circle-filled"
     | "check-in-circle-filled"
     | "info-in-circle-sharp-filled"
     | "check-in-circle-sharp-filled"
     | "check-in-circle"
     | "x-in-circle"
-    | "plus"
-    | "x-in-circle"
     | "pause-in-circle"
-    | "play-in-circle"
-    | "user"
-    | "management"
-    | "collaboration"
-    | "ui"
-    | "workflow"
-    | "analytics"
-    | "reminders"
-    | "comban";
+    | "play-in-circle";
 
-export type IconSize = 24 | 36 | 48;
+export type IconSize = 20 | 24 | 36 | 48;
 
 export type IconProps = {
-    iconName: IconName | string;
+    iconName: IconName;
     className?: string;
-    height?: string;
-    width?: string;
     onClick?: () => void;
     size?: IconSize;
 };

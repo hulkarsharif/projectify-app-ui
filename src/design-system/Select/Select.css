@@ -7,13 +7,18 @@
 .btn-secondary.select__header {
     background-color: var(--white);
     justify-content: space-between;
-    padding: 0 var(--space-8) 0 var(--space-16);
+    padding: 0 var(--space-8) 0 var(--space-12);
     font-weight: var(--font-weight-400);
 }
 
 .btn-secondary.select__header:hover {
     border-color: var(--violet-500);
     background-color: var(--white);
+}
+
+.btn-secondary.select__header:hover .select__icon,
+.btn-secondary.select__header:focus .select__icon {
+    fill: var(--violet-500);
 }
 
 .btn-secondary.select__header.select__header--has-selection {
@@ -69,7 +74,7 @@
 }
 
 .select__search input {
-    padding: 0 var(--space-12);
+    padding: 0 var(--space-8);
     width: calc(100% - var(--space-2));
     height: 3.2rem;
 }
@@ -81,7 +86,7 @@
     display: grid;
     grid-template-columns: 1fr 2rem;
     align-items: center;
-    padding: 0 var(--space-12);
+    padding: 0 var(--space-8);
     transition: all 0.3s;
     cursor: pointer;
     width: calc(100% - var(--space-2));
