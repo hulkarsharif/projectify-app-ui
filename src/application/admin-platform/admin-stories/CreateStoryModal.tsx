@@ -10,13 +10,13 @@ import {
     Select,
     Option,
     Label
-} from "../../../design-system";
+} from "design-system";
 import {
     AdminTeamMemberActions,
     ProjectWithContributors,
     TeamMember
 } from "../../../types";
-import { projectService, teamMemberService } from "../../../api";
+import { projectService, teamMemberService } from "api";
 import { storyService } from "../../../api";
 
 import { useStore } from "../../../hooks";
@@ -190,7 +190,7 @@ const CreateStoryModal: React.FC<StoryModalProps> = ({ show, closeModal }) => {
 
     return (
         <Modal show={show} position="center">
-            <ModalTitle variant="paragraphLG" weight="medium">
+            <ModalTitle variant="paragraph-lg" weight="medium">
                 New Story
             </ModalTitle>
             <Inputs>

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import toast from "react-hot-toast";
-import { GroupedTasks } from "../../../Utils";
-import { useStore } from "../../../hooks";
-import { Actions, AdminChangeTaskStatusAction } from "../../../store";
-import { adminTasksService } from "../../../api";
-import { Typography } from "../../../design-system";
-import { TaskStatus } from "../../../types";
-import { KanbanCard, KanbanCardBase, Scrollable } from "../../components";
+import { GroupedTasks } from "Utils";
+import { useStore } from "hooks";
+import { Actions, AdminChangeTaskStatusAction } from "store";
+import { adminTasksService } from "api";
+import { Typography } from "design-system";
+import { TaskStatus } from "types";
+import { KanbanCard, KanbanCardBase, Scrollable } from "application/components";
 import { EditTaskModal } from "./EditTaskModal";
 import { DeleteTaskModal } from "./DeleteTaskModal";
 
@@ -21,10 +21,10 @@ enum StatusToTitle {
     DONE = "Done"
 }
 
-enum StatusToColor {
-    TODO = "var(--jaguar-500)",
-    INPROGRESS = "var(--sunglow-700)",
-    DONE = "var(--green-500)"
+enum StatusToColumnTitleColor {
+    TODO = "neutral",
+    INPROGRESS = "warning-strong",
+    DONE = "success"
 }
 
 const TasksColumns = styled.div`
@@ -36,16 +36,15 @@ const TasksColumns = styled.div`
 
 const TasksColumn = styled.div`
     height: 100%;
-    padding: var(--space-24) 0 var(--space-10) var(--space-10);
+    padding: var(--space-24) 0 var(--space-12) var(--space-12) var(--space-12);
     background-color: var(--jaguar-25);
     border-radius: var(--border-radius-16);
     border: 0.15rem solid var(--jaguar-100);
     overflow: auto;
 `;
 
-const TasksColumnTitle = styled(Typography)<{ color: string }>`
+const TasksColumnTitle = styled(Typography)`
     margin-bottom: var(--space-16);
-    color: ${(props) => props.color};
 `;
 
 const KanbanCards = styled(Scrollable)`
@@ -54,7 +53,7 @@ const KanbanCards = styled(Scrollable)`
     ); // Excluding Column Title Line-height + margin bottom of it
 
     ${KanbanCardBase} {
-        width: calc(100% - var(--space-10));
+        width: calc(100% - var(--space-12));
     }
 `;
 
@@ -103,9 +102,13 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
                             onDrop={(e) => onDrop(e, groupName as TaskStatus)}
                         >
                             <TasksColumnTitle
-                                variant="paragraphSM"
+                                variant="paragraph-sm"
                                 weight="semibold"
-                                color={StatusToColor[groupName as TaskStatus]}
+                                color={
+                                    StatusToColumnTitleColor[
+                                        groupName as TaskStatus
+                                    ]
+                                }
                             >
                                 {StatusToTitle[groupName as TaskStatus]}{" "}
                                 <span>({groupedTasks[groupName].length})</span>

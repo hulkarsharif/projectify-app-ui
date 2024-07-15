@@ -1,15 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
 import toast from "react-hot-toast";
-import {
-    Typography,
-    Modal,
-    Input,
-    DatePickerV1,
-    Button
-} from "../../../design-system";
+import { Typography, Modal, Input, DatePickerV1, Button } from "design-system";
 
-import { CreateInput, adminTasksService } from "../../../api";
+import { adminTasksService } from "api";
 import { useStore } from "../../../hooks";
 import { Actions, AdminAddTaskAction } from "../../../store";
 import { toIso8601 } from "../../../Utils";
@@ -32,7 +26,7 @@ const Inputs = styled.div`
 
 const Buttons = styled.div`
     display: flex;
-    gap: var(--space-10);
+    gap: var(--space-12);
 `;
 
 const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
@@ -83,7 +77,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
 
     return (
         <Modal show={show} position="center">
-            <ModalTitle variant="paragraphLG" weight="medium">
+            <ModalTitle variant="paragraph-lg" weight="medium">
                 New Task
             </ModalTitle>
             <Inputs>

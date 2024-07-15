@@ -9,12 +9,12 @@ import {
     DatePickerV1,
     Select,
     Option
-} from "../../../design-system";
-import { useStore } from "../../../hooks";
-import { TaskStatus, TaskUpdate } from "../../../types";
-import { adminTasksService } from "../../../api";
-import { Actions, AdminUpdateTaskAction } from "../../../store";
-import { toDateObj, toIso8601 } from "../../../Utils";
+} from "design-system";
+import { useStore } from "hooks";
+import { TaskStatus, TaskUpdate } from "types";
+import { adminTasksService } from "api";
+import { Actions, AdminUpdateTaskAction } from "store";
+import { toDateObj, toIso8601 } from "Utils";
 
 type EditTaskModalProps = {
     show: boolean;
@@ -47,7 +47,7 @@ const Inputs = styled.div`
 
 const Buttons = styled.div`
     display: flex;
-    gap: var(--space-10);
+    gap: var(--space-12);
 `;
 const EditTaskModal: React.FC<EditTaskModalProps> = ({
     show,
@@ -109,7 +109,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
 
     return (
         <Modal show={show} position="center">
-            <EditTaskModalTitle variant="paragraphLG" weight="medium">
+            <EditTaskModalTitle variant="paragraph-lg" weight="medium">
                 Edit Task
             </EditTaskModalTitle>
             <Inputs>
@@ -127,6 +127,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                     }}
                     shape="rounded"
                     size="lg"
+                    clearable
                 />
                 <DatePickerV1
                     inputSize="lg"
@@ -142,7 +143,6 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                     headerPlaceholder="Select Due Data"
                     shape="rounded"
                     size="lg"
-                    clearable
                 />
             </Inputs>
             <Buttons>
