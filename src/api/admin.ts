@@ -44,7 +44,6 @@ class Admin {
         }
     }
     async signIn(input: SignInInput): Promise<{ token: string }> {
-        console.log(input);
         try {
             const response = await fetch(`${this.url}/login`, {
                 method: "POST",
@@ -125,6 +124,22 @@ class Admin {
                 const data = await response.json();
                 throw new Error(data.message);
             }
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async activateAccount(token: string) {
+        try {
+            const response = await fetch(
+                `${this.url}/activate-account?activationToken=${token}`
+            );
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+
             return response.json();
         } catch (error) {
             throw error;

@@ -1,4 +1,4 @@
-export * from "./container";
-export * from "./card";
+export * from "./Container";
+export * from "./Card";
 export * from "./SectionBase";
 export * from "./SectionText";
