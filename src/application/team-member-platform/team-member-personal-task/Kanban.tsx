@@ -110,7 +110,7 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
                             onDrop={(e) => onDrop(e, groupName as TaskStatus)}
                         >
                             <TasksColumnTitle
-                                variant="paragraphSM"
+                                variant="paragraph-sm"
                                 weight="semibold"
                                 color={
                                     StatusToColumnTitleColor[

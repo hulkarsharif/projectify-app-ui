@@ -109,7 +109,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
 
     return (
         <Modal show={show} position="center">
-            <EditTaskModalTitle variant="paragraphLG" weight="medium">
+            <EditTaskModalTitle variant="paragraph-lg" weight="medium">
                 Edit Task
             </EditTaskModalTitle>
             <Inputs>

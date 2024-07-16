@@ -1,11 +1,11 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import { SideBar, SideBarLinks, SideBarLinkGroup } from "../../design-system";
+import { SideBar, SideBarLinks, SideBarLinksGroup } from "../../design-system";
 import { AppPage, AppLayout, SideBarUser } from "../components";
 import { useLocalStorage, useStore } from "../../hooks";
 
 import { Actions } from "../../store";
 
-const links: SideBarLinkGroup[] = [
+const links: SideBarLinksGroup[] = [
     {
         title: "Menu",
         links: [
