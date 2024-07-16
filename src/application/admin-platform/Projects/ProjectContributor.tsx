@@ -55,11 +55,11 @@ const ProjectContributor: React.FC<ProjectContributorProps> = ({
                 shape="rounded"
             />
             <div>
-                <Typography variant="paragraphSM" weight="medium">
+                <Typography variant="paragraph-sm" weight="medium">
                     {details.firstName} {details.lastName}
                 </Typography>
                 <ProjectContributorPosition
-                    variant="subtitleSM"
+                    variant="subtitle-sm"
                     weight="medium"
                 >
                     {details.position}

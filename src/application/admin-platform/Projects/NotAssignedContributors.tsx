@@ -112,7 +112,7 @@ const NotAssignedContributors: React.FC<Props> = ({
         <>
             <Header>
                 <Icon iconName="arrow-left" onClick={goBack} />
-                <Typography variant="paragraphLG" weight="medium">
+                <Typography variant="paragraph-lg" weight="medium">
                     Team Members
                 </Typography>
             </Header>

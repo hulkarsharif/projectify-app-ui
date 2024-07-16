@@ -13,18 +13,18 @@ import {
     TableHead,
     TableHeadCell,
     TableRow
-} from "../../../design-system";
+} from "design-system";
 
 import {
     TeamMember,
     AdminTeamMemberActions,
     AdminTeamMemberStatusChange
-} from "../../../types";
+} from "types";
 import { DeleteTeamMemberModal } from "./DeleteTeamMemberModal";
 import { ChangeTeamMemberStatusModal } from "./ChangeTeamMemberStatusModal";
 import { EditTeamMemberModal } from "./EditTeamMemberModal";
-import { toDateObj } from "../../../Utils";
-import { Scrollable } from "../../components";
+import { toDateObj } from "Utils";
+import { Scrollable } from "application/components";
 
 type TeamMembersTableProps = {
     data: TeamMember[];
@@ -115,7 +115,7 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                             <TableRow key={teamMember.id} columns={columns}>
                                 <TableBodyCell>
                                     <Typography
-                                        variant="paragraphSM"
+                                        variant="paragraph-sm"
                                         weight="medium"
                                     >
                                         {teamMember.firstName}
@@ -123,7 +123,7 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                                 </TableBodyCell>
                                 <TableBodyCell>
                                     <Typography
-                                        variant="paragraphSM"
+                                        variant="paragraph-sm"
                                         weight="medium"
                                     >
                                         {teamMember.lastName}
@@ -131,7 +131,7 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                                 </TableBodyCell>
                                 <TableBodyCell>
                                     <Typography
-                                        variant="paragraphSM"
+                                        variant="paragraph-sm"
                                         weight="medium"
                                     >
                                         {teamMember.position}
@@ -139,7 +139,7 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                                 </TableBodyCell>
                                 <TableBodyCell>
                                     <Typography
-                                        variant="paragraphSM"
+                                        variant="paragraph-sm"
                                         weight="medium"
                                     >
                                         {teamMember.email}
@@ -147,7 +147,7 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                                 </TableBodyCell>
                                 <TableBodyCell>
                                     <Typography
-                                        variant="paragraphSM"
+                                        variant="paragraph-sm"
                                         weight="medium"
                                     >
                                         {format(

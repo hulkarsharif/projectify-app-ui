@@ -130,7 +130,7 @@ const AssignedContributors: React.FC<Props> = ({
     return (
         <>
             <Header>
-                <Typography variant="paragraphLG" weight="medium">
+                <Typography variant="paragraph-lg" weight="medium">
                     Contributors
                 </Typography>
                 <Icon iconName="x" onClick={closeModal} />
@@ -173,7 +173,7 @@ const AssignedContributors: React.FC<Props> = ({
                                         }
                                     />
                                     <JoinedAt
-                                        variant="subtitleSM"
+                                        variant="subtitle-sm"
                                         weight="medium"
                                     >
                                         Joined at{" "}

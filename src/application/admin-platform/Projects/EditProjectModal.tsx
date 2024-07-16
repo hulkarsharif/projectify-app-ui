@@ -122,7 +122,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
     };
     return (
         <Modal show={show} position="center">
-            <ModalTitle variant="paragraphLG" weight="medium">
+            <ModalTitle variant="paragraph-lg" weight="medium">
                 New Project
             </ModalTitle>
             <Inputs>

@@ -12,10 +12,10 @@ import {
     TableHeadCell,
     TableRow,
     LinearProgress
-} from "../../../design-system";
-import { Scrollable } from "../../components";
-import { ProjectStatus, ProjectWithContributors } from "../../../types";
-import { formatAsMMMddYYYY, formatDeadline } from "../../../Utils";
+} from "design-system";
+import { formatAsMMMddYYYY, formatDeadline } from "Utils";
+import { ProjectStatus, ProjectWithContributors } from "types";
+import { Scrollable } from "application/components";
 
 import { ChangeProjectStatusModal } from "./ChangeProjectStatusModal";
 import { EditProjectModal } from "./EditProjectModal";
@@ -27,21 +27,6 @@ type ProjectsTableProps = {
 
 type ActionsOnProject = ProjectStatus | "edit" | "contributors";
 
-const renderDeadline = (isoDate: string) => {
-    const formattedDeadline = formatDeadline(isoDate);
-    let className = "";
-    if (formattedDeadline.includes("left")) {
-        className = "red";
-    } else {
-        className = "green";
-    }
-
-    return (
-        <Deadline variant="paragraphSM" weight="medium" className={className}>
-            {formattedDeadline}
-        </Deadline>
-    );
-};
 const statuses = ["ACTIVE", "COMPLETED", "ARCHIVED", "ONHOLD"];
 const options: MenuOption[] = [
     { label: "Edit", iconName: "edit", value: "edit", color: "primary" },
@@ -86,7 +71,7 @@ const allowedActions = {
 
 const columns = ["20%", "10%", "20%", "15%", "15%", "10%", "10%"];
 enum StatusToBadgeColors {
-    ACTIVE = "violet",
+    ACTIVE = "primary",
     ARCHIVED = "gray",
     COMPLETED = "green",
     ONHOLD = "red"
@@ -97,7 +82,6 @@ const TableContainer = styled(Scrollable)`
 `;
 
 const ProjectDescription = styled(Typography)`
-    color: var(--jaguar-500);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -111,15 +95,20 @@ const ProgressWrapper = styled.div`
     width: 80%;
 `;
 
-const Deadline = styled(Typography)`
-    &.green {
-        color: var(--green-600);
-    }
+const renderDeadline = (isoDate: string) => {
+    const formattedDeadline = formatDeadline(isoDate);
+    const isDeadlineClose = formattedDeadline.includes("left");
 
-    &.red {
-        color: var(--red-orange-600);
-    }
-`;
+    return (
+        <Typography
+            variant="paragraph-sm"
+            weight="medium"
+            color={isDeadlineClose ? "error-strong" : "success-strong"}
+        >
+            {formattedDeadline}
+        </Typography>
+    );
+};
 
 const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
     const [selectedProjectId, setSelectedProjectId] = useState("");
@@ -145,6 +134,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
             setShowManageContributorsModal(true);
         }
     };
+
     return (
         <>
             <TableContainer>
@@ -167,14 +157,15 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                                     <TableBodyCell>
                                         <AboutProject>
                                             <Typography
-                                                variant="paragraphSM"
+                                                variant="paragraph-sm"
                                                 weight="medium"
                                             >
                                                 {project.name}
                                             </Typography>
                                             <ProjectDescription
-                                                variant="subtitleSM"
+                                                variant="subtitle-sm"
                                                 weight="medium"
+                                                color="neutral"
                                             >
                                                 {project.description}
                                             </ProjectDescription>
@@ -196,14 +187,14 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                                         <ProgressWrapper>
                                             <LinearProgress
                                                 value={project.progress}
-                                                color="blue"
+                                                color="primary"
                                                 shape="rounded"
                                             />
                                         </ProgressWrapper>
                                     </TableBodyCell>
                                     <TableBodyCell>
                                         <Typography
-                                            variant="paragraphSM"
+                                            variant="paragraph-sm"
                                             weight="medium"
                                         >
                                             {formatAsMMMddYYYY(
@@ -216,7 +207,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                                     </TableBodyCell>
                                     <TableBodyCell>
                                         <Typography
-                                            variant="paragraphSM"
+                                            variant="paragraph-sm"
                                             weight="medium"
                                         >
                                             {project.numberOfContributors || 0}
