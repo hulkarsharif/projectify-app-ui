@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { NoDataPlaceholder } from "../../components";
 import { CreateTeamMemberModal } from "./CreateTeamMemberModal";
-import noTeamMember from "application/assets/illustrations/no-teamMember.svg";
+import noTeamMember from "assets/illustrations/no-teamMember.svg";
 import { useStore } from "../../../hooks";
 import { teamMemberService } from "../../../api";
 import { Actions, AdminPopulateTeamMemberAction } from "../../../store";

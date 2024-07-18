@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { NoDataPlaceholder, PageHeader } from "../../components";
-import noTask from "application/assets/illustrations/no-task.svg";
+import noTask from "assets/illustrations/no-task.svg";
 import { adminTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
-import { Actions, AdminPopulateTasksAction } from "../../../store";
-import { groupTasksByStatus } from "../../../Utils";
+import { Actions, AdminPopulateTasksAction } from "store";
+import { groupTasksByStatus } from "Utils";
 import { CreateTaskModal } from "./CreateTaskModal";
 import { Kanban } from "./Kanban";
 import toast from "react-hot-toast";

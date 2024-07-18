@@ -1,12 +1,10 @@
 import styled from "styled-components";
 import { Typography } from "../../../design-system";
-import { Container, SectionSidePadding } from "../../components";
+import { Container } from "../../components";
 
 const FooterSection = styled.footer`
     padding: var(--space-20) var(--space-100);
     border-top: 1px solid var(--jaguar-200);
-
-    ${SectionSidePadding}
 `;
 
 const FooterContainer = styled(Container)`
@@ -53,7 +51,7 @@ const Footer = () => {
     return (
         <FooterSection id="footer">
             <FooterContainer>
-                <CopyrightText variant="paragraphSM">
+                <CopyrightText variant="paragraph-sm">
                     ©Projectify 2024 - All Rights Reserved
                 </CopyrightText>
                 <NavWrapper>

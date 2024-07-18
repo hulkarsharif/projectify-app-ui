@@ -37,12 +37,20 @@ export type IconName =
     | "check-in-circle"
     | "x-in-circle"
     | "pause-in-circle"
+    | "email"
+    | "company"
+    | "phone"
+    | "email-purple"
+    | "location"
+    | "facebook"
+    | "twitter"
+    | "instagram"
     | "play-in-circle";
 
 export type IconSize = 20 | 24 | 36 | 48;
 
 export type IconProps = {
-    iconName: IconName;
+    iconName?: IconName;
     className?: string;
     onClick?: () => void;
     size?: IconSize;

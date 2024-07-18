@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import { Button, Typography } from "../../../../design-system";
-import { data } from "./data";
+
 import {
     Container,
     Card,
     SectionBase,
+    SectionHeading,
     SectionSubHeading
-} from "../../../components";
-import background from "../../Images/DemoImage/bgEffect-demo.png";
+} from "marketing/components";
+import { data } from "./data";
 
 const FeaturesBase = styled(SectionBase)`
     background-color: var(--white);
@@ -25,12 +25,6 @@ const FeatureCards = styled.div`
     .featureCard {
         flex-basis: calc((100% - var(--space-64)) / 3);
     }
-`;
-
-const Description = styled(Typography)`
-    color: var(--jaguar-500);
-    margin-bottom: var(--space-50);
-    text-align: center;
 `;
 
 export const Features = () => {

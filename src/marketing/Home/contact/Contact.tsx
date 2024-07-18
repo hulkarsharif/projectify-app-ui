@@ -132,7 +132,7 @@ const Contact = () => {
                         <Logo size="sm" layout="horizontal" />
                     </Link>
 
-                    <Description variant="paragraphSM" weight="bold">
+                    <Description variant="paragraph-sm" weight="bold">
                         Unleashing Success One Project at a Time!
                     </Description>
                 </ContactLeftLogoWrapper>

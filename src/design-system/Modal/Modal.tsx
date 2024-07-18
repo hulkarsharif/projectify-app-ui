@@ -2,7 +2,7 @@ import React from "react";
 import { positionClassNames } from "./classnames";
 import "./Modal.css";
 import { trimWhiteSpaces } from "../utils";
-import Xicon from "../../pages/Home/Images/closeIcon.svg";
+import Xicon from "assets/image/lock.jpg";
 
 interface ModalProps {
     show: boolean;

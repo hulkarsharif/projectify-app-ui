@@ -8,7 +8,7 @@ import { Actions, PopulateProjectsAction } from "../../../store";
 import { CreateProjectModal } from "./CreateProjectModal";
 import { ProjectsFilters } from "./ProjectsFilters";
 import { ProjectStatus } from "../../../types";
-import noProject from "application/assets/illustrations/no-project.svg";
+import noProject from "assets/illustrations/no-project.svg";
 import { ProjectsTable } from "./ProjectsTable";
 
 const AdminProjectsPage = () => {
