@@ -5,7 +5,7 @@ import {
     SectionRightAndLeftPadding,
     SectionSubHeading
 } from "marketing/components";
-import heroImg from "assets/images/hero.png";
+import heroImg from "assets/image/hero.png";
 
 const HeroBase = styled.header`
     background-color: var(--violet-12);

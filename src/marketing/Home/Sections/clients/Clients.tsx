@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { Container, SectionRightAndLeftPadding } from "marketing/components";
 
-import googleLogo from "assets/logos/google.svg";
-import amazonLogo from "assets/logos/amazon.svg";
-import airbnbLogo from "assets/logos/airbnb.svg";
-import shopifyLogo from "assets/logos/shopify.svg";
-import creativeCloudLogo from "assets/logos/creative-cloud.svg";
+import googleLogo from "marketing/assets/logos/google.svg";
+import amazonLogo from "marketing/assets/logos/amazon.svg";
+import airbnbLogo from "marketing/assets/logos/airbnb.svg";
+import shopifyLogo from "marketing/assets/logos/shopify.svg";
+import creativeCloudLogo from "marketing/assets/logos/creative-cloud.svg";
 
 const ClientsBase = styled.section`
     padding-top: var(--space-32);
