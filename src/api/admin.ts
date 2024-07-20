@@ -1,4 +1,4 @@
-import { AdminUser } from "../types";
+import { AdminUser } from "types";
 
 type SignUpInput = {
     firstName: string;
@@ -11,6 +11,7 @@ type SignUpInput = {
         position: string;
     };
 };
+
 type SignInInput = {
     email: string;
     password: string;
@@ -43,6 +44,7 @@ class Admin {
             throw error;
         }
     }
+
     async signIn(input: SignInInput): Promise<{ token: string }> {
         try {
             const response = await fetch(`${this.url}/login`, {
@@ -78,11 +80,13 @@ class Admin {
                 const data = await response.json();
                 throw new Error(data.message);
             }
+
             return response.json();
         } catch (error) {
             throw error;
         }
     }
+
     async resetPassword(
         password: string,
         passwordConfirm: string,
@@ -124,6 +128,7 @@ class Admin {
                 const data = await response.json();
                 throw new Error(data.message);
             }
+
             return response.json();
         } catch (error) {
             throw error;

@@ -2,7 +2,7 @@ import { Button, Input, Toaster } from "design-system";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import flatIronBuilding from "assets/image/flatIronBuilding.jpg";
-import { adminService } from "../../../api";
+import { adminService } from "api";
 import { AuthActionLink, AuthWrapper } from "application/components";
 import styled from "styled-components";
 
@@ -11,6 +11,10 @@ const Form = styled.form`
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-20);
+
+    svg {
+        color: red;
+    }
 `;
 const StyledPreferredNameInput = styled(Input)`
     grid-column: 1 / 3;
@@ -60,29 +64,30 @@ const AdminSignup = () => {
     };
 
     const isFormSubmittable =
-        firstName && lastName && email && password && passwordConfirm;
+        firstName &&
+        lastName &&
+        email &&
+        password &&
+        passwordConfirm &&
+        company &&
+        position;
+
     const createAccount = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setIsFormSubmitting(true);
         try {
+            setIsFormSubmitting(true);
             const response = await adminService.signUp({
                 firstName,
                 lastName,
-                preferredName: preferredName,
                 email,
                 password,
-                company: {
-                    name: company,
-                    position: position
-                }
+                preferredName: preferredName
             });
             setIsFormSubmitting(false);
             setFirstName("");
             setLastName("");
             setPreferredName("");
             setEmail("");
-            setCompany("");
-            setPosition("");
             setPassword("");
             setPasswordConfirm("");
 
@@ -103,7 +108,7 @@ const AdminSignup = () => {
                 pageTitle="Sign Up"
                 switchLayout={false}
             >
-                <Form onSubmit={createAccount} noValidate>
+                <Form onSubmit={createAccount}>
                     <Input
                         type="text"
                         placeholder="First Name"
@@ -132,24 +137,7 @@ const AdminSignup = () => {
                         size="lg"
                         disabled={isFormSubmitting}
                     />
-                    <Input
-                        type="text"
-                        placeholder="Company"
-                        value={company}
-                        onChange={handleOnChangeCompany}
-                        shape="rounded"
-                        size="lg"
-                        disabled={isFormSubmitting}
-                    />
-                    <Input
-                        type="text"
-                        placeholder="Position"
-                        value={position}
-                        onChange={handleOnChangePosition}
-                        shape="rounded"
-                        size="lg"
-                        disabled={isFormSubmitting}
-                    />
+
                     <StyledEmailInput
                         type="email"
                         placeholder="Email"
@@ -177,6 +165,24 @@ const AdminSignup = () => {
                         size="lg"
                         disabled={isFormSubmitting}
                     />
+                    <Input
+                        type="text"
+                        placeholder="Company"
+                        value={company}
+                        onChange={handleOnChangeCompany}
+                        shape="rounded"
+                        size="lg"
+                        disabled={isFormSubmitting}
+                    />
+                    <Input
+                        type="text"
+                        placeholder="Position"
+                        value={position}
+                        onChange={handleOnChangePosition}
+                        shape="rounded"
+                        size="lg"
+                        disabled={isFormSubmitting}
+                    />
                     <StyledButton
                         color="primary"
                         size="lg"
@@ -186,13 +192,12 @@ const AdminSignup = () => {
                         Sign Up
                     </StyledButton>
                 </Form>
-                <div style={{ marginTop: "auto" }}>
-                    <AuthActionLink
-                        linkText="Sign In"
-                        hintText="Already have an account?"
-                        linkTo="../admin/sign-in"
-                    />
-                </div>
+
+                <AuthActionLink
+                    linkText="Sign In"
+                    hintText="Already have an account?"
+                    linkTo="../admin/sign-in"
+                />
             </AuthWrapper>
             <Toaster />
         </>

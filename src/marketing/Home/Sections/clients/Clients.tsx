@@ -3,7 +3,7 @@ import { Container, SectionRightAndLeftPadding } from "marketing/components";
 
 import googleLogo from "marketing/assets/logos/google.svg";
 import amazonLogo from "marketing/assets/logos/amazon.svg";
-import airbnbLogo from "marketing/assets/logos/airbnb.svg";
+import airbnbLogo from "marketing/assets/logos/airnbnb.svg";
 import shopifyLogo from "marketing/assets/logos/shopify.svg";
 import creativeCloudLogo from "marketing/assets/logos/creative-cloud.svg";
 
