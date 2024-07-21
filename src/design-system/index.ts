@@ -10,7 +10,6 @@ export * from "./Sidebar";
 export * from "./Icon";
 export * from "./Toast";
 export * from "./Badge";
-export * from "./BaseCard";
 export * from "./DatePicker";
 export * from "./Bar";
 export * from "./Menu";
