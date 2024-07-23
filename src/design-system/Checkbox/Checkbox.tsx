@@ -2,7 +2,7 @@ import React from "react";
 import { Label } from "../Label";
 import { CheckboxProps, CheckboxShape } from "./types";
 
-import "./Checkingbox.css";
+import "./Checkbox.css";
 import { trimWhiteSpaces } from "../utils";
 import { Icon, IconName } from "../Icon";
 
@@ -51,7 +51,6 @@ const Checkbox: React.FC<CheckboxProps> = ({
     position
 }) => {
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.checked);
         onChange(e.target.checked);
     };
     const checkboxWrapperClassName = trimWhiteSpaces(
