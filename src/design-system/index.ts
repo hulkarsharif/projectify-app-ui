@@ -14,7 +14,7 @@ export * from "./DatePicker";
 export * from "./Bar";
 export * from "./Menu";
 export * from "./Select";
-export * from "./Checkingbox";
+export * from "./Checkbox";
 export * from "./Switch";
 export * from "./Progress";
 export * from "./Table";
