@@ -1,7 +1,7 @@
 import { trimWhiteSpaces } from "design-system/utils";
 import { BaseCardProps } from "./types";
 import { colorMap, borderRadiusMap } from "./classnames";
-import "./BaseCard.css";
+import "../BaseCard.css";
 
 const BaseCard: React.FC<BaseCardProps> = ({
     color,
