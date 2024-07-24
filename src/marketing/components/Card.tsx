@@ -6,7 +6,7 @@ import {
     IconCardColor,
     IconName,
     Typography
-} from "../../design-system";
+} from "design-system";
 
 interface CardProps {
     iconName: IconName;
